@@ -1,6 +1,6 @@
 # cvs
 
-A basic canvas framework for 2d drawing.
+cvs (a short name from canvas) is a basic canvas framework for 2d drawing, it's designed to make drawing easier.
 
 ## Usage
 
