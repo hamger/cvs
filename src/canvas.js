@@ -43,17 +43,17 @@ class Canvas {
     })
     this.canvas.addEventListener(tap.start, e => {})
   }
-  addElement (element) {
+  add (element) {
     if (element instanceof Element) {
       element.ctx = this.ctx
       element.canvas = this.canvas
       this.children.push(element)
       if (element.click) this.clickChildren.push(element)
     } else {
-      throw Error('Function addElement only accept the instance of Element.')
+      throw Error('Function add only accept the instance of Element.')
     }
   }
-  removeElement (element) {
+  remove (element) {
     if (element) {
       this.children.some((item, index) => {
         if (item.id === element.id) {

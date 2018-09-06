@@ -4,7 +4,7 @@ var canvas = new Canvas({
   container: document.getElementById('container')
 })
 
-canvas.addElement(
+canvas.add(
   new Img({
     img: 'https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png',
     dx: 200,
@@ -21,7 +21,7 @@ canvas.draw()
 // // 当图片准备以后再绘制
 // img.onload = function () {
 //   // 绘制图片,按照图片本身的大小进行加载
-//   canvas.addElement(
+//   canvas.add(
 //     new Img({
 //       img: img,
 //       dx: 80,

@@ -23,7 +23,7 @@ for (var i = 0; i < dotCount; i++) {
     fill: `rgba(${Math.random() * 255}, ${Math.random() *
       255}, ${Math.random() * 255}, ${Math.random()})`
   })
-  canvas.addElement(element)
+  canvas.add(element)
   dots.push({
     x: x,
     y: y,

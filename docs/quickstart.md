@@ -7,7 +7,7 @@ var canvas = new Canvas({
   container: document.getElementById("container")
 });
 
-canvas.addElement(
+canvas.add(
   new Circle({
     x: 100,
     y: 100,

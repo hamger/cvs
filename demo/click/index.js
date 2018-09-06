@@ -12,7 +12,7 @@ var element = new Circle({
 element.addEventListener('click', function (e) {
   console.log('element: ' + e)
 })
-canvas.addElement(element)
+canvas.add(element)
 
 var element2 = new Rect({
   x: 200,
@@ -24,7 +24,7 @@ var element2 = new Rect({
 element2.addEventListener('click', function (e) {
   console.log('element2: ' + e)
 })
-canvas.addElement(element2)
+canvas.add(element2)
 
 var element3 = new Rect({
   x: 300,
@@ -34,7 +34,7 @@ var element3 = new Rect({
   stroke: 'blue'
 })
 
-canvas.addElement(element3)
+canvas.add(element3)
 
 var element4 = new Circle({
   zIndex: -2,
@@ -46,12 +46,12 @@ var element4 = new Circle({
 element4.addEventListener('click', function (e) {
   console.log('element4: ' + e)
 })
-canvas.addElement(element4)
+canvas.add(element4)
 
 canvas.draw()
 
 // setTimeout(() => {
-//   canvas.removeElement(element2)
+//   canvas.remove(element2)
 //   element3.attr({stroke: '#4F8'})
 //   canvas.draw()
 // }, 1600)

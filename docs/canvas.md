@@ -12,22 +12,22 @@ var canvas = new Canvas(options);
 
 ### 实例方法
 
-#### addElement
+#### add
 
 向画布中添加一个元素
 
 ```js
-canvas.addElement(element);
+canvas.add(element);
 ```
 
 - element 必须为一个`Element`实例
 
-#### removeElement
+#### remove
 
 从画布中去除一个元素
 
 ```js
-canvas.removeElement(element);
+canvas.remove(element);
 ```
 
 - element 必须为一个`Element`实例

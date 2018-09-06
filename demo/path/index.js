@@ -4,7 +4,7 @@ let canvas = new Canvas({
   container: document.getElementById('container')
 })
 
-canvas.addElement(
+canvas.add(
   new Path({
     path:
       'M 10 10' +
@@ -18,7 +18,7 @@ canvas.addElement(
   })
 )
 
-canvas.addElement(
+canvas.add(
   new Poly({
     points: [[90, 190], [34, 56], [222, 333]],
     stroke: '#198',
@@ -26,14 +26,14 @@ canvas.addElement(
   })
 )
 
-canvas.addElement(
+canvas.add(
   new Poly({
     points: [[500, 190], [234, 356], [522, 433]],
     fill: '#999'
   })
 )
 
-canvas.addElement(
+canvas.add(
   new Arc({
     visible: false,
     x: 500,
@@ -72,7 +72,7 @@ canvas.draw()
 
 // function move () {
 //   requestAnimationFrame(move)
-//   canvas.removeElement()
+//   canvas.remove()
 //   dots.forEach(dot => {
 //     // 粒子位移
 //     dot.x += dot.xa
@@ -83,7 +83,7 @@ canvas.draw()
 //     dot.xa *= dot.x > canvas.width - r || dot.x < r ? -1 : 1
 //     dot.ya *= dot.y > canvas.height - r || dot.y < r ? -1 : 1
 
-//     canvas.addElement(
+//     canvas.add(
 //       new Circle({
 //         zIndex: dot.zIndex,
 //         r: r,

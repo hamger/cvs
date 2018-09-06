@@ -3,7 +3,7 @@ var canvas = new Canvas({
   container: document.getElementById('container')
 })
 
-canvas.addElement(new Text({
+canvas.add(new Text({
   text: 'hello',
   x: 89,
   y: 76
