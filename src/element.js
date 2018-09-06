@@ -37,4 +37,10 @@ export default class Element {
     if (this.lineJoin) ctx.lineJoin = this.lineJoin
     if (this.lineLimit) ctx.lineLimit = this.lineLimit
   }
+  setText () {
+    let ctx = this.ctx
+    if (this.font) ctx.font = this.font
+    if (this.textAlign) ctx.textAlign = this.textAlign
+    if (this.textBaseline) ctx.textBaseline = this.textBaseline
+  }
 }
