@@ -57,3 +57,8 @@ export function delBlank (str) {
   var regEx = /\s+/g
   return str.trim().replace(regEx, ' ')
 }
+
+export function isDef (arg) {
+  if (arg || arg === 0) return true
+  else return false
+}

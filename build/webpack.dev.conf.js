@@ -44,6 +44,9 @@ var webpackConfig = {
     ]
   },
   devServer: {
+    clientLogLevel: 'warning',
+    hot: true,
+    compress: true,
     stats: {
       hash: false,
       assets: false,
@@ -51,7 +54,12 @@ var webpackConfig = {
       modules: false
     }
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+      f: ['hg-jslibrary', 'default']
+    })
+  ]
 }
 
 // 在不同的页面中插入对应的js文件

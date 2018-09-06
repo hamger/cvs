@@ -1,6 +1,6 @@
-const ERROR = 2;
-const WARNING = 1;
-const IGNORE = 0;
+const ERROR = 2
+const WARNING = 1
+const IGNORE = 0
 
 module.exports = {
   root: true,
@@ -12,7 +12,9 @@ module.exports = {
   },
   extends: ['standard'],
   rules: {
-    'jsx-quotes': IGNORE,
+    'no-useless-constructor': IGNORE,
+    'no-unused-vars': IGNORE,
+    'no-undef': IGNORE,
     'no-new': IGNORE,
     'no-ueless-constructor': IGNORE,
     'operator-linebreak': [ERROR, 'after'],

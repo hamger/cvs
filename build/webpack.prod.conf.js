@@ -1,5 +1,4 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const utils = require('./utils')
 const resolve = utils.resolve
@@ -8,7 +7,9 @@ var webpackConfig = {
   entry: './src/index.js',
   output: {
     filename: 'cvs.js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    library: 'cvs',
+    libraryTarget: 'umd'
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
@@ -44,7 +45,10 @@ var webpackConfig = {
     ]
   },
   plugins: [
-    new UglifyJsPlugin()
+    new UglifyJsPlugin(),
+    new webpack.ProvidePlugin({
+      f: ['hg-jslibrary', 'default']
+    })
   ]
 }
 
