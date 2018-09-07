@@ -11,7 +11,7 @@ var canvas = new Canvas({
   container: document.getElementById("container")
 });
 
-canvas.addChild(
+canvas.add(
   new Circle({
     x: 100,
     y: 100,
@@ -24,7 +24,7 @@ canvas.draw();
 
 ## Document
 
-[文档地址](https://hamger.github.io/canvas-demo/#/)
+[文档地址](https://hamger.github.io/cvs/#/)
 
 ## Changelog
 

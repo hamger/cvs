@@ -1,6 +1,13 @@
-> 使用以下代码创建一个 canvas 画布，并在画布上画一个圆形
+### Instrall
+
+```bash
+npm instrall cvs
+```
+
+### Usage
 
 ```js
+// create a circle in canvas
 import { Canvas, Circle } from "canvas-kit";
 
 var canvas = new Canvas({
