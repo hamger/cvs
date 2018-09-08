@@ -10,10 +10,10 @@ export default class Element {
   attr (opt) {
     Object.assign(this, opt)
   }
-  addEventListener (eventType, callback) {
+  on (eventType, callback) {
     this[eventType] = callback
   }
-  removeEventListener (eventType) {
+  off (eventType) {
     this[eventType] = null
   }
   // 设置公共绘制样式

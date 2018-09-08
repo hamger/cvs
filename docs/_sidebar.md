@@ -4,6 +4,6 @@
   * [Canvas](/canvas.md)
   * [Element](/element.md)
   * Shape
-    * [Circle](/shape/circle.md)
-    * [Rect](/shape/rect.md)
+    * [Circle](/graphics/circle.md)
+    * [Rect](/graphics/rect.md)
   

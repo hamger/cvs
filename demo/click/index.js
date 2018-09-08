@@ -9,7 +9,7 @@ var element = new Circle({
   x: 100,
   fill: '#999'
 })
-element.addEventListener('click', function (e) {
+element.on('click', function (e) {
   console.log('element: ' + e)
 })
 canvas.add(element)
@@ -21,7 +21,7 @@ var element2 = new Rect({
   h: 60,
   fill: 'green'
 })
-element2.addEventListener('click', function (e) {
+element2.on('click', function (e) {
   console.log('element2: ' + e)
 })
 canvas.add(element2)
@@ -43,7 +43,7 @@ var element4 = new Circle({
   x: 150,
   fill: '#3e9'
 })
-element4.addEventListener('click', function (e) {
+element4.on('click', function (e) {
   console.log('element4: ' + e)
 })
 canvas.add(element4)
