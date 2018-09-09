@@ -1,5 +1,5 @@
 import Element from './element'
-import { arrSort, tap, getLocation } from './utils'
+import { arrSort, tap, getLocation, animFrame } from './utils'
 
 class Canvas {
   constructor (opt) {
@@ -25,7 +25,7 @@ class Canvas {
     this.height = this.canvas.height = this.container.clientHeight
   }
   bind () {
-    this.canvas.on('click', e => {
+    this.canvas.addEventListener('click', e => {
       let temp = null
       var location = getLocation(this.canvas, e)
       // 根据 zIndex 降序排列，因为只触发最前面元素的点击事件
@@ -41,7 +41,7 @@ class Canvas {
       this.draw()
       if (temp) temp.click(e)
     })
-    this.canvas.on(tap.start, e => {})
+    // this.canvas.addEventListener(tap.start, e => {})
   }
   add (element) {
     if (element instanceof Element) {
@@ -85,10 +85,10 @@ class Canvas {
   }
   animate (func) {
     function func2 () {
-      requestAnimationFrame(func2)
+      animFrame(func2)
       func()
     }
-    this.anim = requestAnimationFrame(func2)
+    this.anim = animFrame(func2)
   }
   cancelAnimate () {
     cancelAnimationFrame(this.anim)
