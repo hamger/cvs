@@ -1,5 +1,4 @@
 import Element from '../element'
-import { delBlank } from '../utils'
 
 export default class Path extends Element {
   constructor (opt) {
@@ -13,7 +12,7 @@ export default class Path extends Element {
     ctx.beginPath()
     if (this.stroke) ctx.strokeStyle = this.stroke
     else ctx.fillStyle = this.fill
-    let path = delBlank(this.path)
+    let path = f.delBlank(this.path)
     let pathType = path.match(/[A-z]/g)
     let pathVal = path
       .split(/[A-z]/)
@@ -23,7 +22,7 @@ export default class Path extends Element {
       })
       .map(function (item) {
         // 去除多余的空格
-        return delBlank(item)
+        return f.delBlank(item)
       })
 
     pathType.forEach((item, index) => {

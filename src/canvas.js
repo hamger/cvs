@@ -1,5 +1,5 @@
 import Element from './element'
-import { arrSort, tap, getLocation, animFrame } from './utils'
+import { tap, getLocation, animFrame } from './utils'
 
 class Canvas {
   constructor (opt) {
@@ -29,7 +29,7 @@ class Canvas {
       let temp = null
       var location = getLocation(this.canvas, e)
       // 根据 zIndex 降序排列，因为只触发最前面元素的点击事件
-      arrSort(this.clickChildren, 'zIndex', true).some(child => {
+      f.arrSort(this.clickChildren, 'zIndex', true).some(child => {
         if (!child.visible) return false
         this.clear()
         child.draw(this.ctx)
@@ -76,7 +76,7 @@ class Canvas {
   }
   draw () {
     this.clear()
-    arrSort(this.children, 'zIndex').forEach(child => {
+    f.arrSort(this.children, 'zIndex').forEach(child => {
       if (child.visible) child.draw()
     })
   }
