@@ -13,8 +13,6 @@ var element = new Circle(options);
 | r             | Number | 规定圆形半径    | --      |
 | x             | Number | 规定圆心 x 坐标 | --      |
 | y             | Number | 规定圆心 y 坐标 | --      |
-| fill / stroke | String | 规定颜色        | `#000`  |
-| zIndex        | Number | 规定前后顺序    | `0`     |
 
 ### example
 
