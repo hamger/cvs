@@ -1,4 +1,4 @@
-import { Canvas, Circle, Rect, Img, text } from '@'
+import { Canvas, Circle, Rect, Img, Text } from '@'
 var canvas = new Canvas({
   container: document.getElementById('container')
 })
@@ -57,5 +57,15 @@ element5.on('click', function (e) {
   console.log('element5: ' + e)
 })
 canvas.add(element5)
+
+// var element6 = new Text({
+//   text: 'Hello cvs',
+//   x: 289,
+//   y: 76
+// })
+// element6.on('click', function (e) {
+//   console.log('element6: ' + e)
+// })
+// canvas.add(element6)
 
 canvas.draw()

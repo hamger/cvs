@@ -9,9 +9,15 @@ export default class Path extends Element {
   draw () {
     var ctx = this.ctx
     ctx.save()
-    ctx.beginPath()
     if (this.stroke) ctx.strokeStyle = this.stroke
     else ctx.fillStyle = this.fill
+    this.drawPath()
+    if (this.stroke) ctx.stroke()
+    else ctx.fill()
+    ctx.restore()
+  }
+  drawPath () {
+    this.ctx.beginPath()
     let path = f.delBlank(this.path)
     let pathType = path.match(/[A-z]/g)
     let pathVal = path
@@ -35,9 +41,6 @@ export default class Path extends Element {
       }
       this.resolve(item, arr)
     })
-    if (this.stroke) ctx.stroke()
-    else ctx.fill()
-    ctx.restore()
   }
   resolve (type, val) {
     if (/(M|m)/.test(type)) {

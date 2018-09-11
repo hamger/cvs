@@ -9,11 +9,22 @@ export default class Img extends Element {
       img = new Image()
       img.src = this.img
       img.onload = () => {
+        this.imgWidth = img.width
+        this.imgHeight = img.height
         this.drawImg(img)
       }
     } else {
+      this.imgWidth = img.width
+      this.imgHeight = img.height
       this.drawImg(img)
     }
+  }
+  drawPath () {
+    var ctx = this.ctx
+    ctx.beginPath()
+    var w = f.isDef(this.dw) ? this.wd : this.imgWidth
+    var h = f.isDef(this.dh) ? this.wh : this.imgHeight
+    ctx.rect(this.dx, this.dy, w, h)
   }
   drawImg (img) {
     let ctx = this.ctx

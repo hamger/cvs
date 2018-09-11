@@ -3,6 +3,7 @@ import Element from '../element'
 export default class Text extends Element {
   draw () {
     var ctx = this.ctx
+    ctx.beginPath()
     ctx.save()
     this.setGeneral()
     this.setText()

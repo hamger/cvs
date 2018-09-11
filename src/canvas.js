@@ -31,14 +31,12 @@ class Canvas {
       // 根据 zIndex 降序排列，因为只触发最前面元素的点击事件
       f.arrSort(this.clickChildren, 'zIndex', true).some(child => {
         if (!child.visible) return false
-        this.clear()
-        child.draw(this.ctx)
+        child.drawPath()
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
           return true
         }
       })
-      this.draw()
       if (temp) temp.click(e)
     })
     // this.canvas.addEventListener(tap.start, e => {})

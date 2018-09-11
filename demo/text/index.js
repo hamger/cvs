@@ -1,4 +1,5 @@
 import { Canvas, Text } from '@'
+// import { Canvas, Text } from '../../dist/cvs.js'
 var canvas = new Canvas({
   container: document.getElementById('container')
 })
