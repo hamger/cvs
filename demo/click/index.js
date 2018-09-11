@@ -1,4 +1,4 @@
-import { Canvas, Circle, Rect } from '@'
+import { Canvas, Circle, Rect, Img, text } from '@'
 var canvas = new Canvas({
   container: document.getElementById('container')
 })
@@ -48,10 +48,14 @@ element4.on('click', function (e) {
 })
 canvas.add(element4)
 
-canvas.draw()
+var element5 = new Img({
+  img: 'https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png',
+  dx: 200,
+  dy: 200
+})
+element5.on('click', function (e) {
+  console.log('element5: ' + e)
+})
+canvas.add(element5)
 
-// setTimeout(() => {
-//   canvas.remove(element2)
-//   element3.attr({stroke: '#4F8'})
-//   canvas.draw()
-// }, 1600)
+canvas.draw()
