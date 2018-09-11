@@ -1,4 +1,5 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const webpack = require('webpack')
 const path = require('path')
 const utils = require('./utils')
 const resolve = utils.resolve
