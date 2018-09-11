@@ -45,24 +45,28 @@ export default class Element {
   }
   // 圆周运动
   circling (opt) {
+    const relativeX = opt.relativeX || 0
+    const relativeY = opt.relativeY || 0
     const vpx = opt.vpx
     const vpy = opt.vpy
     const r = opt.r || 100
     const speed = opt.speed || 0.05
-    this.x = vpx + r * Math.cos(this.angle)
-    this.y = vpy + r * Math.sin(this.angle)
+    this.x = vpx + r * Math.cos(this.angle) - relativeX
+    this.y = vpy + r * Math.sin(this.angle) - relativeY
     this.angle += speed
   }
   // 椭圆运动
   elliptic (opt) {
+    const relativeX = opt.relativeX || 0
+    const relativeY = opt.relativeY || 0
     const vpx = opt.vpx
     const vpy = opt.vpy
     const radiusX = opt.radiusX || 100
     const radiusY = opt.radiusY || 80
     const speed = opt.speed || 0.05
     this.angle += speed
-    this.x = vpx + radiusX * Math.cos(this.angle)
-    this.y = vpy + radiusY * Math.sin(this.angle)
+    this.x = vpx + radiusX * Math.cos(this.angle) - relativeX
+    this.y = vpy + radiusY * Math.sin(this.angle) - relativeY
   }
   // 匀速直线运动
   line (opt) {
@@ -91,8 +95,5 @@ export default class Element {
       this.x = endX
       this.y = endY
     }
-  }
-  // 自定义动画
-  diyAnimate () {
   }
 }
