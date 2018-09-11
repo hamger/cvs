@@ -6,6 +6,8 @@ var element = new Rect(options);
 
 ### options
 
+除了支持[公共属性](../Element.md)外，还支持以下属性：
+
 | options.key   | value  | description     | default |
 | ------------- | ------ | --------------- | ------- |
 | w             | Number | 规定矩形宽度    | --      |

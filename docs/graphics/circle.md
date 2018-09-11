@@ -6,6 +6,8 @@ var element = new Circle(options);
 
 ### options
 
+除了支持[公共属性](../Element.md)外，还支持以下属性：
+
 | options.key   | value  | description     | default |
 | ------------- | ------ | --------------- | ------- |
 | r             | Number | 规定圆形半径    | --      |

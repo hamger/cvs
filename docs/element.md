@@ -24,7 +24,7 @@ var elememt = new Elememt(options);
 | opacity                  | Number | 设置绘图的当前 alpha 或透明值      | --      |
 | globalCompositeOperation | String | 设置新图像如何绘制到已有的图像上   | --      |
 
-> see 对以下图形属性进行了缩写
+> cvs 对以下图形属性进行了缩写
 
 - fillStyle 缩写为 fill
 - stokeStyle 缩写为 stroke

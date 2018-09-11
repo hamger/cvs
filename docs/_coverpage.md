@@ -7,4 +7,4 @@
 * designed to make drawing easier
 
 [GitHub](https://github.com/cvs/)
-[Get Started](/quickstart.md)
+[Get Started](/Start.md)
