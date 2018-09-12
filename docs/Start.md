@@ -8,7 +8,7 @@ npm instrall cvs
 
 ```js
 // create a circle in canvas
-import { Canvas, Circle } from "canvas-kit";
+import { Canvas, Circle } from "cvs";
 
 var canvas = new Canvas({
   container: document.getElementById("container")
