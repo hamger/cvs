@@ -1,12 +1,13 @@
 import Element from './element'
-import { tap, getLocation, animFrame } from './utils'
+import { getLocation, animFrame } from './utils'
 
 class Canvas {
   constructor (opt) {
     this.container = opt.container
     this.children = []
     this.eventChildren = {
-      click: []
+      click: [],
+      hover: [],
     }
     this.init()
     this.bind()
@@ -66,6 +67,10 @@ class Canvas {
       if (element.click) {
         this.eventChildren.click.push(element)
         f.arrSort(this.eventChildren.click, 'zIndex', true)
+      }
+      if (element.hover) {
+        this.eventChildren.hover.push(element)
+        f.arrSort(this.eventChildren.hover, 'zIndex', true)
       }
     } else {
       throw Error('Function add only accept the instance of Element.')

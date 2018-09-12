@@ -43,10 +43,29 @@ var elememt = new Elememt(options);
   - `{Object} opt`表示属性的对象
 
 - 示例：
+
   ```js
   elememt.attr({
     x: 12,
     y: 34
+  });
+  ```
+
+#### on(eventType, callback)
+
+- 描述：
+
+  为元素绑定事件
+
+- 参数：
+
+  - `{string} eventType`规定绑定的事件名称，可选项: `click`，`tapStart`，`tapEnd`，`tapMove`
+  - `{Function} callback`规定监听函数
+
+- 示例：
+  ```js
+  element.on("click", function(e) {
+    console.log("element: " + e);
   });
   ```
 
@@ -85,8 +104,8 @@ elliptic 函数接受一个对象参数, 以下是该对象各个字段的介绍
 
 line 函数接受一个对象参数, 以下是该对象各个字段的介绍
 
-| 字段 | 描述                               | 类型   | 默认值 |
-| ---- | ---------------------------------- | ------ | ------ |
-| endX | 必填参数，运动终点在 X 轴的位置    | Number | --     |
-| endY | 必填参数，运动终点在 Y 轴的位置    | Number | --     |
+| 字段 | 描述                                | 类型   | 默认值 |
+| ---- | ----------------------------------- | ------ | ------ |
+| endX | 必填参数，运动终点在 X 轴的位置     | Number | --     |
+| endY | 必填参数，运动终点在 Y 轴的位置     | Number | --     |
 | time | 必填参数，运动的持续时间，单位是 ms | Number | --     |
