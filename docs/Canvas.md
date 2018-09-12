@@ -12,38 +12,80 @@ var canvas = new Canvas(options);
 
 ### 实例方法
 
-#### add
+#### add(element)
 
-向画布中添加一个元素
+- 描述：
 
-```js
-canvas.add(element);
-```
+  向画布中添加一个元素
 
-- element 必须为一个`Element`实例
+- 参数：
 
-#### remove
+  - `{Element} element`
 
-从画布中去除一个元素
+- 示例：
+  ```js
+  canvas.add(element);
+  ```
 
-```js
-canvas.remove(element);
-```
+#### remove(element)
 
-- element 必须为一个`Element`实例
+- 描述：
 
-#### draw
+  从画布中去除一个元素
 
-命令画布进行绘制
+- 参数：
 
-```js
-canvas.draw();
-```
+  - `{Element} element`
 
-#### clear
+- 示例：
+  ```js
+  canvas.remove(element);
+  ```
 
-清空画布
+#### draw()
+- 描述：
 
-```js
-canvas.clear();
-```
+  命令画布进行绘制
+
+- 示例：
+
+  ```js
+  canvas.draw();
+  ```
+
+#### clear()
+- 描述：
+
+  清空画布
+
+- 示例：
+  ```js
+  canvas.clear();
+  ```
+
+#### animate(func)
+
+- 描述：
+
+  执行动画
+
+- 参数：
+
+  - `{Function} func`表示每一帧绘制的逻辑
+
+- 示例：
+
+  ```js
+  var x = 0,
+    y = 0;
+  var element = new Circle({ x: x, y: y, r: 10 });
+  function move() {
+    canvas.clear();
+    element.attr({
+      x: x++,
+      y: y++
+    });
+    canvas.draw();
+  }
+  elememt.animate(move);
+  ```
