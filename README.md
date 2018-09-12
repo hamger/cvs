@@ -28,6 +28,10 @@ canvas.draw();
 
 ## Changelog
 
+### 2018.9.12
+
+> v0.1.5 添加 click 事件监听
+
 ### 2018.9.11
 
 > v0.1.4 添加 Path，Img，Text 构造器

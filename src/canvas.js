@@ -5,7 +5,9 @@ class Canvas {
   constructor (opt) {
     this.container = opt.container
     this.children = []
-    this.clickChildren = []
+    this.eventChildren = {
+      click: []
+    }
     this.init()
     this.bind()
   }
@@ -29,7 +31,7 @@ class Canvas {
       let temp = null
       var location = getLocation(this.canvas, e)
       // 根据 zIndex 降序排列，因为只触发最前面元素的点击事件
-      f.arrSort(this.clickChildren, 'zIndex', true).some(child => {
+      this.eventChildren.click.some(child => {
         if (!child.visible) return false
         child.drawPath()
         if (this.ctx.isPointInPath(location.x, location.y)) {
@@ -39,14 +41,32 @@ class Canvas {
       })
       if (temp) temp.click(e)
     })
-    // this.canvas.addEventListener(tap.start, e => {})
+    this.canvas.addEventListener('mousemove', e => {
+      let temp = null
+      var location = getLocation(this.canvas, e)
+      // 根据 zIndex 降序排列，因为只触发最前面元素的点击事件
+      this.eventChildren.click.some(child => {
+        if (!child.visible) return false
+        child.drawPath()
+        if (this.ctx.isPointInPath(location.x, location.y)) {
+          temp = child
+          return true
+        }
+      })
+      if (temp) this.canvas.style.cursor = 'pointer'
+      else this.canvas.style.cursor = 'auto'
+    })
   }
   add (element) {
     if (element instanceof Element) {
       element.ctx = this.ctx
       element.canvas = this.canvas
       this.children.push(element)
-      if (element.click) this.clickChildren.push(element)
+      f.arrSort(this.children, 'zIndex')
+      if (element.click) {
+        this.eventChildren.click.push(element)
+        f.arrSort(this.eventChildren.click, 'zIndex', true)
+      }
     } else {
       throw Error('Function add only accept the instance of Element.')
     }
@@ -74,7 +94,7 @@ class Canvas {
   }
   draw () {
     this.clear()
-    f.arrSort(this.children, 'zIndex').forEach(child => {
+    this.children.forEach(child => {
       if (child.visible) child.draw()
     })
   }

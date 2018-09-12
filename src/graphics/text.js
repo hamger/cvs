@@ -10,8 +10,6 @@ export default class Text extends Element {
     this.fontStyle = this.fontStyle || 'normal'
     this.fontWeight = this.fontWeight || 'normal'
     this.fontVariant = this.fontVariant || 'normal'
-    this.textAlign = this.textAlign || 'start'
-    this.textBaseline = this.textBaseline || 'bottom'
   }
   draw () {
     var ctx = this.ctx
@@ -41,9 +39,9 @@ export default class Text extends Element {
     }
   }
   drawPath () {
-    var ctx = this.ctx
-    ctx.beginPath()
+    // var ctx = this.ctx
+    // ctx.beginPath()
     // console.log(this)
-    ctx.rect(this.x, this.y, this.fontStyle, this.textWidth)
+    // ctx.rect(this.x, this.y, this.textWidth.toFixed(0), this.fontStyle)
   }
 }

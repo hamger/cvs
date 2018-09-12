@@ -58,16 +58,16 @@ element5.on('click', function (e) {
 })
 canvas.add(element5)
 
-var element6 = new Text({
-  zIndex: 2,
-  text: 'Hello cvs',
-  x: 0,
-  y: 200,
-  fontSize: 44
-})
-element6.on('click', function (e) {
-  console.log('element6: ' + e)
-})
-canvas.add(element6)
+// var element6 = new Text({
+//   zIndex: -92,
+//   text: 'Hello cvs',
+//   x: 0,
+//   y: 44,
+//   fontSize: 44
+// })
+// element6.on('click', function (e) {
+//   console.log('element6: ' + e)
+// })
+// canvas.add(element6)
 
 canvas.draw()
