@@ -14,7 +14,7 @@ var element = new Path(options);
 
 > 使用字符串描述路径，详情参考 [svg path](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths)
 
-* 大写字母表示决定位置，小写字母表示相对位置
+* 大写字母表示决定位置，小写字母表示相对位置（除`M/m`和`Z/z`）
 * `M/m x y`表示`ctx.moveTo(x, y)`
 * `L/l x y`表示`ctx.lineTo(x, y)`
 * `H/h x`表示水平移动`x`距离
