@@ -5,7 +5,7 @@ export default class Text extends Element {
     super(opt)
     this.lineWidth = 1
     this.lineCount = 1
-    this.fontSize = this.fontSize || 12
+    this.fontSize = this.fontSize || 10
     this.fontFamily = this.fontFamily || 'sans-serif'
     this.fontStyle = this.fontStyle || 'normal'
     this.fontWeight = this.fontWeight || 'normal'
