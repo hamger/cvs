@@ -1,4 +1,4 @@
-import { Canvas, Circle } from '@'
+import { Canvas, Circle, Rect } from '@'
 let canvas = new Canvas({
   container: document.getElementById('container')
 })
@@ -10,22 +10,40 @@ for (var i = 0; i < dotCount; i++) {
   r = r + 0.5
   var x = Math.random() * canvas.width
   var y = Math.random() * canvas.height
-  let dot = new Circle({
+  // let dot = new Circle({
+  //   angle: 0,
+  //   zIndex: Math.random() * dotCount,
+  //   r,
+  //   x,
+  //   y,
+  //   fill: 'red'
+  // })
+  let dot = new Rect({
     angle: 0,
-    zIndex: Math.random() * dotCount,
-    r,
     x,
     y,
-    fill: 'red'
+    w: 100,
+    h: 80
   })
   dots.push(dot)
 }
+
+let aa = new Circle({
+  zIndex: Math.random() * dotCount,
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  r: 200,
+  fill: '#000',
+  stroke: true
+})
 
 function move () {
   canvas.remove()
   dots.forEach((dot, i) => {
     if (i === 0) {
       dot.circling({
+        relativeX: 50,
+        relativeY: 40,
         vpx: canvas.width / 2,
         vpy: canvas.height / 2,
         r: 200,
@@ -33,6 +51,8 @@ function move () {
       })
     } else if (i === 1) {
       dot.elliptic({
+        relativeX: 50,
+        relativeY: 40,
         vpx: canvas.width / 2,
         vpy: canvas.height / 2,
         radiusX: 400,
@@ -41,15 +61,22 @@ function move () {
       })
     } else {
       dot.line({
-        endX: canvas.width / 2,
-        endY: canvas.height / 2,
+        endX: canvas.width / 2 - 50,
+        endY: canvas.height / 2 - 40,
         time: 1000
       })
     }
+    // dot.circling({
+    //   vpx: canvas.width / 2,
+    //   vpy: canvas.height / 2,
+    //   r: 200,
+    //   speed: 0.01
+    // })
     canvas.add(
       dot
     )
   })
+  canvas.add(aa)
   canvas.draw()
 }
 
