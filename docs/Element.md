@@ -55,7 +55,7 @@ var elememt = new Elememt(options);
 
 - 描述：
 
-  为元素绑定事件
+  为元素绑定事件监听
 
 - 参数：
 
@@ -67,6 +67,21 @@ var elememt = new Elememt(options);
   element.on("click", function(e) {
     console.log("element: " + e);
   });
+  ```
+
+#### off(eventType)
+
+- 描述：
+
+  为元素取消绑定事件监听
+
+- 参数：
+
+  - `{string} eventType`规定绑定的事件名称，可选项: `click`，`tapStart`，`tapEnd`，`tapMove`
+
+- 示例：
+  ```js
+  element.off("click")
   ```
 
 #### 运动函数
