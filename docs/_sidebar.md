@@ -3,7 +3,7 @@
 * API
   * [Canvas](/Canvas.md)
   * [Element](/Element.md)
-  * Shape
+  * graphics
     * [Circle](/graphics/Circle.md)
     * [Rect](/graphics/Rect.md)
     * [Arc](/graphics/Arc.md)
