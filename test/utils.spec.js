@@ -1,7 +1,7 @@
-import { delBlank } from '../src/utils'
+import { int } from '../src/utils'
 
-describe('delBlank', () => {
-  it('delBlank should delete needless blank', () => {
-    expect(delBlank('l   ea rner ')).toBe('l ea rner')
+describe('int', () => {
+  it('int should return integer', () => {
+    expect(int(2.56).toBe(3))
   })
 })
