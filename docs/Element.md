@@ -10,6 +10,9 @@ var elememt = new Elememt(options);
 | ----------- | ------- | -------------- | ------- |
 | zIndex      | Number  | 规定层次索引值 | `0`     |
 | visible     | Boolean | 规定是否可见   | `true`  |
+| cache       | Boolean | 规定是否缓存   | `false` |
+
+> 当元素在画布中的位置需动态变化，且元素其余属性不发生改变时，推荐开启 cache，提高渲染性能
 
 由于使用的是 canvas，绘制的所有图形都支持 canvas 的属性，这里只列出常用的属性，详细信息参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
 
@@ -81,7 +84,7 @@ var elememt = new Elememt(options);
 
 - 示例：
   ```js
-  element.off("click")
+  element.off("click");
   ```
 
 #### 运动函数
