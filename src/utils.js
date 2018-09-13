@@ -16,9 +16,16 @@ export const tap = {
   end: f.isMobile() ? 'touchend' : 'mouseup'
 }
 
-// 四舍五入 取整
+// 四舍五入取整（将目标数字加上 0.5，然后对结果执行逐位运算以消除小数部分）
 export function int (num) {
-  return ~~(0.5 + num)
+  var rounded
+  // With a bitwise or.
+  rounded = (0.5 + num) | 0
+  // A double bitwise not.
+  rounded = ~~(0.5 + num)
+  // Finally, a left bitwise shift.
+  rounded = (0.5 + num) << 0
+  return rounded
 }
 
 export const animFrame = (function () {

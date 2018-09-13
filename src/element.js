@@ -2,6 +2,7 @@ let id = 0
 export default class Element {
   constructor (opt) {
     this.id = id++
+    this.cache = 0
     if (opt.zIndex === undefined) opt.zIndex = 0
     if (opt.visible === undefined) opt.visible = true
     Object.assign(this, opt)
@@ -17,8 +18,9 @@ export default class Element {
     this[eventType] = null
   }
   // 设置公共绘制样式
-  setGeneral () {
-    let ctx = this.ctx
+  setGeneral (ctx2) {
+    // let ctx = this.ctx
+    let ctx = ctx2 || this.ctx
     if (this.stroke) ctx.strokeStyle = this.stroke
     if (this.fill) ctx.fillStyle = this.fill
     if (this.shadowColor) ctx.shadowColor = this.shadowColor
@@ -30,15 +32,17 @@ export default class Element {
       ctx.globalCompositeOperation = this.globalCompositeOperation
     }
   }
-  setLine () {
-    let ctx = this.ctx
+  setLine (ctx2) {
+    // let ctx = this.ctx
+    let ctx = ctx2 || this.ctx
     if (this.lineWidth) ctx.lineWidth = this.lineWidth
     if (this.lineCap) ctx.lineCap = this.lineCap
     if (this.lineJoin) ctx.lineJoin = this.lineJoin
     if (this.lineLimit) ctx.lineLimit = this.lineLimit
   }
-  setText () {
-    let ctx = this.ctx
+  setText (ctx2) {
+    // let ctx = this.ctx
+    let ctx = ctx2 || this.ctx
     if (this.font) ctx.font = this.font
     if (this.textAlign) ctx.textAlign = this.textAlign
     if (this.textBaseline) ctx.textBaseline = this.textBaseline

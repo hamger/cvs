@@ -4,41 +4,40 @@ let canvas = new Canvas({
 })
 const dotCount = 3
 let r = 10
+let aa = new Circle({
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  r: 200,
+  fill: '#000',
+  stroke: true,
+  lineWidth: 2.23
+})
+canvas.add(aa)
 
 let dots = []
 for (var i = 0; i < dotCount; i++) {
   r = r + 0.5
   var x = Math.random() * canvas.width
   var y = Math.random() * canvas.height
-  // let dot = new Circle({
-  //   angle: 0,
-  //   zIndex: Math.random() * dotCount,
-  //   r,
-  //   x,
-  //   y,
-  //   fill: 'red'
-  // })
-  let dot = new Rect({
+  let dot = new Circle({
     angle: 0,
+    r,
     x,
     y,
-    w: 100,
-    h: 80
+    fill: 'red'
   })
+  // let dot = new Rect({
+  //   angle: 0,
+  //   x,
+  //   y,
+  //   w: 100,
+  //   h: 80
+  // })
   dots.push(dot)
+  canvas.add(dot)
 }
 
-let aa = new Circle({
-  zIndex: Math.random() * dotCount,
-  x: canvas.width / 2,
-  y: canvas.height / 2,
-  r: 200,
-  fill: '#000',
-  stroke: true
-})
-
 function move () {
-  canvas.remove()
   dots.forEach((dot, i) => {
     if (i === 0) {
       dot.circling({
@@ -66,17 +65,7 @@ function move () {
         time: 1000
       })
     }
-    // dot.circling({
-    //   vpx: canvas.width / 2,
-    //   vpy: canvas.height / 2,
-    //   r: 200,
-    //   speed: 0.01
-    // })
-    canvas.add(
-      dot
-    )
   })
-  canvas.add(aa)
   canvas.draw()
 }
 

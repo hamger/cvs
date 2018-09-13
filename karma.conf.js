@@ -24,7 +24,7 @@ module.exports = function (config) {
       dir: 'coverage/'
     },
 
-    port: 9876,
+    port: 9878,
     colors: true,
 
     // level of logging

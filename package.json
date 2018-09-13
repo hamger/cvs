@@ -66,6 +66,6 @@
     "webpack-dev-server": "2.11.1"
   },
   "dependencies": {
-    "hg-jslibrary": "^0.1.4"
+    "hg-jslibrary": "^0.1.5"
   }
 }
