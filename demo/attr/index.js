@@ -4,7 +4,7 @@ let canvas = new Canvas({
 })
 
 const dotSpeed = 1
-const dotCount = 40
+const dotCount = 80
 
 let dots = []
 for (var i = 0; i < dotCount; i++) {
@@ -19,6 +19,7 @@ for (var i = 0; i < dotCount; i++) {
     r: r,
     x: x,
     y: y,
+    cache: true,
     fill: `rgba(${Math.random() * 255}, ${Math.random() *
       255}, ${Math.random() * 255}, ${Math.random()})`
   })

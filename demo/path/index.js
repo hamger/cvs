@@ -34,13 +34,13 @@ canvas.add(
 
 canvas.add(
   new Arc({
-    visible: false,
-    x: 500,
-    y: 100,
+    x: 500.3,
+    y: 100.4,
     r: 50,
     startAngle: -80,
     endAngle: 20,
-    anticlockwise: true
+    anticlockwise: true,
+    cache: true
   })
 )
 

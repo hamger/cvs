@@ -10,7 +10,7 @@ var element = new Img(options);
 
 | options.key | value          | description                                 | default |
 | ----------- | -------------- | ------------------------------------------- | ------- |
-| img         | Object\|String | 图片地址或者 canvas 图像源                  | --      |
+| img         | Object / String | 图片地址或者 canvas 图像源                  | --      |
 | dx          | Number         | 目标画布的左上角在目标 canvas 上 X 轴的位置 | --      |
 | dy          | Number         | 目标画布的左上角在目标 canvas 上 Y 轴的位置 | --      |
 | dw          | Number         | 在目标画布上绘制图像的宽度                  | --      |

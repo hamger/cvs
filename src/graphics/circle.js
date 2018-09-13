@@ -1,16 +1,22 @@
 import Element from '../element'
-import { int } from '../utils'
+
 export default class Circle extends Element {
   constructor (opt) {
     super(opt)
-    this.cacheCanvas = document.createElement('canvas')
-    this.cacheCtx = this.cacheCanvas.getContext('2d')
+    if (this.cache) this.cacheDraw()
   }
   draw () {
     var ctx = this.ctx
     ctx.save()
-    if (this.cache === 0) this.cacheDraw()
-    ctx.drawImage(this.cacheCanvas, this.x - this.r, this.y - this.r)
+    if (this.cache) {
+      ctx.drawImage(this.cacheCanvas, this.x - this.r, this.y - this.r)
+    } else {
+      this.setGeneral()
+      this.setLine()
+      this.drawPath()
+      if (this.stroke) ctx.stroke()
+      else ctx.fill()
+    }
     ctx.restore()
   }
   drawPath (ctx2) {
@@ -18,16 +24,24 @@ export default class Circle extends Element {
     ctx.beginPath()
     if (ctx2) {
       let lineWidth = this.lineWidth || 1
-      ctx.arc(int(this.r + lineWidth), int(this.r + lineWidth), int(this.r), 0, Math.PI * 2)
+      ctx.arc(
+        this.r + lineWidth,
+        this.r + lineWidth,
+        this.r,
+        0,
+        Math.PI * 2
+      )
     } else {
-      ctx.arc(int(this.x), int(this.y), int(this.r), 0, Math.PI * 2)
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2)
     }
   }
   cacheDraw () {
+    this.cacheCanvas = document.createElement('canvas')
+    var cacheCtx = this.cacheCanvas.getContext('2d')
     let lineWidth = this.lineWidth || 1
-    this.cacheCanvas.width = 2 * int(this.r + lineWidth)
-    this.cacheCanvas.height = 2 * int(this.r + lineWidth)
-    var cacheCtx = this.cacheCtx
+    // +1 防止离屏画布过小
+    this.cacheCanvas.width = 2 * (this.r + lineWidth) + 1
+    this.cacheCanvas.height = 2 * (this.r + lineWidth) + 1
     cacheCtx.save()
     this.setGeneral(cacheCtx)
     this.setLine(cacheCtx)
@@ -35,6 +49,5 @@ export default class Circle extends Element {
     if (this.stroke) cacheCtx.stroke()
     else cacheCtx.fill()
     cacheCtx.restore()
-    this.cache++
   }
 }

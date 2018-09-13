@@ -2,7 +2,7 @@ let id = 0
 export default class Element {
   constructor (opt) {
     this.id = id++
-    this.cache = 0
+    this.cache = false
     if (opt.zIndex === undefined) opt.zIndex = 0
     if (opt.visible === undefined) opt.visible = true
     Object.assign(this, opt)
