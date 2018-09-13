@@ -4,35 +4,28 @@ var canvas = new Canvas({
   container: document.getElementById('container')
 })
 
-canvas.add(
-  new Img({
-    img: 'https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png',
-    dx: 200,
-    dy: 200
+// 准备图片元素对象
+var img = new Image()
+img.src = 'https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png'
+
+// 当图片准备以后再绘制
+img.onload = function () {
+  // 绘制图片,按照图片本身的大小进行加载
+  let dx = 0
+  let dy = 0
+  var element = new Img({
+    img: img,
+    dx: dx,
+    dy: dy,
+    cache: true
   })
-)
-
-canvas.draw()
-
-// // 准备图片元素对象
-// var img = new Image()
-// img.src = 'https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png'
-
-// // 当图片准备以后再绘制
-// img.onload = function () {
-//   // 绘制图片,按照图片本身的大小进行加载
-//   canvas.add(
-//     new Img({
-//       img: img,
-//       dx: 80,
-//       dy: 80,
-//       dw: 200,
-//       dh: 200,
-//       sx: 20,
-//       sy: 30,
-//       sw: 100,
-//       sh: 100
-//     })
-//   )
-//   canvas.draw()
-// }
+  canvas.add(element)
+  function move () {
+    element.attr({
+      dx: dx++,
+      dy: dy++
+    })
+    canvas.draw()
+  }
+  canvas.animate(move)
+}
