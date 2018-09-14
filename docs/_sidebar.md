@@ -1,7 +1,7 @@
 * 基础
   * [Start](/Start.md)
 * API
-  * [Canvas](/Cvs.md)
+  * [Cvs](/Cvs.md)
   * [Element](/Element.md)
   * graphics
     * [Circle](/graphics/Circle.md)
