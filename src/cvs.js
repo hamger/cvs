@@ -14,18 +14,11 @@ class Cvs {
   }
   init () {
     var canvas = document.createElement('canvas')
+    this.width = canvas.width = this.container.clientWidth
+    this.height = canvas.height = this.container.clientHeight
     this.canvas = canvas
-    this.container.appendChild(canvas)
-    // 当屏幕被伸缩时，使画布依然充满整个元素
-    canvas.style.width = '100%'
-    canvas.style.height = '100%'
-    this.resize()
-    window.onresize = this.resize.bind(this)
     this.ctx = canvas.getContext('2d')
-  }
-  resize () {
-    this.width = this.canvas.width = this.container.clientWidth
-    this.height = this.canvas.height = this.container.clientHeight
+    this.container.appendChild(canvas)
   }
   bind () {
     this.canvas.addEventListener('click', e => {

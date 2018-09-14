@@ -48,15 +48,22 @@ element4.on('click', function (e) {
 })
 cvs.add(element4)
 
-var element5 = new Img({
-  img: 'https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png',
-  dx: 200,
-  dy: 200
-})
-element5.on('click', function (e) {
-  console.log('element5: ' + e)
-})
-cvs.add(element5)
+var img = new Image()
+img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
+
+// 当图片准备以后再绘制
+img.onload = function () {
+  var element5 = new Img({
+    img: img,
+    dx: 200,
+    dy: 200
+  })
+  element5.on('click', function (e) {
+    console.log('element5: ' + e)
+  })
+  cvs.add(element5)
+  cvs.draw()
+}
 
 // var element6 = new Text({
 //   zIndex: -92,
@@ -69,5 +76,3 @@ cvs.add(element5)
 //   console.log('element6: ' + e)
 // })
 // cvs.add(element6)
-
-cvs.draw()
