@@ -14,9 +14,9 @@ var cvs = new Cvs(options);
 
 ### 实例属性
 
-| cvs.key | value | description          | default |
-| ------- | ----- | -------------------- | ------- |
-| canvas  | DOM   | 创建出的 canvas 元素 | --      |
+| cvs.key | value | description          |
+| ------- | ----- | -------------------- |
+| canvas  | DOM   | 创建出的 canvas 元素（便于设置其 css 样式） |
 
 ### 实例方法
 
