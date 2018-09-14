@@ -55,13 +55,11 @@ var elememt = new Elememt(options);
 
 - 描述：
 
-  添加元素绘制方法
+  添加元素绘制方法（添加顺序决定执行顺序)
 
 - 参数：
 
   - `{Object | Array<Object>} opt`表示绘制方法的对象或对象数组
-
-  > 添加顺序表示执行顺序
 
 - 示例：
 

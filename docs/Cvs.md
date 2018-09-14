@@ -16,7 +16,9 @@ var cvs = new Cvs(options);
 
 | cvs.key | value | description          |
 | ------- | ----- | -------------------- |
-| canvas  | DOM   | 创建出的 canvas 元素（便于设置其 css 样式） |
+| canvas  | DOM   | 生成的 canvas 元素（便于设置其 css 样式） |
+| width   | Number | canvas 元素标签宽度（等价于cvs.canvas.width） |
+| height  | Number | canvas 元素标签高度（等价于cvs.canvas.height） |
 
 ### 实例方法
 
