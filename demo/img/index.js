@@ -1,6 +1,5 @@
-// import { Canvas, Img } from '../../dist/cvs'
-import { Canvas, Img } from '@'
-var canvas = new Canvas({
+import { Cvs, Img } from '@'
+var cvs = new Cvs({
   container: document.getElementById('container')
 })
 
@@ -19,13 +18,13 @@ img.onload = function () {
     dy: dy,
     cache: true
   })
-  canvas.add(element)
+  cvs.add(element)
   function move () {
     element.attr({
       dx: dx++,
       dy: dy++
     })
-    canvas.draw()
+    cvs.draw()
   }
-  canvas.animate(move)
+  cvs.animate(move)
 }

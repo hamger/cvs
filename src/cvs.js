@@ -1,7 +1,7 @@
 import Element from './element'
 import { getLocation, animFrame } from './utils'
 
-class Canvas {
+class Cvs {
   constructor (opt) {
     this.container = opt.container
     this.children = []
@@ -117,4 +117,4 @@ class Canvas {
     cancelAnimationFrame(this.anim)
   }
 }
-export default Canvas
+export default Cvs

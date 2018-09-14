@@ -1,24 +1,24 @@
-import { Canvas, Circle, Rect } from '@'
-let canvas = new Canvas({
+import { Cvs, Circle, Rect } from '@'
+let cvs = new Cvs({
   container: document.getElementById('container')
 })
 const dotCount = 3
 let r = 10
 let aa = new Circle({
-  x: canvas.width / 2,
-  y: canvas.height / 2,
+  x: cvs.width / 2,
+  y: cvs.height / 2,
   r: 200,
   fill: '#000',
   stroke: true,
   lineWidth: 2.23
 })
-canvas.add(aa)
+cvs.add(aa)
 
 let dots = []
 for (var i = 0; i < dotCount; i++) {
   r = r + 0.5
-  var x = Math.random() * canvas.width
-  var y = Math.random() * canvas.height
+  var x = Math.random() * cvs.width
+  var y = Math.random() * cvs.height
   // let dot = new Circle({
   //   angle: 0,
   //   r,
@@ -35,7 +35,7 @@ for (var i = 0; i < dotCount; i++) {
     cache: true
   })
   dots.push(dot)
-  canvas.add(dot)
+  cvs.add(dot)
 }
 
 function move () {
@@ -44,8 +44,8 @@ function move () {
       dot.circling({
         relativeX: 50,
         relativeY: 40,
-        vpx: canvas.width / 2,
-        vpy: canvas.height / 2,
+        vpx: cvs.width / 2,
+        vpy: cvs.height / 2,
         r: 200,
         speed: 0.01
       })
@@ -53,21 +53,21 @@ function move () {
       dot.elliptic({
         relativeX: 50,
         relativeY: 40,
-        vpx: canvas.width / 2,
-        vpy: canvas.height / 2,
+        vpx: cvs.width / 2,
+        vpy: cvs.height / 2,
         radiusX: 400,
         radiusY: 200,
         speed: 0.03
       })
     } else {
       dot.line({
-        endX: canvas.width / 2 - 50,
-        endY: canvas.height / 2 - 40,
+        endX: cvs.width / 2 - 50,
+        endY: cvs.height / 2 - 40,
         time: 1000
       })
     }
   })
-  canvas.draw()
+  cvs.draw()
 }
 
-canvas.animate(move)
+cvs.animate(move)

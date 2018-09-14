@@ -1,9 +1,9 @@
-import { Canvas, Path, Poly, Arc } from '@'
-let canvas = new Canvas({
+import { Cvs, Path, Poly, Arc } from '@'
+let cvs = new Cvs({
   container: document.getElementById('container')
 })
 
-canvas.add(
+cvs.add(
   new Path({
     path:
       'M 10 10' +
@@ -17,7 +17,7 @@ canvas.add(
   })
 )
 
-canvas.add(
+cvs.add(
   new Poly({
     points: [[90, 190], [34, 56], [222, 333]],
     stroke: '#198',
@@ -25,14 +25,14 @@ canvas.add(
   })
 )
 
-canvas.add(
+cvs.add(
   new Poly({
     points: [[500, 190], [234, 356], [522, 433]],
     fill: '#999'
   })
 )
 
-canvas.add(
+cvs.add(
   new Arc({
     x: 500.3,
     y: 100.4,
@@ -44,4 +44,4 @@ canvas.add(
   })
 )
 
-canvas.draw()
+cvs.draw()

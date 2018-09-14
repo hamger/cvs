@@ -5,13 +5,13 @@ cvs (a short name from canvas) is a basic canvas framework for 2d drawing, it's 
 ## Usage
 
 ```js
-import { Canvas, Circle } from "cvs";
+import { Cvs, Circle } from "cvs";
 
-var canvas = new Canvas({
+var cvs = new Canvas({
   container: document.getElementById("container")
 });
 
-canvas.add(
+cvs.add(
   new Circle({
     x: 100,
     y: 100,
@@ -19,7 +19,7 @@ canvas.add(
   })
 );
 
-canvas.draw();
+cvs.draw();
 ```
 
 ## Document

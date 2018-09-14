@@ -1,5 +1,5 @@
-import { Canvas, Circle, Rect, Img, Text } from '@'
-var canvas = new Canvas({
+import { Cvs, Circle, Rect, Img, Text } from '@'
+var cvs = new Cvs({
   container: document.getElementById('container')
 })
 
@@ -12,7 +12,7 @@ var element = new Circle({
 element.on('click', function (e) {
   console.log('element: ' + e)
 })
-canvas.add(element)
+cvs.add(element)
 
 var element2 = new Rect({
   x: 200,
@@ -24,7 +24,7 @@ var element2 = new Rect({
 element2.on('click', function (e) {
   console.log('element2: ' + e)
 })
-canvas.add(element2)
+cvs.add(element2)
 
 var element3 = new Rect({
   x: 300,
@@ -34,7 +34,7 @@ var element3 = new Rect({
   stroke: 'blue'
 })
 
-canvas.add(element3)
+cvs.add(element3)
 
 var element4 = new Circle({
   zIndex: -2,
@@ -46,7 +46,7 @@ var element4 = new Circle({
 element4.on('click', function (e) {
   console.log('element4: ' + e)
 })
-canvas.add(element4)
+cvs.add(element4)
 
 var element5 = new Img({
   img: 'https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png',
@@ -56,7 +56,7 @@ var element5 = new Img({
 element5.on('click', function (e) {
   console.log('element5: ' + e)
 })
-canvas.add(element5)
+cvs.add(element5)
 
 // var element6 = new Text({
 //   zIndex: -92,
@@ -68,6 +68,6 @@ canvas.add(element5)
 // element6.on('click', function (e) {
 //   console.log('element6: ' + e)
 // })
-// canvas.add(element6)
+// cvs.add(element6)
 
-canvas.draw()
+cvs.draw()

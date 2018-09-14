@@ -1,10 +1,9 @@
-import { Canvas, Text } from '@'
-// import { Canvas, Text } from '../../dist/cvs.js'
-var canvas = new Canvas({
+import { Cvs, Text } from '@'
+var cvs = new Cvs({
   container: document.getElementById('container')
 })
 
-canvas.add(
+cvs.add(
   new Text({
     text: 'hello',
     x: 89,
@@ -13,7 +12,7 @@ canvas.add(
   })
 )
 
-canvas.add(
+cvs.add(
   new Text({
     text: 'hanger',
     x: 189,
@@ -21,4 +20,4 @@ canvas.add(
     fontSize: 43
   })
 )
-canvas.draw()
+cvs.draw()

@@ -1,7 +1,7 @@
 > 创建一个绘图对象
 
 ```js
-var canvas = new Canvas(options);
+var cvs = new Cvs(options);
 ```
 
 ### options
@@ -24,7 +24,7 @@ var canvas = new Canvas(options);
 
 - 示例：
   ```js
-  canvas.add(element);
+  cvs.add(element);
   ```
 
 #### remove(element)
@@ -39,7 +39,7 @@ var canvas = new Canvas(options);
 
 - 示例：
   ```js
-  canvas.remove(element);
+  cvs.remove(element);
   ```
 
 #### draw()
@@ -50,7 +50,7 @@ var canvas = new Canvas(options);
 - 示例：
 
   ```js
-  canvas.draw();
+  cvs.draw();
   ```
 
 #### clear()
@@ -60,7 +60,7 @@ var canvas = new Canvas(options);
 
 - 示例：
   ```js
-  canvas.clear();
+  cvs.clear();
   ```
 
 #### animate(func)
@@ -80,12 +80,12 @@ var canvas = new Canvas(options);
     y = 0;
   var element = new Circle({ x: x, y: y, r: 10 });
   function move() {
-    canvas.clear();
+    cvs.clear();
     element.attr({
       x: x++,
       y: y++
     });
-    canvas.draw();
+    cvs.draw();
   }
   elememt.animate(move);
   ```
