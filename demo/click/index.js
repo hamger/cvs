@@ -34,17 +34,15 @@ var element3 = new Rect({
   h: 80,
   stroke: 'blue'
 })
-// element3.exec({
-//   'rotate': 10
-// })
-// element3.exec({
-//   'scale': [1.5, 2]
-// })
+element3.exec({
+  'scale': [1.2, 1.1]
+})
 element3.exec([{
   'rotate': 10
-}, {
-  'scale': [1.5, 2]
 }])
+// element3.on('click', function (e) {
+//   console.log('element3: ' + e)
+// })
 cvs.add(element3)
 
 var element4 = new Circle({

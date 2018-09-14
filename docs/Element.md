@@ -36,7 +36,7 @@ var elememt = new Elememt(options);
 
 - 描述：
 
-  用于更改元素属性
+  更改元素属性
 
 - 参数：
 
@@ -51,15 +51,37 @@ var elememt = new Elememt(options);
   });
   ```
 
+#### exec(opt)
+
+- 描述：
+
+  添加元素绘制方法
+
+- 参数：
+
+  - `{Object | Array<Object>} opt`表示绘制方法的对象或对象数组
+
+  > 添加顺序表示执行顺序
+
+- 示例：
+
+  ```js
+  element.exec({ scale: [1.5, 1.8] });
+  element.exec({ setTransform: [1, 1, 0, 1, 0, 0] });
+  element.exec([{ rotate: 10 }, { translate: [10, 90] }]);
+  ```
+
 #### on(eventType, callback)
 
 - 描述：
 
-  为元素（除 Text 元素）绑定事件监听 
+  为元素（除 Text 元素）绑定事件监听
+
+  !> 内部使用 isPointInPath() 判断是否在区域内，如果路径指定了变形，将以变形前为基准，因此不要在变形的元素中绑定事件监听
 
 - 参数：
 
-  - `{string} eventType`规定绑定的事件名称，可选项: `click`，`tapStart`，`tapEnd`，`tapMove`
+  - `{string} eventType`规定绑定的事件名称，可选项: `click`
   - `{Function} callback`规定监听函数
 
 - 示例：
