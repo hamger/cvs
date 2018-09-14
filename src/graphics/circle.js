@@ -42,12 +42,10 @@ export default class Circle extends Element {
     // +1 防止离屏画布过小
     this.cacheCanvas.width = 2 * (this.r + lineWidth) + 1
     this.cacheCanvas.height = 2 * (this.r + lineWidth) + 1
-    cacheCtx.save()
     this.setGeneral(cacheCtx)
     this.setLine(cacheCtx)
     this.drawPath(cacheCtx)
     if (this.stroke) cacheCtx.stroke()
     else cacheCtx.fill()
-    cacheCtx.restore()
   }
 }

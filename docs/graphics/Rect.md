@@ -14,6 +14,9 @@ var element = new Rect(options);
 | h             | Number | 规定矩形高度    | --      |
 | x             | Number | 规定矩形 x 坐标 | --      |
 | y             | Number | 规定矩形 y 坐标 | --      |
+| cache       | Boolean | 规定是否缓存   | `false` |
+
+> 当元素在画布中的位置需动态变化，且元素其余属性不发生改变时，推荐开启 cache，提高渲染性能
 
 ### example
 

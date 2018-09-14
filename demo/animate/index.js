@@ -19,20 +19,21 @@ for (var i = 0; i < dotCount; i++) {
   r = r + 0.5
   var x = Math.random() * canvas.width
   var y = Math.random() * canvas.height
-  let dot = new Circle({
-    angle: 0,
-    r,
-    x,
-    y,
-    fill: 'red'
-  })
-  // let dot = new Rect({
+  // let dot = new Circle({
   //   angle: 0,
+  //   r,
   //   x,
   //   y,
-  //   w: 100,
-  //   h: 80
+  //   fill: 'red'
   // })
+  let dot = new Rect({
+    angle: 0,
+    x,
+    y,
+    w: 100,
+    h: 80,
+    cache: true
+  })
   dots.push(dot)
   canvas.add(dot)
 }

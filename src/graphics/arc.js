@@ -50,12 +50,10 @@ export default class Arc extends Element {
     let lineWidth = this.lineWidth || 1
     this.cacheCanvas.width = 2 * (this.r + lineWidth)
     this.cacheCanvas.height = 2 * (this.r + lineWidth)
-    cacheCtx.save()
     this.setGeneral(cacheCtx)
     this.setLine(cacheCtx)
     this.drawPath(cacheCtx)
     if (this.stroke) cacheCtx.stroke()
     else cacheCtx.fill()
-    cacheCtx.restore()
   }
 }

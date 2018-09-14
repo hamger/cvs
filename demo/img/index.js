@@ -6,7 +6,7 @@ var canvas = new Canvas({
 
 // 准备图片元素对象
 var img = new Image()
-img.src = 'https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png'
+img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
 
 // 当图片准备以后再绘制
 img.onload = function () {

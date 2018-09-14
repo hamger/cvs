@@ -19,6 +19,9 @@ var element = new Img(options);
 | sy          | Number | 源图像的矩形选择框的左上角 Y 坐标           | --      |
 | sw          | Number | 源图像的矩形选择框的宽度                    | --      |
 | sh          | Number | 源图像的矩形选择框的高度                    | --      |
+| cache       | Boolean | 规定是否缓存   | `false` |
+
+> 当元素在画布中的位置需动态变化，且元素其余属性不发生改变时，推荐开启 cache，提高渲染性能
 
 ### example
 

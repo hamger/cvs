@@ -16,6 +16,9 @@ var element = new Arc(options);
 | startAngle    | Number | 规定起始角度    | --      |
 | endAngle      | Number | 规定终点角度    | --      |
 | anticlockwise | Number | 规定绘制方向    | `false` |
+| cache       | Boolean | 规定是否缓存   | `false` |
+
+> 当元素在画布中的位置需动态变化，且元素其余属性不发生改变时，推荐开启 cache，提高渲染性能
 
 ### example
 
