@@ -1,5 +1,7 @@
 ## Cvs
+
 创建一个绘图对象
+
 ```js
 var cvs = new Cvs(options);
 ```
@@ -9,6 +11,12 @@ var cvs = new Cvs(options);
 | options.key | value | description                               | default |
 | ----------- | ----- | ----------------------------------------- | ------- |
 | container   | DOM   | 作为容器的 dom 元素，容器大小决定画布大小 | --      |
+
+### 实例属性
+
+| cvs.key | value | description          | default |
+| ------- | ----- | -------------------- | ------- |
+| canvas  | DOM   | 创建出的 canvas 元素 | --      |
 
 ### 实例方法
 
@@ -43,6 +51,7 @@ var cvs = new Cvs(options);
   ```
 
 #### draw()
+
 - 描述：
 
   命令画布进行绘制
@@ -54,6 +63,7 @@ var cvs = new Cvs(options);
   ```
 
 #### clear()
+
 - 描述：
 
   清空画布
