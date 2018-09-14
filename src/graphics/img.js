@@ -8,11 +8,13 @@ export default class Img extends Element {
     if (this.cache) this.cacheDraw()
   }
   draw () {
+    this.w = this.dw ? this.dw : this.img.width
+    this.h = this.dh ? this.dh : this.img.height
     if (this.cache) {
       this.cacheDraw()
       this.ctx.drawImage(this.cacheCanvas, this.dx, this.dy)
     } else {
-      this.drawImg()
+      this.drawUnit()
     }
   }
   drawPath () {
@@ -20,11 +22,12 @@ export default class Img extends Element {
     ctx.beginPath()
     ctx.rect(this.dx, this.dy, this.w, this.h)
   }
-  drawImg (ctx2) {
+  drawUnit (ctx2) {
     let ctx = ctx2 || this.ctx
     let img = this.img
     ctx.save()
-    this.setGeneral()
+    this.setGeneral(ctx)
+    this.setFunc(ctx)
     if (ctx2) {
       if (this.sw && this.sh) {
         ctx.drawImage(
@@ -65,13 +68,9 @@ export default class Img extends Element {
     ctx.restore()
   }
   cacheDraw () {
-    var img = this.img
     this.cacheCanvas = document.createElement('canvas')
-    var cacheCtx = this.cacheCanvas.getContext('2d')
-    this.w = this.dw ? this.dw : img.width
-    this.h = this.dh ? this.dh : img.height
     this.cacheCanvas.width = this.w
     this.cacheCanvas.height = this.h
-    this.drawImg(cacheCtx)
+    this.drawUnit(this.cacheCanvas.getContext('2d'))
   }
 }

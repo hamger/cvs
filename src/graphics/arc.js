@@ -6,21 +6,26 @@ export default class Arc extends Element {
     if (this.cache) this.cacheDraw()
   }
   draw () {
-    var ctx = this.ctx
+    let ctx = this.ctx
     ctx.save()
     if (this.cache) {
       ctx.drawImage(this.cacheCanvas, this.x - this.r, this.y - this.r)
     } else {
-      this.setGeneral()
-      this.setLine()
-      this.drawPath()
-      if (this.stroke) ctx.stroke()
-      else ctx.fill()
+      this.drawUnit()
     }
     ctx.restore()
   }
+  drawUnit (ctx2) {
+    let ctx = ctx2 || this.ctx
+    this.setGeneral(ctx)
+    this.setLine(ctx)
+    this.setFunc(ctx)
+    this.drawPath(ctx || null)
+    if (this.stroke) ctx.stroke()
+    else ctx.fill()
+  }
   drawPath (ctx2) {
-    var ctx = ctx2 || this.ctx
+    let ctx = ctx2 || this.ctx
     ctx.beginPath()
     if (ctx2) {
       let lineWidth = this.lineWidth || 1
@@ -46,14 +51,9 @@ export default class Arc extends Element {
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
-    var cacheCtx = this.cacheCanvas.getContext('2d')
     let lineWidth = this.lineWidth || 1
     this.cacheCanvas.width = 2 * (this.r + lineWidth)
     this.cacheCanvas.height = 2 * (this.r + lineWidth)
-    this.setGeneral(cacheCtx)
-    this.setLine(cacheCtx)
-    this.drawPath(cacheCtx)
-    if (this.stroke) cacheCtx.stroke()
-    else cacheCtx.fill()
+    this.drawUnit(this.cacheCanvas.getContext('2d'))
   }
 }

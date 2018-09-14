@@ -7,7 +7,8 @@ var element = new Circle({
   r: 50,
   y: 100,
   x: 100,
-  fill: '#999'
+  fill: '#999',
+  cache: true
 })
 element.on('click', function (e) {
   console.log('element: ' + e)
@@ -51,7 +52,8 @@ var element4 = new Circle({
   r: 50,
   y: 150,
   x: 150,
-  fill: '#3e9'
+  fill: '#3e9',
+  cache: true
 })
 element4.on('click', function (e) {
   console.log('element4: ' + e)

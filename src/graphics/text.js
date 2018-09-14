@@ -18,6 +18,7 @@ export default class Text extends Element {
     this.setGeneral()
     this.assembleFont()
     this.setText()
+    this.setFunc()
     var text
     if (this.stroke) {
       text = ctx.strokeText(this.text, this.x, this.y)

@@ -9,6 +9,9 @@ export default class Path extends Element {
   draw () {
     var ctx = this.ctx
     ctx.save()
+    this.setGeneral()
+    this.setLine()
+    this.setFunc()
     if (this.stroke) ctx.strokeStyle = this.stroke
     else ctx.fillStyle = this.fill
     this.drawPath()

@@ -51,12 +51,6 @@ export default class Element {
     if (this.lineJoin) ctx.lineJoin = this.lineJoin
     if (this.lineLimit) ctx.lineLimit = this.lineLimit
   }
-  setTransfrom (ctx2) {
-    let ctx = ctx2 || this.ctx
-    this.execArr.forEach(item => {
-      if (this.translate) ctx.translate(this.translate[0], this.translate[1])
-    })
-  }
   setText (ctx2) {
     let ctx = ctx2 || this.ctx
     if (this.font) ctx.font = this.font
