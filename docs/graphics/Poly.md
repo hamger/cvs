@@ -1,4 +1,6 @@
-> 绘制一个多边形/折线
+## Poly
+
+绘制一个多边形/折线元素
 
 ```js
 var element = new Poly(options);

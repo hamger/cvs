@@ -4,11 +4,11 @@
   * [Cvs](/Cvs.md)
   * [Element](/Element.md)
   * graphics
-    * [Circle](/graphics/Circle.md)
-    * [Rect](/graphics/Rect.md)
     * [Arc](/graphics/Arc.md)
-    * [Poly](/graphics/Poly.md)
-    * [Path](/graphics/Path.md)
+    * [Circle](/graphics/Circle.md)
     * [Img](/graphics/Img.md)
+    * [Path](/graphics/Path.md)
+    * [Poly](/graphics/Poly.md)
+    * [Rect](/graphics/Rect.md)
     * [Text](/graphics/Text.md)
   

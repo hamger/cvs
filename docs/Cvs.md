@@ -1,5 +1,5 @@
-> 创建一个绘图对象
-
+## Cvs
+创建一个绘图对象
 ```js
 var cvs = new Cvs(options);
 ```

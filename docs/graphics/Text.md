@@ -1,4 +1,6 @@
-> 绘制一个文本
+## Text
+
+绘制一个文本元素
 
 ```js
 var element = new Text(options);
@@ -19,13 +21,13 @@ var element = new Text(options);
 
 font 这个属性可以分解成多个属性单独配置，这些配置只有在不设置 font 时生效
 
-| options.key | value | description | default |
-| ----------- | ------ | -------------------------- | ------- |
-| fontStyle | Number | 规定文本内容的 font-style | `normal` |
-| fontVariant | String | 规定文本内容的 font-variant | `normal` |
-| fontWeight | String | 规定文本内容的 font-weight | `normal` |
-| fontSize | String | 规定文本内容的 font-size | `10` |
-| fontFamily | String | 规定文本内容的 font-family | `sans-serif` |
+| options.key | value  | description                 | default      |
+| ----------- | ------ | --------------------------- | ------------ |
+| fontStyle   | Number | 规定文本内容的 font-style   | `normal`     |
+| fontVariant | String | 规定文本内容的 font-variant | `normal`     |
+| fontWeight  | String | 规定文本内容的 font-weight  | `normal`     |
+| fontSize    | String | 规定文本内容的 font-size    | `10`         |
+| fontFamily  | String | 规定文本内容的 font-family  | `sans-serif` |
 
 ### example
 

@@ -1,10 +1,10 @@
-### Instrall
+## Instrall
 
 ```bash
 npm instrall cvs
 ```
 
-### Usage
+## Usage
 
 ```js
 // create a circle in canvas

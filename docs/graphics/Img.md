@@ -1,4 +1,6 @@
-> 绘制一个图片
+## Img
+
+绘制一个图片元素
 
 ```js
 var element = new Img(options);
@@ -21,7 +23,7 @@ var element = new Img(options);
 | sh          | Number  | 源图像的矩形选择框的高度                    | --      |
 | cache       | Boolean | 规定是否缓存                                | `false` |
 
-> 当元素在画布中的位置需动态变化，且元素其余属性不发生改变时，推荐开启 cache，提高渲染性能
+> 当元素在画布中的位置需动态变化，且元素其余属性不发生改变时，推荐开启 cache ，提高渲染性能
 
 ### example
 
