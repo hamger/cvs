@@ -1,4 +1,4 @@
-# cvs <small>0.1.5</small>
+# cvs <small>0.1.6</small>
 
 >  A basic canvas framework for 2d drawing.
 
