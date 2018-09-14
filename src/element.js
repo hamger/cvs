@@ -1,15 +1,28 @@
+import { int } from './utils'
+
 let id = 0
 export default class Element {
   constructor (opt) {
     this.id = id++
     this.cache = false
     this.visible = true
-    if (opt.zIndex === undefined) opt.zIndex = 0
+    this.zIndex = 0
+    this.execArr = []
     Object.assign(this, opt)
   }
   // 设置绘制属性
   attr (opt) {
     Object.assign(this, opt)
+  }
+  // 设置绘制方法
+  exec (opt) {
+    if (f.isObject(opt)) {
+      this.execArr.push(opt)
+    } else {
+      opt.forEach(item => {
+        this.execArr.push(item)
+      })
+    }
   }
   on (eventType, callback) {
     this[eventType] = callback
@@ -19,7 +32,6 @@ export default class Element {
   }
   // 设置公共绘制样式
   setGeneral (ctx2) {
-    // let ctx = this.ctx
     let ctx = ctx2 || this.ctx
     if (this.stroke) ctx.strokeStyle = this.stroke
     if (this.fill) ctx.fillStyle = this.fill
@@ -33,19 +45,33 @@ export default class Element {
     }
   }
   setLine (ctx2) {
-    // let ctx = this.ctx
     let ctx = ctx2 || this.ctx
     if (this.lineWidth) ctx.lineWidth = this.lineWidth
     if (this.lineCap) ctx.lineCap = this.lineCap
     if (this.lineJoin) ctx.lineJoin = this.lineJoin
     if (this.lineLimit) ctx.lineLimit = this.lineLimit
   }
+  setTransfrom (ctx2) {
+    let ctx = ctx2 || this.ctx
+    this.execArr.forEach(item => {
+      if (this.translate) ctx.translate(this.translate[0], this.translate[1])
+    })
+  }
   setText (ctx2) {
-    // let ctx = this.ctx
     let ctx = ctx2 || this.ctx
     if (this.font) ctx.font = this.font
     if (this.textAlign) ctx.textAlign = this.textAlign
     if (this.textBaseline) ctx.textBaseline = this.textBaseline
+  }
+  setFunc (ctx2) {
+    if (this.execArr.length === 0) return
+    let ctx = ctx2 || this.ctx
+    this.execArr.forEach(item => {
+      let key = Object.keys(item)[0]
+      let val = item[key]
+      if (/(scale|translate|transform|setTransform)/.test(key)) ctx[key](...val)
+      if (key === 'rotate') ctx[key](val * Math.PI / 180)
+    })
   }
   // 圆周运动
   circling (opt) {
@@ -82,7 +108,7 @@ export default class Element {
       k = (endY - this.y) / (endX - this.x)
       b = endY - k * endX
       let distanceX = endX - this.x
-      let speedX = (distanceX / time * 16)
+      let speedX = (distanceX / time) * 16
       this.record = {
         speedX,
         k,

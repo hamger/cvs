@@ -13,6 +13,7 @@ export default class Rect extends Element {
     } else {
       this.setGeneral()
       this.setLine()
+      this.setFunc()
       this.drawPath()
       if (this.stroke) ctx.stroke()
       else ctx.fill()
