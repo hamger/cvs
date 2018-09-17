@@ -20,7 +20,7 @@ var element = new Arc(options);
 | anticlockwise | Number  | 规定绘制方向    | `false` |
 | cache         | Boolean | 规定是否缓存    | `false` |
 
-> 当元素在画布中的位置需动态变化，且元素其余属性不发生改变时，推荐开启 cache ，提高渲染性能
+> 在动画中，如果只有元素的位置发生变化，推荐开启`cache`，使用离屏渲染提高性能
 
 ### example
 

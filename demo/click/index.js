@@ -7,11 +7,20 @@ var element = new Circle({
   r: 50,
   y: 100,
   x: 100,
-  fill: '#999',
-  cache: true
+  fill: '#999'
+  // cache: true
 })
-element.on('click', function (e) {
-  console.log('element: ' + e)
+element.on('click', function () {
+  if (element.fill === '#999') {
+    element.attr({
+      fill: '#23af9a'
+    })
+  } else {
+    element.attr({
+      fill: '#999'
+    })
+  }
+  cvs.draw()
 })
 cvs.add(element)
 
@@ -23,8 +32,25 @@ var element2 = new Rect({
   stroke: 'green',
   cache: true
 })
-element2.on('click', function (e) {
-  console.log('element2: ' + e)
+element2.on('click', function () {
+  if (element2.x === 200) {
+    element2.attr({
+      x: 250,
+      y: 600,
+      // animation: {
+      //   type: 'line',
+      //   endX: 250,
+      //   endY: 600,
+      //   time: 1000
+      // }
+    })
+  } else {
+    element2.attr({
+      x: 200,
+      y: 400
+    })
+  }
+  cvs.draw()
 })
 cvs.add(element2)
 
