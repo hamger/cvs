@@ -16,10 +16,23 @@ export default class Element {
       this.lw = 0
       if (this.stroke && this.lineWidth) this.lw = this.lineWidth / 2
     }
+    if (this.hover) {
+      this.noHover = {}
+      for (let key in this.hover) {
+        this.noHover[key] = this[key]
+      }
+    }
   }
   // 设置绘制属性
   attr (opt) {
     Object.assign(this, opt)
+    if (this.hover) {
+      for (let key in opt) {
+        if (key in this.noHover) {
+          this.noHover[key] = opt[key]
+        }
+      }
+    }
   }
   // 设置绘制方法
   exec (opt) {

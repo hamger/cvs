@@ -80,6 +80,9 @@ var element4 = new Circle({
   y: 150,
   x: 150,
   fill: '#3e9',
+  hover: {
+    fill: '#5f1'
+  },
   cache: true
 })
 element4.on('click', function (e) {

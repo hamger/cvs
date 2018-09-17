@@ -7,7 +7,7 @@ class Cvs {
     this.children = []
     this.eventChildren = {
       click: [],
-      hover: [],
+      hover: []
     }
     this.init()
     this.bind()
@@ -35,10 +35,13 @@ class Cvs {
       })
       if (temp) temp.click(e)
     })
+    // 使用count记数，防止光标移动时重复操作
+    let count = 0
+    let temp3 = null
     this.canvas.addEventListener('mousemove', e => {
       let temp = null
       var location = getLocation(this.canvas, e)
-      // 根据 zIndex 降序排列，因为只触发最前面元素的点击事件
+      // 实现鼠标移动到可点击区域时，光标变化
       this.eventChildren.click.some(child => {
         if (!child.visible) return false
         child.drawPath()
@@ -47,8 +50,38 @@ class Cvs {
           return true
         }
       })
-      if (temp) this.canvas.style.cursor = 'pointer'
-      else this.canvas.style.cursor = 'auto'
+      if (temp && count === 0) {
+        console.log('inner')
+        this.canvas.style.cursor = 'pointer'
+        count++
+      }
+      if (!temp && count > 0) {
+        console.log('outer')
+        this.canvas.style.cursor = 'auto'
+        count = 0
+      }
+
+      // 模拟 hover 事件监听
+      if (this.eventChildren.hover.length === 0) return
+      let temp2 = null
+      this.eventChildren.hover.some(child => {
+        if (!child.visible) return false
+        child.drawPath()
+        if (this.ctx.isPointInPath(location.x, location.y)) {
+          temp2 = child
+          return true
+        }
+      })
+      if (temp2) {
+        temp2.attr({ fill: '#5f1' })
+        temp3 = temp2
+        this.draw()
+      } else if (temp3) {
+        console.log(temp3)
+        temp3.attr({ fill: '#3e9' })
+        temp3 = null
+        this.draw()
+      }
     })
   }
   add (element) {
@@ -64,6 +97,7 @@ class Cvs {
       if (element.hover) {
         this.eventChildren.hover.push(element)
         f.arrSort(this.eventChildren.hover, 'zIndex', true)
+        console.log(this.eventChildren.hover)
       }
     } else {
       throw Error('Function add only accept the instance of Element.')

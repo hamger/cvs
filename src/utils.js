@@ -10,11 +10,11 @@ export function getLocation (container, event) {
   }
 }
 
-export const tap = {
-  start: f.isMobile() ? 'touchstart' : 'mousedown',
-  move: f.isMobile() ? 'touchmove' : 'mousemove',
-  end: f.isMobile() ? 'touchend' : 'mouseup'
-}
+// export const tap = {
+//   start: f.isMobile() ? 'touchstart' : 'mousedown',
+//   move: f.isMobile() ? 'touchmove' : 'mousemove',
+//   end: f.isMobile() ? 'touchend' : 'mouseup'
+// }
 
 // 四舍五入取整（将目标数字加上 0.5，然后对结果执行逐位运算以消除小数部分）
 export function int (num) {
