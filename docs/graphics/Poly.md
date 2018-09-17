@@ -17,7 +17,7 @@ var element = new Poly(options);
 
 > 当元素在画布中的位置需动态变化，且元素其余属性不发生改变时，推荐开启 cach ，提高渲染性能
 
-> 当设置了`stroke`且开启`cache`，请确保没有设置`lineWidth`，如果设置了较大的`lineWidth`，图形的角会有明显的裁剪现象，这是因为 cvs 不会对线条交接处最远的位置进行大量计算 
+> 当设置了`stroke`且开启`cache`，请确保没有设置`lineWidth`，如果设置了较大的`lineWidth`，每个角会有明显的裁剪现象，这是因为 cvs 不会去计算线条交接处最远的位置
 
 ### example
 
