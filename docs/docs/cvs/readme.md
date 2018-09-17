@@ -1,4 +1,5 @@
-## Cvs
+
+### Cvs
 
 创建一个绘图对象
 
@@ -101,3 +102,6 @@ var cvs = new Cvs(options);
   }
   elememt.animate(move);
   ```
+
+
+<ClientOnly><c-animate></c-animate></ClientOnly>
