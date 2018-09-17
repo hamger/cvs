@@ -51,9 +51,10 @@ export default class Arc extends Element {
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
-    let lineWidth = this.lineWidth || 1
-    this.cacheCanvas.width = 2 * (this.r + lineWidth)
-    this.cacheCanvas.height = 2 * (this.r + lineWidth)
+    this.lw = 0
+    if (this.stroke && this.lineWidth) this.lw = this.lineWidth / 2
+    this.cacheCanvas.width = 2 * (this.r + this.lw)
+    this.cacheCanvas.height = 2 * (this.r + this.lw)
     this.drawUnit(this.cacheCanvas.getContext('2d'))
   }
 }

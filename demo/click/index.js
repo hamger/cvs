@@ -1,4 +1,4 @@
-import { Cvs, Circle, Rect, Img, Text } from '@'
+import { Cvs, Circle, Rect, Img, Poly } from '@'
 var cvs = new Cvs({
   container: document.getElementById('container')
 })
@@ -21,7 +21,6 @@ var element2 = new Rect({
   w: 60,
   h: 60,
   stroke: 'green',
-  lineWidth: 30,
   cache: true
 })
 element2.on('click', function (e) {
@@ -37,11 +36,13 @@ var element3 = new Rect({
   stroke: 'blue'
 })
 element3.exec({
-  'scale': [1.2, 1.1]
+  scale: [1.2, 1.1]
 })
-element3.exec([{
-  'rotate': 10
-}])
+element3.exec([
+  {
+    rotate: 10
+  }
+])
 // element3.on('click', function (e) {
 //   console.log('element3: ' + e)
 // })
@@ -60,6 +61,16 @@ element4.on('click', function (e) {
 })
 cvs.add(element4)
 
+var element6 = new Poly({
+  zIndex: 9,
+  points: [[200, 23], [250, 53], [260, 93], [170, 173], [200, 23]],
+  cache: true
+})
+element6.on('click', function (e) {
+  console.log('element6: ' + e)
+})
+cvs.add(element6)
+
 var img = new Image()
 img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
 
@@ -76,15 +87,3 @@ img.onload = function () {
   cvs.add(element5)
   cvs.draw()
 }
-
-// var element6 = new Text({
-//   zIndex: -92,
-//   text: 'Hello cvs',
-//   x: 0,
-//   y: 44,
-//   fontSize: 44
-// })
-// element6.on('click', function (e) {
-//   console.log('element6: ' + e)
-// })
-// cvs.add(element6)
