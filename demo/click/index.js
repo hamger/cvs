@@ -83,7 +83,7 @@ var element4 = new Circle({
   hover: {
     fill: '#5f1'
   },
-  cache: true
+  // cache: true
 })
 element4.on('click', function (e) {
   console.log('element4: ' + e)

@@ -37,6 +37,7 @@ class Cvs {
     })
     // 使用count记数，防止光标移动时重复操作
     let count = 0
+    let count2 = 0
     let temp3 = null
     this.canvas.addEventListener('mousemove', e => {
       let temp = null
@@ -51,12 +52,10 @@ class Cvs {
         }
       })
       if (temp && count === 0) {
-        console.log('inner')
         this.canvas.style.cursor = 'pointer'
         count++
       }
-      if (!temp && count > 0) {
-        console.log('outer')
+      if (!temp && count === 1) {
         this.canvas.style.cursor = 'auto'
         count = 0
       }
@@ -72,14 +71,18 @@ class Cvs {
           return true
         }
       })
-      if (temp2) {
-        temp2.attr({ fill: '#5f1' })
+      if (temp2 && count2 === 0) {
+        console.log('inner')
+        temp2.attr(temp2.hover, true)
         temp3 = temp2
+        count2++
+        console.log(temp2)
         this.draw()
-      } else if (temp3) {
-        console.log(temp3)
-        temp3.attr({ fill: '#3e9' })
-        temp3 = null
+      }
+      if (!temp2 && count2 === 1) {
+        console.log('outer')
+        temp3.attr(temp3.noHover, true)
+        count2 = 0
         this.draw()
       }
     })
@@ -125,6 +128,7 @@ class Cvs {
     }
   }
   draw () {
+    console.log(123)
     this.clear()
     this.children.forEach(child => {
       if (child.visible) child.draw()

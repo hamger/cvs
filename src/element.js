@@ -24,8 +24,10 @@ export default class Element {
     }
   }
   // 设置绘制属性
-  attr (opt) {
+  attr (opt, isHover) {
     Object.assign(this, opt)
+    // 由 hover 引起的属性变化，不更新 noHover
+    if (isHover) return
     if (this.hover) {
       for (let key in opt) {
         if (key in this.noHover) {
