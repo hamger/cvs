@@ -21,14 +21,16 @@ cvs.add(
   new Poly({
     points: [[90, 190], [34, 56], [222, 333]],
     stroke: '#198',
-    lineWidth: 3
+    lineWidth: 1,
+    cache: true
   })
 )
 
 cvs.add(
   new Poly({
     points: [[500, 190], [234, 356], [522, 433]],
-    fill: '#999'
+    fill: '#999',
+    cache: true
   })
 )
 

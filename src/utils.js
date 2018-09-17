@@ -30,13 +30,13 @@ export function int (num) {
 
 export const animFrame = (function () {
   return (
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
+    requestAnimationFrame ||
+    webkitRequestAnimationFrame ||
+    mozRequestAnimationFrame ||
+    oRequestAnimationFrame ||
+    msRequestAnimationFrame ||
     function (callback) {
-      window.setTimeout(callback, 1000 / 60)
+      setTimeout(callback, 1000 / 60)
     }
   )
 })()

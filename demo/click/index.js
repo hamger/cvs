@@ -20,7 +20,9 @@ var element2 = new Rect({
   y: 400,
   w: 60,
   h: 60,
-  fill: 'green'
+  stroke: 'green',
+  lineWidth: 30,
+  cache: true
 })
 element2.on('click', function (e) {
   console.log('element2: ' + e)

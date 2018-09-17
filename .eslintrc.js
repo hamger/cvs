@@ -12,6 +12,7 @@ module.exports = {
   },
   extends: ['standard'],
   rules: {
+    'one-var': IGNORE,
     'no-useless-constructor': IGNORE,
     'no-unused-vars': IGNORE,
     'no-undef': IGNORE,
