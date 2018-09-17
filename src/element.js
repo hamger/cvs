@@ -9,6 +9,13 @@ export default class Element {
     this.zIndex = 0
     this.execArr = []
     Object.assign(this, opt)
+    if (this.cache) {
+      // 为离屏 canvas 添加 padding ，使渲染更完整
+      this.p = 2
+      // 记录线条宽度，离屏渲染需要遇到
+      this.lw = 0
+      if (this.stroke && this.lineWidth) this.lw = this.lineWidth / 2
+    }
   }
   // 设置绘制属性
   attr (opt) {
@@ -64,7 +71,7 @@ export default class Element {
       let key = Object.keys(item)[0]
       let val = item[key]
       if (/(scale|translate|transform|setTransform)/.test(key)) ctx[key](...val)
-      if (key === 'rotate') ctx[key](val * Math.PI / 180)
+      if (key === 'rotate') ctx[key]((val * Math.PI) / 180)
     })
   }
   // 圆周运动

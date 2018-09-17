@@ -32,8 +32,6 @@ export default class Rect extends Element {
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
-    this.lw = 0
-    if (this.stroke && this.lineWidth) this.lw = this.lineWidth / 2
     this.cacheCanvas.width = this.w + this.lw * 2
     this.cacheCanvas.height = this.h + this.lw * 2
     this.drawUnit(this.cacheCanvas.getContext('2d'))

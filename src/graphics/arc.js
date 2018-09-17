@@ -9,10 +9,12 @@ export default class Arc extends Element {
     let ctx = this.ctx
     ctx.save()
     if (this.cache) {
-      ctx.drawImage(this.cacheCanvas, this.x - this.r, this.y - this.r)
-    } else {
-      this.drawUnit()
-    }
+      ctx.drawImage(
+        this.cacheCanvas,
+        this.x - this.halfW,
+        this.y - this.halfH
+      )
+    } else this.drawUnit()
     ctx.restore()
   }
   drawUnit (ctx2) {
@@ -20,7 +22,7 @@ export default class Arc extends Element {
     this.setGeneral(ctx)
     this.setLine(ctx)
     this.setFunc(ctx)
-    this.drawPath(ctx || null)
+    this.drawPath(ctx2 || null)
     if (this.stroke) ctx.stroke()
     else ctx.fill()
   }
@@ -28,10 +30,9 @@ export default class Arc extends Element {
     let ctx = ctx2 || this.ctx
     ctx.beginPath()
     if (ctx2) {
-      let lineWidth = this.lineWidth || 1
       ctx.arc(
-        this.r + lineWidth,
-        this.r + lineWidth,
+        this.halfW,
+        this.halfH,
         this.r,
         (this.startAngle * Math.PI) / 180,
         (this.endAngle * Math.PI) / 180,
@@ -51,10 +52,10 @@ export default class Arc extends Element {
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
-    this.lw = 0
-    if (this.stroke && this.lineWidth) this.lw = this.lineWidth / 2
-    this.cacheCanvas.width = 2 * (this.r + this.lw)
-    this.cacheCanvas.height = 2 * (this.r + this.lw)
+    this.halfW = this.r + this.lw + this.p
+    this.halfH = this.r + this.lw + this.p
+    this.cacheCanvas.width = 2 * this.halfW
+    this.cacheCanvas.height = 2 * this.halfH
     this.drawUnit(this.cacheCanvas.getContext('2d'))
   }
 }

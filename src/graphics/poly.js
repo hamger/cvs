@@ -14,8 +14,8 @@ export default class Polygon extends Element {
   }
   drawUint (ctx2) {
     var ctx = ctx2 || this.ctx
-    this.setGeneral(ctx2)
-    this.setLine(ctx2)
+    this.setGeneral(ctx)
+    this.setLine(ctx)
     this.drawPath(ctx2 || null)
     if (this.stroke) ctx.stroke()
     else ctx.fill()
