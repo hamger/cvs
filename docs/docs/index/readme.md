@@ -54,4 +54,4 @@ function move () {
 }
 cvs.animate(move)
 ```
-<c-attr></c-attr> 
+<ClientOnly><c-attr></c-attr></ClientOnly>

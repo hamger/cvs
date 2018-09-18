@@ -30,7 +30,7 @@ export default class Element {
       if (key === 'opacity') ctx.globalAlpha = this.opt[key]
       else if (key === 'stroke') ctx.strokeStyle = this.opt[key]
       else if (key === 'fill') ctx.fillStyle = this.opt[key]
-      else {
+      else if (/(shadowColor|shadowBlur|shadowOffsetX|shadowOffsetY|lineCap|lineJoin|lineWidth|miterLimit|font|textAlign|textBaseline)/.test(key)) {
         ctx[key] = this.opt[key]
       }
     }

@@ -44,5 +44,4 @@ var element = new Img(options);
     cvs.draw()
   };
 ```
-
-<c-img></c-img>   
+<ClientOnly><c-img></c-img></ClientOnly>

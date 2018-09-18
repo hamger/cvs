@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Cvs, Path, Poly, Arc } from 'cvs'
+import { Cvs, Path } from 'cvs'
 import Container from '../Container'
 export default {
   components: {
