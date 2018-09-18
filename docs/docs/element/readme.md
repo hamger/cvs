@@ -52,8 +52,6 @@ var elememt = new Elememt(options);
   });
   ```
 
-  <c-attr></c-attr>
-
 #### exec(opt)
 
 - 描述：

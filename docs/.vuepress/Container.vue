@@ -23,8 +23,6 @@ export default {
   position: relative;
   border: 1px solid #afafaf;
   border-radius: 10px;
-  min-width: 500px;
-  min-height: 500px;
 }
 .restart {
   position: absolute;

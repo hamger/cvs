@@ -1,7 +1,7 @@
 <template>
     <div>
          <Container>
-             <div id="container" style="width:700px;height:500px"></div>
+             <div id="container" style="width:100%;height:460px"></div>
          </Container>
     </div>
 </template>
@@ -28,38 +28,9 @@ export default {
           'l 30 -50' +
           'C 100 100 200 200 300 200' +
           's 50 50 100 100' +
-          'T 130 500' +
+          'T 130 350' +
           'a 0 50 50 -90 180',
         stroke: '#454'
-      })
-    )
-
-    cvs.add(
-      new Poly({
-        points: [[90, 190], [34, 56], [222, 333]],
-        stroke: '#198',
-        lineWidth: 1,
-        cache: true
-      })
-    )
-
-    cvs.add(
-      new Poly({
-        points: [[500, 190], [234, 356], [522, 433]],
-        fill: '#999',
-        cache: true
-      })
-    )
-
-    cvs.add(
-      new Arc({
-        x: 500.3,
-        y: 100.4,
-        r: 50,
-        startAngle: -80,
-        endAngle: 20,
-        anticlockwise: true,
-        cache: true
       })
     )
 

@@ -32,11 +32,19 @@ font 这个属性可以分解成多个属性单独配置，这些配置只有在
 ### example
 
 ```js
-new Text({
-  text: "hello",
-  x: 89,
-  y: 76
-});
+var cvs = new Cvs({
+  container: document.getElementById('container')
+})
+
+cvs.add(
+  new Text({
+    text: 'hello',
+    x: 89,
+    y: 76,
+    font: '48px serif'
+  })
+)
+cvs.draw()
 ```
 
 <c-text></c-text>

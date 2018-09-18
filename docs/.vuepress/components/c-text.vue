@@ -1,8 +1,8 @@
 <template>
     <div>
-         <Container>
-             <div id="container" style="width:700px;height:500px"></div>
-         </Container>
+      <Container>
+          <div id="container" style="width:100%;height:160px"></div>
+      </Container>
     </div>
 </template>
 <script>
@@ -26,15 +26,6 @@ export default {
         x: 89,
         y: 76,
         font: '48px serif'
-      })
-    )
-
-    cvs.add(
-      new Text({
-        text: 'hanger',
-        x: 189,
-        y: 76,
-        fontSize: 43
       })
     )
     cvs.draw()

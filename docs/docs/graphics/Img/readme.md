@@ -28,15 +28,21 @@ var element = new Img(options);
 ### example
 
 ```js
-var img = new Image();
-img.src = "https://zos.alipayobjects.com/rmsportal/nAVchPnSaAWncPj.png";
-img.onload = function() {
-  new Img({
-    img: img,
-    dx: 200,
-    dy: 200
-  });
-};
+ var cvs = new Cvs({
+    container: document.getElementById('container')
+  })
+
+  var img = new Image()
+  img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
+
+  img.onload = function() {
+    cvs.add(new Img({
+      img: img,
+      dx: 200,
+      dy: 100
+    }));
+    cvs.draw()
+  };
 ```
 
 <c-img></c-img>   
