@@ -16,7 +16,6 @@ export default class Text extends Element {
     ctx.save()
     this.assembleFont()
     this.setAttr()
-    this.setFunc()
     if (this.opt.stroke) {
       ctx.strokeText(this.opt.text, this.opt.x, this.opt.y)
     } else {

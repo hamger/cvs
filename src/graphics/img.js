@@ -27,7 +27,6 @@ export default class Img extends Element {
     let img = this.opt.img
     ctx.save()
     this.setAttr(ctx)
-    this.setFunc(ctx)
     if (ctx2) {
       if (this.opt.sw && this.opt.sh) {
         ctx.drawImage(

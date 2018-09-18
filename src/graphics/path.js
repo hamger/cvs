@@ -10,7 +10,6 @@ export default class Path extends Element {
     var ctx = this.ctx
     ctx.save()
     this.setAttr()
-    this.setFunc()
     this.drawPath()
     this.dye()
     ctx.restore()

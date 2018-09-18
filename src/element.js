@@ -1,5 +1,3 @@
-// import { int } from './utils'
-
 let id = 0
 export default class Element {
   constructor (opt) {
@@ -10,18 +8,14 @@ export default class Element {
       visible: true,
       zIndex: 0
     }
-    Object.assign(this.opt, opt)
+    this.attr(opt)
     if (this.opt.cache) {
       // 为离屏 canvas 添加 padding ，使渲染更完整
       this.p = 2
       // 记录线条宽度，离屏渲染需要遇到
       this.lw = 0
-      if (this.opt.stroke && this.opt.lineWidth) this.lw = this.opt.lineWidth / 2
-    }
-    if (this.opt.hover) {
-      this.noHover = {}
-      for (let key in this.opt.hover) {
-        this.noHover[key] = this.opt[key]
+      if (this.opt.stroke && this.opt.lineWidth) {
+        this.lw = this.opt.lineWidth / 2
       }
     }
   }
@@ -32,8 +26,21 @@ export default class Element {
       if (key === 'opacity') ctx.globalAlpha = this.opt[key]
       else if (key === 'stroke') ctx.strokeStyle = this.opt[key]
       else if (key === 'fill') ctx.fillStyle = this.opt[key]
-      else if (/(shadowColor|shadowBlur|shadowOffsetX|shadowOffsetY|lineCap|lineJoin|lineWidth|miterLimit|font|textAlign|textBaseline|globalCompositeOperation)/.test(key)) {
+      else if (
+        /(shadowColor|shadowBlur|shadowOffsetX|shadowOffsetY|lineCap|lineJoin|lineWidth|miterLimit|font|textAlign|textBaseline|globalCompositeOperation)/.test(
+          key
+        )
+      ) {
         ctx[key] = this.opt[key]
+      } else if (key === 'transform') {
+        this.execArr.forEach(item => {
+          let k = Object.keys(item)[0]
+          let val = item[k]
+          if (/(scale|translate|transform|setTransform)/.test(k)) {
+            ctx[k](...val)
+          }
+          if (k === 'rotate') ctx[k]((val * Math.PI) / 180)
+        })
       }
     }
   }
@@ -45,23 +52,21 @@ export default class Element {
   }
   // 设置绘制属性
   attr (opt, isHover) {
+    // 更新属性
     Object.assign(this.opt, opt)
+    // 设置转换函数
+    if (opt.transform) {
+      this.execArr = []
+      opt.transform.forEach(item => {
+        this.execArr.push(item)
+      })
+    }
     // 由 hover 引起的属性变化，不更新 noHover
     if (isHover) return
     if (this.opt.hover) {
-      for (let key in opt) {
-        if (key in this.noHover) this.noHover[key] = opt[key]
+      for (let key in this.opt.hover) {
+        this.noHover[key] = this.opt[key]
       }
-    }
-  }
-  // 设置绘制方法
-  exec (opt) {
-    if (f.isObject(opt)) {
-      this.execArr.push(opt)
-    } else {
-      opt.forEach(item => {
-        this.execArr.push(item)
-      })
     }
   }
   on (eventType, callback) {
@@ -69,16 +74,6 @@ export default class Element {
   }
   off (eventType) {
     this[eventType] = null
-  }
-  setFunc (ctx2) {
-    if (this.execArr.length === 0) return
-    let ctx = ctx2 || this.ctx
-    this.execArr.forEach(item => {
-      let key = Object.keys(item)[0]
-      let val = item[key]
-      if (/(scale|translate|transform|setTransform)/.test(key)) ctx[key](...val)
-      if (key === 'rotate') ctx[key]((val * Math.PI) / 180)
-    })
   }
   // 圆周运动
   circling (opt) {

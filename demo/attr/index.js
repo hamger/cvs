@@ -3,7 +3,7 @@ let cvs = new Cvs({
   container: document.getElementById('container')
 })
 const dotSpeed = 1
-const dotCount = 60
+const dotCount = 160
 let dots = []
 for (var i = 0; i < dotCount; i++) {
   var r = Math.random() * 30 + 10

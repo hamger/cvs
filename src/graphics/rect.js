@@ -18,7 +18,6 @@ export default class Rect extends Element {
   drawUnit (ctx2) {
     let ctx = ctx2 || this.ctx
     this.setAttr(ctx)
-    this.setFunc(ctx)
     this.drawPath(ctx2 || null)
     this.dye(ctx)
   }

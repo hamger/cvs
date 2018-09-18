@@ -20,7 +20,6 @@ export default class Arc extends Element {
   drawUnit (ctx2) {
     let ctx = ctx2 || this.ctx
     this.setAttr(ctx)
-    this.setFunc(ctx)
     this.drawPath(ctx2 || null)
     if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
