@@ -10,6 +10,7 @@ var elememt = new Elememt(options);
 | ----------- | ------- | -------------- | ------- |
 | zIndex      | Number  | 规定层次索引值 | `0`     |
 | visible     | Boolean | 规定是否可见   | `true`  |
+| hover     | Object | 规定鼠标移动到元素上时的元素属性   | -- |
 
 由于使用的是 canvas，绘制的所有图形都支持 canvas 的属性，这里只列出常用的属性，详细信息参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
 
