@@ -8,7 +8,7 @@ module.exports = {
       }
     }
   },
-  base: '/',
+  base: '/vshow/',
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },

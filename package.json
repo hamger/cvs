@@ -11,7 +11,7 @@
     "tonpm": "npm run build && npm version patch && npm publish",
     "test": "karma start",
     "docs:build": "vuepress build docs",
-    "docs:dev": "cd docs && vuepress dev ."
+    "docs:dev": "vuepress dev docs"
   },
   "main": "dist/cvs.js",
   "keywords": [
