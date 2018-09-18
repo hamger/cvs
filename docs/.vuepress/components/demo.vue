@@ -8,17 +8,13 @@
 <script>
 import { Cvs } from 'cvs'
 import Container from '../Container'
-    export default{
-        components:{
-            Container
-        },
-        data(){
-            return{
-                
-            }
-        },
-        mounted() {
-            
-        }
-    }
+export default {
+  components: {
+    Container
+  },
+  data() {
+    return {}
+  },
+  mounted() {}
+}
 </script>

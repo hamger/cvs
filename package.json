@@ -12,7 +12,7 @@
     "test": "karma start",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
-    "docs:pro":"sh deploy.sh"
+    "docs:pro": "sh deploy.sh"
   },
   "main": "dist/cvs.js",
   "keywords": [
@@ -46,10 +46,12 @@
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
+    "eslint-plugin-html": "^4.0.5",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^3.14.0",
     "glob": "^7.1.2",
     "html-webpack-plugin": "^2.30.1",
     "jasmine-core": "^2.5.1",
