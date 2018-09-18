@@ -21,8 +21,7 @@ export default class Circle extends Element {
     var ctx = ctx2 || this.ctx
     this.setAttr(ctx)
     this.drawPath(ctx2 || null)
-    if (this.opt.stroke) ctx.stroke()
-    else ctx.fill()
+    this.dye(ctx)
   }
   drawPath (ctx2) {
     var ctx = ctx2 || this.ctx

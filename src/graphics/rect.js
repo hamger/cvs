@@ -20,8 +20,7 @@ export default class Rect extends Element {
     this.setAttr(ctx)
     this.setFunc(ctx)
     this.drawPath(ctx2 || null)
-    if (this.opt.stroke) ctx.stroke()
-    else ctx.fill()
+    this.dye(ctx)
   }
   drawPath (ctx2) {
     var ctx = ctx2 || this.ctx

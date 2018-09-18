@@ -12,8 +12,7 @@ export default class Path extends Element {
     this.setAttr()
     this.setFunc()
     this.drawPath()
-    if (this.opt.stroke) ctx.stroke()
-    else ctx.fill()
+    this.dye()
     ctx.restore()
   }
   drawPath () {

@@ -17,13 +17,11 @@ export default class Text extends Element {
     this.assembleFont()
     this.setAttr()
     this.setFunc()
-    var text
     if (this.opt.stroke) {
-      text = ctx.strokeText(this.opt.text, this.opt.x, this.opt.y)
+      ctx.strokeText(this.opt.text, this.opt.x, this.opt.y)
     } else {
-      text = ctx.fillText(this.opt.text, this.opt.x, this.opt.y)
+      ctx.fillText(this.opt.text, this.opt.x, this.opt.y)
     }
-    // this.opt.textWidth = ctx.measureText(text).width
     ctx.restore()
   }
   assembleFont () {
@@ -37,10 +35,5 @@ export default class Text extends Element {
       ].join(' ')
     }
   }
-  drawPath () {
-    // var ctx = this.ctx
-    // ctx.beginPath()
-    // console.log(this)
-    // ctx.rect(this.opt.x, this.opt.y, this.opt.textWidth.toFixed(0), this.fontStyle)
-  }
+  drawPath () {}
 }

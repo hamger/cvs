@@ -9,7 +9,6 @@ export default class Element {
     this.zIndex = 0
     this.execArr = []
     this.opt = opt
-    // Object.assign(this, opt)
     if (this.cache) {
       // 为离屏 canvas 添加 padding ，使渲染更完整
       this.p = 2
@@ -24,6 +23,7 @@ export default class Element {
       }
     }
   }
+  // 设置上下文属性
   setAttr (ctx2) {
     let ctx = ctx2 || this.ctx
     for (let key in this.opt) {
@@ -34,6 +34,12 @@ export default class Element {
         ctx[key] = this.opt[key]
       }
     }
+  }
+  // 填充或描边
+  dye (ctx2) {
+    let ctx = ctx2 || this.ctx
+    if (this.opt.stroke) ctx.stroke()
+    else ctx.fill()
   }
   // 设置绘制属性
   attr (opt, isHover) {

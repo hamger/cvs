@@ -1,6 +1,6 @@
 {
   "name": "cvs-docs",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A basic canvas framework for 2d drawing.",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,6 @@
   "author": "Hanger",
   "license": "MIT",
   "dependencies": {
-    "cvs": "^0.1.7"
+    "cvs": "^0.1.8"
   }
 }
