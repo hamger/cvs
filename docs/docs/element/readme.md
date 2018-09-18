@@ -1,4 +1,4 @@
-## Element
+### Element
 支持的所有图形的基类，支持的所有通用的属性和方法
 ```js
 var elememt = new Elememt(options);
@@ -50,6 +50,8 @@ var elememt = new Elememt(options);
     y: 34
   });
   ```
+
+  <c-attr></c-attr>
 
 #### exec(opt)
 

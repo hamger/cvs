@@ -1,4 +1,4 @@
-## Rect
+### Rect
 
 绘制一个矩形元素
 
@@ -8,7 +8,7 @@ var element = new Rect(options);
 
 ### options
 
-除了支持[公共属性](../Element.md)外，还支持以下属性：
+除了支持[公共属性](../../element/)外，还支持以下属性：
 
 | options.key | value   | description     | default |
 | ----------- | ------- | --------------- | ------- |
