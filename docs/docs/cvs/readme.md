@@ -102,6 +102,3 @@ var cvs = new Cvs(options);
   }
   elememt.animate(move);
   ```
-
-
-<ClientOnly><c-animate></c-animate></ClientOnly>

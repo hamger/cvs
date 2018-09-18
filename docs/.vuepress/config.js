@@ -14,7 +14,7 @@ module.exports = {
       { text: 'Home', link: '/' },
     ],
     sidebar: [
-      ['/docs/index/', '快速开始'],
+      ['/docs/index/', 'Start'],
       ['/docs/cvs/', 'Cvs'],
       ['/docs/element/', 'Element'],
       {
