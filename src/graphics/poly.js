@@ -14,33 +14,32 @@ export default class Polygon extends Element {
   }
   drawUint (ctx2) {
     var ctx = ctx2 || this.ctx
-    this.setGeneral(ctx)
-    this.setLine(ctx)
+    this.setAttr(ctx)
     this.drawPath(ctx2 || null)
-    if (this.stroke) ctx.stroke()
+    if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
   }
   drawPath (ctx2) {
     var ctx = ctx2 || this.ctx
     ctx.beginPath()
     if (ctx2) {
-      this.points.forEach((item, index) => {
+      this.opt.points.forEach((item, index) => {
         if (index === 0) ctx.moveTo(item[0] - this.minX, item[1] - this.minY)
         else ctx.lineTo(item[0] - this.minX, item[1] - this.minY)
       })
     } else {
-      this.points.forEach((item, index) => {
+      this.opt.points.forEach((item, index) => {
         if (index === 0) ctx.moveTo(item[0], item[1])
         else ctx.lineTo(item[0], item[1])
       })
     }
-    if (!this.stroke) ctx.closePath()
+    if (!this.opt.stroke) ctx.closePath()
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
     let x = []
     let y = []
-    this.points.forEach(item => {
+    this.opt.points.forEach(item => {
       x.push(item[0])
       y.push(item[1])
     })

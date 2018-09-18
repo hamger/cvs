@@ -3,39 +3,37 @@ import Element from '../element'
 export default class Text extends Element {
   constructor (opt) {
     super(opt)
-    this.lineWidth = 1
-    this.lineCount = 1
-    this.fontSize = this.fontSize || 10
-    this.fontFamily = this.fontFamily || 'sans-serif'
-    this.fontStyle = this.fontStyle || 'normal'
-    this.fontWeight = this.fontWeight || 'normal'
-    this.fontVariant = this.fontVariant || 'normal'
+    this.opt.lineWidth = 1
+    this.opt.fontSize = this.opt.fontSize || 10
+    this.opt.fontFamily = this.opt.fontFamily || 'sans-serif'
+    this.opt.fontStyle = this.opt.fontStyle || 'normal'
+    this.opt.fontWeight = this.opt.fontWeight || 'normal'
+    this.opt.fontVariant = this.opt.fontVariant || 'normal'
   }
   draw () {
     var ctx = this.ctx
     ctx.beginPath()
     ctx.save()
-    this.setGeneral()
     this.assembleFont()
-    this.setText()
+    this.setAttr()
     this.setFunc()
     var text
-    if (this.stroke) {
-      text = ctx.strokeText(this.text, this.x, this.y)
+    if (this.opt.stroke) {
+      text = ctx.strokeText(this.opt.text, this.opt.x, this.opt.y)
     } else {
-      text = ctx.fillText(this.text, this.x, this.y)
+      text = ctx.fillText(this.opt.text, this.opt.x, this.opt.y)
     }
-    this.textWidth = ctx.measureText(text).width
+    // this.opt.textWidth = ctx.measureText(text).width
     ctx.restore()
   }
   assembleFont () {
-    if (!this.font) {
-      this.font = [
-        this.fontStyle,
-        this.fontVariant,
-        this.fontWeight,
-        this.fontSize + 'px',
-        this.fontFamily
+    if (!this.opt.font) {
+      this.opt.font = [
+        this.opt.fontStyle,
+        this.opt.fontVariant,
+        this.opt.fontWeight,
+        this.opt.fontSize + 'px',
+        this.opt.fontFamily
       ].join(' ')
     }
   }
@@ -43,6 +41,6 @@ export default class Text extends Element {
     // var ctx = this.ctx
     // ctx.beginPath()
     // console.log(this)
-    // ctx.rect(this.x, this.y, this.textWidth.toFixed(0), this.fontStyle)
+    // ctx.rect(this.opt.x, this.opt.y, this.opt.textWidth.toFixed(0), this.fontStyle)
   }
 }

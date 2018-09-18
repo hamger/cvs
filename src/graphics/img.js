@@ -8,11 +8,11 @@ export default class Img extends Element {
     if (this.cache) this.cacheDraw()
   }
   draw () {
-    this.w = this.dw ? this.dw : this.img.width
-    this.h = this.dh ? this.dh : this.img.height
+    this.w = this.opt.dw ? this.opt.dw : this.opt.img.width
+    this.h = this.opt.dh ? this.opt.dh : this.opt.img.height
     if (this.cache) {
       this.cacheDraw()
-      this.ctx.drawImage(this.cacheCanvas, this.dx, this.dy)
+      this.ctx.drawImage(this.cacheCanvas, this.opt.dx, this.opt.dy)
     } else {
       this.drawUnit()
     }
@@ -20,49 +20,49 @@ export default class Img extends Element {
   drawPath () {
     var ctx = this.ctx
     ctx.beginPath()
-    ctx.rect(this.dx, this.dy, this.w, this.h)
+    ctx.rect(this.opt.dx, this.opt.dy, this.w, this.h)
   }
   drawUnit (ctx2) {
     let ctx = ctx2 || this.ctx
-    let img = this.img
+    let img = this.opt.img
     ctx.save()
-    this.setGeneral(ctx)
+    this.setAttr(ctx)
     this.setFunc(ctx)
     if (ctx2) {
-      if (this.sw && this.sh) {
+      if (this.opt.sw && this.opt.sh) {
         ctx.drawImage(
           img,
-          this.sx,
-          this.sy,
-          this.sw,
-          this.sh,
+          this.opt.sx,
+          this.opt.sy,
+          this.opt.sw,
+          this.opt.sh,
           0,
           0,
-          this.dw,
-          this.dh
+          this.opt.dw,
+          this.opt.dh
         )
-      } else if (this.dw && this.dh) {
-        ctx.drawImage(img, 0, 0, this.dw, this.dh)
+      } else if (this.opt.dw && this.opt.dh) {
+        ctx.drawImage(img, 0, 0, this.opt.dw, this.opt.dh)
       } else {
         ctx.drawImage(img, 0, 0)
       }
     } else {
-      if (this.sw && this.sh) {
+      if (this.opt.sw && this.opt.sh) {
         ctx.drawImage(
           img,
-          this.sx,
-          this.sy,
-          this.sw,
-          this.sh,
-          this.dx,
-          this.dy,
-          this.dw,
-          this.dh
+          this.opt.sx,
+          this.opt.sy,
+          this.opt.sw,
+          this.opt.sh,
+          this.opt.dx,
+          this.opt.dy,
+          this.opt.dw,
+          this.opt.dh
         )
-      } else if (this.dw && this.dh) {
-        ctx.drawImage(img, this.dx, this.dy, this.dw, this.dh)
+      } else if (this.opt.dw && this.opt.dh) {
+        ctx.drawImage(img, this.opt.dx, this.opt.dy, this.opt.dw, this.opt.dh)
       } else {
-        ctx.drawImage(img, this.dx, this.dy)
+        ctx.drawImage(img, this.opt.dx, this.opt.dy)
       }
     }
     ctx.restore()

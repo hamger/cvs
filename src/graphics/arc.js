@@ -11,19 +11,18 @@ export default class Arc extends Element {
     if (this.cache) {
       ctx.drawImage(
         this.cacheCanvas,
-        this.x - this.halfW,
-        this.y - this.halfH
+        this.opt.x - this.halfW,
+        this.opt.y - this.halfH
       )
     } else this.drawUnit()
     ctx.restore()
   }
   drawUnit (ctx2) {
     let ctx = ctx2 || this.ctx
-    this.setGeneral(ctx)
-    this.setLine(ctx)
+    this.setAttr(ctx)
     this.setFunc(ctx)
     this.drawPath(ctx2 || null)
-    if (this.stroke) ctx.stroke()
+    if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
   }
   drawPath (ctx2) {
@@ -33,27 +32,27 @@ export default class Arc extends Element {
       ctx.arc(
         this.halfW,
         this.halfH,
-        this.r,
-        (this.startAngle * Math.PI) / 180,
-        (this.endAngle * Math.PI) / 180,
-        !!this.anticlockwise
+        this.opt.r,
+        (this.opt.startAngle * Math.PI) / 180,
+        (this.opt.endAngle * Math.PI) / 180,
+        !!this.opt.anticlockwise
       )
     } else {
       ctx.arc(
-        this.x,
-        this.y,
-        this.r,
-        (this.startAngle * Math.PI) / 180,
-        (this.endAngle * Math.PI) / 180,
-        !!this.anticlockwise
+        this.opt.x,
+        this.opt.y,
+        this.opt.r,
+        (this.opt.startAngle * Math.PI) / 180,
+        (this.opt.endAngle * Math.PI) / 180,
+        !!this.opt.anticlockwise
       )
     }
-    if (!this.stroke) ctx.closePath()
+    if (!this.opt.stroke) ctx.closePath()
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
-    this.halfW = this.r + this.lw + this.p
-    this.halfH = this.r + this.lw + this.p
+    this.halfW = this.opt.r + this.lw + this.p
+    this.halfH = this.opt.r + this.lw + this.p
     this.cacheCanvas.width = 2 * this.halfW
     this.cacheCanvas.height = 2 * this.halfH
     this.drawUnit(this.cacheCanvas.getContext('2d'))

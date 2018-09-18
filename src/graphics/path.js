@@ -9,19 +9,16 @@ export default class Path extends Element {
   draw () {
     var ctx = this.ctx
     ctx.save()
-    this.setGeneral()
-    this.setLine()
+    this.setAttr()
     this.setFunc()
-    if (this.stroke) ctx.strokeStyle = this.stroke
-    else ctx.fillStyle = this.fill
     this.drawPath()
-    if (this.stroke) ctx.stroke()
+    if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
     ctx.restore()
   }
   drawPath () {
     this.ctx.beginPath()
-    let path = f.delBlank(this.path)
+    let path = f.delBlank(this.opt.path)
     let pathType = path.match(/[A-z]/g)
     let pathVal = path
       .split(/[A-z]/)

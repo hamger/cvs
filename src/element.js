@@ -1,4 +1,4 @@
-import { int } from './utils'
+// import { int } from './utils'
 
 let id = 0
 export default class Element {
@@ -8,13 +8,14 @@ export default class Element {
     this.visible = true
     this.zIndex = 0
     this.execArr = []
-    Object.assign(this, opt)
+    this.opt = opt
+    // Object.assign(this, opt)
     if (this.cache) {
       // 为离屏 canvas 添加 padding ，使渲染更完整
       this.p = 2
       // 记录线条宽度，离屏渲染需要遇到
       this.lw = 0
-      if (this.stroke && this.lineWidth) this.lw = this.lineWidth / 2
+      if (this.opt.stroke && this.opt.lineWidth) this.lw = this.opt.lineWidth / 2
     }
     if (this.hover) {
       this.noHover = {}
@@ -23,9 +24,20 @@ export default class Element {
       }
     }
   }
+  setAttr (ctx2) {
+    let ctx = ctx2 || this.ctx
+    for (let key in this.opt) {
+      if (key === 'opacity') ctx.globalAlpha = this.opt[key]
+      else if (key === 'stroke') ctx.strokeStyle = this.opt[key]
+      else if (key === 'fill') ctx.fillStyle = this.opt[key]
+      else {
+        ctx[key] = this.opt[key]
+      }
+    }
+  }
   // 设置绘制属性
   attr (opt, isHover) {
-    Object.assign(this, opt)
+    Object.assign(this.opt, opt)
     // 由 hover 引起的属性变化，不更新 noHover
     if (isHover) return
     if (this.hover) {
@@ -52,33 +64,6 @@ export default class Element {
   off (eventType) {
     this[eventType] = null
   }
-  // 设置公共绘制样式
-  setGeneral (ctx2) {
-    let ctx = ctx2 || this.ctx
-    if (this.stroke) ctx.strokeStyle = this.stroke
-    if (this.fill) ctx.fillStyle = this.fill
-    if (this.shadowColor) ctx.shadowColor = this.shadowColor
-    if (this.shadowBlur) ctx.shadowBlur = this.shadowBlur
-    if (this.shadowOffsetX) ctx.shadowOffsetX = this.shadowOffsetX
-    if (this.shadowOffsetY) ctx.shadowOffsetY = this.shadowOffsetY
-    if (this.opacity) ctx.globalAlpha = this.opacity
-    if (this.globalCompositeOperation) {
-      ctx.globalCompositeOperation = this.globalCompositeOperation
-    }
-  }
-  setLine (ctx2) {
-    let ctx = ctx2 || this.ctx
-    if (this.lineWidth) ctx.lineWidth = this.lineWidth
-    if (this.lineCap) ctx.lineCap = this.lineCap
-    if (this.lineJoin) ctx.lineJoin = this.lineJoin
-    if (this.lineLimit) ctx.lineLimit = this.lineLimit
-  }
-  setText (ctx2) {
-    let ctx = ctx2 || this.ctx
-    if (this.font) ctx.font = this.font
-    if (this.textAlign) ctx.textAlign = this.textAlign
-    if (this.textBaseline) ctx.textBaseline = this.textBaseline
-  }
   setFunc (ctx2) {
     if (this.execArr.length === 0) return
     let ctx = ctx2 || this.ctx
@@ -97,9 +82,9 @@ export default class Element {
     const vpy = opt.vpy
     const r = opt.r || 100
     const speed = opt.speed || 0.05
-    this.x = vpx + r * Math.cos(this.angle) - relativeX
-    this.y = vpy + r * Math.sin(this.angle) - relativeY
-    this.angle += speed
+    this.opt.x = vpx + r * Math.cos(this.opt.angle) - relativeX
+    this.opt.y = vpy + r * Math.sin(this.opt.angle) - relativeY
+    this.opt.angle += speed
   }
   // 椭圆运动
   elliptic (opt) {
@@ -110,9 +95,9 @@ export default class Element {
     const radiusX = opt.radiusX || 100
     const radiusY = opt.radiusY || 80
     const speed = opt.speed || 0.05
-    this.angle += speed
-    this.x = vpx + radiusX * Math.cos(this.angle) - relativeX
-    this.y = vpy + radiusY * Math.sin(this.angle) - relativeY
+    this.opt.angle += speed
+    this.opt.x = vpx + radiusX * Math.cos(this.opt.angle) - relativeX
+    this.opt.y = vpy + radiusY * Math.sin(this.opt.angle) - relativeY
   }
   // 匀速直线运动
   line (opt) {
@@ -120,26 +105,26 @@ export default class Element {
     const endY = opt.endY
     const time = opt.time
     let k, b
-    if (!this.record) {
-      k = (endY - this.y) / (endX - this.x)
+    if (!this.opt.record) {
+      k = (endY - this.opt.y) / (endX - this.opt.x)
       b = endY - k * endX
-      let distanceX = endX - this.x
+      let distanceX = endX - this.opt.x
       let speedX = (distanceX / time) * 16
-      this.record = {
+      this.opt.record = {
         speedX,
         k,
         b
       }
     } else {
-      k = this.record.k
-      b = this.record.b
+      k = this.opt.record.k
+      b = this.opt.record.b
     }
-    if (Math.abs(this.x - endX) > Math.abs(this.record.speedX)) {
-      this.x += this.record.speedX
-      this.y = k * this.x + b
+    if (Math.abs(this.opt.x - endX) > Math.abs(this.opt.record.speedX)) {
+      this.opt.x += this.opt.record.speedX
+      this.opt.y = k * this.opt.x + b
     } else {
-      this.x = endX
-      this.y = endY
+      this.opt.x = endX
+      this.opt.y = endY
     }
   }
 }
