@@ -24,7 +24,7 @@ cvs.draw();
 
 ## Document
 
-[文档地址](https://hamger.github.io/cvs/#/)
+[文档地址](https://hamger.github.io/cvs/)
 
 ## Changelog
 
