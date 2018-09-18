@@ -11,7 +11,7 @@ var element = new Circle({
   // cache: true
 })
 element.on('click', function () {
-  if (element.fill === '#999') {
+  if (element.opt.fill === '#999') {
     element.attr({
       fill: '#23af9a'
     })
@@ -33,7 +33,7 @@ var element2 = new Rect({
   cache: true
 })
 element2.on('click', function () {
-  if (element2.x === 200) {
+  if (element2.opt.x === 200) {
     element2.attr({
       x: 250,
       y: 600,
@@ -80,9 +80,9 @@ var element4 = new Circle({
   y: 150,
   x: 150,
   fill: '#3e9',
-  // hover: {
-  //   fill: '#5f1'
-  // },
+  hover: {
+    fill: '#5f1'
+  },
   // cache: true
 })
 element4.on('click', function (e) {

@@ -23,7 +23,7 @@ class Cvs {
       var location = getLocation(this.canvas, e)
       // 只触发点击区域最前面元素的监听事件
       this.descChildren.some(child => {
-        if (!child.visible || !child.click) return false
+        if (!child.opt.visible || !child.click) return false
         child.drawPath()
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
@@ -42,7 +42,7 @@ class Cvs {
       // 实现鼠标移动到可点击区域时，光标变化
       let temp = null
       this.descChildren.some(child => {
-        if (!child.visible || !child.click) return false
+        if (!child.opt.visible || !child.click) return false
         child.drawPath()
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
@@ -59,17 +59,17 @@ class Cvs {
       }
 
       // 模拟 hover 事件监听
-      let temp2 = {}
+      let temp2 = {opt: {}}
       this.descChildren.some(child => {
-        if (!child.visible) return false
+        if (!child.opt.visible) return false
         child.drawPath()
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp2 = child
           return true
         }
       })
-      if (temp2.hover && count2 === 0) {
-        temp2.attr(temp2.hover, true)
+      if (temp2.opt.hover && count2 === 0) {
+        temp2.attr(temp2.opt.hover, true)
         hoverEle = temp2
         count2++
         this.draw()
@@ -86,9 +86,9 @@ class Cvs {
       element.ctx = this.ctx
       element.canvas = this.canvas
       this.children.push(element)
-      f.arrSort(this.children, 'zIndex')
+      f.arrSort(this.children, 'opt.zIndex')
       this.descChildren.push(element)
-      f.arrSort(this.descChildren, 'zIndex', true)
+      f.arrSort(this.descChildren, 'opt.zIndex', true)
     } else {
       throw Error('Function add only accept the instance of Element.')
     }
@@ -101,23 +101,21 @@ class Cvs {
           return true
         }
       })
-      if (element.click) {
-        this.clickChildren.some((item, index) => {
-          if (item.id === element.id) {
-            this.children.splice(index, 1)
-            return true
-          }
-        })
-      }
+      this.descChildren.some((item, index) => {
+        if (item.id === element.id) {
+          this.children.splice(index, 1)
+          return true
+        }
+      })
     } else {
       this.children = []
-      this.clickChildren = []
+      this.descChildren = []
     }
   }
   draw () {
     this.clear()
     this.children.forEach(child => {
-      if (child.visible) child.draw()
+      if (child.opt.visible) child.draw()
     })
   }
   clear () {

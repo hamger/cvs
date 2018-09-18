@@ -4,22 +4,24 @@ let id = 0
 export default class Element {
   constructor (opt) {
     this.id = id++
-    this.cache = false
-    this.visible = true
-    this.zIndex = 0
     this.execArr = []
-    this.opt = opt
-    if (this.cache) {
+    this.opt = {
+      cache: false,
+      visible: true,
+      zIndex: 0
+    }
+    Object.assign(this.opt, opt)
+    if (this.opt.cache) {
       // 为离屏 canvas 添加 padding ，使渲染更完整
       this.p = 2
       // 记录线条宽度，离屏渲染需要遇到
       this.lw = 0
       if (this.opt.stroke && this.opt.lineWidth) this.lw = this.opt.lineWidth / 2
     }
-    if (this.hover) {
+    if (this.opt.hover) {
       this.noHover = {}
-      for (let key in this.hover) {
-        this.noHover[key] = this[key]
+      for (let key in this.opt.hover) {
+        this.noHover[key] = this.opt[key]
       }
     }
   }
@@ -30,7 +32,7 @@ export default class Element {
       if (key === 'opacity') ctx.globalAlpha = this.opt[key]
       else if (key === 'stroke') ctx.strokeStyle = this.opt[key]
       else if (key === 'fill') ctx.fillStyle = this.opt[key]
-      else if (/(shadowColor|shadowBlur|shadowOffsetX|shadowOffsetY|lineCap|lineJoin|lineWidth|miterLimit|font|textAlign|textBaseline)/.test(key)) {
+      else if (/(shadowColor|shadowBlur|shadowOffsetX|shadowOffsetY|lineCap|lineJoin|lineWidth|miterLimit|font|textAlign|textBaseline|globalCompositeOperation)/.test(key)) {
         ctx[key] = this.opt[key]
       }
     }
@@ -46,11 +48,9 @@ export default class Element {
     Object.assign(this.opt, opt)
     // 由 hover 引起的属性变化，不更新 noHover
     if (isHover) return
-    if (this.hover) {
+    if (this.opt.hover) {
       for (let key in opt) {
-        if (key in this.noHover) {
-          this.noHover[key] = opt[key]
-        }
+        if (key in this.noHover) this.noHover[key] = opt[key]
       }
     }
   }
