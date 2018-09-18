@@ -10,7 +10,9 @@
     "start": "npm run dev",
     "tonpm": "npm run build && npm version patch && npm publish",
     "test": "karma start",
-    "docs": "docsify serve docs"
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs",
+    "docs:pro":"sh deploy.sh"
   },
   "main": "dist/cvs.js",
   "keywords": [

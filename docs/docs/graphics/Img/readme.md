@@ -1,4 +1,4 @@
-## Img
+### Img
 
 绘制一个图片元素
 
@@ -8,7 +8,7 @@ var element = new Img(options);
 
 ### options
 
-除了支持[公共属性](../Element.md)外，还支持以下属性：
+除了支持[公共属性](../../element/)外，还支持以下属性：
 
 | options.key | value   | description                                 | default |
 | ----------- | ------- | ------------------------------------------- | ------- |
@@ -38,3 +38,5 @@ img.onload = function() {
   });
 };
 ```
+
+<c-img></c-img>   

@@ -1,4 +1,4 @@
-## Poly
+### Poly
 
 绘制一个多边形/折线元素
 
@@ -8,11 +8,11 @@ var element = new Poly(options);
 
 ### options
 
-除了支持[公共属性](../Element.md)外，还支持以下属性：
+除了支持[公共属性](../../element//)外，还支持以下属性：
 
 | options.key | value        | description              | default |
 | ----------- | ------------ | ------------------------ | ------- |
-| points      | Array<array> | 规定多边形顶点(折线拐点) | --      |
+| points      | Array\<array> | 规定多边形顶点(折线拐点) | --      |
 | cache       | Boolean | 规定是否缓存    | `false` |
 
 > 在动画中，如果只有元素的位置发生变化，推荐开启`cache`，使用离屏渲染提高性能
