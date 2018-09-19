@@ -2,7 +2,7 @@
 home: true
 # heroImage: /hero.png
 actionText: 快速上手 →
-actionLink: /docs/index/
+actionLink: /docs/start
 features:
 - title: 简洁至上
   details: 操作真的很简单
