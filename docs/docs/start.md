@@ -42,7 +42,7 @@ function move () {
   dots.forEach(dot => {
     dot.x += dot.xa
     dot.y += dot.ya
-    let r = dot.element.r
+    let r = dot.element.opt.r
     dot.xa *= dot.x > cvs.width - r || dot.x < r ? -1 : 1
     dot.ya *= dot.y > cvs.height - r || dot.y < r ? -1 : 1
     dot.element.attr({

@@ -8,6 +8,7 @@ export default class Element {
       visible: true,
       zIndex: 0
     }
+    this.noHover = {}
     this.attr(opt)
     if (this.opt.cache) {
       // 为离屏 canvas 添加 padding ，使渲染更完整
