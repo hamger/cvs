@@ -22,6 +22,15 @@ module.exports = {
     'no-proto': IGNORE,
     'new-cap': IGNORE,
     'no-useless-call': IGNORE,
-    'comma-dangle': IGNORE
+    'comma-dangle': IGNORE,
+    'indent': [
+      'error',
+      2,
+      {
+        SwitchCase: 1,
+        flatTernaryExpressions: true
+      }
+    ],
+    semi: [2, 'never']
   },
 }

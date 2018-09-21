@@ -65,6 +65,18 @@ var cvs = new Cvs(options);
   cvs.draw();
   ```
 
+#### move()
+
+- 描述：
+
+  确定了下一帧的画布中所有元素的位置
+
+- 示例：
+
+  ```js
+  cvs.move();
+  ```
+  
 #### clear()
 
 - 描述：

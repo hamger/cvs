@@ -40,3 +40,15 @@ export const animFrame = (function () {
     }
   )
 })()
+
+export const cancelAnim = (function () {
+  return (
+    cancelAnimationFrame ||
+    webkitCancelAnimationFrame ||
+    mozCancelAnimationFrame ||
+    msCancelAnimationFrame ||
+    function (id) {
+      clearTimeout(id)
+    }
+  )
+}())
