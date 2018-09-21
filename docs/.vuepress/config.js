@@ -26,7 +26,7 @@ module.exports = {
                     '/docs/graphics/Rect',
                     '/docs/graphics/Arc',
                     '/docs/graphics/Poly',
-                    '/docs/graphics/Animate',
+                    '/docs/graphics/Path',
                     '/docs/graphics/Img',
                     '/docs/graphics/Text',
                 ]
