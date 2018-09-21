@@ -1,11 +1,12 @@
 import Element from './element'
-import { getLocation, animFrame } from './utils'
+import { getLocation, animFrame, cancelAnim } from './utils'
 
 class Cvs {
   constructor (opt) {
     this.container = opt.container
     this.children = [] // 根据 zIndex 升序排列的子元素
     this.descChildren = [] // 根据 zIndex 降序排列的子元素
+    this.stop = null
     this.init()
     this.bind()
   }
@@ -113,23 +114,30 @@ class Cvs {
     }
   }
   draw () {
-    this.clear()
     this.children.forEach(child => {
       if (child.opt.visible) child.draw()
+    })
+  }
+  move () {
+    this.children.forEach(child => {
+      if (child.opt.visible) child.animate()
     })
   }
   clear () {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
-  animate (func) {
+  animate () {
+    var _this = this
     function func2 () {
-      animFrame(func2)
-      func()
+      _this.stop = animFrame(func2)
+      _this.clear()
+      _this.draw()
+      _this.move()
     }
-    this.anim = animFrame(func2)
+    func2()
   }
   cancelAnimate () {
-    cancelAnimationFrame(this.anim)
+    cancelAnim(this.stop)
   }
 }
 export default Cvs

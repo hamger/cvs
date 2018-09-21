@@ -46,7 +46,7 @@ cvs.draw();
 
 ### 2018.9.11
 
-> v0.1.4 添加 Path，Img，Text 构造器
+> v0.1.4 添加 Animate，Img，Text 构造器
 
 ### 2018.9.5
 
