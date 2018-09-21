@@ -24,5 +24,4 @@ module.exports = {
     'no-useless-call': IGNORE,
     'comma-dangle': IGNORE
   },
-  extends: ["eslint-config-alloy/vue"],
 }
