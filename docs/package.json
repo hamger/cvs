@@ -10,5 +10,11 @@
   "license": "MIT",
   "dependencies": {
     "cvs": "^0.1.8"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.0.0",
+    "eslint-config-alloy": "^1.4.2",
+    "eslint-plugin-vue": "^3.14.0"
   }
 }

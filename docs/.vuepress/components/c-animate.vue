@@ -7,26 +7,26 @@
 </template>
 
 <script>
-import { Cvs, Circle, Rect } from 'cvs'
-import Container from '../Container'
+import { Cvs, Rect } from 'cvs';
+import Container from '../Container';
 export default {
   components: {
     Container
   },
   data() {
-    return {}
+    return {};
   },
   mounted() {
     let cvs = new Cvs({
       container: document.getElementById('container')
-    })
-    const dotCount = 3
-    let r = 10
-    let dots = []
-    for (var i = 0; i < dotCount; i++) {
-      r = r + 0.5
-      var x = Math.random() * cvs.width
-      var y = Math.random() * cvs.height
+    });
+    const dotCount = 3;
+    let r = 10;
+    let dots = [];
+    for (let i = 0; i < dotCount; i++) {
+      r = r + 0.5;
+      let x = Math.random() * cvs.width;
+      let y = Math.random() * cvs.height;
       let dot = new Rect({
         angle: 0,
         x,
@@ -34,9 +34,9 @@ export default {
         w: 100,
         h: 80,
         cache: true
-      })
-      dots.push(dot)
-      cvs.add(dot)
+      });
+      dots.push(dot);
+      cvs.add(dot);
     }
     function move() {
       dots.forEach((dot, i) => {
@@ -48,7 +48,7 @@ export default {
             vpy: cvs.height / 2,
             r: 200,
             speed: 0.01
-          })
+          });
         } else if (i === 1) {
           dot.elliptic({
             relativeX: 50,
@@ -58,18 +58,18 @@ export default {
             radiusX: 400,
             radiusY: 200,
             speed: 0.03
-          })
+          });
         } else {
           dot.line({
             endX: cvs.width / 2 - 50,
             endY: cvs.height / 2 - 40,
             time: 1000
-          })
+          });
         }
-      })
-      cvs.draw()
+      });
+      cvs.draw();
     }
-    cvs.animate(move)
+    cvs.animate(move);
   }
-}
+};
 </script>
