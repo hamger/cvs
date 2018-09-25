@@ -1,4 +1,5 @@
 import Tween from './Animate/tween'
+import { colorPalette } from './Animate/colorAnimate'
 
 function circling (element, option) {
   const { opt: ele } = element
@@ -99,11 +100,52 @@ function parabola (element, option) {
   }
 }
 
+// var palette = colorPalette([
+//   [0, 'red'],
+//   [0.7, 'orange'],
+//   [0.17, 'yellow'],
+//   [0.22, 'green'],
+//   [0.42, 'cyan'],
+//   [0.82, 'blue'],
+//   [0.90, 'purple'],
+// ])
+
+const gradientColor = (ele, options) => {
+  const { ctx, opt } = ele
+  const { colors } = options
+  const palette = colorPalette(colors)
+  var width = ctx.width, height = ctx.height
+  var start = 0
+  const len = palette.length / 4
+  var end = len
+  const draw = (offset) => {
+    ctx.clearRect(0, 0, width, height)
+    console.log(offset)
+    ctx.fillStyle = 'rgba(' + [
+      palette[offset * 4 + 0],
+      palette[offset * 4 + 1],
+      palette[offset * 4 + 2],
+      palette[offset * 4 + 3]
+    ] + ')'
+    ctx.arc(width / 2, height / 2, height / 2, 0, 2 * Math.PI)
+    ctx.fill()
+  }
+
+  setInterval(() => {
+    start++
+    if (start > end) {
+      start = 0
+    }
+    draw(Tween.Linear(start, 0, len, end).toFixed(0))
+  }, 10)
+}
+
 const Animate = {
   circling,
   elliptic,
   line,
-  parabola
+  parabola,
+  gradientColor
 }
 
 export default Animate
