@@ -27,7 +27,7 @@ var Tween = {
       return c * (t /= d) * t * t + b
     },
     easeOut: function (t, b, c, d) {
-      return c * ((t = t/d - 1) * t * t + 1) + b
+      return c * ((t = t / d - 1) * t * t + 1) + b
     },
     easeInOut: function (t, b, c, d) {
       if ((t /= d / 2) < 1) return c / 2 * t * t * t + b
@@ -63,7 +63,7 @@ var Tween = {
       return -c * Math.cos(t / d * (Math.PI / 2)) + c + b
     },
     easeOut: function (t, b, c, d) {
-      return c * Math.sin(t / d * (Math.PI/2)) + b
+      return c * Math.sin(t / d * (Math.PI / 2)) + b
     },
     easeInOut: function (t, b, c, d) {
       return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b
@@ -144,7 +144,7 @@ var Tween = {
     },
     easeOut: function (t, b, c, d, s) {
       if (typeof s === 'undefined') s = 1.70158
-      return c * ((t = t/d - 1) * t * ((s + 1) * t + s) + 1) + b
+      return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b
     },
     easeInOut: function (t, b, c, d, s) {
       if (typeof s === 'undefined') s = 1.70158

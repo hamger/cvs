@@ -6,7 +6,7 @@ export default class Element {
     this.opt = {
       cache: false,
       visible: true,
-      zIndex: 0
+      zIndex: 0,
     }
     this.noHover = {}
     this.attr(opt)
@@ -75,8 +75,5 @@ export default class Element {
   }
   off (eventType) {
     this[eventType] = null
-  }
-  animate () {
-
   }
 }

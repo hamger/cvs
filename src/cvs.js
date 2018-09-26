@@ -9,6 +9,7 @@ class Cvs {
     this.stop = null
     this.init()
     this.bind()
+    this.animate()
   }
   init () {
     var canvas = document.createElement('canvas')
@@ -115,12 +116,15 @@ class Cvs {
   }
   draw () {
     this.children.forEach(child => {
-      if (child.opt.visible) child.draw()
+      if (child.opt.visible) {
+        child.draw()
+        this.move()
+      }
     })
   }
   move () {
     this.children.forEach(child => {
-      if (child.opt.visible) child.animate()
+      if (child.animate) child.animate()
     })
   }
   clear () {
@@ -132,7 +136,6 @@ class Cvs {
       _this.stop = animFrame(func2)
       _this.clear()
       _this.draw()
-      _this.move()
     }
     func2()
   }

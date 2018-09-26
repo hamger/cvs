@@ -57,7 +57,7 @@ var cvs = new Cvs(options);
 
 - 描述：
 
-  命令画布进行绘制
+  命令画布进行绘制，内部引用了cvs.move()
 
 - 示例：
 
@@ -92,7 +92,7 @@ var cvs = new Cvs(options);
 
 - 描述：
 
-  执行动画
+  执行动画, 在Cvs类中自调用
 
 - 参数：
 
