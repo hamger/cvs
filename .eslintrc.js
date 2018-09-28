@@ -33,5 +33,4 @@ module.exports = {
     ],
     semi: [2, 'never']
   },
-  // extends: ["eslint-config-alloy/vue"],
 }
