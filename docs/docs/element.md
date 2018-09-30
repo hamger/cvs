@@ -109,11 +109,11 @@ var elememt = new Elememt(options);
 
 - 描述：
 
-  元素的运动函数
+  元素的运动函数,example可在跟目录下的demo/animate查看
 
 - 参数：
 
-  - 暂时为自定义函数或者调用路径函数
+  - 自定义函数或者调用路径函数
 
 - 示例：
   ```js

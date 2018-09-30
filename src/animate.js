@@ -99,11 +99,11 @@ function parabola (element, option) {
   }
 }
 
-const Animate = {
+const AnimatePath = {
   circling,
   elliptic,
   line,
   parabola
 }
 
-export default Animate
+export default AnimatePath
