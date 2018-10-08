@@ -140,7 +140,7 @@ const gradientColor = (ele, options) => {
   }, 10)
 }
 
-const Animate = {
+const AnimatePath = {
   circling,
   elliptic,
   line,
@@ -148,4 +148,4 @@ const Animate = {
   gradientColor
 }
 
-export default Animate
+export default AnimatePath

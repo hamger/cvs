@@ -7,6 +7,6 @@ import Poly from './graphics/poly'
 import Arc from './graphics/arc'
 import Img from './graphics/img'
 import Text from './graphics/text'
-import Animate from './animate'
+import AnimatePath from './animate'
 
-export { Cvs, Element, Animate, Circle, Rect, Poly, Arc, Img, Text, Path }
+export { Cvs, Element, AnimatePath, Circle, Rect, Poly, Arc, Img, Text, Path }
