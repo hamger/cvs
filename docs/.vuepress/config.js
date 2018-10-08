@@ -1,5 +1,4 @@
 module.exports = {
-                ]
   title: 'CVS',
   description: 'tool for canvas',
   configureWebpack: {
