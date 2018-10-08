@@ -30,6 +30,11 @@ module.exports = {
           '/docs/graphics/Img',
           '/docs/graphics/Text'
         ]
+      },
+      {
+        title: 'Animate',
+        collapsable: false,
+        children: ['/docs/animate/animatePath', '/docs/animate/animateColor']
       }
     ]
   }
