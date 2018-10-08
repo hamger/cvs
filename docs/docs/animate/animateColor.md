@@ -46,7 +46,7 @@ const colorArr = colorPalette(colors)
 
 | 字段 | 描述                                | 类型   | 默认值 |
 | ---- | ----------------------------------- | ------ | ------ |
-| colorArr | 调色板 | Array\<Number\> | Linear     |
+| colorArr | 调色板 | Array\<Number\> | --   |
 | during | 必填参数，运动的持续时间，单位是 ms | Number | --     |
 | type | 缓动函数 | Array、String | Linear     |
 
