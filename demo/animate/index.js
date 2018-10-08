@@ -1,5 +1,5 @@
 import { Cvs, Circle, AnimatePath } from '@'
-const { circling, elliptic, line, parabola } = AnimatePath
+const { circling, elliptic, line, parabola, colorPalette, gradientColor } = AnimatePath
 let cvs = new Cvs({
   container: document.getElementById('container')
 })
@@ -70,25 +70,3 @@ addBtn.onclick = function () {
   }
   cvs.add(dot)
 }
-
-// let ball = new Circle({
-//     x: 50,
-//     y: 50,
-//     r: 50,
-//     cache: true
-//   })
-//   cvs.add(ball)
-//   const startTime = Date.now()
-//   const colors = [
-//     [0.3, 'red'],
-//     [0.7, 'orange'],
-//     [0.17, 'yellow'],
-//     [0.22, 'green'],
-//     [0.42, 'cyan'],
-//     [0.82, 'blue'],
-//     [0.90, 'purple'],
-//   ]
-//   gradientColor(ball, {
-//     startTime,
-//     colors
-//   })

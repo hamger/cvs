@@ -1,5 +1,4 @@
 import Tween from './Animate/tween'
-import { colorPalette } from './Animate/colorAnimate'
 
 function circling (element, option) {
   const { opt: ele } = element
@@ -100,44 +99,63 @@ function parabola (element, option) {
   }
 }
 
-// var palette = colorPalette([
-//   [0, 'red'],
-//   [0.7, 'orange'],
-//   [0.17, 'yellow'],
-//   [0.22, 'green'],
-//   [0.42, 'cyan'],
-//   [0.82, 'blue'],
-//   [0.90, 'purple'],
-// ])
+const colorPalette = (gradient) => {
+  var canvas = document.createElement('canvas')
+  canvas.width = '1'
+  canvas.height = '256'
+  // document.body.appendChild(canvas); // debug
+  var ele = canvas.getContext('2d'),
+    grad = ele.createLinearGradient(0, 0, 1, 256)
+  gradient.forEach(function (item) {
+    grad.addColorStop(item[0], item[1])
+  })
+  ele.fillStyle = grad
+  ele.fillRect(0, 0, 1, 256)
+  return ele.getImageData(0, 0, 1, 256).data
+}
 
 const gradientColor = (ele, options) => {
   const { ctx, opt } = ele
-  const { colors } = options
-  const palette = colorPalette(colors)
+  const { colorArr } = options
   var width = ctx.width, height = ctx.height
   var start = 0
-  const len = palette.length / 4
-  var end = len
-  const draw = (offset) => {
-    ctx.clearRect(0, 0, width, height)
-    console.log(offset)
-    ctx.fillStyle = 'rgba(' + [
-      palette[offset * 4 + 0],
-      palette[offset * 4 + 1],
-      palette[offset * 4 + 2],
-      palette[offset * 4 + 3]
-    ] + ')'
-    ctx.arc(width / 2, height / 2, height / 2, 0, 2 * Math.PI)
-    ctx.fill()
-  }
+  var begin = 0
+  var during = options.during
+  var type = options.type || 'Linear'
+  // var end = (colorArr.length / 4) // 256
+  var end = ((colorArr.length / 4) / during)
 
-  setInterval(() => {
-    start++
-    if (start > end) {
-      start = 0
+  if (!ele.recordParam) {
+    ele.recordParam = {
+      start,
+      begin,
+      end,
+      during
     }
-    draw(Tween.Linear(start, 0, len, end).toFixed(0))
-  }, 10)
+  } else {
+    start = ele.recordParam.start++
+    // if (start > during) {
+    //   ele.recordParam.start = 0
+    //   start = 0
+    // }
+    begin = ele.recordParam.begin
+    end = ele.recordParam.end
+  }
+  var offset
+  if (type instanceof Array) {
+    offset = Tween[type[0]][type[1]](start, begin, end, during).toFixed(0)
+  } else if (typeof type === 'string') {
+    offset = Tween[type](start, begin, end, during).toFixed(0)
+  }
+  // console.log(offset)
+  ctx.clearRect(0, 0, width, height)
+  ctx.fillStyle = 'rgba(' + [
+    colorArr[offset * 4 + 0],
+    colorArr[offset * 4 + 1],
+    colorArr[offset * 4 + 2],
+    colorArr[offset * 4 + 3]
+  ] + ')'
+  ctx.fill()
 }
 
 const AnimatePath = {
@@ -145,6 +163,7 @@ const AnimatePath = {
   elliptic,
   line,
   parabola,
+  colorPalette,
   gradientColor
 }
 
