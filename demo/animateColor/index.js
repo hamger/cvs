@@ -20,11 +20,12 @@ const colors = [
   [0.90, 'purple'],
 ]
 
-const colorArr = colorPalette(colors)
+// const colorArr = colorPalette(colors)
 ball.animate = () => {
   gradientColor(ball, {
-    colorArr,
-    during: 20
+    colors,
+    during: 20,
+    period: true
   })
 }
 
