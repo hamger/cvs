@@ -117,13 +117,13 @@ const colorPalette = (gradient) => {
 
 const gradientColor = (ele, options) => {
   const { ctx, opt } = ele
-  const { colorArr } = options
   var width = ctx.width, height = ctx.height
   var start = 0
   var begin = 0
   var during = options.during
   var type = options.type || 'Linear'
-  // var end = (colorArr.length / 4) // 256
+  var colorArr = (ele.recordParam && ele.recordParam.colorArr) || colorPalette(options.colors)
+
   var end = ((colorArr.length / 4) / during)
 
   if (!ele.recordParam) {
@@ -131,14 +131,11 @@ const gradientColor = (ele, options) => {
       start,
       begin,
       end,
-      during
+      during,
+      colorArr
     }
   } else {
     start = ele.recordParam.start++
-    // if (start > during) {
-    //   ele.recordParam.start = 0
-    //   start = 0
-    // }
     begin = ele.recordParam.begin
     end = ele.recordParam.end
   }
@@ -147,6 +144,9 @@ const gradientColor = (ele, options) => {
     offset = Tween[type[0]][type[1]](start, begin, end, during).toFixed(0)
   } else if (typeof type === 'string') {
     offset = Tween[type](start, begin, end, during).toFixed(0)
+  }
+  if (options.period && offset > (colorArr.length / 4)) {
+    ele.recordParam.start = 0
   }
   // console.log(offset)
   ctx.clearRect(0, 0, width, height)

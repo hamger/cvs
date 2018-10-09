@@ -9,7 +9,7 @@
   - 默认值： Linear  
 
 
-> 生成调色板
+<!-- > 生成调色板
 
 ```javascript
 
@@ -40,19 +40,20 @@ const colors = [
 
 const colorArr = colorPalette(colors)
 
-```
+``` -->
 
-##### 利用调色板数组进行各种缓动动画
+> 颜色缓动动画
 
 | 字段 | 描述                                | 类型   | 默认值 |
 | ---- | ----------------------------------- | ------ | ------ |
-| colorArr | 调色板 | Array\<Number\> | --   |
+| colors | 允许使用透明度的颜色 | Array\<array\> | --   |
 | during | 必填参数，运动的持续时间，单位是 ms | Number | --     |
 | type | 缓动函数 | Array、String | Linear     |
+| period | 是否循环 | Boolean | false |
 
 ```javascript
 
-import { colorPalette,Circle,Cvs } from cvs
+import { gradientColor,Circle,Cvs } from cvs
 
 let cvs = new Cvs({
   container: document.getElementById('container')
@@ -67,8 +68,17 @@ let ball = new Circle({
 
 ball.animate = () => {
   gradientColor(ball, {
-    colorArr,
-    during: 20
+    colors:[
+        [0.3, 'red'],
+        [0.7, 'orange'],
+        [0.17, 'yellow'],
+        [0.22, 'green'],
+        [0.42, 'cyan'],
+        [0.82, 'blue'],
+        [0.90, 'purple'],
+    ],
+    during: 20,
+    period:true
   })
 }
 
