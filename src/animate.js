@@ -1,6 +1,10 @@
 import Tween from './Animate/tween'
 import bezier from './Animate/bezier'
 
+// 默认运动速度
+const defaultSpeed = 0.04
+
+// 正圆运动
 function circling (element, option) {
   const { opt: ele } = element
   const relativeX = option.relativeX || 0
@@ -8,11 +12,13 @@ function circling (element, option) {
   const vpx = option.vpx
   const vpy = option.vpy
   const r = option.r || 100
-  const speed = option.speed || 0.05
+  const speed = option.speed || defaultSpeed
   ele.x = vpx + r * Math.cos(ele.angle) - relativeX
   ele.y = vpy + r * Math.sin(ele.angle) - relativeY
   ele.angle += speed
 }
+
+// 椭圆运动
 function elliptic (element, option) {
   const { opt: ele } = element
   const relativeX = option.relativeX || 0
@@ -21,12 +27,13 @@ function elliptic (element, option) {
   const vpy = option.vpy
   const radiusX = option.radiusX || 100
   const radiusY = option.radiusY || 80
-  const speed = option.speed || 0.05
+  const speed = option.speed || defaultSpeed
   ele.angle += speed
   ele.x = vpx + radiusX * Math.cos(ele.angle) - relativeX
   ele.y = vpy + radiusY * Math.sin(ele.angle) - relativeY
 }
 
+// 直线运动
 function line (element, option) {
   const { opt: ele } = element
   const endX = option.endX
@@ -60,8 +67,10 @@ function line (element, option) {
     ele.recordLine.start += 10
   }
 }
+
+// 半抛物线运动
 function parabola (element, option) {
-  const { opt: ele, ctx } = element
+  const { opt: ele } = element
   const endX = option.endX
   const endY = option.endY
   const time = option.time
@@ -100,11 +109,11 @@ function parabola (element, option) {
   }
 }
 
+// 调色板
 const colorPalette = (gradient) => {
   var canvas = document.createElement('canvas')
   canvas.width = '1'
   canvas.height = '256'
-  // document.body.appendChild(canvas); // debug
   var ele = canvas.getContext('2d'),
     grad = ele.createLinearGradient(0, 0, 1, 256)
   gradient.forEach(function (item) {
@@ -115,6 +124,7 @@ const colorPalette = (gradient) => {
   return ele.getImageData(0, 0, 1, 256).data
 }
 
+// 颜色缓动
 const gradientColor = (ele, options) => {
   const { ctx, opt } = ele
   var width = ctx.width, height = ctx.height
@@ -148,7 +158,6 @@ const gradientColor = (ele, options) => {
   if (options.period && offset > (colorArr.length / 4)) {
     ele.recordParam.start = 0
   }
-  // console.log(offset)
   ctx.clearRect(0, 0, width, height)
   ctx.fillStyle = 'rgba(' + [
     colorArr[offset * 4 + 0],
