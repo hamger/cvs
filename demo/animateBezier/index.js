@@ -27,11 +27,12 @@ againBtn.onclick = function () {
   })
   dots.animate = () => {
     bezier(dots, {
+      speed: 0.01,
       points: [
         { x: 10, y: 10 },
-        { x: 160, y: 60 },
-        { x: 60, y: 160 },
-        { x: 210, y: 210 }
+        { x: 360, y: 160 },
+        { x: 160, y: 360 },
+        { x: 410, y: 410 }
       ]
     })
   }

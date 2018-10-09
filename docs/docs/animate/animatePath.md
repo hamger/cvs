@@ -33,7 +33,7 @@ var elememt = new Elememt(options);
     | vpx       | 必填参数，圆周运动中心点在 X 轴的位置            | Number | --     |
     | vpy       | 必填参数，圆周运动中心点在 Y 轴的位置            | Number | --     |
     | r         | 圆周运动的半径                                   | Number | `100`  |
-    | speed     | 圆周运动的速度                                   | Number | `0.05` |
+    | speed     | 圆周运动的速度                                   | Number | `0.04` |
 
 - 示例：
 
@@ -70,7 +70,7 @@ var elememt = new Elememt(options);
     | vpy       | 必填参数，椭圆运动中心点在 Y 轴的位置            | Number | --     |
     | radiusX   | 椭圆运动的长轴长度                               | Number | `100`  |
     | radiusY   | 椭圆运动的短轴长度                               | Number | `80`   |
-    | speed     | 椭圆运动的速度                                   | Number | `0.05` |
+    | speed     | 椭圆运动的速度                                   | Number | `0.04` |
 
 - 示例：
 
