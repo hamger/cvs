@@ -56,10 +56,7 @@ var webpackConfig = {
     }
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.ProvidePlugin({
-      f: ['hg-jslibrary', 'default']
-    })
+    new webpack.HotModuleReplacementPlugin()
   ]
 }
 

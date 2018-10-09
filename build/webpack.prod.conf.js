@@ -46,10 +46,7 @@ var webpackConfig = {
     ]
   },
   plugins: [
-    new UglifyJsPlugin(),
-    new webpack.ProvidePlugin({
-      f: ['hg-jslibrary', 'default']
-    })
+    new UglifyJsPlugin()
   ]
 }
 

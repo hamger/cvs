@@ -1,5 +1,5 @@
 import Element from './element'
-import { getLocation, animFrame, cancelAnim } from './utils'
+import { getLocation, animFrame, cancelAnim, arrSort } from './utils'
 
 class Cvs {
   constructor (opt) {
@@ -88,9 +88,9 @@ class Cvs {
       element.ctx = this.ctx
       element.canvas = this.canvas
       this.children.push(element)
-      f.arrSort(this.children, 'opt.zIndex')
+      arrSort(this.children, 'opt.zIndex')
       this.descChildren.push(element)
-      f.arrSort(this.descChildren, 'opt.zIndex', true)
+      arrSort(this.descChildren, 'opt.zIndex', true)
     } else {
       throw Error('Function add only accept the instance of Element.')
     }
