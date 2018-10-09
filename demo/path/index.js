@@ -5,6 +5,13 @@ let cvs = new Cvs({
 
 cvs.add(
   new Path({
+    path: 'M 167 211' + 'C 444 205 268 438 583 489',
+    stroke: 'red'
+  })
+)
+
+cvs.add(
+  new Path({
     path:
       'M 10 10' +
       'L 100 100' +

@@ -1,4 +1,5 @@
 import Tween from './Animate/tween'
+import bezier from './Animate/bezier'
 
 function circling (element, option) {
   const { opt: ele } = element
@@ -158,13 +159,14 @@ const gradientColor = (ele, options) => {
   ctx.fill()
 }
 
-const AnimatePath = {
+const Animate = {
   circling,
   elliptic,
   line,
   parabola,
   colorPalette,
-  gradientColor
+  gradientColor,
+  bezier
 }
 
-export default AnimatePath
+export default Animate

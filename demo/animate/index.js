@@ -1,5 +1,5 @@
-import { Cvs, Circle, AnimatePath } from '@'
-const { circling, elliptic, line, parabola, colorPalette, gradientColor } = AnimatePath
+import { Cvs, Circle, Animate } from '@'
+const { circling, elliptic, line, parabola, colorPalette, gradientColor } = Animate
 let cvs = new Cvs({
   container: document.getElementById('container')
 })
