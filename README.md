@@ -28,6 +28,10 @@ cvs.draw();
 
 ## Changelog
 
+### 2018.10.9
+
+> v0.1.9 添加 circling、elliptic、line、parabola 运动函数
+
 ### 2018.9.18
 
 > v0.1.8 优化配置项赋值操作
