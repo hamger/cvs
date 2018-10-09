@@ -30,7 +30,7 @@ cvs.draw();
 
 ### 2018.10.9
 
-> v0.1.9 添加 circling、elliptic、line、parabola 运动函数
+> v0.1.10 添加 circling、elliptic、line、parabola 运动函数
 
 ### 2018.9.18
 
