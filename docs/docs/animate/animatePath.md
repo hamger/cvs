@@ -2,14 +2,8 @@
 
 > 各种路径函数
 
-- 有 type 字段的表示可以接入缓动函数
-  - type 的类型： string | Array
-  - String 只能为 Linear 大小写敏感
-  - Array: 第一个值确定缓动类型，比如 Quad、Cubic，第二个值确定缓动速度，比如 easeIn，详细值可以参考 [张鑫旭](https://www.zhangxinxu.com/wordpress/2016/12/how-use-tween-js-animation-easing/)
-  - 默认值： Linear
-
 ```js
-var elememt = new Elememt(options);
+var ele = new Elememt(options);
 ```
 
 #### 运动函数
@@ -104,7 +98,7 @@ var elememt = new Elememt(options);
     | endX | 必填参数，运动终点在 X 轴的位置     | Number        | --     |
     | endY | 必填参数，运动终点在 Y 轴的位置     | Number        | --     |
     | time | 必填参数，运动的持续时间，单位是 ms | Number        | --     |
-    | type | 缓动函数                            | Array、String | Linear |
+    | type | 缓动函数，详细值可以参考 [张鑫旭](https://www.zhangxinxu.com/wordpress/2016/12/how-use-tween-js-animation-easing/)  | Array &#124; String | `Linear` |
 
 * 示例：
 
@@ -134,7 +128,7 @@ var elememt = new Elememt(options);
     | endX | 必填参数，运动终点在 X 轴的位置     | Number          | --       |
     | endY | 必填参数，运动终点在 Y 轴的位置     | Number          | --       |
     | time | 必填参数，运动的持续时间，单位是 ms | Number          | --       |
-    | type | 缓动函数                            | Array \| String | `Linear` |
+    | type | 缓动函数，详细值可以参考 [张鑫旭](https://www.zhangxinxu.com/wordpress/2016/12/how-use-tween-js-animation-easing/)                         | Array &#124;  String | `Linear` |
 
 - 示例：
   ```

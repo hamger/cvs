@@ -41,22 +41,22 @@ function line (element, option) {
   const time = option.time
   const type = option.type || 'Linear'
   let start, x, y
-  if (!ele.recordLine) {
+  if (!ele._recordLine) {
     start = 0
-    ele.recordLine = {
+    ele._recordLine = {
       start: 0,
       sx: ele.x,
       sy: ele.y,
     }
   } else {
-    start = ele.recordLine.start
+    start = ele._recordLine.start
   }
   if (type instanceof Array) {
-    x = Tween[type[0]][type[1]](start, ele.recordLine.sx, endX, time)
-    y = Tween[type[0]][type[1]](start, ele.recordLine.sy, endY, time)
+    x = Tween[type[0]][type[1]](start, ele._recordLine.sx, endX, time)
+    y = Tween[type[0]][type[1]](start, ele._recordLine.sy, endY, time)
   } else if (typeof type === 'string') {
-    x = Tween[type](start, ele.recordLine.sx, endX, time)
-    y = Tween[type](start, ele.recordLine.sy, endY, time)
+    x = Tween[type](start, ele._recordLine.sx, endX, time)
+    y = Tween[type](start, ele._recordLine.sy, endY, time)
   }
   if (Math.abs(ele.x - endX) < 0.1 && Math.abs(ele.y - endY) < 0.1) {
     ele.x = endX
@@ -64,7 +64,7 @@ function line (element, option) {
   } else {
     ele.x = x
     ele.y = y
-    ele.recordLine.start += 10
+    ele._recordLine.start += 10
   }
 }
 
@@ -78,11 +78,11 @@ function parabola (element, option) {
   let a = 0.0004
   let b, c
   let start, x
-  if (!ele.recordParabola) {
+  if (!ele._recordParabola) {
     start = 0
     b = ((ele.y - endY) - a * (Math.pow(ele.x, 2) - Math.pow(endX, 2))) / (ele.x - endX)
     c = ele.y - a * Math.pow(ele.x, 2) - b * ele.x
-    ele.recordParabola = {
+    ele._recordParabola = {
       start: 0,
       sx: ele.x,
       sy: ele.y,
@@ -90,14 +90,14 @@ function parabola (element, option) {
       c,
     }
   } else {
-    start = ele.recordParabola.start
-    b = ele.recordParabola.b
-    c = ele.recordParabola.c
+    start = ele._recordParabola.start
+    b = ele._recordParabola.b
+    c = ele._recordParabola.c
   }
   if (type instanceof Array) {
-    x = Tween[type[0]][type[1]](start, ele.recordParabola.sx, endX, time)
+    x = Tween[type[0]][type[1]](start, ele._recordParabola.sx, endX, time)
   } else if (typeof type === 'string') {
-    x = Tween[type](start, ele.recordParabola.sx, endX, time)
+    x = Tween[type](start, ele._recordParabola.sx, endX, time)
   }
   if (Math.abs(ele.x - endX) < 0.1 && Math.abs(ele.y - endY) < 0.1) {
     ele.x = endX
@@ -105,7 +105,7 @@ function parabola (element, option) {
   } else {
     ele.x = x
     ele.y = (a * ele.x * ele.x + b * ele.x + c)
-    ele.recordParabola.start += 10
+    ele._recordParabola.start += 10
   }
 }
 
@@ -132,12 +132,12 @@ const gradientColor = (ele, options) => {
   var begin = 0
   var during = options.during
   var type = options.type || 'Linear'
-  var colorArr = (ele.recordParam && ele.recordParam.colorArr) || colorPalette(options.colors)
+  var colorArr = (ele._recordParam && ele._recordParam.colorArr) || colorPalette(options.colors)
 
   var end = ((colorArr.length / 4) / during)
 
-  if (!ele.recordParam) {
-    ele.recordParam = {
+  if (!ele._recordParam) {
+    ele._recordParam = {
       start,
       begin,
       end,
@@ -145,9 +145,9 @@ const gradientColor = (ele, options) => {
       colorArr
     }
   } else {
-    start = ele.recordParam.start++
-    begin = ele.recordParam.begin
-    end = ele.recordParam.end
+    start = ele._recordParam.start++
+    begin = ele._recordParam.begin
+    end = ele._recordParam.end
   }
   var offset
   if (type instanceof Array) {
@@ -156,7 +156,7 @@ const gradientColor = (ele, options) => {
     offset = Tween[type](start, begin, end, during).toFixed(0)
   }
   if (options.period && offset > (colorArr.length / 4)) {
-    ele.recordParam.start = 0
+    ele._recordParam.start = 0
   }
   ctx.clearRect(0, 0, width, height)
   ctx.fillStyle = 'rgba(' + [

@@ -118,9 +118,9 @@ class Cvs {
     this.children.forEach(child => {
       if (child.opt.visible) {
         child.draw()
-        this.move()
       }
     })
+    this.move()
   }
   move () {
     this.children.forEach(child => {
