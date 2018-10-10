@@ -7,12 +7,14 @@ class Cvs {
     this.children = [] // 根据 zIndex 升序排列的子元素
     this.descChildren = [] // 根据 zIndex 降序排列的子元素
     this.stop = null
+    this.animateCount = 0
+    this.initAnimateTime = 0
+    this.pauseTime = 0
     this.init()
     this.bind()
-    this.animate()
   }
   init () {
-    var canvas = document.createElement('canvas')
+    let canvas = document.createElement('canvas')
     this.width = canvas.width = this.container.clientWidth
     this.height = canvas.height = this.container.clientHeight
     this.canvas = canvas
@@ -22,7 +24,7 @@ class Cvs {
   bind () {
     this.canvas.addEventListener('click', e => {
       let temp = null
-      var location = getLocation(this.canvas, e)
+      let location = getLocation(this.canvas, e)
       // 只触发点击区域最前面元素的监听事件
       this.descChildren.some(child => {
         if (!child.opt.visible || !child.click) return false
@@ -39,7 +41,7 @@ class Cvs {
     let count2 = 0
     let hoverEle = null
     this.canvas.addEventListener('mousemove', e => {
-      var location = getLocation(this.canvas, e)
+      let location = getLocation(this.canvas, e)
 
       // 实现鼠标移动到可点击区域时，光标变化
       let temp = null
@@ -61,7 +63,7 @@ class Cvs {
       }
 
       // 模拟 hover 事件监听
-      let temp2 = {opt: {}}
+      let temp2 = { opt: {} }
       this.descChildren.some(child => {
         if (!child.opt.visible) return false
         child.drawPath()
@@ -130,16 +132,47 @@ class Cvs {
   clear () {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
+  _getAnimateTime (time) {
+    // console.dir(this.pauseTime)
+    return time - this.initAnimateTime - this.pauseTime
+  }
   animate () {
-    var _this = this
+    this.startTime = new Date()
+    if (this.animateCount === 0) this.initAnimateTime = new Date()
+    if (this.stopTime) this.pauseTime += this.startTime - this.stopTime
+    this.animateCount++
+    let self = this
     function func2 () {
-      _this.stop = animFrame(func2)
-      _this.clear()
-      _this.draw()
+      self.stop = animFrame(func2)
+      self.clear()
+      let curTime = new Date()
+      self.children.forEach(child => {
+        let idx = child.trackIndex
+        if (child.tracks.length > idx) {
+          let track = child.tracks[idx]
+          let curAnimateTime = self._getAnimateTime(curTime)
+          // console.log(child._trackDelay())
+          if (
+            curAnimateTime > child._trackDelay() &&
+            curAnimateTime < child._trackDelay() + track.duration
+          ) {
+            console.log(curAnimateTime)
+            track.loop()
+          } else if (
+            curAnimateTime >= child._trackDelay() + track.duration &&
+            child.tracks[idx + 1]
+          ) {
+            child.trackIndex++
+          }
+        }
+      })
+      self.draw()
     }
     func2()
   }
   cancelAnimate () {
+    this.stopTime = new Date()
+    _getAnimateTime(false)
     cancelAnim(this.stop)
   }
 }

@@ -3,17 +3,12 @@
 var t = 0 // 贝塞尔函数涉及的占比比例，0<=t<=1
 var bezierNodes = [] // 绘制内部控制点的数组
 var nextNodes = [] // 下一帧绘制的控制点
-var isPrinting = false // 正在绘制中标识
-const defaultSpeed = 0.04 // 默认运动速度
 
 function bezier (element, option) {
-  if (t > 1) {
-    isPrinting = false
-    return
-  }
+  if (t > 1) return
   const { opt: ele } = element
-  const speed = option.speed || defaultSpeed
-  isPrinting = true
+  const speed = (1 / element.tracks[element.trackIndex].duration) * 16
+  // console.log(speed)
   t += speed
   drawnode(ele, nextNodes.length ? nextNodes : option.points)
 }

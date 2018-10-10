@@ -4,7 +4,6 @@ import bezier from './Animate/bezier'
 // 默认运动速度
 const defaultSpeed = 0.04
 
-// 正圆运动
 function circling (element, option) {
   const { opt: ele } = element
   const relativeX = option.relativeX || 0

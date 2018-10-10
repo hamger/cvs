@@ -6,7 +6,7 @@ export default class Element {
     this.opt = {
       cache: false,
       visible: true,
-      zIndex: 0,
+      zIndex: 0
     }
     this.noHover = {}
     this.attr(opt)
@@ -19,6 +19,8 @@ export default class Element {
         this.lw = this.opt.lineWidth / 2
       }
     }
+    this.tracks = []
+    this.trackIndex = 0
   }
   // 设置上下文属性
   setAttr (ctx2) {
@@ -75,5 +77,27 @@ export default class Element {
   }
   off (eventType) {
     this[eventType] = null
+  }
+  _trackDelay () {
+    if (!this.tracks.length) return 0
+    let i = this.trackIndex
+    if (i === 0) return this.tracks[0].delay
+    let sum = 0
+    for (let j = 1; j <= i; j++) {
+      sum +=
+        this.tracks[j - 1].delay +
+        this.tracks[j - 1].duration +
+        this.tracks[j].delay
+    }
+    return sum
+  }
+  track (obj) {
+    if (obj instanceof Array) {
+      obj.forEach(item => {
+        this.tracks.push(item)
+      })
+    } else {
+      this.tracks.push(obj)
+    }
   }
 }
