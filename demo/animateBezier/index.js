@@ -50,6 +50,7 @@ var init = 12
 dot.track({
   delay: 0,
   duration: 3000,
+  easing: 'Linear',
   loop: function () {
     if (init <= 85) {
       this.attr({ x: this.attr('x') + 1, y: this.attr('y') - 1 })
@@ -60,8 +61,7 @@ dot.track({
   }
 })
 
-cvs.add(dot)
-cvs.add(rect)
+cvs.add([dot, rect])
 
 cvs.animate()
 
