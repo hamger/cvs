@@ -133,7 +133,6 @@ class Cvs {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
   _getAnimateTime (time) {
-    // console.dir(this.pauseTime)
     return time - this.initAnimateTime - this.pauseTime
   }
   animate () {
@@ -156,7 +155,6 @@ class Cvs {
             curAnimateTime > child._trackDelay() &&
             curAnimateTime < child._trackDelay() + track.duration
           ) {
-            console.log(curAnimateTime)
             track.loop()
           } else if (
             curAnimateTime >= child._trackDelay() + track.duration &&
@@ -172,7 +170,6 @@ class Cvs {
   }
   cancelAnimate () {
     this.stopTime = new Date()
-    _getAnimateTime(false)
     cancelAnim(this.stop)
   }
 }

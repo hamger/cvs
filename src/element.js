@@ -53,8 +53,11 @@ export default class Element {
     if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
   }
-  // 设置绘制属性
+  // 设置/获取绘制属性
   attr (opt, isHover) {
+    if (typeof opt === 'string') {
+      return this.opt[opt]
+    }
     // 更新属性
     Object.assign(this.opt, opt)
     // 设置转换函数
