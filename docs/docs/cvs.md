@@ -27,26 +27,28 @@ var cvs = new Cvs(options);
 
 - 描述：
 
-  向画布中添加一个元素
+  向画布中添加一个或多个元素
 
 - 参数：
 
-  - `{Element} element`
+  - `{Element|Array<Element>} element`
 
 - 示例：
   ```js
-  cvs.add(element);
+  cvs.add([element, element2]);
   ```
 
 #### remove(element)
 
 - 描述：
 
-  从画布中去除一个元素
+  从画布中去除一个或多个元素
 
 - 参数：
 
-  - `{Element} element`
+  - `{Element|Array<Element>} element`
+
+  > 支持不传参数，`cvs.remove()`将删除所有的元素
 
 - 示例：
   ```js
@@ -63,18 +65,6 @@ var cvs = new Cvs(options);
 
   ```js
   cvs.draw();
-  ```
-
-#### move()
-
-- 描述：
-
-  确定了下一帧的画布中所有元素的位置
-
-- 示例：
-
-  ```js
-  cvs.move();
   ```
   
 #### clear()
