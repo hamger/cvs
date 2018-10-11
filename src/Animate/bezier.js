@@ -1,4 +1,5 @@
 // import Tween from './Animate/tween'
+import { period } from '../utils'
 
 var t = 0 // 贝塞尔函数涉及的占比比例，0<=t<=1
 var bezierNodes = [] // 绘制内部控制点的数组
@@ -7,7 +8,7 @@ var nextNodes = [] // 下一帧绘制的控制点
 function bezier (element, option) {
   if (t > 1) return
   const { opt: ele } = element
-  const speed = (1 / element._curTrack().duration) * 16
+  const speed = (1 / element._curTrack().duration) * period
   t += speed
   drawnode(ele, nextNodes.length ? nextNodes : option.points)
 }

@@ -19,6 +19,7 @@ export default class Element {
         this.lw = this.opt.lineWidth / 2
       }
     }
+    this.finished = undefined
     this.tracks = []
     this.trackIndex = 0
   }

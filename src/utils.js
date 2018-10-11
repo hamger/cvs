@@ -55,6 +55,9 @@ export function arrSort (arr, key, isDescend = false) {
   return arr
 }
 
+// 全局动画循环周期
+export const period = 1000 / 60
+
 // 开启动画循环
 export const animFrame = (function () {
   return (
@@ -64,7 +67,7 @@ export const animFrame = (function () {
     oRequestAnimationFrame ||
     msRequestAnimationFrame ||
     function (callback) {
-      setTimeout(callback, 1000 / 60)
+      setTimeout(callback, period)
     }
   )
 })()

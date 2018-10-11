@@ -6,6 +6,7 @@ class Cvs {
     this.container = opt.container
     this.children = [] // 根据 zIndex 升序排列的子元素
     this.descChildren = [] // 根据 zIndex 降序排列的子元素
+    this.animChildren = [] // 具有运动轨迹的子元素
     this.stop = null
     this.animateCount = 0
     this.initAnimateTime = 0
@@ -20,6 +21,9 @@ class Cvs {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.container.appendChild(canvas)
+    // 将画布和上下文环境告知每一个子元素
+    Element.prototype.ctx = this.ctx
+    Element.prototype.canvas = this.canvas
   }
   bind () {
     this.canvas.addEventListener('click', e => {
@@ -85,35 +89,59 @@ class Cvs {
       }
     })
   }
-  add (element) {
+  _addUnit (element) {
     if (element instanceof Element) {
-      element.ctx = this.ctx
-      element.canvas = this.canvas
       this.children.push(element)
       arrSort(this.children, 'opt.zIndex')
+      if (element.tracks.length) this.animChildren.push(element)
       this.descChildren.push(element)
       arrSort(this.descChildren, 'opt.zIndex', true)
     } else {
       throw Error('Function add only accept the instance of Element.')
     }
   }
-  remove (element) {
-    if (element) {
-      this.children.some((item, index) => {
-        if (item.id === element.id) {
-          this.children.splice(index, 1)
-          return true
-        }
-      })
-      this.descChildren.some((item, index) => {
-        if (item.id === element.id) {
-          this.children.splice(index, 1)
-          return true
-        }
+  add (element) {
+    if (element instanceof Array) {
+      element.forEach(item => {
+        this._addUnit(item)
       })
     } else {
+      this._addUnit(element)
+    }
+  }
+  _removeUnit (element) {
+    this.children.some((item, index) => {
+      if (item.id === element.id) {
+        this.children.splice(index, 1)
+        return true
+      }
+    })
+    this.descChildren.some((item, index) => {
+      if (item.id === element.id) {
+        this.children.splice(index, 1)
+        return true
+      }
+    })
+    this.animChildren.some((item, index) => {
+      if (item.id === element.id) {
+        this.children.splice(index, 1)
+        return true
+      }
+    })
+  }
+  remove (element) {
+    if (!element) {
       this.children = []
       this.descChildren = []
+      this.animChildren = []
+      return
+    }
+    if (element instanceof Array) {
+      element.forEach(item => {
+        this._removeUnit(item)
+      })
+    } else {
+      this._removeUnit(element)
     }
   }
   draw () {
@@ -145,7 +173,7 @@ class Cvs {
       self.stop = animFrame(func)
       self.clear()
       let curTime = new Date()
-      self.children.forEach(child => {
+      self.animChildren.forEach(child => {
         let idx = child.trackIndex
         if (child.tracks.length > idx) {
           let track = child.tracks[idx]
@@ -160,6 +188,8 @@ class Cvs {
             child.tracks[idx + 1]
           ) {
             child.trackIndex++
+          } else {
+            child.finished = true
           }
         }
       })
