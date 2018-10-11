@@ -141,8 +141,8 @@ class Cvs {
     if (this.stopTime) this.pauseTime += this.startTime - this.stopTime
     this.animateCount++
     let self = this
-    function func2 () {
-      self.stop = animFrame(func2)
+    function func () {
+      self.stop = animFrame(func)
       self.clear()
       let curTime = new Date()
       self.children.forEach(child => {
@@ -150,14 +150,13 @@ class Cvs {
         if (child.tracks.length > idx) {
           let track = child.tracks[idx]
           let curAnimateTime = self._getAnimateTime(curTime)
-          // console.log(child._trackDelay())
           if (
-            curAnimateTime > child._trackDelay() &&
-            curAnimateTime < child._trackDelay() + track.duration
+            curAnimateTime > child._curTrackDelay() &&
+            curAnimateTime < child._curTrackDelay() + track.duration
           ) {
-            track.loop()
+            track.loop.call(child)
           } else if (
-            curAnimateTime >= child._trackDelay() + track.duration &&
+            curAnimateTime >= child._curTrackDelay() + track.duration &&
             child.tracks[idx + 1]
           ) {
             child.trackIndex++
@@ -166,7 +165,7 @@ class Cvs {
       })
       self.draw()
     }
-    func2()
+    func()
   }
   cancelAnimate () {
     this.stopTime = new Date()

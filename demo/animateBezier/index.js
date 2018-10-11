@@ -15,27 +15,27 @@ let dot = new Circle({
   fill: 'pink'
 })
 
-let rect = new Circle({
+let rect = new Rect({
   x: 0,
   y: 100,
-  h: 10,
-  w: 10,
+  h: 20,
+  w: 20,
   cache: true
 })
 
 rect.track({
-  delay: 1200,
-  duration: 4000,
-  loop: () => {
-    rect.attr({ x: rect.attr('x') + 1, y: rect.attr('y') + 0.5 })
+  delay: 1000,
+  duration: 2000,
+  loop: function () {
+    this.attr({ x: this.attr('x') + 1, y: this.attr('y') + 1 })
   }
 })
 
 dot.track({
-  delay: 100,
+  delay: 0,
   duration: 3000,
-  loop: () => {
-    bezier(dot, {
+  loop: function () {
+    bezier(this, {
       points: [
         { x: 10, y: 10 },
         { x: 360, y: 160 },
@@ -46,11 +46,17 @@ dot.track({
   }
 })
 
+var init = 12
 dot.track({
-  delay: 100,
+  delay: 0,
   duration: 3000,
-  loop: () => {
-    dot.attr({ x: dot.opt.x + 1, y: dot.opt.y - 1 })
+  loop: function () {
+    if (init <= 85) {
+      this.attr({ x: this.attr('x') + 1, y: this.attr('y') - 1 })
+    } else {
+      this.attr({ x: this.attr('x') + 1, y: this.attr('y') + 1 })
+    }
+    init++
   }
 })
 

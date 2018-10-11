@@ -81,7 +81,10 @@ export default class Element {
   off (eventType) {
     this[eventType] = null
   }
-  _trackDelay () {
+  _curTrack () {
+    return this.tracks[this.trackIndex]
+  }
+  _curTrackDelay () {
     if (!this.tracks.length) return 0
     let i = this.trackIndex
     if (i === 0) return this.tracks[0].delay

@@ -7,8 +7,7 @@ var nextNodes = [] // 下一帧绘制的控制点
 function bezier (element, option) {
   if (t > 1) return
   const { opt: ele } = element
-  const speed = (1 / element.tracks[element.trackIndex].duration) * 16
-  // console.log(speed)
+  const speed = (1 / element._curTrack().duration) * 16
   t += speed
   drawnode(ele, nextNodes.length ? nextNodes : option.points)
 }
