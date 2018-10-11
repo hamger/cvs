@@ -28,6 +28,10 @@ cvs.draw();
 
 ## Changelog
 
+### 2018.10.11
+
+> v0.1.11 cvs 支持多项添加和删除元素
+
 ### 2018.10.9
 
 > v0.1.10 添加 circling、elliptic、line、parabola 运动函数
