@@ -148,13 +148,7 @@ class Cvs {
     this.children.forEach(child => {
       if (child.opt.visible) {
         child.draw()
-        this.move()
       }
-    })
-  }
-  move () {
-    this.children.forEach(child => {
-      if (child.animate) child.animate()
     })
   }
   clear () {
@@ -182,6 +176,7 @@ class Cvs {
             curAnimateTime > child._curTrackDelay() &&
             curAnimateTime < child._curTrackDelay() + track.duration
           ) {
+            child.curTime = curAnimateTime - child._curTrackDelay()
             track.loop.call(child)
           } else if (
             curAnimateTime >= child._curTrackDelay() + track.duration &&

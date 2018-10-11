@@ -1,19 +1,16 @@
-// import Tween from './Animate/tween'
-import { period } from '../utils'
+import easing from './easing'
 
-var t = 0 // 贝塞尔函数涉及的占比比例，0<=t<=1
 var bezierNodes = [] // 绘制内部控制点的数组
 var nextNodes = [] // 下一帧绘制的控制点
-
 function bezier (element, option) {
-  if (t > 1) return
+  // 贝塞尔函数涉及的占比比例，0<=p<=1 (p: progress 运动进度)
+  var p = easing.easeOutQuad(element.curTime / element._curTrack().duration)
+  if (p > 1) return
   const { opt: ele } = element
-  const speed = (1 / element._curTrack().duration) * period
-  t += speed
-  drawnode(ele, nextNodes.length ? nextNodes : option.points)
+  drawnode(ele, nextNodes.length ? nextNodes : option.points, p)
 }
 
-function drawnode (ele, nodes) {
+function drawnode (ele, nodes, p) {
   if (!nodes.length) return
   nextNodes = []
   nodes.forEach(function (item) {
@@ -38,30 +35,30 @@ function drawnode (ele, nodes) {
           y: nodes[i + 1].y
         }
       ]
-      nextNodes.push(getLocation(arr, t))
+      nextNodes.push(getLocation(arr, p))
     }
   }
 }
 // 通过各控制点与占比t计算当前贝塞尔曲线上的点坐标
-function getLocation (arr, t) {
+function getLocation (arr, p) {
   var x = 0,
     y = 0,
     n = arr.length - 1
   arr.forEach(function (item, index) {
     if (!index) {
-      x += item.x * Math.pow(1 - t, n - index) * Math.pow(t, index)
-      y += item.y * Math.pow(1 - t, n - index) * Math.pow(t, index)
+      x += item.x * Math.pow(1 - p, n - index) * Math.pow(p, index)
+      y += item.y * Math.pow(1 - p, n - index) * Math.pow(p, index)
     } else {
       x +=
         (factorial(n) / factorial(index) / factorial(n - index)) *
         item.x *
-        Math.pow(1 - t, n - index) *
-        Math.pow(t, index)
+        Math.pow(1 - p, n - index) *
+        Math.pow(p, index)
       y +=
         (factorial(n) / factorial(index) / factorial(n - index)) *
         item.y *
-        Math.pow(1 - t, n - index) *
-        Math.pow(t, index)
+        Math.pow(1 - p, n - index) *
+        Math.pow(p, index)
     }
   })
   return {

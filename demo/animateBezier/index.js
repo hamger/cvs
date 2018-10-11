@@ -33,7 +33,7 @@ rect.track({
 
 dot.track({
   delay: 0,
-  duration: 3000,
+  duration: 6000,
   loop: function () {
     bezier(this, {
       points: [

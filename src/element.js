@@ -22,6 +22,7 @@ export default class Element {
     this.finished = undefined
     this.tracks = []
     this.trackIndex = 0
+    this.curTime = 0
   }
   // 设置上下文属性
   setAttr (ctx2) {
