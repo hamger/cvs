@@ -1,5 +1,4 @@
 import Tween from './Animate/tween'
-import bezier from './Animate/bezier'
 
 // 默认运动速度
 const defaultSpeed = 0.04
@@ -173,8 +172,7 @@ const Animate = {
   line,
   parabola,
   colorPalette,
-  gradientColor,
-  bezier
+  gradientColor
 }
 
 export default Animate

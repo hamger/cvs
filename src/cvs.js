@@ -176,8 +176,8 @@ class Cvs {
             curAnimateTime > child._curTrackDelay() &&
             curAnimateTime < child._curTrackDelay() + track.duration
           ) {
-            child.curTime = curAnimateTime - child._curTrackDelay()
-            track.loop.call(child)
+            child.curTrackTime = curAnimateTime - child._curTrackDelay()
+            track.loop()
           } else if (
             curAnimateTime >= child._curTrackDelay() + track.duration &&
             child.tracks[idx + 1]

@@ -8,5 +8,20 @@ import Arc from './graphics/arc'
 import Img from './graphics/img'
 import Text from './graphics/text'
 import Animate from './animate'
+import Track from './track'
+import Bezier from './tracks/bezier'
 
-export { Cvs, Element, Animate, Circle, Rect, Poly, Arc, Img, Text, Path }
+export {
+  Cvs,
+  Element,
+  Animate,
+  Circle,
+  Rect,
+  Poly,
+  Arc,
+  Img,
+  Text,
+  Path,
+  Track,
+  Bezier
+}

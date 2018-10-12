@@ -1,3 +1,5 @@
+import Track from './track'
+
 let id = 0
 export default class Element {
   constructor (opt) {
@@ -22,7 +24,7 @@ export default class Element {
     this.finished = undefined
     this.tracks = []
     this.trackIndex = 0
-    this.curTime = 0
+    this.curTrackTime = 0
   }
   // 设置上下文属性
   setAttr (ctx2) {
@@ -99,13 +101,41 @@ export default class Element {
     }
     return sum
   }
-  track (obj) {
-    if (obj instanceof Array) {
-      obj.forEach(item => {
-        this.tracks.push(item)
+  _addTrackUnit (track) {
+    if (track instanceof Track) {
+      track.$ele = this
+      this.tracks.push(track)
+    } else {
+      throw Error('Function addTrack only accept the instance of Track.')
+    }
+  }
+  addTrack (track) {
+    if (track instanceof Array) {
+      track.forEach(item => {
+        this._addTrackUnit(item)
       })
     } else {
-      this.tracks.push(obj)
+      this._addTrackUnit(track)
+    }
+  }
+  _removeTrackUnit (track) {
+    this.tracks.some((item, index) => {
+      if (item.id === track.id) {
+        this.children.splice(index, 1)
+        return true
+      }
+    })
+  }
+  removeTrack (track) {
+    if (!track) {
+      this.tracks = []
+    }
+    if (track instanceof Array) {
+      track.forEach(item => {
+        this._removeTrackUnit(item)
+      })
+    } else {
+      this._removeTrackUnit(track)
     }
   }
 }

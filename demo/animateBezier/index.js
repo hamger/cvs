@@ -1,5 +1,4 @@
-import { Cvs, Circle, Rect, Animate } from '@'
-const { bezier } = Animate
+import { Cvs, Circle, Rect, Bezier, Track } from '@'
 let cvs = new Cvs({
   container: document.getElementById('container')
 })
@@ -23,43 +22,41 @@ let rect = new Rect({
   cache: true
 })
 
-rect.track({
+var customTrack = new Track({
   delay: 1000,
   duration: 2000,
   loop: function () {
-    this.attr({ x: this.attr('x') + 1, y: this.attr('y') + 1 })
+    this.$ele.attr({ x: this.$ele.attr('x') + 1, y: this.$ele.attr('y') + 1 })
   }
 })
+rect.addTrack(customTrack)
 
-dot.track({
+var bezier = new Bezier({
   delay: 0,
   duration: 6000,
-  loop: function () {
-    bezier(this, {
-      points: [
-        { x: 10, y: 10 },
-        { x: 360, y: 160 },
-        { x: 160, y: 360 },
-        { x: 410, y: 410 }
-      ]
-    })
-  }
+  points: [
+    { x: 10, y: 10 },
+    { x: 360, y: 160 },
+    { x: 160, y: 360 },
+    { x: 410, y: 410 }
+  ]
 })
+dot.addTrack(bezier)
 
-var init = 12
-dot.track({
-  delay: 0,
-  duration: 3000,
-  easing: 'Linear',
-  loop: function () {
-    if (init <= 85) {
-      this.attr({ x: this.attr('x') + 1, y: this.attr('y') - 1 })
-    } else {
-      this.attr({ x: this.attr('x') + 1, y: this.attr('y') + 1 })
-    }
-    init++
-  }
-})
+// var init = 12
+// dot.addTrack({
+//   delay: 0,
+//   duration: 3000,
+//   easing: 'Linear',
+//   loop: function () {
+//     if (init <= 85) {
+//       this.attr({ x: this.attr('x') + 1, y: this.attr('y') - 1 })
+//     } else {
+//       this.attr({ x: this.attr('x') + 1, y: this.attr('y') + 1 })
+//     }
+//     init++
+//   }
+// })
 
 cvs.add([dot, rect])
 
