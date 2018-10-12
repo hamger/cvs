@@ -8,7 +8,7 @@ var element = new Text(options);
 
 ### options
 
-除了支持[公共属性](../../element)外，还支持以下属性：
+除了支持[公共属性](/docs/element.html#options)外，还支持以下属性：
 
 | options.key  | value  | description                | default           |
 | ------------ | ------ | -------------------------- | ----------------- |

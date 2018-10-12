@@ -18,6 +18,7 @@ module.exports = {
       ['/docs/start', 'Start'],
       ['/docs/cvs', 'Cvs'],
       ['/docs/element', 'Element'],
+      ['/docs/track', 'Track'],
       {
         title: 'graphics',
         collapsable: false,
@@ -31,10 +32,15 @@ module.exports = {
           '/docs/graphics/Text'
         ]
       },
+      // {
+      //   title: 'Animate',
+      //   collapsable: false,
+      //   children: ['/docs/animate/animatePath', '/docs/animate/animateColor']
+      // },
       {
-        title: 'Animate',
+        title: 'Tracks',
         collapsable: false,
-        children: ['/docs/animate/animatePath', '/docs/animate/animateColor']
+        children: ['/docs/tracks/bezier']
       }
     ]
   }

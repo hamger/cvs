@@ -7,10 +7,9 @@ export default class Bezier extends Track {
     this.bezierNodes = [] // 绘制内部控制点的数组
     this.nextNodes = [] // 下一帧绘制的控制点
   }
-  loop () {
-    // 贝塞尔函数涉及的占比比例，0<=p<=1 (p: progress 运动进度)
-    var p = easing[this.easing](this.$ele.curTrackTime / this.duration)
-    if (p > 1) return
+  loop (p2) {
+    // 贝塞尔函数涉及的占比比例，0<=p<=1
+    var p = easing[this.easing](p2)
     this.drawnode(this.nextNodes.length ? this.nextNodes : this.points, p)
   }
   drawnode (nodes, p) {

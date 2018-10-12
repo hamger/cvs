@@ -10,6 +10,7 @@ import Text from './graphics/text'
 import Animate from './animate'
 import Track from './track'
 import Bezier from './tracks/bezier'
+import easing from './easing'
 
 export {
   Cvs,
@@ -23,5 +24,6 @@ export {
   Text,
   Path,
   Track,
-  Bezier
+  Bezier,
+  easing
 }

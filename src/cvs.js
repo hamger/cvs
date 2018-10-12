@@ -176,8 +176,9 @@ class Cvs {
             curAnimateTime > child._curTrackDelay() &&
             curAnimateTime < child._curTrackDelay() + track.duration
           ) {
-            child.curTrackTime = curAnimateTime - child._curTrackDelay()
-            track.loop()
+            // 当前运动进度
+            let p = (curAnimateTime - child._curTrackDelay()) / track.duration
+            track.loop(p)
           } else if (
             curAnimateTime >= child._curTrackDelay() + track.duration &&
             child.tracks[idx + 1]
