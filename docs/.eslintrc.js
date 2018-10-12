@@ -15,6 +15,7 @@ module.exports = {
     $fetch: false
   },
   rules: {
+    'no-var': IGNORE,
     'one-var': IGNORE,
     'no-useless-constructor': IGNORE,
     'no-unused-vars': IGNORE,

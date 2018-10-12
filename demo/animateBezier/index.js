@@ -33,7 +33,7 @@ rect.addTrack(customTrack)
 
 var bezier = new Bezier({
   delay: 0,
-  duration: 6000,
+  duration: 4000,
   points: [
     { x: 10, y: 10 },
     { x: 360, y: 160 },
@@ -41,7 +41,17 @@ var bezier = new Bezier({
     { x: 410, y: 410 }
   ]
 })
-dot.addTrack(bezier)
+var bezier2 = new Bezier({
+  delay: 0,
+  duration: 6000,
+  points: [
+    { x: 410, y: 410 },
+    { x: 760, y: 560 },
+    { x: 560, y: 760 },
+    { x: 810, y: 810 }
+  ]
+})
+dot.addTrack([bezier, bezier2])
 
 // var init = 12
 // dot.addTrack({
