@@ -38,7 +38,7 @@ var bezier = new Bezier({
   delay: 100,
   duration: 4000,
   retrace: true,
-  iterationCount: 3,
+  iterationCount: 2,
   points: [
     { x: 210, y: 10 },
     { x: 460, y: 60 },
@@ -70,32 +70,19 @@ cvs.animate()
 
 stopBtn.onclick = function () {
   if (flag) {
+    // 关闭动画
     cvs.cancelAnimate()
     flag = false
   } else {
+    // 开启动画
     cvs.animate()
     flag = true
   }
 }
 
-// againBtn.onclick = function () {
-//   let dot = new Circle({
-//     x: 0,
-//     y: 0,
-//     r: 10,
-//     cache: true,
-//     fill: 'pink'
-//   })
-//   dot.animate = () => {
-//     bezier(dot, {
-//       speed: 0.007,
-//       points: [
-//         { x: 10, y: 10 },
-//         { x: 360, y: 160 },
-//         { x: 160, y: 360 },
-//         { x: 410, y: 410 }
-//       ]
-//     })
-//   }
-//   cvs.add(dot)
-// }
+againBtn.onclick = function () {
+  // 重置动画
+  cvs.resetAnimate()
+  // 开启动画
+  cvs.animate()
+}

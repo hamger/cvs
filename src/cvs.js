@@ -183,5 +183,15 @@ class Cvs {
     this.stopTime = new Date()
     cancelAnim(this.stop)
   }
+  resetAnimate () {
+    cancelAnim(this.stop)
+    this.initAnimateTime = 0
+    this.pauseTime = 0
+    this.animateTime = 0
+    this.finishedAinmCount = 0
+    this.animChildren.forEach(child => {
+      child.finished = false
+    })
+  }
 }
 export default Cvs

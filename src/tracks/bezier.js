@@ -18,7 +18,7 @@ export default class Bezier extends Track {
       } else {
         let p3 = 1 - (p2 - 0.5) * 2
         // 防止折返后终点不在起点上
-        if ((1 - p2) * this.duration < 100) p3 = 0
+        if ((1 - p2) * this.duration < 80) p3 = 0
         p = easing[this.easing](p3)
         this.drawnode(this.nextNodes.length ? this.nextNodes : this.points, p)
       }
