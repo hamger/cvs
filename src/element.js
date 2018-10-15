@@ -22,10 +22,9 @@ export default class Element {
         this.lw = this.opt.lineWidth / 2
       }
     }
-    this.finished = undefined
+    this.finished = false
     this.tracks = []
     this.trackIndex = 0
-    this.cycleIndex = 0
   }
   // 设置上下文属性
   setAttr (ctx2) {
@@ -85,6 +84,32 @@ export default class Element {
   }
   off (eventType) {
     this[eventType] = null
+  }
+  runTrack (animateTime) {
+    let track = this._curTrack()
+    if (animateTime <= this._curTrackDelay()) {
+      return false
+    } else if (
+      animateTime > this._curTrackDelay() &&
+      animateTime < this._curTrackDelay() + track.duration
+    ) {
+      // 当前运动进度
+      console.log(this._curTrackDelay())
+      let p = (animateTime - this._curTrackDelay()) / track.duration
+      track.loop(p)
+    } else if (track.iterationCount > track.cycleIndex + 1) {
+      console.log('cycle:' + track.cycleIndex)
+      track.cycleIndex++
+    } else if (
+      animateTime >= this._curTrackDelay() + track.duration &&
+      this.tracks[this.trackIndex + 1]
+    ) {
+      console.log('trackIndex:' + track.cycleIndex)
+      this.trackIndex++
+    } else {
+      console.log('finished:' + track.cycleIndex)
+      this.finished = true
+    }
   }
   _curTrack () {
     return this.tracks[this.trackIndex]

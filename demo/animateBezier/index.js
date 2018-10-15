@@ -36,7 +36,7 @@ let dot = new Circle({
 
 var bezier = new Bezier({
   delay: 100,
-  duration: 6000,
+  duration: 4000,
   retrace: true,
   iterationCount: 3,
   points: [

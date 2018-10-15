@@ -7,9 +7,11 @@ class Cvs {
     this.children = [] // 根据 zIndex 升序排列的子元素
     this.descChildren = [] // 根据 zIndex 降序排列的子元素
     this.animChildren = [] // 具有运动轨迹的子元素
-    this.stop = null
-    this.initAnimateTime = 0
-    this.pauseTime = 0
+    this.stop = null // 定时器
+    this.initAnimateTime = 0 // 动画初始时间
+    this.pauseTime = 0 // 暂定总时间
+    this.animateTime = 0 // 动画已进行的时间
+    this.finishedAinmCount = 0 // 已完成动画的元素个数
     this.init()
     this.bind()
   }
@@ -164,39 +166,18 @@ class Cvs {
     function func () {
       self.stop = animFrame(func)
       self.clear()
-      let curTime = new Date()
+      self.animateTime = self._getAnimateTime(new Date())
       self.animChildren.forEach(child => {
-        let idx = child.trackIndex
-        if (child.tracks.length > idx) {
-          let track = child._curTrack()
-          let curAnimateTime = self._getAnimateTime(curTime)
-          if (curAnimateTime <= child._curTrackDelay()) {
-            return false
-          } else if (
-            curAnimateTime > child._curTrackDelay() &&
-            curAnimateTime < child._curTrackDelay() + track.duration
-          ) {
-            // 当前运动进度
-            console.log(child._curTrackDelay())
-            let p = (curAnimateTime - child._curTrackDelay()) / track.duration
-            track.loop(p)
-          } else if (track.iterationCount > track.cycleIndex + 1) {
-            console.log('cycle:' + track.cycleIndex)
-            track.cycleIndex++
-          } else if (
-            curAnimateTime >= child._curTrackDelay() + track.duration &&
-            child.tracks[idx + 1]
-          ) {
-            console.log('trackIndex:' + track.cycleIndex)
-            child.trackIndex++
-          } else {
-            console.log('finished:' + track.cycleIndex)
-            child.finished = true
-          }
+        if (child.finished) {
+          self.finishedAinmCount++
+          return
         }
+        child.runTrack(self.animateTime)
       })
       self.draw()
     }
+    // 如果所有的动画已结束，停止循环
+    if (self.animChildren.length === self.finishedAinmCount) return
     func()
   }
   cancelAnimate () {
