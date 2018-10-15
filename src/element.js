@@ -85,62 +85,39 @@ export default class Element {
   off (eventType) {
     this[eventType] = null
   }
-  runTrack (animateTime) {
-    let track = this._curTrack()
-    if (animateTime <= this._curTrackDelay()) {
-      return false
-    } else if (
-      animateTime > this._curTrackDelay() &&
-      animateTime < this._curTrackDelay() + track.duration
-    ) {
-      // 当前运动进度
-      console.log(this._curTrackDelay())
-      let p = (animateTime - this._curTrackDelay()) / track.duration
-      track.loop(p)
-    } else if (track.iterationCount > track.cycleIndex + 1) {
-      console.log('cycle:' + track.cycleIndex)
-      track.cycleIndex++
-    } else if (
-      animateTime >= this._curTrackDelay() + track.duration &&
-      this.tracks[this.trackIndex + 1]
-    ) {
-      console.log('trackIndex:' + track.cycleIndex)
-      this.trackIndex++
-    } else {
-      console.log('finished:' + track.cycleIndex)
-      this.finished = true
-    }
-  }
-  _curTrack () {
-    return this.tracks[this.trackIndex]
-  }
-  _curTrackDelay () {
-    if (!this.tracks.length) return
-    let track = this._curTrack()
-    let i = this.trackIndex
-    if (i === 0) {
-      if (track.iterationCount > track.cycleIndex) {
-        // let cycleCount = track.cycleIndex
-        return track.delay + track.duration * track.cycleIndex
-      } else {
-        return track.delay
+  getCurTrack (animateTime) {
+    let res = {}
+    let a = 0
+    let b = 0
+    this.tracks.some((item, index) => {
+      a = a + item.delay
+      b = a + item.duration * item.iterationCount
+      if (index === 0 && animateTime < a) {
+        res.index = -1
+        return true
+      } else if (animateTime >= a && animateTime <= b) {
+        res.index = index
+        res.cycle = Math.ceil((animateTime - a) / item.duration)
+        res.time = animateTime - (res.cycle - 1) * item.duration
+        return true
       }
+      a = b
+    })
+    return res
+  }
+  runTrack (animateTime) {
+    let res = this.getCurTrack(animateTime)
+    console.log(res)
+    // 已执行完所有轨迹
+    if (res.index === undefined) {
+      this.finished = true
+      return
     }
-    let sum = 0
-    for (let j = 1; j <= i; j++) {
-      sum +=
-        this.tracks[j - 1].delay +
-        this.tracks[j - 1].duration +
-        this.tracks[j].delay
-    }
-    console.log(track)
-    if (track.iterationCount > track.cycleIndex) {
-      let cycleCount = track.cycleIndex - 1
-      console.log(sum + track.duration * cycleCount)
-      return sum + track.duration * cycleCount
-    } else {
-      return sum
-    }
+    // 未执行第一个轨迹
+    if (res.index === -1) return
+    // 执行当前轨迹循环体
+    let track = this.tracks[res.index]
+    track.loop(res.time / track.duration)
   }
   _addTrackUnit (track) {
     if (track instanceof Track) {
