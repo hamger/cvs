@@ -21,7 +21,8 @@ var customTrack = new Track({
   loop: function (p) {
     this.$ele.attr({
       // 这里的 200 为运动总路程，10 为初始位置
-      x: 200 * easing.easeOutQuad(p) + 10
+      x: 200 * easing.easeOutQuad(p) + 10,
+      y: 10 // 此行不能省略，因为动画重置时需要获取到y轴坐标
     })
   }
 })
@@ -54,7 +55,8 @@ var customTrack2 = new Track({
   loop: function (p) {
     this.$ele.attr({
       // 这里的 200 为运动总路程，10 为初始位置
-      x: 400 * easing.easeOutQuad(p) + 0
+      x: 400 * easing.easeOutQuad(p) + 0,
+      y: 100
     })
   }
 })

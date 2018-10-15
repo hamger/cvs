@@ -14,7 +14,6 @@ export default class Element {
     this.attr(opt)
     if (this.opt.cache) {
       // 为离屏 canvas 添加 padding ，使渲染更完整
-
       this.p = 2
       // 记录线条宽度，离屏渲染需要遇到
       this.lw = 0
