@@ -162,23 +162,22 @@ class Cvs {
     this.startTime = new Date()
     if (this.initAnimateTime === 0) this.initAnimateTime = new Date()
     if (this.stopTime) this.pauseTime += this.startTime - this.stopTime
-    let self = this
-    function func () {
-      self.stop = animFrame(func)
-      self.clear()
-      self.animateTime = self._getAnimateTime(new Date())
-      self.animChildren.forEach(child => {
+    const loopUnit = () => {
+      this.stop = animFrame(loopUnit)
+      this.clear()
+      this.animateTime = this._getAnimateTime(new Date())
+      this.animChildren.forEach(child => {
         if (child.finished) {
-          self.finishedAinmCount++
+          this.finishedAinmCount++
           return
         }
-        child.runTrack(self.animateTime)
+        child.runTrack(this.animateTime)
       })
-      self.draw()
+      this.draw()
     }
     // 如果所有的动画已结束，停止循环
-    if (self.animChildren.length === self.finishedAinmCount) return
-    func()
+    if (this.animChildren.length === this.finishedAinmCount) return
+    loopUnit()
   }
   cancelAnimate () {
     this.stopTime = new Date()
