@@ -91,7 +91,6 @@ export default class Element {
     this.tracks.some((item, index) => {
       a = a + item.delay
       b = a + item.duration * item.iterationCount
-      console.log(a + '--' + animateTime + '--' + b)
       if (animateTime < a) {
         res.index = index
         res.cycle = -1
