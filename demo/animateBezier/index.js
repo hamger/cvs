@@ -22,17 +22,17 @@ let dot = new Circle({
 //   cache: true
 // })
 
-// var customTrack = new Track({
-//   delay: 0,
-//   duration: 1000,
-//   loop: function (p) {
-//     console.log(p)
-//     this.$ele.attr({
-//       // 这里的 200 为运动总路程，10 为初始位置
-//       x: 200 * easing.easeOutQuad(p) + 10
-//     })
-//   }
-// })
+var customTrack = new Track({
+  delay: 0,
+  duration: 1000,
+  loop: function (p) {
+    console.log(p)
+    this.$ele.attr({
+      // 这里的 200 为运动总路程，10 为初始位置
+      x: 200 * easing.easeOutQuad(p) + 10
+    })
+  }
+})
 
 var bezier = new Bezier({
   delay: 100,
@@ -46,8 +46,8 @@ var bezier = new Bezier({
     { x: 510, y: 310 }
   ]
 })
-dot.addTrack([bezier])
-// dot.addTrack([customTrack, bezier])
+// dot.addTrack([bezier])
+dot.addTrack([customTrack, bezier])
 
 // var init = 12
 // dot.addTrack({

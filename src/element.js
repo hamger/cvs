@@ -92,13 +92,15 @@ export default class Element {
     this.tracks.some((item, index) => {
       a = a + item.delay
       b = a + item.duration * item.iterationCount
-      if (index === 0 && animateTime < a) {
-        res.index = -1
+      console.log(a + '--' + animateTime + '--' + b)
+      if (animateTime < a) {
+        res.index = index
+        res.cycle = -1
         return true
       } else if (animateTime >= a && animateTime <= b) {
         res.index = index
-        res.cycle = Math.ceil((animateTime - a) / item.duration)
-        res.time = animateTime - (res.cycle - 1) * item.duration
+        res.cycle = Math.floor((animateTime - a) / item.duration)
+        res.time = animateTime - a - res.cycle * item.duration
         return true
       }
       a = b
@@ -107,14 +109,13 @@ export default class Element {
   }
   runTrack (animateTime) {
     let res = this.getCurTrack(animateTime)
-    console.log(res)
     // 已执行完所有轨迹
     if (res.index === undefined) {
       this.finished = true
       return
     }
-    // 未执行第一个轨迹
-    if (res.index === -1) return
+    // 轨迹处于延迟状态
+    if (res.cycle === -1) return
     // 执行当前轨迹循环体
     let track = this.tracks[res.index]
     track.loop(res.time / track.duration)
