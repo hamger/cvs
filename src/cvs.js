@@ -8,7 +8,6 @@ class Cvs {
     this.descChildren = [] // 根据 zIndex 降序排列的子元素
     this.animChildren = [] // 具有运动轨迹的子元素
     this.stop = null
-    this.animateCount = 0
     this.initAnimateTime = 0
     this.pauseTime = 0
     this.init()
@@ -159,9 +158,8 @@ class Cvs {
   }
   animate () {
     this.startTime = new Date()
-    if (this.animateCount === 0) this.initAnimateTime = new Date()
+    if (this.initAnimateTime === 0) this.initAnimateTime = new Date()
     if (this.stopTime) this.pauseTime += this.startTime - this.stopTime
-    this.animateCount++
     let self = this
     function func () {
       self.stop = animFrame(func)
@@ -170,21 +168,29 @@ class Cvs {
       self.animChildren.forEach(child => {
         let idx = child.trackIndex
         if (child.tracks.length > idx) {
-          let track = child.tracks[idx]
+          let track = child._curTrack()
           let curAnimateTime = self._getAnimateTime(curTime)
-          if (
+          if (curAnimateTime <= child._curTrackDelay()) {
+            return false
+          } else if (
             curAnimateTime > child._curTrackDelay() &&
             curAnimateTime < child._curTrackDelay() + track.duration
           ) {
             // 当前运动进度
+            console.log(child._curTrackDelay())
             let p = (curAnimateTime - child._curTrackDelay()) / track.duration
             track.loop(p)
+          } else if (track.iterationCount > track.cycleIndex + 1) {
+            console.log('cycle:' + track.cycleIndex)
+            track.cycleIndex++
           } else if (
             curAnimateTime >= child._curTrackDelay() + track.duration &&
             child.tracks[idx + 1]
           ) {
+            console.log('trackIndex:' + track.cycleIndex)
             child.trackIndex++
           } else {
+            console.log('finished:' + track.cycleIndex)
             child.finished = true
           }
         }

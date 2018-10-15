@@ -14,6 +14,7 @@ export default class Element {
     this.attr(opt)
     if (this.opt.cache) {
       // 为离屏 canvas 添加 padding ，使渲染更完整
+
       this.p = 2
       // 记录线条宽度，离屏渲染需要遇到
       this.lw = 0
@@ -24,6 +25,7 @@ export default class Element {
     this.finished = undefined
     this.tracks = []
     this.trackIndex = 0
+    this.cycleIndex = 0
   }
   // 设置上下文属性
   setAttr (ctx2) {
@@ -88,9 +90,17 @@ export default class Element {
     return this.tracks[this.trackIndex]
   }
   _curTrackDelay () {
-    if (!this.tracks.length) return 0
+    if (!this.tracks.length) return
+    let track = this._curTrack()
     let i = this.trackIndex
-    if (i === 0) return this.tracks[0].delay
+    if (i === 0) {
+      if (track.iterationCount > track.cycleIndex) {
+        // let cycleCount = track.cycleIndex
+        return track.delay + track.duration * track.cycleIndex
+      } else {
+        return track.delay
+      }
+    }
     let sum = 0
     for (let j = 1; j <= i; j++) {
       sum +=
@@ -98,7 +108,14 @@ export default class Element {
         this.tracks[j - 1].duration +
         this.tracks[j].delay
     }
-    return sum
+    console.log(track)
+    if (track.iterationCount > track.cycleIndex) {
+      let cycleCount = track.cycleIndex - 1
+      console.log(sum + track.duration * cycleCount)
+      return sum + track.duration * cycleCount
+    } else {
+      return sum
+    }
   }
   _addTrackUnit (track) {
     if (track instanceof Track) {
