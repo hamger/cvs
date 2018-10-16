@@ -15,10 +15,11 @@ let track = new Track(options);
 | loop        | Function | 规定动画循环体   | --      |
 
 ::: tip
-`loop`函数会接受一个参数`t`，该参数表示当前轨迹下已经运动的时间。在该函数中你可以引入`easing`来实现缓动，[`easing`函数](#easing)需要传入一个关于运动进度的参数`p`（0<=p<=1），返回新的运动进度。
+`loop`函数会接受一个参数`t`，该参数表示当前轨迹下已经运动的时间（单位：ms）。在该函数中你可以引入`easing`来实现缓动，[`easing`函数](#easing)需要传入一个关于运动进度的参数`p`（0<=p<=1），返回新的运动进度。
 :::
 
 ### easing
+
 ```js
 let t = easing[key](p);
 ```
@@ -38,10 +39,13 @@ let t = easing[key](p);
 
   - `{Number} p` 时间进度（`0<=p<=1`）
 
+- 返回值：
+
+  - `{Number} p2` 缓动计算后的时间进度（`0<=p2<=1`）
+
 - 示例：
   ```js
-  import { easing } from "cvs";
-  let t = easing.easeInQuad(p);
+  let p2 = easing.easeInQuad(p);
   ```
 
 ### example
