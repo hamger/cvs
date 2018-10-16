@@ -26,10 +26,7 @@ for (let i = 0; i < dotCount; i++) {
         const radii = this.$ele.attr('r')
         this.xa *= x > cvs.width - radii || x < radii ? -1 : 1
         this.ya *= y > cvs.height - radii || y < radii ? -1 : 1
-        this.$ele.attr({
-          x: x,
-          y: y
-        })
+        this.$ele.attr({ x: x, y: y })
       }
     })
   )
