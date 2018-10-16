@@ -18,7 +18,8 @@ let dot = new Circle({
 let dotCustomTrack = new Track({
   delay: 0,
   duration: 1000,
-  loop: function (p) {
+  loop: function (t) {
+    let p = t / this.duration
     this.$ele.attr({
       // 这里的 200 为运动总路程，10 为初始位置
       x: 200 * easing.easeOutQuad(p) + 10,
@@ -52,7 +53,8 @@ let rect = new Rect({
 let customTrack2 = new Track({
   delay: 0,
   duration: 3000,
-  loop: function (p) {
+  loop: function (t) {
+    let p = t / this.duration
     this.$ele.attr({
       // 这里的 200 为运动总路程，10 为初始位置
       x: 400 * easing.easeOutQuad(p) + 0,

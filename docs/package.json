@@ -9,7 +9,7 @@
   "author": "Hanger",
   "license": "MIT",
   "dependencies": {
-    "cvs": "^0.1.8"
+    "cvs": "^0.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

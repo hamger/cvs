@@ -11,7 +11,8 @@ export default class Bezier extends Track {
     this.bezierNodes = []
     this.nextNodes = []
   }
-  loop (p2) {
+  loop (t) {
+    const p2 = t / this.duration
     // 设置了折返的的情况
     if (this.retrace) {
       let p = 0

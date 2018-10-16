@@ -97,8 +97,13 @@ export default class Element {
         return true
       } else if (animateTime >= a && animateTime <= b) {
         res.index = index
-        res.cycle = Math.floor((animateTime - a) / item.duration)
-        res.time = animateTime - a - res.cycle * item.duration
+        if (item.duration === Infinity) {
+          res.cycle = 0
+          res.time = animateTime - a
+        } else {
+          res.cycle = Math.floor((animateTime - a) / item.duration)
+          res.time = animateTime - a - res.cycle * item.duration
+        }
         return true
       }
       a = b
@@ -114,9 +119,8 @@ export default class Element {
     }
     // 轨迹处于延迟状态
     if (res.cycle === -1) return
-    // 执行当前轨迹循环体
-    let track = this.tracks[res.index]
-    track.loop(res.time / track.duration)
+    // 执行当前轨迹循环体，并传入已经运行的事件
+    this.tracks[res.index].loop(res.time)
   }
   _addTrackUnit (track) {
     if (track instanceof Track) {
