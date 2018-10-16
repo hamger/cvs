@@ -10,6 +10,7 @@ let dot = new Circle({
   r: 10,
   cache: true,
 })
+
 dot.animate = () => {
   dot.opt.x++
 }
@@ -31,27 +32,27 @@ stopBtn.onclick = function () {
 }
 
 againBtn.onclick = function () {
-  let dots = new Circle({
+  let cc = new Circle({
     angle: 0,
     x: 0,
     y: 0,
     r: 10,
     cache: true,
   })
-  dots.animate = () => {
-    parabola(dots, {
+  cc.animate = () => {
+    parabola(cc, {
       endX: cvs.width - 10,
       endY: cvs.height - 10,
       time: 5000,
-      type: ['Quad', 'easeIn']
+      // type: ['Quad', 'easeIn']
       // type: 'Linear'
     })
   }
-  cvs.add(dots)
+  cvs.add(cc)
 }
 
 addBtn.onclick = function () {
-  let dot = new Circle({
+  let bb = new Circle({
     color: 0,
     angle: 0,
     x: 0,
@@ -59,14 +60,14 @@ addBtn.onclick = function () {
     r: 10,
     cache: true,
   })
-  dot.animate = () => {
-    if (dot.opt.x < cvs.width - dot.opt.r) {
-      dot.opt.x += 1
+  bb.animate = () => {
+    if (bb.opt.x < cvs.width - bb.opt.r) {
+      bb.opt.x += 1
     }
-    if (dot.opt.color < 255) {
-      dot.opt.color++
+    if (bb.opt.color < 255) {
+      bb.opt.color++
     }
-    dot.opt.fill = `rgba(${dot.opt.color}, 0, 0, 1)`
+    bb.opt.fill = `rgba(${bb.opt.color}, 0, 0, 1)`
   }
-  cvs.add(dot)
+  cvs.add(bb)
 }
