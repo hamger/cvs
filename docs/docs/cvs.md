@@ -1,4 +1,3 @@
-
 ### Cvs
 
 创建一个绘图对象
@@ -15,11 +14,11 @@ var cvs = new Cvs(options);
 
 ### 实例属性
 
-| cvs.key | value | description          |
-| ------- | ----- | -------------------- |
-| canvas  | DOM   | 生成的 canvas 元素（便于设置其 css 样式） |
-| width   | Number | canvas 元素标签宽度（等价于cvs.canvas.width） |
-| height  | Number | canvas 元素标签高度（等价于cvs.canvas.height） |
+| cvs.key | value  | description                                     |
+| ------- | ------ | ----------------------------------------------- |
+| canvas  | DOM    | 生成的 canvas 元素（便于设置其 css 样式）       |
+| width   | Number | canvas 元素标签宽度（等价于 cvs.canvas.width）  |
+| height  | Number | canvas 元素标签高度（等价于 cvs.canvas.height） |
 
 ### 实例方法
 
@@ -59,14 +58,14 @@ var cvs = new Cvs(options);
 
 - 描述：
 
-  命令画布进行绘制，内部引用了cvs.move()
+  命令画布进行绘制，内部引用了 cvs.move()
 
 - 示例：
 
   ```js
   cvs.draw();
   ```
-  
+
 #### clear()
 
 - 描述：
@@ -78,29 +77,62 @@ var cvs = new Cvs(options);
   cvs.clear();
   ```
 
-#### animate(func)
+#### animate()
 
 - 描述：
 
-  执行动画, 在Cvs类中自调用
-
-- 参数：
-
-  - `{Function} func`表示每一帧绘制的逻辑
+  执行动画
 
 - 示例：
 
   ```js
-  var x = 0,
-    y = 0;
-  var element = new Circle({ x: x, y: y, r: 10 });
-  function move() {
-    cvs.clear();
-    element.attr({
-      x: x++,
-      y: y++
-    });
-    cvs.draw();
-  }
-  elememt.animate(move);
+  import { Cvs, Circle, Track, easing } from "cvs";
+  let cvs = new Cvs({
+    container: document.getElementById("container")
+  });
+  let dot = new Circle({
+    x: 10,
+    y: 10,
+    r: 10,
+    cache: true,
+    fill: "pink"
+  });
+  var customTrack = new Track({
+    delay: 100,
+    duration: 4000,
+    loop: function(p) {
+      this.$ele.attr({
+        // 这里的 400 为运动总路程，10 为初始位置
+        x: 400 * easing.easeInQuad(p) + 10,
+        y: 400 * easing.easeInQuad(p) + 10
+      });
+    }
+  });
+  dot.addTrack(customTrack);
+  cvs.add(dot);
+  cvs.animate();
   ```
+
+#### cancelAnimate()
+
+- 描述：
+
+  关闭动画
+
+- 示例：
+
+```js
+cvs.cancelAnimate();
+```
+
+#### resetAnimate()
+
+- 描述：
+
+  重置动画属性（ 再次运动仍需执行`cvs.animate()`）
+
+- 示例：
+
+```js
+cvs.resetAnimate();
+```
