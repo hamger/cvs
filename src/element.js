@@ -21,7 +21,7 @@ export default class Element {
         this.lw = this.opt.lineWidth / 2
       }
     }
-    this.finished = undefined
+    this.finished = false
     this.tracks = []
     this.trackIndex = 0
   }
@@ -84,21 +84,39 @@ export default class Element {
   off (eventType) {
     this[eventType] = null
   }
-  _curTrack () {
-    return this.tracks[this.trackIndex]
+  getCurTrack (animateTime) {
+    let res = {}
+    let a = 0
+    let b = 0
+    this.tracks.some((item, index) => {
+      a = a + item.delay
+      b = a + item.duration * item.iterationCount
+      if (animateTime < a) {
+        res.index = index
+        res.cycle = -1
+        return true
+      } else if (animateTime >= a && animateTime <= b) {
+        res.index = index
+        res.cycle = Math.floor((animateTime - a) / item.duration)
+        res.time = animateTime - a - res.cycle * item.duration
+        return true
+      }
+      a = b
+    })
+    return res
   }
-  _curTrackDelay () {
-    if (!this.tracks.length) return 0
-    let i = this.trackIndex
-    if (i === 0) return this.tracks[0].delay
-    let sum = 0
-    for (let j = 1; j <= i; j++) {
-      sum +=
-        this.tracks[j - 1].delay +
-        this.tracks[j - 1].duration +
-        this.tracks[j].delay
+  runTrack (animateTime) {
+    let res = this.getCurTrack(animateTime)
+    // 已执行完所有轨迹
+    if (res.index === undefined) {
+      this.finished = true
+      return
     }
-    return sum
+    // 轨迹处于延迟状态
+    if (res.cycle === -1) return
+    // 执行当前轨迹循环体
+    let track = this.tracks[res.index]
+    track.loop(res.time / track.duration)
   }
   _addTrackUnit (track) {
     if (track instanceof Track) {

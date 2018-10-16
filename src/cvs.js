@@ -7,10 +7,11 @@ class Cvs {
     this.children = [] // 根据 zIndex 升序排列的子元素
     this.descChildren = [] // 根据 zIndex 降序排列的子元素
     this.animChildren = [] // 具有运动轨迹的子元素
-    this.stop = null
-    this.animateCount = 0
-    this.initAnimateTime = 0
-    this.pauseTime = 0
+    this.stop = null // 定时器
+    this.initAnimateTime = 0 // 动画初始时间
+    this.pauseTime = 0 // 暂定总时间
+    this.animateTime = 0 // 动画已进行的时间
+    this.finishedAinmCount = 0 // 已完成动画的元素个数
     this.init()
     this.bind()
   }
@@ -159,43 +160,42 @@ class Cvs {
   }
   animate () {
     this.startTime = new Date()
-    if (this.animateCount === 0) this.initAnimateTime = new Date()
+    if (this.initAnimateTime === 0) this.initAnimateTime = new Date()
     if (this.stopTime) this.pauseTime += this.startTime - this.stopTime
-    this.animateCount++
-    let self = this
-    function func () {
-      self.stop = animFrame(func)
-      self.clear()
-      let curTime = new Date()
-      self.animChildren.forEach(child => {
-        let idx = child.trackIndex
-        if (child.tracks.length > idx) {
-          let track = child.tracks[idx]
-          let curAnimateTime = self._getAnimateTime(curTime)
-          if (
-            curAnimateTime > child._curTrackDelay() &&
-            curAnimateTime < child._curTrackDelay() + track.duration
-          ) {
-            // 当前运动进度
-            let p = (curAnimateTime - child._curTrackDelay()) / track.duration
-            track.loop(p)
-          } else if (
-            curAnimateTime >= child._curTrackDelay() + track.duration &&
-            child.tracks[idx + 1]
-          ) {
-            child.trackIndex++
-          } else {
-            child.finished = true
-          }
+    const loopUnit = () => {
+      this.stop = animFrame(loopUnit)
+      this.clear()
+      this.animateTime = this._getAnimateTime(new Date())
+      this.animChildren.forEach(child => {
+        if (child.finished) {
+          this.finishedAinmCount++
+          return
         }
+        // console.log(this.animateTime)
+        child.runTrack(this.animateTime)
       })
-      self.draw()
+      this.draw()
     }
-    func()
+    // 如果所有的动画已结束，停止循环
+    if (this.animChildren.length === this.finishedAinmCount) return
+    loopUnit()
   }
   cancelAnimate () {
     this.stopTime = new Date()
     cancelAnim(this.stop)
+  }
+  resetAnimate () {
+    cancelAnim(this.stop)
+    this.initAnimateTime = 0
+    this.pauseTime = 0
+    this.animateTime = 0
+    this.finishedAinmCount = 0
+    this.animChildren.forEach(child => {
+      child.finished = false
+      child.tracks.forEach(track => {
+        track.reset && track.reset()
+      })
+    })
   }
 }
 export default Cvs

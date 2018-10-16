@@ -7,17 +7,37 @@ export default class Bezier extends Track {
     this.bezierNodes = [] // 绘制内部控制点的数组
     this.nextNodes = [] // 下一帧绘制的控制点
   }
+  reset () {
+    this.bezierNodes = []
+    this.nextNodes = []
+  }
   loop (p2) {
-    // 贝塞尔函数涉及的占比比例，0<=p<=1
-    var p = easing[this.easing](p2)
-    this.drawnode(this.nextNodes.length ? this.nextNodes : this.points, p)
+    // 设置了折返的的情况
+    if (this.retrace) {
+      let p = 0
+      if (p2 <= 0.5) {
+        // 贝塞尔函数涉及的占比比例，0<=p<=1
+        p = easing[this.easing](p2 * 2)
+        this.drawnode(this.nextNodes.length ? this.nextNodes : this.points, p)
+      } else {
+        let p3 = 1 - (p2 - 0.5) * 2
+        // 防止折返后终点不在起点上
+        if ((1 - p2) * this.duration < 80) p3 = 0
+        p = easing[this.easing](p3)
+        this.drawnode(this.nextNodes.length ? this.nextNodes : this.points, p)
+      }
+    } else {
+      // 贝塞尔函数涉及的占比比例，0<=p<=1
+      p = easing[this.easing](p2)
+      this.drawnode(this.nextNodes.length ? this.nextNodes : this.points, p)
+    }
   }
   drawnode (nodes, p) {
     if (!nodes.length) return
     if (nodes.length === 1) {
       this.bezierNodes.push(nodes[0])
       if (this.bezierNodes.length > 1) {
-        var len = this.bezierNodes.length
+        let len = this.bezierNodes.length
         this.$ele.attr({
           x: this.bezierNodes[len - 1].x,
           y: this.bezierNodes[len - 1].y
@@ -26,8 +46,8 @@ export default class Bezier extends Track {
     }
     this.nextNodes = []
     if (nodes.length) {
-      for (var i = 0; i < nodes.length - 1; i++) {
-        var arr = [
+      for (let i = 0; i < nodes.length - 1; i++) {
+        let arr = [
           {
             x: nodes[i].x,
             y: nodes[i].y
@@ -45,7 +65,7 @@ export default class Bezier extends Track {
 
 // 通过各控制点与占比t计算当前贝塞尔曲线上的点坐标
 function getLocation (arr, p) {
-  var x = 0,
+  let x = 0,
     y = 0,
     n = arr.length - 1
   arr.forEach(function (item, index) {

@@ -1,4 +1,4 @@
-import { Cvs, Circle, Rect, Bezier, Track } from '@'
+import { Cvs, Circle, Rect, Bezier, Track, easing } from '@'
 let cvs = new Cvs({
   container: document.getElementById('container')
 })
@@ -7,12 +7,39 @@ let againBtn = document.querySelector('.again')
 let flag = true
 
 let dot = new Circle({
-  x: 0,
-  y: 0,
+  zIndex: 1,
+  x: 210,
+  y: 10,
   r: 10,
   cache: true,
   fill: 'pink'
 })
+
+var dotCustomTrack = new Track({
+  delay: 0,
+  duration: 1000,
+  loop: function (p) {
+    this.$ele.attr({
+      // 这里的 200 为运动总路程，10 为初始位置
+      x: 200 * easing.easeOutQuad(p) + 10,
+      y: 10 // 此行不能省略，因为动画重置时需要获取到y轴坐标
+    })
+  }
+})
+
+var bezier = new Bezier({
+  delay: 0,
+  duration: 4000,
+  retrace: true,
+  iterationCount: 2,
+  points: [
+    { x: 210, y: 10 },
+    { x: 460, y: 60 },
+    { x: 260, y: 260 },
+    { x: 510, y: 310 }
+  ]
+})
+dot.addTrack([dotCustomTrack, bezier])
 
 let rect = new Rect({
   x: 0,
@@ -22,51 +49,19 @@ let rect = new Rect({
   cache: true
 })
 
-var customTrack = new Track({
-  delay: 1000,
-  duration: 2000,
-  loop: function () {
-    this.$ele.attr({ x: this.$ele.attr('x') + 1, y: this.$ele.attr('y') + 1 })
+var customTrack2 = new Track({
+  delay: 0,
+  duration: 3000,
+  loop: function (p) {
+    this.$ele.attr({
+      // 这里的 200 为运动总路程，10 为初始位置
+      x: 400 * easing.easeOutQuad(p) + 0,
+      y: 100
+    })
   }
 })
-rect.addTrack(customTrack)
 
-var bezier = new Bezier({
-  delay: 0,
-  duration: 4000,
-  points: [
-    { x: 10, y: 10 },
-    { x: 360, y: 160 },
-    { x: 160, y: 360 },
-    { x: 410, y: 410 }
-  ]
-})
-var bezier2 = new Bezier({
-  delay: 0,
-  duration: 6000,
-  points: [
-    { x: 410, y: 410 },
-    { x: 760, y: 560 },
-    { x: 560, y: 760 },
-    { x: 810, y: 810 }
-  ]
-})
-dot.addTrack([bezier, bezier2])
-
-// var init = 12
-// dot.addTrack({
-//   delay: 0,
-//   duration: 3000,
-//   easing: 'Linear',
-//   loop: function () {
-//     if (init <= 85) {
-//       this.attr({ x: this.attr('x') + 1, y: this.attr('y') - 1 })
-//     } else {
-//       this.attr({ x: this.attr('x') + 1, y: this.attr('y') + 1 })
-//     }
-//     init++
-//   }
-// })
+rect.addTrack(customTrack2)
 
 cvs.add([dot, rect])
 
@@ -74,32 +69,19 @@ cvs.animate()
 
 stopBtn.onclick = function () {
   if (flag) {
+    // 关闭动画
     cvs.cancelAnimate()
     flag = false
   } else {
+    // 开启动画
     cvs.animate()
     flag = true
   }
 }
 
-// againBtn.onclick = function () {
-//   let dot = new Circle({
-//     x: 0,
-//     y: 0,
-//     r: 10,
-//     cache: true,
-//     fill: 'pink'
-//   })
-//   dot.animate = () => {
-//     bezier(dot, {
-//       speed: 0.007,
-//       points: [
-//         { x: 10, y: 10 },
-//         { x: 360, y: 160 },
-//         { x: 160, y: 360 },
-//         { x: 410, y: 410 }
-//       ]
-//     })
-//   }
-//   cvs.add(dot)
-// }
+againBtn.onclick = function () {
+  // 重置动画
+  cvs.resetAnimate()
+  // 开启动画
+  cvs.animate()
+}
