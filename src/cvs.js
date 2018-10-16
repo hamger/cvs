@@ -171,6 +171,7 @@ class Cvs {
           this.finishedAinmCount++
           return
         }
+        // console.log(this.animateTime)
         child.runTrack(this.animateTime)
       })
       this.draw()
