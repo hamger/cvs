@@ -28,9 +28,9 @@ export default {
         img: img,
         dx: 200,
         dy: 10
-      }));
+      }))
       cvs.draw()
-    };
+    }
   }
 }
 </script>
