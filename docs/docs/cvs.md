@@ -47,7 +47,9 @@ var cvs = new Cvs(options);
 
   - `{Element|Array<Element>} element`
 
-  > 支持不传参数，`cvs.remove()`将删除所有的元素
+::: danger
+支持不传参数，`cvs.remove()`将删除所有的元素
+:::
 
 - 示例：
   ```js
@@ -58,7 +60,7 @@ var cvs = new Cvs(options);
 
 - 描述：
 
-  命令画布进行绘制，内部引用了 cvs.move()
+  执行一次画布绘制
 
 - 示例：
 

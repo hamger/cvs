@@ -25,11 +25,12 @@ var elememt = new Elememt(options);
 | opacity                  | Number | 设置绘图的当前 alpha 或透明值      | --      |
 | globalCompositeOperation | String | 设置新图像如何绘制到已有的图像上   | --      |
 
-> cvs 对以下图形属性进行了缩写
-
-- fillStyle 缩写为 fill
-- stokeStyle 缩写为 stroke
-- globalAlpha 缩写为 opacity
+::: tip
+cvs 对以下图形属性进行了缩写
+- `fillStyle` 缩写为 `fill`
+- `stokeStyle` 缩写为 `stroke`
+- `globalAlpha` 缩写为 `opacity`
+:::
 
 ### 实例方法
 
@@ -75,8 +76,9 @@ var elememt = new Elememt(options);
 - 描述：
 
   为元素（除 Text 元素）绑定事件监听
-
-  > 内部使用 isPointInPath() 判断是否在区域内，如果路径指定了变形，将以变形前为基准，因此不要在变形的元素中绑定事件监听
+::: warning
+内部使用`isPointInPath()`判断是否在区域内，如果路径指定了变形，将以变形前为基准，因此不要为变形的元素中绑定事件监听
+:::
 
 - 参数：
 
@@ -103,25 +105,4 @@ var elememt = new Elememt(options);
 - 示例：
   ```js
   element.off("click");
-  ```
-  
-#### animate()
-
-- 描述：
-
-  元素的运动函数,example可在跟目录下的demo/animate查看
-
-- 参数：
-
-  - 自定义函数或者调用路径函数
-
-- 示例：
-  ```js
-  element.animete = () => {
-    xxx // your code
-  };
-
-  element.animate = () => {
-    linear(element, option)
-  }
   ```

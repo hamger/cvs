@@ -18,7 +18,9 @@ var element = new Rect(options);
 | y           | Number  | 规定矩形 y 坐标 | --      |
 | cache       | Boolean | 规定是否缓存    | `false` |
 
-> 在动画中，如果只有元素的位置发生变化，推荐开启`cache`，使用离屏渲染提高性能
+::: tip
+在动画中，如果只有元素的位置发生变化，推荐开启`cache`，使用离屏渲染提高性能
+:::
 
 ### example
 

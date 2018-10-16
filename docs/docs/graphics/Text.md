@@ -19,7 +19,7 @@ var element = new Text(options);
 | textBaseline | String | 规定文字垂直方向的对齐方式 | `alphabetic`      |
 | font         | String | 规定文本内容的当前字体属性 | `10px sans-serif` |
 
-font 这个属性可以分解成多个属性单独配置，这些配置只有在不设置 font 时生效
+font 属性可以分解成多个属性单独配置，这些配置只有在不设置 font 时生效
 
 | options.key | value  | description                 | default      |
 | ----------- | ------ | --------------------------- | ------------ |
