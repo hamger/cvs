@@ -192,6 +192,9 @@ class Cvs {
     this.finishedAinmCount = 0
     this.animChildren.forEach(child => {
       child.finished = false
+      child.tracks.forEach(track => {
+        track.reset && track.reset()
+      })
     })
   }
 }

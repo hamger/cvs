@@ -7,6 +7,10 @@ export default class Bezier extends Track {
     this.bezierNodes = [] // 绘制内部控制点的数组
     this.nextNodes = [] // 下一帧绘制的控制点
   }
+  reset () {
+    this.bezierNodes = []
+    this.nextNodes = []
+  }
   loop (p2) {
     // 设置了折返的的情况
     if (this.retrace) {

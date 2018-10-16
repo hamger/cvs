@@ -15,7 +15,7 @@ let dot = new Circle({
   fill: 'pink'
 })
 
-var customTrack = new Track({
+var dotCustomTrack = new Track({
   delay: 0,
   duration: 1000,
   loop: function (p) {
@@ -39,7 +39,7 @@ var bezier = new Bezier({
     { x: 510, y: 310 }
   ]
 })
-dot.addTrack([customTrack, bezier])
+dot.addTrack([dotCustomTrack, bezier])
 
 let rect = new Rect({
   x: 0,
