@@ -5,13 +5,13 @@ let cvs = new Cvs({
 const dotSpeed = 1
 const dotCount = 160
 let dots = []
-for (var i = 0; i < dotCount; i++) {
-  var r = Math.random() * 30 + 10
-  var x = Math.random() * (cvs.width - 2 * r) + r
-  var y = Math.random() * (cvs.height - 2 * r) + r
-  var xa = (Math.random() * 2 - 1) * dotSpeed
-  var ya = (Math.random() * 2 - 1) * dotSpeed
-  var element = new Circle({
+for (let i = 0; i < dotCount; i++) {
+  let r = Math.random() * 30 + 10
+  let x = Math.random() * (cvs.width - 2 * r) + r
+  let y = Math.random() * (cvs.height - 2 * r) + r
+  let xa = (Math.random() * 2 - 1) * dotSpeed
+  let ya = (Math.random() * 2 - 1) * dotSpeed
+  let element = new Circle({
     zIndex: Math.random() * dotCount,
     r: r,
     x: x,

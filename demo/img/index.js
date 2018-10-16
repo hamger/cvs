@@ -1,13 +1,13 @@
 import { Cvs, Img } from '@'
-var cvs = new Cvs({
+let cvs = new Cvs({
   container: document.getElementById('container')
 })
 
-var img = new Image()
+let img = new Image()
 img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
 
 img.onload = function () {
-  var element = new Img({
+  let element = new Img({
     img: img,
     dx: 200,
     dy: 100,

@@ -11,7 +11,7 @@ export default class Text extends Element {
     this.opt.fontVariant = this.opt.fontVariant || 'normal'
   }
   draw () {
-    var ctx = this.ctx
+    let ctx = this.ctx
     ctx.beginPath()
     ctx.save()
     this.assembleFont()

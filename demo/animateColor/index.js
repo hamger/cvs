@@ -31,7 +31,7 @@ ball.animate = () => {
 
 cvs.animate()
 
-// var flag
+// let flag
 // let stopBtn = document.querySelector('.stop')
 // stopBtn.onclick = function () {
 //   if (flag) {

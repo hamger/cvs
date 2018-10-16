@@ -4,7 +4,7 @@ const path = require('path')
 const utils = require('./utils')
 const resolve = utils.resolve
 
-var webpackConfig = {
+let webpackConfig = {
   entry: './src/index.js',
   output: {
     filename: 'cvs.js',

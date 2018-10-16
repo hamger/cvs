@@ -8,7 +8,7 @@ export default class Path extends Element {
     this.lastCpoint = []
   }
   draw () {
-    var ctx = this.ctx
+    let ctx = this.ctx
     ctx.save()
     this.setAttr()
     this.drawPath()

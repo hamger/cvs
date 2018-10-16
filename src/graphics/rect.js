@@ -6,7 +6,7 @@ export default class Rect extends Element {
     if (this.cache) this.cacheDraw()
   }
   draw () {
-    var ctx = this.ctx
+    let ctx = this.ctx
     ctx.save()
     if (this.cache) {
       ctx.drawImage(this.cacheCanvas, this.opt.x - this.lw, this.opt.y - this.lw)
@@ -22,7 +22,7 @@ export default class Rect extends Element {
     this.dye(ctx)
   }
   drawPath (ctx2) {
-    var ctx = ctx2 || this.ctx
+    let ctx = ctx2 || this.ctx
     ctx.beginPath()
     if (ctx2) ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
     else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)

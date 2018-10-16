@@ -3,7 +3,7 @@
 定义一段贝尔曲线运动
 
 ```js
-var bezier = new Bezier(options);
+let bezier = new Bezier(options);
 ```
 
 ### options
@@ -36,7 +36,7 @@ let dot = new Circle({
   cache: true,
   fill: "pink"
 });
-var bezier = new Bezier({
+let bezier = new Bezier({
   delay: 0,
   duration: 4000,
   points: [

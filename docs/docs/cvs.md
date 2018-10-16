@@ -3,7 +3,7 @@
 创建一个绘图对象
 
 ```js
-var cvs = new Cvs(options);
+let cvs = new Cvs(options);
 ```
 
 ### options
@@ -99,7 +99,7 @@ var cvs = new Cvs(options);
     cache: true,
     fill: "pink"
   });
-  var customTrack = new Track({
+  let customTrack = new Track({
     delay: 100,
     duration: 3000,
     loop: function(p) {

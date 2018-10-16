@@ -3,7 +3,7 @@
 绘制一个多边形/折线元素
 
 ```js
-var element = new Poly(options);
+let element = new Poly(options);
 ```
 
 ### options

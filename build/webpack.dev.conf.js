@@ -4,7 +4,7 @@ const path = require('path')
 const utils = require('./utils')
 const resolve = utils.resolve
 
-var webpackConfig = {
+let webpackConfig = {
   entry: utils.getEntry('demo/**/index.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -61,8 +61,8 @@ var webpackConfig = {
 }
 
 // 在不同的页面中插入对应的js文件
-var htmls = utils.getEntry('demo/**/index.html')
-var pages = Object.keys(htmls)
+let htmls = utils.getEntry('demo/**/index.html')
+let pages = Object.keys(htmls)
 pages.forEach(filename => {
   webpackConfig.plugins.push(
     new HtmlWebpackPlugin({

@@ -6,7 +6,7 @@
  * d: duration（持续时间）。
  * you can visit 'https://www.zhangxinxu.com/study/201612/how-to-use-tween-js.html' to get effect
 */
-var Tween = {
+let Tween = {
   Linear: function (t, b, c, d) {
     return c * t / d + b
   },
@@ -97,7 +97,7 @@ var Tween = {
   },
   Elastic: {
     easeIn: function (t, b, c, d, a, p) {
-      var s
+      let s
       if (t === 0) return b
       if ((t /= d) === 1) return b + c
       if (typeof p === 'undefined') p = d * 0.3
@@ -110,7 +110,7 @@ var Tween = {
       return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b
     },
     easeOut: function (t, b, c, d, a, p) {
-      var s
+      let s
       if (t === 0) return b
       if ((t /= d) === 1) return b + c
       if (typeof p === 'undefined') p = d * 0.3
@@ -123,7 +123,7 @@ var Tween = {
       return (a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b)
     },
     easeInOut: function (t, b, c, d, a, p) {
-      var s
+      let s
       if (t === 0) return b
       if ((t /= d / 2) === 2) return b + c
       if (typeof p === 'undefined') p = d * (0.3 * 1.5)

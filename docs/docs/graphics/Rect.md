@@ -3,7 +3,7 @@
 绘制一个矩形元素
 
 ```js
-var element = new Rect(options);
+let element = new Rect(options);
 ```
 
 ### options

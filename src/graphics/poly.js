@@ -6,20 +6,20 @@ export default class Polygon extends Element {
     if (this.cache) this.cacheDraw()
   }
   draw () {
-    var ctx = this.ctx
+    let ctx = this.ctx
     ctx.save()
     if (this.cache) ctx.drawImage(this.cacheCanvas, this.minX, this.minY)
     else this.drawUint()
     ctx.restore()
   }
   drawUint (ctx2) {
-    var ctx = ctx2 || this.ctx
+    let ctx = ctx2 || this.ctx
     this.setAttr(ctx)
     this.drawPath(ctx2 || null)
     this.dye(ctx)
   }
   drawPath (ctx2) {
-    var ctx = ctx2 || this.ctx
+    let ctx = ctx2 || this.ctx
     ctx.beginPath()
     if (ctx2) {
       this.opt.points.forEach((item, index) => {

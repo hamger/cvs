@@ -3,7 +3,7 @@
 绘制一个圆弧元素
 
 ```js
-var element = new Arc(options);
+let element = new Arc(options);
 ```
 
 ### options

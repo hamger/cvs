@@ -3,7 +3,7 @@
 支持所有运动轨迹的基类，使用该类可自定义运动轨迹
 
 ```js
-var track = new Track(options);
+let track = new Track(options);
 ```
 
 ### options
@@ -19,7 +19,7 @@ var track = new Track(options);
 ### easing
 
 ```js
-var t = easing[key](p)
+let t = easing[key](p);
 ```
 
 | key                                                                 | description                               |
@@ -43,7 +43,7 @@ let dot = new Circle({
   cache: true,
   fill: "pink"
 });
-var customTrack = new Track({
+let customTrack = new Track({
   delay: 100,
   duration: 4000,
   loop: function(p) {

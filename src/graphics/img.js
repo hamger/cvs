@@ -18,7 +18,7 @@ export default class Img extends Element {
     }
   }
   drawPath () {
-    var ctx = this.ctx
+    let ctx = this.ctx
     ctx.beginPath()
     ctx.rect(this.opt.dx, this.opt.dy, this.w, this.h)
   }

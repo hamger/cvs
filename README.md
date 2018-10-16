@@ -7,7 +7,7 @@ cvs (a short name from canvas) is a basic canvas framework for 2d drawing, it's 
 ```js
 import { Cvs, Circle } from "cvs";
 
-var cvs = new Cvs({
+let cvs = new Cvs({
   container: document.getElementById("container")
 });
 

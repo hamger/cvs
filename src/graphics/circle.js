@@ -6,7 +6,7 @@ export default class Circle extends Element {
     if (this.cache) this.cacheDraw()
   }
   draw () {
-    var ctx = this.ctx
+    let ctx = this.ctx
     ctx.save()
     if (this.cache) {
       ctx.drawImage(this.cacheCanvas,
@@ -18,13 +18,13 @@ export default class Circle extends Element {
     ctx.restore()
   }
   drawUint (ctx2) {
-    var ctx = ctx2 || this.ctx
+    let ctx = ctx2 || this.ctx
     this.setAttr(ctx)
     this.drawPath(ctx2 || null)
     this.dye(ctx)
   }
   drawPath (ctx2) {
-    var ctx = ctx2 || this.ctx
+    let ctx = ctx2 || this.ctx
     ctx.beginPath()
     if (ctx2) {
       ctx.arc(this.halfW, this.halfH, this.opt.r, 0, Math.PI * 2)

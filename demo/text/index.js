@@ -1,5 +1,5 @@
 import { Cvs, Text } from '@'
-var cvs = new Cvs({
+let cvs = new Cvs({
   container: document.getElementById('container')
 })
 

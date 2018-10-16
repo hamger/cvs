@@ -1,9 +1,9 @@
 // 获取相对于容器的坐标
 export function getLocation (container, event) {
-  var hastouch = 'ontouchstart' in window
-  var e = event || window.event
-  var x = hastouch ? e.targetTouches[0].pageX : e.clientX
-  var y = hastouch ? e.targetTouches[0].pageY : e.clientY
+  let hastouch = 'ontouchstart' in window
+  let e = event || window.event
+  let x = hastouch ? e.targetTouches[0].pageX : e.clientX
+  let y = hastouch ? e.targetTouches[0].pageY : e.clientY
   return {
     x: x - container.getBoundingClientRect().left,
     y: y - container.getBoundingClientRect().top
@@ -12,7 +12,7 @@ export function getLocation (container, event) {
 
 // 四舍五入取整（将目标数字加上 0.5，然后对结果执行逐位运算以消除小数部分）
 export function int (num) {
-  var rounded
+  let rounded
   // With a bitwise or.
   rounded = (0.5 + num) | 0
   // A double bitwise not.
@@ -27,7 +27,7 @@ export function int (num) {
  * @param {需要处理的字符串} str
  */
 export function delBlank (str) {
-  var regEx = /\s+/g
+  let regEx = /\s+/g
   return str.trim().replace(regEx, ' ')
 }
 

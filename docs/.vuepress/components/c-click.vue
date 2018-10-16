@@ -16,11 +16,11 @@ export default {
     return {}
   },
   mounted() {
-    var cvs = new Cvs({
+    let cvs = new Cvs({
       container: document.getElementById('container')
     })
 
-    var element = new Circle({
+    let element = new Circle({
       r: 50,
       y: 100,
       x: 100,
@@ -41,7 +41,7 @@ export default {
     })
     cvs.add(element)
 
-    var element2 = new Rect({
+    let element2 = new Rect({
       x: 200,
       y: 400,
       w: 60,
@@ -71,7 +71,7 @@ export default {
     })
     cvs.add(element2)
 
-    var element3 = new Rect({
+    let element3 = new Rect({
       x: 300,
       y: 300,
       w: 80,
@@ -91,7 +91,7 @@ export default {
     // })
     cvs.add(element3)
 
-    var element4 = new Circle({
+    let element4 = new Circle({
       zIndex: -2,
       r: 50,
       y: 150,
@@ -107,7 +107,7 @@ export default {
     })
     cvs.add(element4)
 
-    var element6 = new Poly({
+    let element6 = new Poly({
       zIndex: 9,
       points: [[200, 23], [250, 53], [260, 93], [170, 173], [200, 23]],
       cache: true
@@ -117,12 +117,12 @@ export default {
     })
     cvs.add(element6)
 
-    var img = new Image()
+    let img = new Image()
     img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
 
     // 当图片准备以后再绘制
     img.onload = function() {
-      var element5 = new Img({
+      let element5 = new Img({
         img: img,
         dx: 200,
         dy: 200

@@ -109,10 +109,10 @@ function parabola (element, option) {
 
 // 调色板
 const colorPalette = (gradient) => {
-  var canvas = document.createElement('canvas')
+  let canvas = document.createElement('canvas')
   canvas.width = '1'
   canvas.height = '256'
-  var ele = canvas.getContext('2d'),
+  let ele = canvas.getContext('2d'),
     grad = ele.createLinearGradient(0, 0, 1, 256)
   gradient.forEach(function (item) {
     grad.addColorStop(item[0], item[1])
@@ -125,14 +125,14 @@ const colorPalette = (gradient) => {
 // 颜色缓动
 const gradientColor = (ele, options) => {
   const { ctx, opt } = ele
-  var width = ctx.width, height = ctx.height
-  var start = 0
-  var begin = 0
-  var during = options.during
-  var type = options.type || 'Linear'
-  var colorArr = (ele.recordParam && ele.recordParam.colorArr) || colorPalette(options.colors)
+  let width = ctx.width, height = ctx.height
+  let start = 0
+  let begin = 0
+  let during = options.during
+  let type = options.type || 'Linear'
+  let colorArr = (ele.recordParam && ele.recordParam.colorArr) || colorPalette(options.colors)
 
-  var end = ((colorArr.length / 4) / during)
+  let end = ((colorArr.length / 4) / during)
 
   if (!ele.recordParam) {
     ele.recordParam = {
@@ -147,7 +147,7 @@ const gradientColor = (ele, options) => {
     begin = ele.recordParam.begin
     end = ele.recordParam.end
   }
-  var offset
+  let offset
   if (type instanceof Array) {
     offset = Tween[type[0]][type[1]](start, begin, end, during).toFixed(0)
   } else if (typeof type === 'string') {

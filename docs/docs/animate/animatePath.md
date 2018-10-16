@@ -9,7 +9,7 @@
   - 默认值： Linear
 
 ```js
-var elememt = new Elememt(options);
+let elememt = new Elememt(options);
 ```
 
 #### 运动函数

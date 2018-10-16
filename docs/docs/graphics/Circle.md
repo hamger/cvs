@@ -3,7 +3,7 @@
 绘制一个圆形元素
 
 ```js
-var element = new Circle(options);
+let element = new Circle(options);
 ```
 
 ### options

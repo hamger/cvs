@@ -16,7 +16,7 @@ export default {
     return {}
   },
   mounted() {
-    var cvs = new Cvs({
+    let cvs = new Cvs({
       container: document.getElementById('container')
     })
 

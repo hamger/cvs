@@ -3,7 +3,7 @@
 绘制一个文本元素
 
 ```js
-var element = new Text(options);
+let element = new Text(options);
 ```
 
 ### options
@@ -32,7 +32,7 @@ font 属性可以分解成多个属性单独配置，这些配置只有在不设
 ### example
 
 ```js
-var cvs = new Cvs({
+let cvs = new Cvs({
   container: document.getElementById('container')
 })
 

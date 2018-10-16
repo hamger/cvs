@@ -3,7 +3,7 @@
 绘制一个路径元素
 
 ```js
-var element = new Path(options);
+let element = new Path(options);
 ```
 
 ### options
