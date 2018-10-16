@@ -86,7 +86,7 @@ var cvs = new Cvs(options);
 - 示例：
 
   ```js
-  import { Cvs, Circle, Track, easing } from "cvs";
+  import { Cvs, Circle, Track } from "cvs";
   let cvs = new Cvs({
     container: document.getElementById("container")
   });
@@ -99,12 +99,10 @@ var cvs = new Cvs(options);
   });
   var customTrack = new Track({
     delay: 100,
-    duration: 4000,
+    duration: 3000,
     loop: function(p) {
       this.$ele.attr({
-        // 这里的 400 为运动总路程，10 为初始位置
-        x: 400 * easing.easeInQuad(p) + 10,
-        y: 400 * easing.easeInQuad(p) + 10
+        x: 400 * p + 10
       });
     }
   });
