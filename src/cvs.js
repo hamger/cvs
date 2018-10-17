@@ -39,7 +39,7 @@ class Cvs {
           return true
         }
       })
-      if (temp) temp.click(e)
+      if (temp) temp.click.call(temp, e)
     })
     // 使用count记数，防止光标移动时重复操作
     let count = 0

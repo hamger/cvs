@@ -8,67 +8,41 @@ let element = new Circle({
   y: 100,
   x: 100,
   fill: '#999'
-  // cache: true
 })
 element.on('click', function () {
-  if (element.opt.fill === '#999') {
-    element.attr({
-      fill: '#23af9a'
-    })
+  if (this.attr('fill') === '#999') {
+    this.attr({fill: '#23af9a'})
   } else {
-    element.attr({
-      fill: '#999'
-    })
+    this.attr({fill: '#999'})
   }
   cvs.draw()
 })
 cvs.add(element)
 
-let element2 = new Rect({
-  x: 200,
-  y: 400,
-  w: 60,
-  h: 60,
-  stroke: 'green',
-  cache: true
-})
-element2.on('click', function () {
-  if (element2.opt.x === 200) {
-    element2.attr({
-      x: 250,
-      y: 600,
-      // animation: {
-      //   type: 'line',
-      //   endX: 250,
-      //   endY: 600,
-      //   time: 1000
-      // }
-    })
-  } else {
-    element2.attr({
-      x: 200,
-      y: 400
-    })
-  }
-  cvs.draw()
-})
-cvs.add(element2)
+// let element2 = new Rect({
+//   x: 200,
+//   y: 400,
+//   w: 60,
+//   h: 60,
+//   stroke: 'green',
+//   // cache: true
+// })
 
 let element3 = new Rect({
-  x: 300,
+  x: 400,
   y: 300,
   w: 80,
   h: 80,
   stroke: 'blue'
 })
-element3.exec({
-  scale: [1.2, 1.1]
-})
-element3.exec([
-  {
-    rotate: 10
-  }
-])
+// element3.exec({
+//   scale: [1.2, 1.1]
+// })
+// element3.exec([
+//   {
+//     rotate: 10
+//   }
+// ])
 // element3.on('click', function (e) {
 //   console.log('element3: ' + e)
 // })
@@ -82,7 +56,7 @@ let element4 = new Circle({
   fill: '#3e9',
   hover: {
     fill: '#5f1'
-  },
+  }
   // cache: true
 })
 element4.on('click', function (e) {
