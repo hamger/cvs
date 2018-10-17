@@ -1,7 +1,7 @@
 <template>
   <div>
     <Container>
-      <div id="container" style="width:100%;height:500px"></div>
+      <div id="attr-container" style="width:100%;height:500px"></div>
     </Container>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     let cvs = new Cvs({
-      container: document.getElementById('container')
+      container: document.getElementById('attr-container')
     })
     const dotSpeed = 1
     const dotCount = 60

@@ -1,7 +1,7 @@
 <template>
     <div>
          <Container>
-             <div id="container" style="width:100%;height:500px"></div>
+             <div id="demo-container" style="width:100%;height:500px"></div>
          </Container>
     </div>
 </template>
