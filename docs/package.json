@@ -1,6 +1,6 @@
 {
   "name": "cvs-docs",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A basic canvas framework for 2d drawing.",
   "main": "index.js",
   "scripts": {
