@@ -15,6 +15,7 @@ element.on('click', function () {
   } else {
     this.attr({fill: '#999'})
   }
+  cvs.clear()
   cvs.draw()
 })
 cvs.add(element)

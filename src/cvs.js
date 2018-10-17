@@ -1,5 +1,5 @@
 import Element from './element'
-import { getLocation, animFrame, cancelAnim, arrSort } from './utils'
+import { getLocation, animFrame, cancelAnim, arrSort, isMobile } from './utils'
 
 class Cvs {
   constructor (opt) {
@@ -41,13 +41,14 @@ class Cvs {
       })
       if (temp) temp.click.call(temp, e)
     })
+    // 移动端没有 hover 事件
+    if (isMobile) return
     // 使用count记数，防止光标移动时重复操作
     let count = 0
     let count2 = 0
     let hoverEle = null
     this.canvas.addEventListener('mousemove', e => {
       let location = getLocation(this.canvas, e)
-
       // 实现鼠标移动到可点击区域时，光标变化
       let temp = null
       this.descChildren.some(child => {
@@ -78,12 +79,14 @@ class Cvs {
         }
       })
       if (temp2.opt.hover && count2 === 0) {
+        this.clear()
         temp2.attr(temp2.opt.hover, true)
         hoverEle = temp2
         count2++
         this.draw()
       }
       if (hoverEle && hoverEle.id !== temp2.id && count2 === 1) {
+        this.clear()
         hoverEle.attr(hoverEle.noHover, true)
         count2 = 0
         this.draw()

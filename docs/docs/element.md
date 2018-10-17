@@ -53,24 +53,6 @@ cvs 对以下图形属性进行了缩写
   });
   ```
 
-#### exec(opt)
-
-- 描述：
-
-  添加元素绘制方法（添加顺序决定执行顺序)
-
-- 参数：
-
-  - `{Object | Array<Object>} opt`表示绘制方法的对象或对象数组
-
-- 示例：
-
-  ```js
-  element.exec({ scale: [1.5, 1.8] });
-  element.exec({ setTransform: [1, 1, 0, 1, 0, 0] });
-  element.exec([{ rotate: 10 }, { translate: [10, 90] }]);
-  ```
-
 #### on(eventType, callback)
 
 - 描述：
