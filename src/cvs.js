@@ -181,10 +181,10 @@ class Cvs {
   }
   cancelAnimate () {
     this.stopTime = new Date()
-    cancelAnim(this.stop)
+    if (this.stop) cancelAnim(this.stop)
   }
   resetAnimate () {
-    cancelAnim(this.stop)
+    if (this.stop) cancelAnim(this.stop)
     this.initAnimateTime = 0
     this.pauseTime = 0
     this.animateTime = 0

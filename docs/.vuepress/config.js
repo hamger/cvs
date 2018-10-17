@@ -1,6 +1,6 @@
 module.exports = {
   title: 'CVS',
-  description: 'tool for canvas',
+  description: 'a basic canvas framework for 2d drawing',
   configureWebpack: {
     resolve: {
       alias: {
