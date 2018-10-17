@@ -19,6 +19,7 @@ export default {
     let cvs = new Cvs({
       container: document.getElementById('container')
     })
+    this.cvs = cvs
     const dotSpeed = 1
     const dotCount = 60
     for (let i = 0; i < dotCount; i++) {
@@ -50,6 +51,9 @@ export default {
       cvs.add(ele)
     }
     cvs.animate()
-  }
+  },
+  destroyed() {
+      this.cvs.cancelAnimate()
+  },
 }
 </script>
