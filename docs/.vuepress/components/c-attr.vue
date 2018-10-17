@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { Cvs, Circle } from 'cvs'
+import { Cvs, Circle, Track } from 'cvs'
 import Container from '../Container'
 export default {
   components: {
@@ -19,7 +19,7 @@ export default {
     let cvs = new Cvs({
       container: document.getElementById('container')
     })
-    const dotSpeed = 1.5
+    const dotSpeed = 1
     const dotCount = 60
     for (let i = 0; i < dotCount; i++) {
       let r = Math.random() * 30 + 10
