@@ -47,4 +47,4 @@ cvs.add(
 cvs.draw()
 ```
 
-<c-text></c-text>
+<!-- <c-text></c-text> -->

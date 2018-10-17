@@ -46,4 +46,4 @@ let element = new Img(options);
     cvs.draw()
   };
 ```
-<ClientOnly><c-img></c-img></ClientOnly>
+<!-- <ClientOnly><c-img></c-img></ClientOnly> -->

@@ -43,4 +43,4 @@ new Path({
   stroke: "#454"
 });
 ```
-<ClientOnly><c-path></c-path></ClientOnly>
+<!-- <ClientOnly><c-path></c-path></ClientOnly> -->
