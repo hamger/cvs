@@ -2,6 +2,16 @@
 
 cvs (a short name from canvas) is a basic canvas framework for 2d drawing, it's designed to make drawing easier.
 
+## advantage
+
+- 对其他库的无依赖，轻量快捷
+- 支持元素和运动的自定义，应用灵活
+- 元素与运动高度解耦，使动画逻辑更加清晰
+- 画布针对运动进行了拓展，具有更强的动画控制能力
+- 元素支持基础事件绑定，时画布具有更多的交互
+- 支持 Canvas 离屏渲染，使动画绘制更加流畅
+- 简化曲线运动的调用，并提供工具辅助可视化开发
+
 ## Usage
 
 ```js
@@ -25,6 +35,15 @@ cvs.draw();
 ## Document
 
 [文档地址](https://hamger.github.io/cvs/)
+
+## future
+
+- 拓展缓动类型
+- 拓展规则性运动方程
+- 实现大小、颜色的动画
+- 支持图片的更迭动画
+- 基于时间线的细粒度动画控制
+- 支持伪 3D 效果
 
 ## Changelog
 
