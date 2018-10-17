@@ -12,6 +12,11 @@ cvs (a short name from canvas) is a basic canvas framework for 2d drawing, it's 
 - 支持 Canvas 离屏渲染，使动画绘制更加流畅
 - 简化曲线运动的调用，并提供工具辅助可视化开发
 
+## Install
+```bash
+npm install cvs
+```
+
 ## Usage
 
 ```js
