@@ -2,7 +2,7 @@
 
 cvs (a short name from canvas) is a basic canvas framework for 2d drawing, it's designed to make drawing easier.
 
-## advantage
+## Advantage
 
 - 对其他库的无依赖，轻量快捷
 - 支持元素和运动的自定义，应用灵活
@@ -36,7 +36,7 @@ cvs.draw();
 
 [文档地址](https://hamger.github.io/cvs/)
 
-## future
+## Future
 
 - 拓展缓动类型
 - 拓展规则性运动方程
