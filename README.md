@@ -52,6 +52,9 @@ cvs.draw();
 
 ## Changelog
 
+### 2018.10.17
+> v0.2.2 修复 hover 事件重复绘制元素
+
 ### 2018.10.16
 > v0.2.1 考虑到 duration 是 Infinity 的情况，loop 函数接受的参数改为当前轨迹下已运行的时间
 
