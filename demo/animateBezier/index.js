@@ -8,46 +8,48 @@ let flag = true
 
 let dot = new Circle({
   zIndex: 1,
-  x: 210,
-  y: 10,
   r: 10,
+  x: 169,
+  y: 225,
   cache: true,
   fill: 'pink'
-})
-
-let dotCustomTrack = new Track({
-  delay: 0,
-  duration: 1000,
-  loop: function (t) {
-    let p = t / this.duration
-    this.$ele.attr({
-      // 这里的 200 为运动总路程，10 为初始位置
-      x: 200 * easing.easeOutQuad(p) + 10,
-      y: 10 // 此行不能省略，因为动画重置时需要获取到y轴坐标
-    })
-  }
 })
 
 let bezier = new Bezier({
   delay: 0,
   duration: 4000,
-  retrace: true,
-  iterationCount: 2,
+  retrace: true, // 是否折返
+  iterationCount: 2, // 重复次数
   points: [
-    { x: 210, y: 10 },
-    { x: 460, y: 60 },
-    { x: 260, y: 260 },
-    { x: 510, y: 310 }
+    { x: 169, y: 225 },
+    { x: 178, y: 442 },
+    { x: 379, y: 119 },
+    { x: 398, y: 430 },
+    { x: 555, y: 160 },
+    { x: 264, y: 312 },
+    { x: 293, y: 508 },
+    { x: 545, y: 513 }
   ]
 })
-dot.addTrack([dotCustomTrack, bezier])
+dot.addTrack(bezier)
 
 let rect = new Rect({
-  x: 0,
-  y: 100,
   h: 20,
   w: 20,
   cache: true
+})
+
+let customTrack = new Track({
+  delay: 0,
+  duration: 2000,
+  loop: function (t) {
+    let p = t / this.duration
+    this.$ele.attr({
+      // 这里的 200 为运动总路程，10 为初始位置
+      x: 400 * easing.easeOutQuad(p),
+      y: 100 // 此行不能省略，因为动画重置时需要获取到y轴坐标
+    })
+  }
 })
 
 let customTrack2 = new Track({
@@ -56,14 +58,13 @@ let customTrack2 = new Track({
   loop: function (t) {
     let p = t / this.duration
     this.$ele.attr({
-      // 这里的 200 为运动总路程，10 为初始位置
-      x: 400 * easing.easeOutQuad(p) + 0,
-      y: 100
+      x: 400,
+      y: 400 * easing.easeOutQuad(p) + 100,
     })
   }
 })
 
-rect.addTrack(customTrack2)
+rect.addTrack([customTrack, customTrack2])
 
 cvs.add([dot, rect])
 

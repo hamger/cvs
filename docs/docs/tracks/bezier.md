@@ -15,11 +15,13 @@ let bezier = new Bezier(options);
 | points      | Array\<object> | 规定贝塞尔曲线控制点                              | --       |
 | easing      | String         | 规定缓动效果（[可选值](/docs/track.html#easing)） | `linear` |
 
-> `points` 值为两项数组时，可以用于绘制直线
+::: tip
+`points` 值为两项数组时，便可以用于绘制直线
+:::
 
 ### tool
 
-你可能需要这个[工具](https://hamger.github.io/demo/bezier/bezier.html)，以便于更直观的控制运动轨迹。
+[贝塞尔曲线描绘器](https://hamger.github.io/demo/bezier/bezier.html)-这是一个很实用的工具，以便于让开发者能够更直观地设计曲线运动。
 
 ### example
 
