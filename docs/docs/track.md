@@ -49,7 +49,7 @@ let t = easing[key](p);
   ```
 
 ### example
-
+以下是一个使用`Track`构造器自定义轨迹的例子。
 ```js
 import { Cvs, Circle, Track, easing } from "cvs";
 let cvs = new Cvs({
