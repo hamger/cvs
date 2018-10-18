@@ -1,7 +1,7 @@
 {
   "name": "cvs",
   "description": "A basic canvas framework for 2d drawing.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "Hanger <2313303800@qq.com>",
   "license": "MIT",
   "scripts": {
