@@ -31,7 +31,6 @@ let cvs = new Cvs(options);
 - 参数：
 
   - `{Element|Array<Element>} element`
-
 - 示例：
   ```js
   cvs.add([element, element2]);

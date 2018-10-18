@@ -1,16 +1,18 @@
 ### Element
-支持的所有图形的基类，支持的所有通用的属性和方法
+
+支持所有图形的基类，使用该类可自定义元素
+
 ```js
 let elememt = new Elememt(options);
 ```
 
 ### options
 
-| options.key | value   | description    | default |
-| ----------- | ------- | -------------- | ------- |
-| zIndex      | Number  | 规定层次索引值 | `0`     |
-| visible     | Boolean | 规定是否可见   | `true`  |
-| hover     | Object | 规定鼠标移动到元素上时的元素属性   | -- |
+| options.key | value   | description                      | default |
+| ----------- | ------- | -------------------------------- | ------- |
+| zIndex      | Number  | 规定层次索引值                   | `0`     |
+| visible     | Boolean | 规定是否可见                     | `true`  |
+| hover       | Object  | 规定鼠标移动到元素上时的元素属性 | --      |
 
 由于使用的是 canvas，绘制的所有图形都支持 canvas 的属性，这里只列出常用的属性，详细信息参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
 
@@ -27,9 +29,11 @@ let elememt = new Elememt(options);
 
 ::: tip
 cvs 对以下图形属性进行了缩写
+
 - `fillStyle` 缩写为 `fill`
 - `stokeStyle` 缩写为 `stroke`
 - `globalAlpha` 缩写为 `opacity`
+
 :::
 
 ### 实例方法
@@ -38,19 +42,19 @@ cvs 对以下图形属性进行了缩写
 
 - 描述：
 
-  更改元素属性
+  获取或设置元素属性
 
 - 参数：
 
-  - `{Object} opt`表示属性的对象
+  - `{String | Object} opt` 参数类型为`String`表示获取属性，`Object`表示设置属性
 
 - 示例：
 
   ```js
-  elememt.attr({
-    x: 12,
-    y: 34
-  });
+  // 获取元素属性
+  elememt.attr("x");
+  // 设置元素属性
+  elememt.attr({ x: 12, y: 34 });
   ```
 
 #### on(eventType, callback)
@@ -58,9 +62,9 @@ cvs 对以下图形属性进行了缩写
 - 描述：
 
   为元素（除 Text 元素）绑定事件监听
-::: warning
-cvs 内部使用`isPointInPath()`判断是否在元素区域内，如果路径指定了变形，将以变形前为基准，因此不要为变形后的元素绑定事件监听
-:::
+  ::: warning
+  cvs 内部使用`isPointInPath()`判断是否在元素区域内，如果路径指定了变形，将以变形前为基准，因此不要为变形后的元素绑定事件监听
+  :::
 
 - 参数：
 
@@ -88,3 +92,39 @@ cvs 内部使用`isPointInPath()`判断是否在元素区域内，如果路径�
   ```js
   element.off("click");
   ```
+
+#### addTrack(track)
+
+- 描述：
+
+  向元素中添加一个或多个轨迹
+
+- 参数：
+
+  - `{Track|Array<Track>} track`
+
+- 示例：
+  ```js
+  elememt.addTrack([track, track2]);
+  ```
+
+#### removeTrack(track)
+
+- 描述：
+
+  从元素中去除一个或多个轨迹
+
+- 参数：
+
+  - `{Track|Array<Track>} track`
+
+  ::: tip
+  支持不传参数，`elememt.removeTrack()`将删除所有的轨迹
+  :::
+  
+- 示例：
+
+  ```js
+  elememt.removeTrack([track, track2]);
+  ```
+
