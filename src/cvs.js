@@ -32,7 +32,7 @@ class Cvs {
       let location = getLocation(this.canvas, e)
       // 只触发点击区域最前面元素的监听事件
       this.descChildren.some(child => {
-        if (!child.opt.visible || !child.click) return false
+        if (!child.opt.visible || !child.click || !child.drawPath) return false
         child.drawPath()
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
@@ -52,7 +52,7 @@ class Cvs {
       // 实现鼠标移动到可点击区域时，光标变化
       let temp = null
       this.descChildren.some(child => {
-        if (!child.opt.visible || !child.click) return false
+        if (!child.opt.visible || !child.click || !child.drawPath) return false
         child.drawPath()
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
@@ -71,13 +71,14 @@ class Cvs {
       // 模拟 hover 事件监听
       let temp2 = { opt: {} }
       this.descChildren.some(child => {
-        if (!child.opt.visible) return false
+        if (!child.opt.visible || !child.drawPath) return false
         child.drawPath()
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp2 = child
           return true
         }
       })
+      // 当光标在移出元素时
       if (temp2.opt.hover && count2 === 0) {
         this.clear()
         temp2.attr(temp2.opt.hover, true)
@@ -85,6 +86,7 @@ class Cvs {
         count2++
         this.draw()
       }
+      // 当光标在移入元素时
       if (hoverEle && hoverEle.id !== temp2.id && count2 === 1) {
         this.clear()
         hoverEle.attr(hoverEle.noHover, true)
@@ -151,7 +153,8 @@ class Cvs {
   draw () {
     this.children.forEach(child => {
       if (child.opt.visible) {
-        child.draw()
+        child.draw.call(child, this.ctx)
+        // child.draw()
       }
     })
   }

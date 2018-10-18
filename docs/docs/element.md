@@ -8,13 +8,13 @@ let elememt = new Elememt(options);
 
 ### options
 
-| options.key | value   | description                      | default |
-| ----------- | ------- | -------------------------------- | ------- |
-| zIndex      | Number  | 规定层次索引值                   | `0`     |
-| visible     | Boolean | 规定是否可见                     | `true`  |
-| hover       | Object  | 规定鼠标移动到元素上时的元素属性 | --      |
+| options.key | value   | description                                        | default |
+| ----------- | ------- | -------------------------------------------------- | ------- |
+| zIndex      | Number  | 规定元素在 z 轴上的坐标                            | `0`     |
+| visible     | Boolean | 规定元素是否可见                                   | `true`  |
+| hover       | Object  | 规定鼠标移动到元素上时的元素属性（仅在 PC 端生效） | --      |
 
-由于使用的是 canvas，绘制的所有图形都支持 canvas 的属性，这里只列出常用的属性，详细信息参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
+由于 cvs 是基于 canvas 的框架，所以元素支持应有的 canvas 属性，以下列出了常用的属性，详细信息可参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
 
 | options.key              | value  | description                        | default |
 | ------------------------ | ------ | ---------------------------------- | ------- |
@@ -68,7 +68,7 @@ cvs 对以下图形属性进行了缩写
 
 - 参数：
 
-  - `{string} eventType`规定绑定的事件名称，可选项: `click`
+  - `{string} eventType`规定绑定的事件名称，可选值: `click`
   - `{Function} callback`规定监听函数
 
 - 示例：
@@ -86,7 +86,7 @@ cvs 对以下图形属性进行了缩写
 
 - 参数：
 
-  - `{string} eventType`规定绑定的事件名称，可选项: `click`，`tapStart`，`tapEnd`，`tapMove`
+  - `{string} eventType`规定绑定的事件名称，可选值: `click`
 
 - 示例：
   ```js
@@ -121,10 +121,9 @@ cvs 对以下图形属性进行了缩写
   ::: tip
   支持不传参数，`elememt.removeTrack()`将删除所有的轨迹
   :::
-  
+
 - 示例：
 
   ```js
   elememt.removeTrack([track, track2]);
   ```
-

@@ -54,12 +54,6 @@ export default {
         element2.attr({
           x: 250,
           y: 600
-          // animation: {
-          //   type: 'line',
-          //   endX: 250,
-          //   endY: 600,
-          //   time: 1000
-          // }
         })
       } else {
         element2.attr({
@@ -136,3 +130,4 @@ export default {
   }
 }
 </script>
+
