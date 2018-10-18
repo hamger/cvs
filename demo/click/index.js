@@ -31,6 +31,14 @@ element2.draw = function (ctx) {
   ctx.fillRect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
   ctx.restore()
 }
+element2.drawPath = function (ctx) {
+  ctx.save()
+  ctx.rect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
+  ctx.restore()
+}
+element2.on('click', function (e) {
+  console.log(e)
+})
 cvs.add(element2)
 
 let element3 = new Rect({

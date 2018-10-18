@@ -7,18 +7,17 @@ export default class Img extends Element {
     super(opt)
     if (this.cache) this.cacheDraw()
   }
-  draw () {
+  draw (ctx) {
     this.w = this.opt.dw ? this.opt.dw : this.opt.img.width
     this.h = this.opt.dh ? this.opt.dh : this.opt.img.height
     if (this.cache) {
       this.cacheDraw()
-      this.ctx.drawImage(this.cacheCanvas, this.opt.dx, this.opt.dy)
+      ctx.drawImage(this.cacheCanvas, this.opt.dx, this.opt.dy)
     } else {
       this.drawUnit()
     }
   }
-  drawPath () {
-    let ctx = this.ctx
+  drawPath (ctx) {
     ctx.beginPath()
     ctx.rect(this.opt.dx, this.opt.dy, this.w, this.h)
   }

@@ -33,7 +33,7 @@ class Cvs {
       // 只触发点击区域最前面元素的监听事件
       this.descChildren.some(child => {
         if (!child.opt.visible || !child.click || !child.drawPath) return false
-        child.drawPath()
+        child.drawPath.call(child, this.ctx)
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
           return true
@@ -53,7 +53,7 @@ class Cvs {
       let temp = null
       this.descChildren.some(child => {
         if (!child.opt.visible || !child.click || !child.drawPath) return false
-        child.drawPath()
+        child.drawPath.call(child, this.ctx)
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
           return true
@@ -72,7 +72,7 @@ class Cvs {
       let temp2 = { opt: {} }
       this.descChildren.some(child => {
         if (!child.opt.visible || !child.drawPath) return false
-        child.drawPath()
+        child.drawPath.call(child, this.ctx)
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp2 = child
           return true
@@ -154,7 +154,6 @@ class Cvs {
     this.children.forEach(child => {
       if (child.opt.visible) {
         child.draw.call(child, this.ctx)
-        // child.draw()
       }
     })
   }

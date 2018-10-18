@@ -5,8 +5,7 @@ export default class Arc extends Element {
     super(opt)
     if (this.cache) this.cacheDraw()
   }
-  draw () {
-    let ctx = this.ctx
+  draw (ctx) {
     ctx.save()
     if (this.cache) {
       ctx.drawImage(

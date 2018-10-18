@@ -127,3 +127,32 @@ cvs 对以下图形属性进行了缩写
   ```js
   elememt.removeTrack([track, track2]);
   ```
+
+### 自定义元素
+
+以下是自定义元素的一个例子，你需要定义 `draw` 函数，该函数接受上下文环境`ctx`为第一个参数，且内部的`this`指向元素实例（ 因此不能使用箭头函数来定义），`drawPath`函数同理。
+
+```js
+let element2 = new Element({
+  x: 600,
+  y: 100,
+  w: 180,
+  h: 180
+});
+// 需要自定义 draw 函数，且不能使用箭头函数定义
+element2.draw = function(ctx) {
+  ctx.save();
+  ctx.fillRect(this.attr("x"), this.attr("y"), this.attr("w"), this.attr("h"));
+  ctx.restore();
+};
+// 如果你需要启用事件监听（click、hover等），还需要自定义 drawPath 函数
+element2.drawPath = function(ctx) {
+  ctx.save();
+  ctx.rect(this.attr("x"), this.attr("y"), this.attr("w"), this.attr("h"));
+  ctx.restore();
+};
+element2.on("click", function(e) {
+  console.log(e);
+});
+cvs.add(element2);
+```

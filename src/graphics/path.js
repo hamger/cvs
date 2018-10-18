@@ -7,16 +7,15 @@ export default class Path extends Element {
     this.lastPoint = []
     this.lastCpoint = []
   }
-  draw () {
-    let ctx = this.ctx
+  draw (ctx) {
     ctx.save()
     this.setAttr()
-    this.drawPath()
+    this.drawPath(ctx)
     this.dye()
     ctx.restore()
   }
-  drawPath () {
-    this.ctx.beginPath()
+  drawPath (ctx) {
+    ctx.beginPath()
     let path = delBlank(this.opt.path)
     let pathType = path.match(/[A-z]/g)
     let pathVal = path
