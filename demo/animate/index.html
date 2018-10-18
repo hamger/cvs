@@ -3,26 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>animate</title>
+  <title>animate-bezier</title>
   <style>
     html,
     body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
     }
     #container {
-        width: 100%;
-        height: 90%;
+      width: 100%;
+      height: 90%;
+    }
+    .stop, .again {
+      cursor: pointer;
+      display: inline-block;
+      border: 1px solid #888888;
+      padding: 5px;
+      margin: 0 20px;
     }
   </style>
 </head>
 <body>
-  <div id="container"></div>
-  <div class="stop">暂停按钮</div>
-  <div class="again">再来一遍</div>
-  <div class="add">增加一个自定义动画</div>
+<div id="container"></div>
+<div class="stop">暂停按钮</div>
+<div class="again">再来一遍</div>
 </body>
 </html>
