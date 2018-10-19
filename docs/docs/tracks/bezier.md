@@ -18,7 +18,7 @@ let bezier = new Bezier(options);
 | easing         | String         | 规定缓动效果（[可选值](/docs/track.html#easing)） | `linear` |
 
 ::: tip
-`points` 值为两项数组（表示起点和终点的位置）时，便可用于绘制直线
+`points` 值为两项数组（表示起点和终点的坐标）时，便可用于绘制直线
 :::
 
 ::: tip
@@ -27,7 +27,7 @@ let bezier = new Bezier(options);
 
 ### tool
 
-[贝塞尔曲线描绘器](https://hamger.github.io/demo/bezier/bezier.html)-这是一个很实用的工具，以便于让开发者能够更直观地设计曲线运动。
+[贝塞尔曲线描绘器](https://hamger.github.io/demo/bezier/bezier.html)-这是一个很实用的工具，以便于让开发者能够更直观地设计曲线运动。将其导出参数赋值给`ponits`属性，即可得到对应的轨迹。
 
 ### example
 
