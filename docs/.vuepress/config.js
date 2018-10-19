@@ -35,7 +35,7 @@ module.exports = {
       // {
       //   title: 'Animate',
       //   collapsable: false,
-      //   children: ['/docs/animate/animatePath', '/docs/animate/animateColor']
+      //   children: ['/docs/animateRound/animatePath', '/docs/animateRound/animateColor']
       // },
       {
         title: 'Tracks',

@@ -1,11 +1,13 @@
 import easing from '../easing'
 import Track from '../track'
 
-export default class Round extends Track {
+export default class Elliptic extends Track {
   constructor (opt) {
     super(opt)
-    this.defaultR = 100
+    this.defaultRadiusX = 100
+    this.defaultRadiusY = 80
     this.defaultAngle = 360
+    this.defaultDirection = true
   }
   loop (t) {
     if (!this.vpx || !this.vpy) {
@@ -31,9 +33,10 @@ export default class Round extends Track {
     const relativeY = ele.relativeY || 0
     const vpx = ele.vpx
     const vpy = ele.vpy
-    const r = ele.r || this.defaultR
-    let x = vpx + r * Math.cos(angle * Math.PI / 180) - relativeX
-    let y = vpy + r * Math.sin(angle * Math.PI / 180) - relativeY
+    const radiusX = ele.radiusX || this.defaultRadiusX
+    const radiusY = ele.radiusY || this.defaultRadiusY
+    const x = vpx + radiusX * Math.cos(angle * Math.PI / 180) - relativeX
+    const y = vpy + radiusY * Math.sin(angle * Math.PI / 180) - relativeY
     return { x, y }
   }
 }

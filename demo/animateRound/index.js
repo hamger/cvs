@@ -14,6 +14,22 @@ let dot = new Circle({
   cache: true,
   fill: 'pink'
 })
+let sdot = new Circle({
+  zIndex: 1,
+  r: 10,
+  x: 169,
+  y: 225,
+  cache: true,
+  fill: 'blue'
+})
+let tdot = new Circle({
+  zIndex: 1,
+  r: 10,
+  x: 169,
+  y: 225,
+  cache: true,
+  fill: 'red'
+})
 
 let cd = new Circle({
   r: 10,
@@ -23,52 +39,41 @@ let cd = new Circle({
 
 let round = new Round({
   delay: 0,
-  duration: 5000,
+  duration: 3000,
   retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
   vpx: cvs.width / 2,
   vpy: cvs.height / 2,
-  r: 200,
   angle: 0
 })
 
-dot.addTrack(round)
+let sround = new Round({
+  delay: 0,
+  duration: 5000,
+  retrace: false, // 是否折返
+  iterationCount: Infinity, // 重复次数
+  vpx: cvs.width / 2,
+  vpy: cvs.height / 2,
+  angle: 90
+})
 
-// let rect = new Rect({
-//   h: 20,
-//   w: 20,
-//   cache: true
-// })
-//
-// let customTrack = new Track({
-//   delay: 0,
-//   duration: 2000,
-//   loop: function (t) {
-//     let p = t / this.duration
-//     this.$ele.attr({
-//       // 这里的 200 为运动总路程，10 为初始位置
-//       x: 400 * easing.easeOutQuad(p),
-//       y: 100 // 此行不能省略，因为动画重置时需要获取到y轴坐标
-//     })
-//   }
-// })
-//
-// let customTrack2 = new Track({
-//   delay: 0,
-//   duration: 3000,
-//   loop: function (t) {
-//     let p = t / this.duration
-//     this.$ele.attr({
-//       x: 400,
-//       y: 400 * easing.easeOutQuad(p) + 100,
-//     })
-//   }
-// })
-//
-// rect.addTrack([customTrack, customTrack2])
-//
-// cvs.add([dot, rect])
-cvs.add([dot, cd])
+let tround = new Round({
+  delay: 0,
+  duration: 8000,
+  retrace: false, // 是否折返
+  iterationCount: 1, // 重复次数
+  vpx: cvs.width / 2,
+  vpy: cvs.height / 2,
+  angle: 180,
+  direction: false
+})
+
+dot.addTrack(round)
+sdot.addTrack(sround)
+tdot.addTrack(tround)
+
+cvs.add([dot, sdot, tdot, cd])
+// cvs.add([tdot, cd])
 
 cvs.animate()
 

@@ -11,6 +11,7 @@ import Animate from './animate'
 import Track from './track'
 import Bezier from './tracks/bezier'
 import Round from './tracks/round'
+import Elliptic from './tracks/elliptic'
 import easing from './easing'
 
 export {
@@ -27,5 +28,6 @@ export {
   Track,
   Bezier,
   easing,
-  Round
+  Round,
+  Elliptic
 }
