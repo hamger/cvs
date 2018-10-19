@@ -1,7 +1,7 @@
 <template>
     <div>
       <Container>
-          <div id="container" style="width:100%;height:160px"></div>
+          <div id="text-container" style="width:100%;height:160px"></div>
       </Container>
     </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     let cvs = new Cvs({
-      container: document.getElementById('container')
+      container: document.getElementById('text-container')
     })
 
     cvs.add(

@@ -1,18 +1,20 @@
 ### Element
-支持的所有图形的基类，支持的所有通用的属性和方法
+
+支持所有图形的基类，使用该类可自定义元素
+
 ```js
 let elememt = new Elememt(options);
 ```
 
 ### options
 
-| options.key | value   | description    | default |
-| ----------- | ------- | -------------- | ------- |
-| zIndex      | Number  | 规定层次索引值 | `0`     |
-| visible     | Boolean | 规定是否可见   | `true`  |
-| hover     | Object | 规定鼠标移动到元素上时的元素属性   | -- |
+| options.key | value   | description                                        | default |
+| ----------- | ------- | -------------------------------------------------- | ------- |
+| zIndex      | Number  | 规定元素在 z 轴上的坐标                            | `0`     |
+| visible     | Boolean | 规定元素是否可见                                   | `true`  |
+| hover       | Object  | 规定鼠标移动到元素上时的元素属性（仅在 PC 端生效） | --      |
 
-由于使用的是 canvas，绘制的所有图形都支持 canvas 的属性，这里只列出常用的属性，详细信息参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
+由于 cvs 是基于 canvas 的框架，所以元素支持应有的 canvas 属性，以下列出了常用的属性，详细信息可参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
 
 | options.key              | value  | description                        | default |
 | ------------------------ | ------ | ---------------------------------- | ------- |
@@ -27,9 +29,11 @@ let elememt = new Elememt(options);
 
 ::: tip
 cvs 对以下图形属性进行了缩写
+
 - `fillStyle` 缩写为 `fill`
 - `stokeStyle` 缩写为 `stroke`
 - `globalAlpha` 缩写为 `opacity`
+
 :::
 
 ### 实例方法
@@ -38,37 +42,19 @@ cvs 对以下图形属性进行了缩写
 
 - 描述：
 
-  更改元素属性
+  获取或设置元素属性
 
 - 参数：
 
-  - `{Object} opt`表示属性的对象
+  - `{String | Object} opt` 参数类型为`String`表示获取属性，`Object`表示设置属性
 
 - 示例：
 
   ```js
-  elememt.attr({
-    x: 12,
-    y: 34
-  });
-  ```
-
-#### exec(opt)
-
-- 描述：
-
-  添加元素绘制方法（添加顺序决定执行顺序)
-
-- 参数：
-
-  - `{Object | Array<Object>} opt`表示绘制方法的对象或对象数组
-
-- 示例：
-
-  ```js
-  element.exec({ scale: [1.5, 1.8] });
-  element.exec({ setTransform: [1, 1, 0, 1, 0, 0] });
-  element.exec([{ rotate: 10 }, { translate: [10, 90] }]);
+  // 获取元素属性
+  elememt.attr("x");
+  // 设置元素属性
+  elememt.attr({ x: 12, y: 34 });
   ```
 
 #### on(eventType, callback)
@@ -76,13 +62,13 @@ cvs 对以下图形属性进行了缩写
 - 描述：
 
   为元素（除 Text 元素）绑定事件监听
-::: warning
-内部使用`isPointInPath()`判断是否在区域内，如果路径指定了变形，将以变形前为基准，因此不要为变形的元素中绑定事件监听
-:::
+  ::: warning
+  cvs 内部使用`isPointInPath()`判断是否在元素区域内，如果路径指定了变形，将以变形前为基准，因此不要为变形后的元素绑定事件监听
+  :::
 
 - 参数：
 
-  - `{string} eventType`规定绑定的事件名称，可选项: `click`
+  - `{string} eventType`规定绑定的事件名称，可选值: `click`
   - `{Function} callback`规定监听函数
 
 - 示例：
@@ -100,9 +86,73 @@ cvs 对以下图形属性进行了缩写
 
 - 参数：
 
-  - `{string} eventType`规定绑定的事件名称，可选项: `click`，`tapStart`，`tapEnd`，`tapMove`
+  - `{string} eventType`规定绑定的事件名称，可选值: `click`
 
 - 示例：
   ```js
   element.off("click");
   ```
+
+#### addTrack(track)
+
+- 描述：
+
+  向元素中添加一个或多个轨迹
+
+- 参数：
+
+  - `{Track|Array<Track>} track`
+
+- 示例：
+  ```js
+  elememt.addTrack([track, track2]);
+  ```
+
+#### removeTrack(track)
+
+- 描述：
+
+  从元素中去除一个或多个轨迹
+
+- 参数：
+
+  - `{Track|Array<Track>} track`
+
+  ::: tip
+  支持不传参数，`elememt.removeTrack()`将删除所有的轨迹
+  :::
+
+- 示例：
+
+  ```js
+  elememt.removeTrack([track, track2]);
+  ```
+
+### 自定义元素
+
+以下是一个使用`Element`构造器自定义元素的例子，你需要定义 `draw` 函数，该函数接受上下文环境`ctx`为第一个参数，且内部的`this`指向元素实例（ 因此不能使用箭头函数来定义），`drawPath`函数同理。
+
+```js
+let element2 = new Element({
+  x: 600,
+  y: 100,
+  w: 180,
+  h: 180
+});
+// 需要自定义 draw 函数，且不能使用箭头函数定义
+element2.draw = function(ctx) {
+  ctx.save();
+  ctx.fillRect(this.attr("x"), this.attr("y"), this.attr("w"), this.attr("h"));
+  ctx.restore();
+};
+// 如果你需要启用事件监听（click、hover等），还需要自定义 drawPath 函数
+element2.drawPath = function(ctx) {
+  ctx.save();
+  ctx.rect(this.attr("x"), this.attr("y"), this.attr("w"), this.attr("h"));
+  ctx.restore();
+};
+element2.on("click", function(e) {
+  console.log(e);
+});
+cvs.add(element2);
+```

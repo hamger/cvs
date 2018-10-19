@@ -10,8 +10,7 @@ export default class Text extends Element {
     this.opt.fontWeight = this.opt.fontWeight || 'normal'
     this.opt.fontVariant = this.opt.fontVariant || 'normal'
   }
-  draw () {
-    let ctx = this.ctx
+  draw (ctx) {
     ctx.beginPath()
     ctx.save()
     this.assembleFont()
@@ -34,5 +33,4 @@ export default class Text extends Element {
       ].join(' ')
     }
   }
-  drawPath () {}
 }

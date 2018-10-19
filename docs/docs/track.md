@@ -10,7 +10,7 @@ let track = new Track(options);
 
 | options.key | value    | description      | default |
 | ----------- | -------- | ---------------- | ------- |
-| delay       | Number   | 规定运动延迟时间 | --      |
+| delay       | Number   | 规定运动延迟时间 | `0`      |
 | duration    | Number   | 规定运动持续时间 | --      |
 | loop        | Function | 规定动画循环体   | --      |
 
@@ -49,7 +49,7 @@ let t = easing[key](p);
   ```
 
 ### example
-
+以下是一个使用`Track`构造器自定义轨迹的例子。
 ```js
 import { Cvs, Circle, Track, easing } from "cvs";
 let cvs = new Cvs({

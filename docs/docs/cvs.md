@@ -31,7 +31,6 @@ let cvs = new Cvs(options);
 - 参数：
 
   - `{Element|Array<Element>} element`
-
 - 示例：
   ```js
   cvs.add([element, element2]);
@@ -47,7 +46,7 @@ let cvs = new Cvs(options);
 
   - `{Element|Array<Element>} element`
 
-::: danger
+::: tip
 支持不传参数，`cvs.remove()`将删除所有的元素
 :::
 

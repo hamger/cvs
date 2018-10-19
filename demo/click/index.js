@@ -1,4 +1,4 @@
-import { Cvs, Circle, Rect, Img, Poly } from '@'
+import { Cvs, Element, Circle, Rect, Img, Poly } from '@'
 let cvs = new Cvs({
   container: document.getElementById('container')
 })
@@ -10,42 +10,44 @@ let element = new Circle({
   fill: '#999'
 })
 element.on('click', function () {
+  cvs.clear()
   if (this.attr('fill') === '#999') {
-    this.attr({fill: '#23af9a'})
+    this.attr({ fill: '#23af9a' })
   } else {
-    this.attr({fill: '#999'})
+    this.attr({ fill: '#999' })
   }
   cvs.draw()
 })
 cvs.add(element)
 
-// let element2 = new Rect({
-//   x: 200,
-//   y: 400,
-//   w: 60,
-//   h: 60,
-//   stroke: 'green',
-//   // cache: true
-// })
+let element2 = new Element({
+  x: 600,
+  y: 100,
+  w: 180,
+  h: 180
+})
+element2.draw = function (ctx) {
+  ctx.save()
+  ctx.fillRect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
+  ctx.restore()
+}
+element2.drawPath = function (ctx) {
+  ctx.save()
+  ctx.rect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
+  ctx.restore()
+}
+element2.on('click', function (e) {
+  console.log(e)
+})
+cvs.add(element2)
 
 let element3 = new Rect({
   x: 400,
   y: 300,
   w: 80,
   h: 80,
-  stroke: 'blue'
+  stroke: '#8d8df3'
 })
-// element3.exec({
-//   scale: [1.2, 1.1]
-// })
-// element3.exec([
-//   {
-//     rotate: 10
-//   }
-// ])
-// element3.on('click', function (e) {
-//   console.log('element3: ' + e)
-// })
 cvs.add(element3)
 
 let element4 = new Circle({
@@ -67,6 +69,7 @@ cvs.add(element4)
 let element6 = new Poly({
   zIndex: 9,
   points: [[200, 23], [250, 53], [260, 93], [170, 173], [200, 23]],
+  fill: '#f88a95',
   cache: true
 })
 element6.on('click', function (e) {

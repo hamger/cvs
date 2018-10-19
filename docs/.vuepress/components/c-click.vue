@@ -1,7 +1,7 @@
 <template>
     <div>
          <Container>
-             <div id="container" style="width:100%;height:500px"></div>
+             <div id="click-container" style="width:100%;height:500px"></div>
          </Container>
     </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     let cvs = new Cvs({
-      container: document.getElementById('container')
+      container: document.getElementById('click-container')
     })
 
     let element = new Circle({
@@ -54,12 +54,6 @@ export default {
         element2.attr({
           x: 250,
           y: 600
-          // animation: {
-          //   type: 'line',
-          //   endX: 250,
-          //   endY: 600,
-          //   time: 1000
-          // }
         })
       } else {
         element2.attr({
@@ -136,3 +130,4 @@ export default {
   }
 }
 </script>
+

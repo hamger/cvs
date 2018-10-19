@@ -1,5 +1,5 @@
 import Element from './element'
-import { getLocation, animFrame, cancelAnim, arrSort } from './utils'
+import { getLocation, animFrame, cancelAnim, arrSort, isMobile } from './utils'
 
 class Cvs {
   constructor (opt) {
@@ -32,8 +32,8 @@ class Cvs {
       let location = getLocation(this.canvas, e)
       // 只触发点击区域最前面元素的监听事件
       this.descChildren.some(child => {
-        if (!child.opt.visible || !child.click) return false
-        child.drawPath()
+        if (!child.opt.visible || !child.click || !child.drawPath) return false
+        child.drawPath.call(child, this.ctx)
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
           return true
@@ -41,18 +41,19 @@ class Cvs {
       })
       if (temp) temp.click.call(temp, e)
     })
+    // 移动端没有 hover 事件
+    if (isMobile) return
     // 使用count记数，防止光标移动时重复操作
     let count = 0
     let count2 = 0
     let hoverEle = null
     this.canvas.addEventListener('mousemove', e => {
       let location = getLocation(this.canvas, e)
-
       // 实现鼠标移动到可点击区域时，光标变化
       let temp = null
       this.descChildren.some(child => {
-        if (!child.opt.visible || !child.click) return false
-        child.drawPath()
+        if (!child.opt.visible || !child.click || !child.drawPath) return false
+        child.drawPath.call(child, this.ctx)
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
           return true
@@ -70,20 +71,24 @@ class Cvs {
       // 模拟 hover 事件监听
       let temp2 = { opt: {} }
       this.descChildren.some(child => {
-        if (!child.opt.visible) return false
-        child.drawPath()
+        if (!child.opt.visible || !child.drawPath) return false
+        child.drawPath.call(child, this.ctx)
         if (this.ctx.isPointInPath(location.x, location.y)) {
           temp2 = child
           return true
         }
       })
+      // 当光标在移出元素时
       if (temp2.opt.hover && count2 === 0) {
+        this.clear()
         temp2.attr(temp2.opt.hover, true)
         hoverEle = temp2
         count2++
         this.draw()
       }
+      // 当光标在移入元素时
       if (hoverEle && hoverEle.id !== temp2.id && count2 === 1) {
+        this.clear()
         hoverEle.attr(hoverEle.noHover, true)
         count2 = 0
         this.draw()
@@ -148,7 +153,7 @@ class Cvs {
   draw () {
     this.children.forEach(child => {
       if (child.opt.visible) {
-        child.draw()
+        child.draw.call(child, this.ctx)
       }
     })
   }
@@ -181,10 +186,10 @@ class Cvs {
   }
   cancelAnimate () {
     this.stopTime = new Date()
-    cancelAnim(this.stop)
+    if (this.stop) cancelAnim(this.stop)
   }
   resetAnimate () {
-    cancelAnim(this.stop)
+    if (this.stop) cancelAnim(this.stop)
     this.initAnimateTime = 0
     this.pauseTime = 0
     this.animateTime = 0

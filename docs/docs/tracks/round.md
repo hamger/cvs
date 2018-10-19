@@ -12,6 +12,8 @@ let round = new Round(options);
 | ----------- | -------------- | ------------------------------------------------- | -------- |
 | delay       | Number         | 规定运动延迟时间                                  | --       |
 | duration    | Number         | 规定运动持续时间                                  | --       |
+| retrace        | Boolean         | 规定运动是否折返                                  | `false`  |
+| iterationCount | Number         | 规定运动重复次数                                  | `1`      |
 | vpx         | Number         | 规定圆周运动中心点在X轴上的位置                              | --       |
 | vpy         | Number         | 规定圆周运动中心点在Y轴上的位置                              | --       |
 | r           | Number         | 规定圆周运动的半径                              | `50`       |
@@ -21,8 +23,12 @@ let round = new Round(options);
 
 ::: tip
 `angle` 值为元素与中心点的连线跟X轴形成的角度     
-`direction` 值为`false`时，逆时针转动 
 :::
+
+::: tip
+`direction` 值为`false`时，逆时针转动     
+:::
+ 
 
 
 

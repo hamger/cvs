@@ -1,6 +1,6 @@
 # cvs
 
-cvs (a short name from canvas) is a basic canvas framework for 2d drawing, it's designed to make drawing easier.
+Cvs (a short name from 'canvas') is a basic canvas framework for 2d drawing, it's designed to make canvas's drawing easier.
 
 ## Advantage
 
@@ -11,6 +11,11 @@ cvs (a short name from canvas) is a basic canvas framework for 2d drawing, it's 
 - 元素支持基础事件绑定，时画布具有更多的交互
 - 支持 Canvas 离屏渲染，使动画绘制更加流畅
 - 简化曲线运动的调用，并提供工具辅助可视化开发
+
+## Install
+```bash
+npm install cvs
+```
 
 ## Usage
 
@@ -41,11 +46,17 @@ cvs.draw();
 - 拓展缓动类型
 - 拓展规则性运动方程
 - 实现大小、颜色的动画
-- 支持图片的更迭动画
+- 支持图片的更迭动画
 - 基于时间线的细粒度动画控制
 - 支持伪 3D 效果
 
 ## Changelog
+
+### 2018.10.18
+> v0.2.3 支持自定义元素
+
+### 2018.10.17
+> v0.2.2 修复 hover 事件重复绘制元素
 
 ### 2018.10.16
 > v0.2.1 考虑到 duration 是 Infinity 的情况，loop 函数接受的参数改为当前轨迹下已运行的时间
