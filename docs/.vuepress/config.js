@@ -32,14 +32,6 @@ module.exports = {
           '/docs/graphics/Text'
         ]
       },
-<<<<<<< HEAD
-      // {
-      //   title: 'Animate',
-      //   collapsable: false,
-      //   children: ['/docs/animateRound/animatePath', '/docs/animateRound/animateColor']
-      // },
-=======
->>>>>>> bf07908f51315883808f5aaacaae328a7c1884e9
       {
         title: 'Tracks',
         collapsable: false,
