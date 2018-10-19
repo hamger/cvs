@@ -38,7 +38,7 @@ cvs.animate()
 //     cvs.cancelAnimate()
 //     flag = false
 //   } else {
-//     cvs.animateRound()
+//     cvs.animate()
 //     flag = true
 //   }
 // }
