@@ -35,7 +35,12 @@ module.exports = {
       {
         title: 'Tracks',
         collapsable: false,
-        children: ['/docs/tracks/bezier']
+        children: [
+          '/docs/tracks/bezier',
+          '/docs/tracks/round',
+          '/docs/tracks/elliptic',
+          '/docs/tracks/parabola',
+        ]
       }
     ]
   }

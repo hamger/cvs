@@ -1,4 +1,4 @@
-### Round
+### Elliptic
 
 定义一段椭圆运动
 
@@ -50,18 +50,26 @@ let dot = new Circle({
   cache: true,
   fill: "pink"
 });
+let cd = new Circle({
+  x: cvs.width / 2,
+  y: cvs.height / 2,
+  r: 10,
+  cache: true,
+});
 let elliptic = new Elliptic({
-    delay: 0,
-    duration: 8000,
-    retrace: false, // 是否折返
-    iterationCount: 1, // 重复次数
-    centerX: cvs.width / 2,
-    centerY: cvs.height / 2,
-    angle: 180,
-    direction: false
+  delay: 0,
+  duration: 8000,
+  retrace: false, // 是否折返
+  iterationCount: 1, // 重复次数
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
+  radiusX: 200,
+  radiusY: 80,
+  angle: 180,
+  direction: false
 });
 dot.addTrack(elliptic);
-cvs.add(dot);
+cvs.add([dot, cd]);
 cvs.animate();
 ```
 
