@@ -1,7 +1,7 @@
 <template>
   <div>
     <Container>
-      <div id="container" style="width:100%;height:160px"></div>
+      <div id="container" style="width:100%;height:400px"></div>
     </Container>
   </div>
 </template>
@@ -19,7 +19,6 @@
       let cvs = new Cvs({
         container: document.getElementById('container')
       })
-
       let dot = new Circle({
         x: 0,
         y: 0,
@@ -29,19 +28,16 @@
       });
       let parabola = new Parabola({
         delay: 0,
-        duration: 8000,
+        duration: 2000,
         retrace: false, // 是否折返
         iterationCount: 1, // 重复次数
-        centerX: cvs.width / 2,
-        centerY: cvs.height / 2,
-        r: 100,
-        angle: 180,
-        direction: false
+        endX: cvs.width - 10,
+        endY: cvs.height - 10
       });
       dot.addTrack(parabola);
 
-      cvs.add(dot)
-      cvs.animate()
+      cvs.add(dot);
+      cvs.animate();
     }
   }
 </script>

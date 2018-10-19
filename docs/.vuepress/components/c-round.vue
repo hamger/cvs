@@ -1,7 +1,7 @@
 <template>
   <div>
     <Container>
-      <div id="container" style="width:100%;height:160px"></div>
+      <div id="container" style="width:100%;height:300px"></div>
     </Container>
   </div>
 </template>
@@ -27,6 +27,12 @@
         cache: true,
         fill: "pink"
       });
+      let cd = new Circle({
+        x: cvs.width / 2,
+        y: cvs.height / 2,
+        r: 10,
+        cache: true,
+      })
       let round = new Round({
         delay: 0,
         duration: 8000,
@@ -40,7 +46,7 @@
       });
       dot.addTrack(round);
 
-      cvs.add(dot)
+      cvs.add([dot, cd])
       cvs.animate()
     }
   }

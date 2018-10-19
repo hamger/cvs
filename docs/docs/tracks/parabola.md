@@ -1,4 +1,4 @@
-### Round
+### Parabola
 
 定义一段抛物线运动，顶点是元素现在的位置
 
@@ -39,14 +39,15 @@ let dot = new Circle({
   fill: "pink"
 });
 let parabola = new Parabola({
-    delay: 0,
-    duration: 2000,
-    retrace: false, // 是否折返
-    iterationCount: 1, // 重复次数
-    endX: cvs.width,
-    endY: cvs.height
+  delay: 0,
+  duration: 2000,
+  retrace: false, // 是否折返
+  iterationCount: 1, // 重复次数
+  endX: cvs.width - 10,
+  endY: cvs.height - 10
 });
 dot.addTrack(parabola);
+
 cvs.add(dot);
 cvs.animate();
 ```
