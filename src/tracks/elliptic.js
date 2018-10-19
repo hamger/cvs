@@ -7,14 +7,26 @@ export default class Elliptic extends Track {
     this.defaultRadiusX = 100
     this.defaultRadiusY = 80
     this.defaultAngle = 360
-    this.defaultDirection = true
   }
   loop (t) {
-    if (!this.centerX || !this.centerY) {
-      throw Error('centerX|centerY参数缺失')
+    if (typeof this.centerX !== 'number' || typeof this.centerY !== 'number') {
+      throw Error('centerX|centerY参数类型错误')
     }
     const p2 = t / this.duration
-    let p = easing[this.easing](p2)
+    let p = 0
+    if (this.retrace) {
+      if (p2 <= 0.5) {
+        // 贝塞尔函数涉及的占比比例，0<=p<=1
+        p = easing[this.easing](p2 * 2)
+      } else {
+        let p3 = 1 - (p2 - 0.5) * 2
+        // 防止折返后终点不在起点上
+        if ((1 - p2) * this.duration < 80) p3 = 0
+        p = easing[this.easing](p3)
+      }
+    } else {
+      p = easing[this.easing](p2)
+    }
     const speed = p * this.defaultAngle
     let angle
     if (this.direction === false) {

@@ -12,6 +12,7 @@ import Track from './track'
 import Bezier from './tracks/bezier'
 import Round from './tracks/round'
 import Elliptic from './tracks/elliptic'
+import Parabola from './tracks/parabola'
 import easing from './easing'
 
 export {
@@ -29,5 +30,6 @@ export {
   Bezier,
   easing,
   Round,
-  Elliptic
+  Elliptic,
+  Parabola
 }

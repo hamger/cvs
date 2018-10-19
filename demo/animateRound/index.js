@@ -51,7 +51,7 @@ let round = new Round({
 })
 
 let sround = new Round({
-  delay: 0,
+  delay: 3000,
   duration: 5000,
   retrace: false, // 是否折返
   iterationCount: Infinity, // 重复次数
@@ -64,7 +64,7 @@ let sround = new Round({
 let tround = new Round({
   delay: 0,
   duration: 8000,
-  retrace: false, // 是否折返
+  retrace: true, // 是否折返
   iterationCount: 1, // 重复次数
   centerX: cvs.width / 2,
   centerY: cvs.height / 2,

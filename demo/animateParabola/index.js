@@ -1,83 +1,72 @@
-import { Cvs, Circle, Rect, Bezier, Elliptic, Track, easing } from '@'
+import { Cvs, Circle, Rect, Parabola, Track, easing } from '@'
 let cvs = new Cvs({
   container: document.getElementById('container')
 })
 let stopBtn = document.querySelector('.stop')
 let againBtn = document.querySelector('.again')
 let flag = true
-
+console.log(typeof 666)
 let dot = new Circle({
   zIndex: 1,
   r: 10,
-  x: 169,
-  y: 225,
+  x: 0,
+  y: 0,
   cache: true,
   fill: 'pink'
 })
+
 let sdot = new Circle({
   zIndex: 1,
+  relativeX: 10,
   r: 10,
-  x: 169,
-  y: 225,
+  x: 0,
+  y: cvs.height,
   cache: true,
   fill: 'blue'
 })
+
 let tdot = new Circle({
   zIndex: 1,
   r: 10,
-  x: 169,
-  y: 225,
+  x: 0,
+  y: 0,
   cache: true,
   fill: 'red'
 })
 
-let cd = new Circle({
-  r: 10,
-  x: cvs.width / 2,
-  y: cvs.height / 2
-})
-
-let elliptic = new Elliptic({
+let parabola = new Parabola({
   delay: 0,
-  duration: 3000,
+  duration: 2000,
   retrace: true, // 是否折返
   iterationCount: 1, // 重复次数
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
-  angle: 0
+  endX: cvs.width,
+  endY: cvs.height
 })
 
-let selliptic = new Elliptic({
+let sround = new Parabola({
   delay: 0,
-  duration: 5000,
-  retrace: false, // 是否折返
-  iterationCount: Infinity, // 重复次数
-  radiusX: 300,
-  radiusY: 100,
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
-  angle: 90
-})
-
-let telliptic = new Elliptic({
-  delay: 0,
-  duration: 8000,
+  duration: 2000,
   retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
-  radiusX: 50,
-  radiusY: 200,
-  angle: 180,
-  direction: false
+  endX: cvs.width,
+  endY: 0
 })
 
-dot.addTrack(elliptic)
-sdot.addTrack(selliptic)
-tdot.addTrack(telliptic)
+let tround = new Parabola({
+  delay: 0,
+  duration: 2000,
+  retrace: false, // 是否折返
+  iterationCount: 1, // 重复次数
+  endX: cvs.width / 2,
+  endY: cvs.height
+})
 
-cvs.add([dot, sdot, tdot, cd])
-// cvs.add([dot, cd])
+dot.addTrack(parabola)
+sdot.addTrack(sround)
+tdot.addTrack(tround)
+
+cvs.add([dot, sdot, tdot])
+// cvs.add(dot)
 
 cvs.animate()
 
