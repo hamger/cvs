@@ -10,6 +10,9 @@ import Text from './graphics/text'
 import Animate from './animate'
 import Track from './track'
 import Bezier from './tracks/bezier'
+import Round from './tracks/round'
+import Elliptic from './tracks/elliptic'
+import Parabola from './tracks/parabola'
 import easing from './easing'
 
 export {
@@ -25,5 +28,8 @@ export {
   Path,
   Track,
   Bezier,
-  easing
+  easing,
+  Round,
+  Elliptic,
+  Parabola
 }
