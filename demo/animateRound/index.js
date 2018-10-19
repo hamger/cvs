@@ -14,14 +14,17 @@ let dot = new Circle({
   cache: true,
   fill: 'pink'
 })
+
 let sdot = new Circle({
   zIndex: 1,
+  relativeX: 10,
   r: 10,
   x: 169,
   y: 225,
   cache: true,
   fill: 'blue'
 })
+
 let tdot = new Circle({
   zIndex: 1,
   r: 10,
@@ -42,8 +45,8 @@ let round = new Round({
   duration: 3000,
   retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
-  vpx: cvs.width / 2,
-  vpy: cvs.height / 2,
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
   angle: 0
 })
 
@@ -52,8 +55,9 @@ let sround = new Round({
   duration: 5000,
   retrace: false, // 是否折返
   iterationCount: Infinity, // 重复次数
-  vpx: cvs.width / 2,
-  vpy: cvs.height / 2,
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
+  r: 150,
   angle: 90
 })
 
@@ -62,8 +66,9 @@ let tround = new Round({
   duration: 8000,
   retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
-  vpx: cvs.width / 2,
-  vpy: cvs.height / 2,
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
+  r: 200,
   angle: 180,
   direction: false
 })

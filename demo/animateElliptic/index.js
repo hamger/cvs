@@ -42,8 +42,8 @@ let elliptic = new Elliptic({
   duration: 3000,
   retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
-  vpx: cvs.width / 2,
-  vpy: cvs.height / 2,
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
   angle: 0
 })
 
@@ -54,8 +54,8 @@ let selliptic = new Elliptic({
   iterationCount: Infinity, // 重复次数
   radiusX: 300,
   radiusY: 100,
-  vpx: cvs.width / 2,
-  vpy: cvs.height / 2,
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
   angle: 90
 })
 
@@ -64,8 +64,8 @@ let telliptic = new Elliptic({
   duration: 8000,
   retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
-  vpx: cvs.width / 2,
-  vpy: cvs.height / 2,
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
   radiusX: 50,
   radiusY: 200,
   angle: 180,

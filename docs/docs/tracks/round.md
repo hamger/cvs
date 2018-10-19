@@ -14,8 +14,10 @@ let round = new Round(options);
 | duration    | Number         | 规定运动持续时间                                  | --       |
 | retrace        | Boolean         | 规定运动是否折返                                  | `false`  |
 | iterationCount | Number         | 规定运动重复次数                                  | `1`      |
-| vpx         | Number         | 规定圆周运动中心点在X轴上的位置                              | --       |
-| vpy         | Number         | 规定圆周运动中心点在Y轴上的位置                              | --       |
+| relativeX         | Number         | 元素本身运动中心相对于元素左上角(元素为圆的话是相对于圆心)在X轴上的偏移量                              | `0`       |
+| relativeY         | Number         | 元素本身运动中心相对于元素左上角(元素为圆的话是相对于圆心)在Y轴上的偏移量                              | `0`       |
+| centerX         | Number         | 规定圆周运动中心点在X轴上的位置                              | --       |
+| centerY         | Number         | 规定圆周运动中心点在Y轴上的位置                              | --       |
 | r           | Number         | 规定圆周运动的半径                              | `50`       |
 | angle       | Number         | 规定圆周运动的初始位置                           | `0`       |
 | direction   | Number         | 规定圆周运动的方向                              | `true`       |
@@ -28,9 +30,10 @@ let round = new Round(options);
 ::: tip
 `direction` 值为`false`时，逆时针转动     
 :::
- 
 
-
+::: tip
+`relativeX` : 假设元素为一个宽高都为20正方形，不设置`relativeX`时，是正方形的左上角(0,0)做圆周运动，设置`relativeX`的值为10，就是元素身上(10，0)这个点做圆周运动，`relativeY`同理      
+::: 
 
 ### example
 
@@ -51,8 +54,8 @@ let round = new Round({
     duration: 8000,
     retrace: false, // 是否折返
     iterationCount: 1, // 重复次数
-    vpx: cvs.width / 2,
-    vpy: cvs.height / 2,
+    centerX: cvs.width / 2,
+    centerY: cvs.height / 2,
     r: 100,
     angle: 180,
     direction: false

@@ -32,8 +32,8 @@
         duration: 8000,
         retrace: false, // 是否折返
         iterationCount: 1, // 重复次数
-        vpx: cvs.width / 2,
-        vpy: cvs.height / 2,
+        centerX: cvs.width / 2,
+        centerY: cvs.height / 2,
         r: 100,
         angle: 180,
         direction: false

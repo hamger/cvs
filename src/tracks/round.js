@@ -8,8 +8,8 @@ export default class Round extends Track {
     this.defaultAngle = 360
   }
   loop (t) {
-    if (!this.vpx || !this.vpy) {
-      throw Error('vpx|vpy参数缺失')
+    if (!this.centerX || !this.centerY) {
+      throw Error('centerX|centerY参数缺失')
     }
     const p2 = t / this.duration
     let p = easing[this.easing](p2)
@@ -29,11 +29,11 @@ export default class Round extends Track {
   getPosition (ele, angle) {
     const relativeX = ele.relativeX || 0
     const relativeY = ele.relativeY || 0
-    const vpx = ele.vpx
-    const vpy = ele.vpy
+    const centerX = ele.centerX
+    const centerY = ele.centerY
     const r = ele.r || this.defaultR
-    let x = vpx + r * Math.cos(angle * Math.PI / 180) - relativeX
-    let y = vpy + r * Math.sin(angle * Math.PI / 180) - relativeY
+    let x = centerX + r * Math.cos(angle * Math.PI / 180) - relativeX
+    let y = centerY + r * Math.sin(angle * Math.PI / 180) - relativeY
     return { x, y }
   }
 }
