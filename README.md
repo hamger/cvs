@@ -2,7 +2,7 @@
 
 Cvs (a short name from 'canvas') is a basic canvas framework for 2d drawing, it's designed to make canvas's drawing easier.
 
-## Advantage
+## Features
 
 - 对其他库的无依赖，轻量快捷
 - 支持元素和运动的自定义，应用灵活
