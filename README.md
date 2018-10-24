@@ -61,7 +61,7 @@ commitType: description
 - fix: 问题修复
 - docs: 文档修改
 - test: 测试用例修改
-- perf: 代码优化，包括重构，格式、配置修改等
+- opti: 代码优化，包括重构，格式、配置修改等
 
 ## Changelog
 
