@@ -16,6 +16,7 @@ let element = new Rect(options);
 | h           | Number  | 规定矩形高度    | --      |
 | x           | Number  | 规定矩形 x 坐标 | --      |
 | y           | Number  | 规定矩形 y 坐标 | --      |
+| borderRadius| Number  | 规定矩形的圆角  | --      |
 | cache       | Boolean | 规定是否缓存    | `false` |
 
 ::: tip
@@ -30,6 +31,7 @@ new Rect({
   y: 600,
   fill: "pink",
   w: 50,
-  h: 50
+  h: 50,
+  borderRadius: 5
 });
 ```

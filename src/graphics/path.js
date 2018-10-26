@@ -6,6 +6,8 @@ export default class Path extends Element {
     super(opt)
     this.lastPoint = []
     this.lastCpoint = []
+    this.defaultArrowAngle = 30
+    this.defaultArrowLength = 20
   }
   draw (ctx) {
     ctx.save()
@@ -28,7 +30,6 @@ export default class Path extends Element {
         // 去除多余的空格
         return delBlank(item)
       })
-
     pathType.forEach((item, index) => {
       let arr = []
       if (pathVal[index]) {
@@ -38,6 +39,20 @@ export default class Path extends Element {
         })
       }
       this.resolve(item, arr)
+      if (index === pathType.length - 1) {
+        const start = pathVal[pathType.length - 2].split(' ').map(item => {
+          // 需要将字符串转化为数字
+          return +item
+        })
+        if (this.opt.endArrow) {
+          const { angle, len } = this.opt.endArrow
+          this.drawArrow('end', start, arr, angle, len)
+        }
+        if (this.opt.startArrow) {
+          const { angle, len } = this.opt.startArrow
+          this.drawArrow('start', start, arr, angle, len)
+        }
+      }
     })
   }
   resolve (type, val) {
@@ -120,5 +135,32 @@ export default class Path extends Element {
     if (/(Z|z)/.test(type)) {
       this.ctx.closePath()
     }
+  }
+  drawArrow (type, startPos, lastPos, angle = this.defaultArrowAngle, len = this.defaultArrowLength) {
+    const endAngle = Math.atan2(lastPos[1] - startPos[1], lastPos[0] - startPos[0]) * 180 / Math.PI + 180
+    const startAngle = Math.atan2(lastPos[1] - startPos[1], lastPos[0] - startPos[0]) * 180 / Math.PI
+    const initAngle = type === 'end' ? endAngle : startAngle
+    const reference = type === 'end' ? lastPos : startPos
+    const p1Angle = (initAngle + angle) * Math.PI / 180
+    const p2Angle = (initAngle - angle) * Math.PI / 180
+    const p1 = [reference[0] + len * Math.cos(p1Angle), reference[1] + len * Math.sin(p1Angle)]
+    const p2 = [reference[0] + len * Math.cos(p2Angle), reference[1] + len * Math.sin(p2Angle)]
+    // const { fill } = type === 'end' ? this.opt.endArrow || {} : this.opt.startArrow || {}
+    // console.log(fill)
+    // if (fill) {
+    //   this.ctx.fillStyle = fill
+    //   this.ctx.moveTo(reference[0], reference[1])
+    //   this.ctx.lineTo(p1[0], p1[1])
+    //   this.ctx.lineTo(p2[0], p2[1])
+    //   this.ctx.closePath()
+    //   this.ctx.fill()
+    // } else {
+    //   this.ctx.moveTo(p1[0], p1[1])
+    //   this.ctx.lineTo(reference[0], reference[1])
+    //   this.ctx.lineTo(p2[0], p2[1])
+    // }
+    this.ctx.moveTo(p1[0], p1[1])
+    this.ctx.lineTo(reference[0], reference[1])
+    this.ctx.lineTo(p2[0], p2[1])
   }
 }
