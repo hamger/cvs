@@ -2,7 +2,7 @@
 
 Cvs (a short name from 'canvas') is a basic canvas framework for 2d drawing, it's designed to make canvas's drawing easier.
 
-## Advantage
+## Features
 
 - 对其他库的无依赖，轻量快捷
 - 支持元素和运动的自定义，应用灵活
@@ -49,6 +49,19 @@ cvs.draw();
 - 支持图片的更迭动画
 - 基于时间线的细粒度动画控制
 - 支持伪 3D 效果
+
+## CommitRule
+提交信息需遵循以下格式：
+```bash
+commitType: description
+```
+`commitType`应为以下类型之一：
+
+- feat: 增加新特性
+- fix: 问题修复
+- docs: 文档修改
+- test: 测试用例修改
+- opti: 代码优化，包括重构，格式、配置修改等
 
 ## Changelog
 
