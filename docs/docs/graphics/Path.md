@@ -13,6 +13,8 @@ let element = new Path(options);
 | options.key | value  | description | default |
 | ----------- | ------ | ----------- | ------- |
 | path        | String | 规定路径    | --      |
+| endArrow    | Boolean\<object>    | 规定路径结束位置箭头    | `false`      |
+| startArrow  | Boolean\<object>    | 规定路径开始箭头    | `false`      |
 
 > 使用字符串描述路径，详情参考 [svg path](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths)
 
@@ -28,19 +30,47 @@ let element = new Path(options);
 - `S/s x2 y2, x y`表示绘制光滑的三次贝塞尔曲线
 - `Z/z`表示闭合路径
 
+> endArrow、startArrow支持的参数
+
+- angle: 箭头跟路径的夹角
+- len: 箭头的长度
+<!-- - angle: 箭头跟路径的夹角 -->
+
 ### example
 
 ```js
-new Path({
-  path:
-    "M 10 10" +
-    "L 100 100" +
-    "l 30 -50" +
-    "C 100 100 200 200 300 200" +
-    "s 50 50 100 100" +
-    'T 130 350' +
-    "a 0 50 50 -90 180 1",
-  stroke: "#454"
-});
+let cvs = new Cvs({
+  container: document.getElementById('path-container')
+})
+
+cvs.add(
+  new Path({
+    path:
+      'M 10 10' +
+      'L 100 100' +
+      'l 30 -50' +
+      'C 100 100 200 200 300 200' +
+      's 50 50 100 100' +
+      'T 130 350' +
+      'a 0 50 50 -90 180',
+    stroke: '#454'
+  })
+)
+cvs.add(
+  new Path({
+    path: 'M 100 100' + 'L 200 200',
+    stroke: 'red',
+    startArrow: {
+      angle: 15,
+      len: 50,
+    },
+    endArrow: {
+      angle: 15,
+      len: 30,
+    }
+  })
+)
+
+cvs.draw()
 ```
 <ClientOnly><c-path></c-path></ClientOnly>

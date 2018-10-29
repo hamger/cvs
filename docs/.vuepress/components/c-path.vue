@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Cvs, Path } from 'cvs'
+import { Cvs, Path } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {
@@ -31,6 +31,20 @@ export default {
           'T 130 350' +
           'a 0 50 50 -90 180',
         stroke: '#454'
+      })
+    )
+    cvs.add(
+      new Path({
+        path: 'M 100 100' + 'L 200 200',
+        stroke: 'red',
+        startArrow: {
+          angle: 15,
+          len: 50,
+        },
+        endArrow: {
+          angle: 15,
+          len: 30,
+        }
       })
     )
 
