@@ -1,44 +1,35 @@
-import { Cvs, Circle, AnimatePath } from '@'
-const { circling, elliptic, line, parabola, colorPalette, gradientColor } = AnimatePath
+import { Cvs, Circle, Rect, Bezier, Color, Track, easing } from '@'
+
 let cvs = new Cvs({
   container: document.getElementById('container')
 })
-let ball = new Circle({
-  x: 300,
-  y: 300,
-  r: 200,
-  cache: true
-})
-cvs.add(ball)
-const colors = [
-  [0.3, 'red'],
-  [0.7, 'orange'],
-  [0.17, 'yellow'],
-  [0.22, 'green'],
-  [0.42, 'cyan'],
-  [0.82, 'blue'],
-  [0.90, 'purple'],
-]
 
-// const colorArr = colorPalette(colors)
-ball.animate = () => {
-  gradientColor(ball, {
-    colors,
-    during: 20,
-    period: true
-  })
-}
+let dot = new Circle({
+  zIndex: 1,
+  r: 200,
+  x: 400,
+  y: 400,
+  cache: true,
+  fill: 'pink'
+})
+
+let color = new Color({
+  delay: 0,
+  duration: 8000,
+  retrace: false, // 是否折返
+  colors: [
+    [0.3, 'red'],
+    [0.7, 'orange'],
+    [0.17, 'yellow'],
+    [0.22, 'green'],
+    [0.42, 'cyan'],
+    [0.82, 'blue'],
+    [0.90, 'purple'],
+  ]
+})
+
+dot.addTrack(color)
+
+cvs.add([dot])
 
 cvs.animate()
-
-// let flag
-// let stopBtn = document.querySelector('.stop')
-// stopBtn.onclick = function () {
-//   if (flag) {
-//     cvs.cancelAnimate()
-//     flag = false
-//   } else {
-//     cvs.animate()
-//     flag = true
-//   }
-// }
