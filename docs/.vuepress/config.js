@@ -40,6 +40,7 @@ module.exports = {
           '/docs/tracks/round',
           '/docs/tracks/elliptic',
           '/docs/tracks/parabola',
+          '/docs/tracks/color',
         ]
       }
     ]
