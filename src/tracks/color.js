@@ -24,7 +24,8 @@ export default class Color extends Track {
       p = easing[this.easing](p2)
     }
     const colorArr = this.colorMap
-    const offset = (p * colorArr.length).toFixed(0)
+    const offset = (p * (colorArr.length / 4 - 1)).toFixed(0)
+    console.log(offset)
     this.$ele.attr({
       fill: 'rgba(' + [
         colorArr[offset * 4 + 0],

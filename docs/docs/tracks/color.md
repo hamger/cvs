@@ -15,6 +15,7 @@ let round = new Color(options);
 | retrace     | Boolean       | 规定运动是否折返                                  | `false`  |
 | easing      | String        | 规定缓动效果（[可选值](/docs/track.html#easing)） | `linear` |
 | colors      | Array\<Array> | 颜色变化范围                                      | --       |
+|iterationCount|Number|重复次数|1|
 
 ### example
 
