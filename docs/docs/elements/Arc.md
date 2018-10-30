@@ -28,11 +28,14 @@ let element = new Arc(options);
 
 ```js
 new Arc({
-  x: 500,
-  y: 100,
+  x: 100,
+  y: 70,
   r: 50,
-  startAngle: -80,
-  endAngle: 20,
-  anticlockwise: true
-});
+  startAngle: -90,
+  endAngle: 45,
+  anticlockwise: true,
+  stroke: 'blue'
+})
 ```
+
+<c-arc></c-arc>

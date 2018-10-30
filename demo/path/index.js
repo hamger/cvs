@@ -99,8 +99,8 @@ cvs.add(
 //     x: 500.3,
 //     y: 100.4,
 //     r: 50,
-//     startAngle: -80,
-//     endAngle: 20,
+//     startAngle: -90,
+//     endAngle: 45,
 //     anticlockwise: true,
 //     cache: true
 //   })

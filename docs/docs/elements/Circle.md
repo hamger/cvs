@@ -31,4 +31,4 @@ new Circle({
 });
 ```
 
-<c-circle></c-circle>
+<ClientOnly><c-circle></c-circle></ClientOnly>

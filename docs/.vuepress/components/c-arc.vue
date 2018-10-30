@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Cvs, Circle } from '../../../src/'
+import { Cvs, Arc } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {
@@ -20,10 +20,14 @@ export default {
       container: document.getElementById('text-container')
     })
     cvs.add(
-      new Circle({
-        r: 50,
+      new Arc({
         x: 100,
-        y: 60
+        y: 70,
+        r: 50,
+        startAngle: -90,
+        endAngle: 45,
+        anticlockwise: true,
+        stroke: 'blue'
       })
     )
     cvs.draw()
