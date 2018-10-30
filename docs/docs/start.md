@@ -44,4 +44,4 @@ for (let i = 0; i < dotCount; i++) {
 cvs.animate();
 ```
 
-<ClientOnly><c-attr></c-attr></ClientOnly>
+<ClientOnly><c-start></c-start></ClientOnly>
