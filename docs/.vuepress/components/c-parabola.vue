@@ -15,10 +15,14 @@ export default {
   data() {
     return {}
   },
+  destroyed() {
+    this.cvs.cancelAnimate()
+  },
   mounted() {
     let cvs = new Cvs({
       container: document.getElementById('container')
     })
+    this.cvs = cvs
     let dot = new Circle({
       x: 0,
       y: 0,
