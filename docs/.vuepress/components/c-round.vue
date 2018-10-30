@@ -37,7 +37,7 @@
         delay: 0,
         duration: 8000,
         retrace: false, // 是否折返
-        iterationCount: 1, // 重复次数
+        iterationCount: 30, // 重复次数
         centerX: cvs.width / 2,
         centerY: cvs.height / 2,
         r: 100,

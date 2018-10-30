@@ -42,7 +42,7 @@ let parabola = new Parabola({
   delay: 0,
   duration: 2000,
   retrace: false, // 是否折返
-  iterationCount: 50, // 重复次数
+  iterationCount: 30, // 重复次数
   endX: cvs.width - 10,
   endY: cvs.height - 10
 });
