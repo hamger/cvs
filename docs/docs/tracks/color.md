@@ -8,25 +8,22 @@ let round = new Color(options);
 
 ### options
 
-| options.key | value          | description                                       | default  |
-| ----------- | -------------- | ------------------------------------------------- | -------- |
-| delay       | Number         | 规定运动延迟时间                                  | --       |
-| duration    | Number         | 规定运动持续时间                                  | --       |
-| retrace        | Boolean         | 规定运动是否折返                                  | `false`  |
-| easing      | String         | 规定缓动效果（[可选值](/docs/track.html#easing)） | `linear` |
-| colors      | <Array-Array\>  | 颜色变化范围  | -- |
-
-
+| options.key | value         | description                                       | default  |
+| ----------- | ------------- | ------------------------------------------------- | -------- |
+| delay       | Number        | 规定运动延迟时间                                  | --       |
+| duration    | Number        | 规定运动持续时间                                  | --       |
+| retrace     | Boolean       | 规定运动是否折返                                  | `false`  |
+| easing      | String        | 规定缓动效果（[可选值](/docs/track.html#easing)） | `linear` |
+| colors      | Array\<Array> | 颜色变化范围                                      | --       |
 
 ### example
 
 ```js
-
-import { Cvs, Circle, Color } from '@'
+import { Cvs, Circle, Color } from "cvs";
 
 let cvs = new Cvs({
-  container: document.getElementById('container')
-})
+  container: document.getElementById("container")
+});
 
 let dot = new Circle({
   zIndex: 1,
@@ -34,29 +31,27 @@ let dot = new Circle({
   x: 400,
   y: 400,
   cache: true,
-  fill: 'pink'
-})
+  fill: "pink"
+});
 
 let color = new Color({
   delay: 0,
   duration: 8000,
   retrace: false, // 是否折返
   colors: [
-    [0.3, 'red'],
-    [0.7, 'orange'],
-    [0.17, 'yellow'],
-    [0.22, 'green'],
-    [0.42, 'cyan'],
-    [0.82, 'blue'],
-    [0.90, 'purple'],
+    [0.3, "red"],
+    [0.7, "orange"],
+    [0.17, "yellow"],
+    [0.22, "green"],
+    [0.42, "cyan"],
+    [0.82, "blue"],
+    [0.9, "purple"]
   ]
-})
+});
 
-dot.addTrack(color)
+dot.addTrack(color);
 
-cvs.add([dot])
+cvs.add([dot]);
 
-cvs.animate()
-
+cvs.animate();
 ```
-

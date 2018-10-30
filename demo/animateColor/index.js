@@ -16,7 +16,7 @@ let dot = new Circle({
 let color = new Color({
   delay: 0,
   duration: 8000,
-  retrace: false, // 是否折返
+  retrace: true, // 是否折返
   colors: [
     [0.3, 'red'],
     [0.7, 'orange'],

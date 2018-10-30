@@ -1,13 +1,12 @@
 import Cvs from './cvs'
 import Element from './element'
-import Path from './graphics/path'
-import Circle from './graphics/circle'
-import Rect from './graphics/rect'
-import Poly from './graphics/poly'
-import Arc from './graphics/arc'
-import Img from './graphics/img'
-import Text from './graphics/text'
-import Animate from './animate'
+import Path from './elements/path'
+import Circle from './elements/circle'
+import Rect from './elements/rect'
+import Poly from './elements/poly'
+import Arc from './elements/arc'
+import Img from './elements/img'
+import Text from './elements/text'
 import Track from './track'
 import Bezier from './tracks/bezier'
 import Round from './tracks/round'
@@ -19,7 +18,6 @@ import easing from './easing'
 export {
   Cvs,
   Element,
-  Animate,
   Circle,
   Rect,
   Poly,

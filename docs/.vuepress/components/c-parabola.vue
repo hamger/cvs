@@ -6,38 +6,38 @@
   </div>
 </template>
 <script>
-  import { Cvs, Parabola, Circle } from '../../../src/'
-  import Container from '../Container'
-  export default {
-    components: {
-      Container
-    },
-    data() {
-      return {}
-    },
-    mounted() {
-      let cvs = new Cvs({
-        container: document.getElementById('container')
-      })
-      let dot = new Circle({
-        x: 0,
-        y: 0,
-        r: 10,
-        cache: true,
-        fill: "pink"
-      });
-      let parabola = new Parabola({
-        delay: 0,
-        duration: 2000,
-        retrace: false, // 是否折返
-        iterationCount: 1, // 重复次数
-        endX: cvs.width - 10,
-        endY: cvs.height - 10
-      });
-      dot.addTrack(parabola);
+import { Cvs, Parabola, Circle } from '../../../src/'
+import Container from '../Container'
+export default {
+  components: {
+    Container
+  },
+  data() {
+    return {}
+  },
+  mounted() {
+    let cvs = new Cvs({
+      container: document.getElementById('container')
+    })
+    let dot = new Circle({
+      x: 0,
+      y: 0,
+      r: 10,
+      cache: true,
+      fill: 'pink'
+    })
+    let parabola = new Parabola({
+      delay: 0,
+      duration: 2000,
+      retrace: false, // 是否折返
+      iterationCount: 50, // 重复次数
+      endX: cvs.width - 10,
+      endY: cvs.height - 10
+    })
+    dot.addTrack(parabola)
 
-      cvs.add(dot);
-      cvs.animate();
-    }
+    cvs.add(dot)
+    cvs.animate()
   }
+}
 </script>
