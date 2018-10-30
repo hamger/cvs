@@ -30,20 +30,20 @@ let element = new Img(options);
 ### example
 
 ```js
- let cvs = new Cvs({
-    container: document.getElementById('container')
-  })
+let cvs = new Cvs({
+  container: document.getElementById('img-container')
+})
 
-  let img = new Image()
-  img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
+let img = new Image()
+img.src = require('../../../static/safari.png')
 
-  img.onload = function() {
-    cvs.add(new Img({
-      img: img,
-      dx: 200,
-      dy: 100
-    }));
-    cvs.draw()
-  };
+img.onload = function() {
+  cvs.add(new Img({
+    img: img,
+    dx: 200,
+    dy: 10
+  }))
+  cvs.draw()
+}
 ```
-<ClientOnly><c-img></c-img></ClientOnly>
+<c-img></c-img>

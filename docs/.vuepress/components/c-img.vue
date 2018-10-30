@@ -21,7 +21,7 @@ export default {
     })
 
     let img = new Image()
-    img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
+    img.src = require('../../../static/safari.png')
 
     img.onload = function() {
       cvs.add(new Img({
