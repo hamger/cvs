@@ -17,7 +17,7 @@ let color = new Color({
   delay: 0,
   duration: 5000,
   retrace: true, // 是否折返
-  iterationCount: 1,
+  iterationCount: 10,
   colors: [
     [0, 'red'],
     [0.7, 'orange'],

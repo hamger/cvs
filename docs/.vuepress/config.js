@@ -20,16 +20,16 @@ module.exports = {
       ['/docs/element', 'Element'],
       ['/docs/track', 'Track'],
       {
-        title: 'graphics',
+        title: 'elements',
         collapsable: false,
         children: [
-          '/docs/graphics/Circle',
-          '/docs/graphics/Rect',
-          '/docs/graphics/Arc',
-          '/docs/graphics/Poly',
-          '/docs/graphics/Path',
-          '/docs/graphics/Img',
-          '/docs/graphics/Text'
+          '/docs/elements/Circle',
+          '/docs/elements/Rect',
+          '/docs/elements/Arc',
+          '/docs/elements/Poly',
+          '/docs/elements/Path',
+          '/docs/elements/Img',
+          '/docs/elements/Text'
         ]
       },
       {

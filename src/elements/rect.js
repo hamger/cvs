@@ -17,7 +17,8 @@ export default class Rect extends Element {
   drawUnit (ctx2) {
     let ctx = ctx2 || this.ctx
     this.setAttr(ctx)
-    this.drawPath(ctx2 || null)
+    if (this.opt.borderRadius) this.drawRoundRect(ctx2 || null)
+    else this.drawPath(ctx2 || null)
     this.dye(ctx)
   }
   drawPath (ctx2) {
@@ -25,6 +26,21 @@ export default class Rect extends Element {
     ctx.beginPath()
     if (ctx2) ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
     else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
+  }
+  drawRoundRect (ctx2) {
+    const { x, y, w, h, borderRadius: r } = this.opt
+    let ctx = ctx2 || this.ctx
+    let posA = [x + r, y]
+    let posB = [x + w, y]
+    let posC = [x + w, y + h]
+    let posD = [x, y + h]
+    let posE = [x, y]
+    ctx.beginPath()
+    ctx.moveTo(posA[0], posA[1])
+    ctx.arcTo(posB[0], posB[1], posC[0], posC[1], r)
+    ctx.arcTo(posC[0], posC[1], posD[0], posD[1], r)
+    ctx.arcTo(posD[0], posD[1], posE[0], posE[1], r)
+    ctx.arcTo(posE[0], posE[1], posA[0], posA[1], r)
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
