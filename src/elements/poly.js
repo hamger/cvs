@@ -22,13 +22,13 @@ export default class Polygon extends Element {
     ctx.beginPath()
     if (ctx2) {
       this.opt.points.forEach((item, index) => {
-        if (index === 0) ctx.moveTo(item[0] - this.minX, item[1] - this.minY)
-        else ctx.lineTo(item[0] - this.minX, item[1] - this.minY)
+        if (index === 0) ctx.moveTo(item.x - this.minX, item.y - this.minY)
+        else ctx.lineTo(item.x - this.minX, item.y - this.minY)
       })
     } else {
       this.opt.points.forEach((item, index) => {
-        if (index === 0) ctx.moveTo(item[0], item[1])
-        else ctx.lineTo(item[0], item[1])
+        if (index === 0) ctx.moveTo(item.x, item.y)
+        else ctx.lineTo(item.x, item.y)
       })
     }
     if (!this.opt.stroke) ctx.closePath()
@@ -38,8 +38,8 @@ export default class Polygon extends Element {
     let x = []
     let y = []
     this.opt.points.forEach(item => {
-      x.push(item[0])
-      y.push(item[1])
+      x.push(item.x)
+      y.push(item.y)
     })
     this.minX = Math.min(...x)
     this.minY = Math.min(...y)

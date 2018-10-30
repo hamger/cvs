@@ -35,7 +35,7 @@ export default {
     )
     cvs.add(
       new Path({
-        path: 'M 150 150 L 300 300',
+        path: 'M 400 100 L 600 400',
         stroke: 'red',
         startArrow: {
           angle: 15,

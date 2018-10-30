@@ -68,7 +68,13 @@ cvs.add(element4)
 
 let element6 = new Poly({
   zIndex: 9,
-  points: [[200, 23], [250, 53], [260, 93], [170, 173], [200, 23]],
+  points: [
+    {x: 200, y: 23},
+    {x: 250, y: 53},
+    {x: 260, y: 93},
+    {x: 170, y: 173},
+    {x: 200, y: 23},
+  ],
   fill: '#f88a95',
   cache: true
 })
