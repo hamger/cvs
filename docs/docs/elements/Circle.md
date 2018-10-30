@@ -30,3 +30,5 @@ new Circle({
   y: 100
 });
 ```
+
+<c-circle></c-circle>
