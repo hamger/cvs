@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { Cvs, Circle, Track } from 'cvs'
+import { Cvs, Circle, Track } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {
@@ -53,7 +53,7 @@ export default {
     cvs.animate()
   },
   destroyed() {
-      this.cvs.cancelAnimate()
+    this.cvs.cancelAnimate()
   },
 }
 </script>

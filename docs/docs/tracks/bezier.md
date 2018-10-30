@@ -40,12 +40,13 @@ let dot = new Circle({
   x: 0,
   y: 0,
   r: 10,
-  cache: true,
-  fill: "pink"
+  cache: true
 });
 let bezier = new Bezier({
   delay: 0,
-  duration: 4000,
+  duration: 8000,
+  retrace: true, // 是否折返
+  iterationCount: 30, // 重复次数
   points: [
     { x: 10, y: 10 }, // 起点
     { x: 360, y: 160 }, // 控制点1
@@ -57,3 +58,4 @@ dot.addTrack(bezier);
 cvs.add(dot);
 cvs.animate();
 ```
+<c-bezier></c-bezier>

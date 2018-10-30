@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Cvs, Circle, Rect, Img, Poly } from 'cvs'
+import { Cvs, Circle, Rect, Img, Poly } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {

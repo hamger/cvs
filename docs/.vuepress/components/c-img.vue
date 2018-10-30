@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Cvs, Img } from 'cvs'
+import { Cvs, Img } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {

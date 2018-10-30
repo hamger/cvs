@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Cvs, Text } from 'cvs'
+import { Cvs, Text } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {
