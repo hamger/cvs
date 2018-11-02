@@ -28,7 +28,7 @@ export default class Round extends Track {
     }
     const speed = p * this.defaultAngle
     let angle
-    if (this.direction === false) {
+    if (this.anticlockwise === false) {
       angle = this.angle - speed
     } else {
       angle = this.angle + speed

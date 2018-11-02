@@ -20,7 +20,7 @@ let round = new Round(options);
 | centerY        | Number  | 规定圆周运动中心点在 Y 轴上的位置                                           | --       |
 | r              | Number  | 规定圆周运动的半径                                                          | `50`     |
 | angle          | Number  | 规定圆周运动的初始位置                                                      | `0`      |
-| direction      | Number  | 规定圆周运动的方向                                                          | `true`   |
+| anticlockwise  | Number  | 规定圆周运动的方向                                                          | `true`   |
 | easing         | String  | 规定缓动效果（[可选值](/docs/track.html#easing)）                           | `linear` |
 
 ::: tip
@@ -28,7 +28,7 @@ let round = new Round(options);
 :::
 
 ::: tip
-`direction` 值为`false`时，逆时针转动  
+`anticlockwise` 值为`false`时，逆时针转动  
 :::
 
 ::: tip
@@ -64,7 +64,7 @@ let round = new Round({
   centerY: cvs.height / 2,
   r: 100,
   angle: 180,
-  direction: false
+  anticlockwise: false
 });
 dot.addTrack(round);
 

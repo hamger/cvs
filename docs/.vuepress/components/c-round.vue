@@ -45,7 +45,7 @@ export default {
       centerY: cvs.height / 2,
       r: 100,
       angle: 180,
-      direction: false
+      anticlockwise: false
     })
     dot.addTrack(round)
 

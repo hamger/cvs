@@ -47,6 +47,7 @@ let round = new Round({
   iterationCount: 1, // 重复次数
   centerX: cvs.width / 2,
   centerY: cvs.height / 2,
+  anticlockwise: false,
   angle: 0
 })
 //

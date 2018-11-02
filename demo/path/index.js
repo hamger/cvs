@@ -32,7 +32,7 @@ let cvs = new Cvs({
 
 cvs.add(
   new Path({
-    path: 'M 100 100' + 'L 700 500',
+    path: 'M 300 100' + 'L 700 500',
     stroke: 'red',
     startArrow: true,
     endArrow: {
