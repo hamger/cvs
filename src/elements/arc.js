@@ -3,6 +3,8 @@ import Element from '../element'
 export default class Arc extends Element {
   constructor (opt) {
     super(opt)
+    this.defaultArrowAngle = 60
+    this.defaultArrowLength = 10
     if (this.cache) this.cacheDraw()
   }
   draw (ctx) {
@@ -45,6 +47,14 @@ export default class Arc extends Element {
         !!this.opt.anticlockwise
       )
     }
+    if (this.attr('startArrow')) {
+      const { angle, len } = this.attr('startArrow')
+      this.drawArrow('start', angle, len)
+    }
+    if (this.attr('endArrow')) {
+      const { angle, len } = this.attr('endArrow')
+      this.drawArrow('end', angle, len)
+    }
     if (!this.opt.stroke) ctx.closePath()
   }
   cacheDraw () {
@@ -54,5 +64,22 @@ export default class Arc extends Element {
     this.cacheCanvas.width = 2 * this.halfW
     this.cacheCanvas.height = 2 * this.halfH
     this.drawUnit(this.cacheCanvas.getContext('2d'))
+  }
+  drawArrow (pos, angle = this.defaultArrowAngle, len = this.defaultArrowLength) {
+    const cx = this.attr('x')
+    const cy = this.attr('y')
+    const r = this.attr('r')
+    const basicAngle = pos === 'end' ? this.attr('endAngle') : this.attr('startAngle')
+    const basicArc = basicAngle * Math.PI / 180
+    const basicPos = [cx + r * Math.cos(basicArc), cy + r * Math.sin(basicArc)]
+    const a1Angle = pos === 'end' ? (basicAngle + angle + 180) * Math.PI / 180 : (basicAngle + angle) * Math.PI / 180
+    const a2Angle = pos === 'end' ? (basicAngle - angle) * Math.PI / 180 : (basicAngle + 180 - angle) * Math.PI / 180
+    const arrow1 = [basicPos[0] + len * Math.cos(a1Angle), basicPos[1] + len * Math.sin(a1Angle)]
+    const arrow2 = [basicPos[0] + len * Math.cos(a2Angle), basicPos[1] + len * Math.sin(a2Angle)]
+
+    this.ctx.moveTo(basicPos[0], basicPos[1])
+    this.ctx.lineTo(arrow1[0], arrow1[1])
+    this.ctx.moveTo(basicPos[0], basicPos[1])
+    this.ctx.lineTo(arrow2[0], arrow2[1])
   }
 }

@@ -44,8 +44,8 @@ export default class Path extends Element {
           // 需要将字符串转化为数字
           return +item
         })
-        if (this.opt.startArrow) {
-          const { angle, len } = this.opt.startArrow
+        if (this.attr('startArrow')) {
+          const { angle, len } = this.attr('startArrow')
           this.drawArrow('start', item, arr, end, angle, len)
         }
       }
@@ -54,8 +54,8 @@ export default class Path extends Element {
           // 需要将字符串转化为数字
           return +item
         })
-        if (this.opt.endArrow) {
-          const { angle, len } = this.opt.endArrow
+        if (this.attr('endArrow')) {
+          const { angle, len } = this.attr('endArrow')
           this.drawArrow('end', item, start, arr, angle, len)
         }
       }
