@@ -58,4 +58,5 @@ dot.addTrack(bezier);
 cvs.add(dot);
 cvs.animate();
 ```
-<c-bezier></c-bezier>
+
+<ClientOnly><c-bezier></c-bezier></ClientOnly>

@@ -73,4 +73,4 @@ cvs.add([dot, cd]);
 cvs.animate();
 ```
 
-<c-elliptic></c-elliptic>
+<ClientOnly><c-elliptic></c-elliptic></ClientOnly>

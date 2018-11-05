@@ -30,19 +30,22 @@ let element = new Img(options);
 ### example
 
 ```js
-(async function () {
+(async function() {
   let cvs = new Cvs({
-    container: document.getElementById('img-container')
-  })
+    container: document.getElementById("img-container")
+  });
   await cvs.preload({
-    safari: require('../../../static/safari.png')
-  })
-  cvs.add(new Img({
-    img: 'safari',
-    dx: 200,
-    dy: 10
-  }))
-  cvs.draw()
-})()
+    safari: require("../../../static/safari.png")
+  });
+  cvs.add(
+    new Img({
+      img: "safari",
+      dx: 200,
+      dy: 10
+    })
+  );
+  cvs.draw();
+})();
 ```
-<c-img></c-img>
+
+<ClientOnly><c-img></c-img></ClientOnly>

@@ -72,4 +72,4 @@ cvs.add([dot, cd]);
 cvs.animate();
 ```
 
-<c-round></c-round>
+<ClientOnly><c-round></c-round></ClientOnly>

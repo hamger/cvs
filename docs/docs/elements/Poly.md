@@ -33,4 +33,4 @@ new Poly({
 });
 ```
 
-<c-poly></c-poly>
+<ClientOnly><c-poly></c-poly></ClientOnly>

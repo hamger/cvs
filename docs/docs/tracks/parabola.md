@@ -16,8 +16,8 @@ let parabola = new Parabola(options);
 | iterationCount | Number  | 规定运动重复次数                                                            | `1`      |
 | relativeX      | Number  | 元素本身运动中心相对于元素左上角(元素为圆的话是相对于圆心)在 X 轴上的偏移量 | `0`      |
 | relativeY      | Number  | 元素本身运动中心相对于元素左上角(元素为圆的话是相对于圆心)在 Y 轴上的偏移量 | `0`      |
-| endX           | Number  | 规定平抛运动终点的 X 轴的位置                                             | --       |
-| endY           | Number  | 规定平抛运动终点的 Y 轴的位置                                             | --       |
+| endX           | Number  | 规定平抛运动终点的 X 轴的位置                                               | --       |
+| endY           | Number  | 规定平抛运动终点的 Y 轴的位置                                               | --       |
 | easing         | String  | 规定缓动效果（[可选值](/docs/track.html#easing)）                           | `linear` |
 
 ::: tip
@@ -52,4 +52,4 @@ cvs.add(dot);
 cvs.animate();
 ```
 
-<c-parabola></c-parabola>
+<ClientOnly><c-parabola></c-parabola></ClientOnly>

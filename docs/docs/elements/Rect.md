@@ -56,4 +56,4 @@ new Rect({
 })
 ```
 
-<c-rect></c-rect>
+<ClientOnly><c-rect></c-rect></ClientOnly>
