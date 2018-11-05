@@ -16,21 +16,20 @@ export default {
     return {}
   },
   mounted() {
-    let cvs = new Cvs({
-      container: document.getElementById('img-container')
-    })
-
-    let img = new Image()
-    img.src = require('../../../static/safari.png')
-
-    img.onload = function() {
+    (async function () {
+      let cvs = new Cvs({
+        container: document.getElementById('img-container')
+      })
+      await cvs.preload({
+        safari: require('../../../static/safari.png')
+      })
       cvs.add(new Img({
-        img: img,
+        img: 'safari',
         dx: 200,
         dy: 10
       }))
       cvs.draw()
-    }
+    })()
   }
 }
 </script>

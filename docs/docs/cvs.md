@@ -22,6 +22,34 @@ let cvs = new Cvs(options);
 
 ### 实例方法
 
+#### *async*  preload(obj)
+
+- 描述：
+
+  资源预加载
+
+- 参数：
+
+  - `{Object} obj` 表示资源路径的键值对
+
+- 示例：
+  ```js
+  (async function () {
+    let cvs = new Cvs({
+      container: document.getElementById('img-container')
+    })
+    await cvs.preload({
+      safari: require('../../../static/safari.png')
+    })
+    cvs.add(new Img({
+      img: 'safari',
+      dx: 200,
+      dy: 10
+    }))
+    cvs.draw()
+  })()
+  ```
+
 #### add(element)
 
 - 描述：

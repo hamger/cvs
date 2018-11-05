@@ -1,0 +1,37 @@
+export const loadedResources = new Map()
+
+export function loadTexture (key, texture, timeout = 30000) {
+  if (!loadedResources.has(key)) {
+    const promise = new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        reject(new Error('load img timeout'))
+      }, timeout)
+
+      loadImage(texture).then(img => {
+        resolve(img)
+        loadedResources.set(key, img)
+        clearTimeout(timer)
+      })
+    })
+    loadedResources.set(key, promise)
+    return promise
+  } else {
+    return loadedResources.get(key)
+  }
+}
+
+export function loadImage (url) {
+  return new Promise(function (resolve, reject) {
+    const image = new Image()
+
+    image.onload = function () {
+      resolve(image)
+    }
+
+    image.onerror = function () {
+      reject(new Error('Could not load image at ' + url))
+    }
+
+    image.src = url
+  })
+}

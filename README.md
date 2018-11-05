@@ -65,6 +65,9 @@ commitType: description
 
 ## Changelog
 
+### 2018.11.5
+> v0.2.5 添加 preload 资源预加载函数
+
 ### 2018.10.30
 > v0.2.4 添加圆周运动、椭圆运动、平抛运动
 

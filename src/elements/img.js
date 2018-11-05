@@ -1,10 +1,13 @@
 import Element from '../element'
-
+import {loadedResources} from '../resource'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
 export default class Img extends Element {
   constructor (opt) {
     super(opt)
+    if (loadedResources.has(this.opt.img)) {
+      this.opt.img = loadedResources.get(this.opt.img)
+    }
     if (this.cache) this.cacheDraw()
   }
   draw (ctx) {

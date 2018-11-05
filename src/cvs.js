@@ -1,5 +1,6 @@
 import Element from './element'
 import { getLocation, animFrame, cancelAnim, arrSort, isMobile } from './utils'
+import { loadTexture } from './resource'
 
 class Cvs {
   constructor (opt) {
@@ -15,6 +16,15 @@ class Cvs {
     this.init()
     this.bind()
   }
+
+  async preload (obj) {
+    const tasks = []
+    for (let key in obj) {
+      tasks.push(loadTexture(key, obj[key]))
+    }
+    await Promise.all(tasks)
+  }
+
   init () {
     let canvas = document.createElement('canvas')
     this.width = canvas.width = this.container.clientWidth
