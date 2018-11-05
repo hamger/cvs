@@ -45,4 +45,4 @@ new Arc({
 })
 ```
 
-<c-arc></c-arc>
+<ClientOnly><c-arc></c-arc></ClientOnly>
