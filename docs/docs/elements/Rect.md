@@ -16,7 +16,7 @@ let element = new Rect(options);
 | h            | Number  | 规定矩形高度         | --      |
 | x            | Number  | 规定矩形 x 坐标      | --      |
 | y            | Number  | 规定矩形 y 坐标      | --      |
-| borderRadius | Number  | 规定矩形的外边框圆角 | --      |
+| borderRadius | Number\|Array   | 规定矩形的外边框圆角 | --      |
 | cache        | Boolean | 规定是否缓存         | `false` |
 
 ::: tip
@@ -28,12 +28,32 @@ let element = new Rect(options);
 ```js
 new Rect({
   x: 100,
-  y: 30,
-  fill: "#19da3f",
-  w: 180,
-  h: 80,
-  borderRadius: 10
-});
+  y: 100,
+  w: 200,
+  h: 100,
+  borderRadius: 5,
+})
+new Rect({
+  x: 400,
+  y: 100,
+  w: 200,
+  h: 100,
+  borderRadius: [5, 10],
+})
+new Rect({
+  x: 100,
+  y: 350,
+  w: 200,
+  h: 100,
+  borderRadius: [5, 10, 15],
+})
+new Rect({
+  x: 400,
+  y: 350,
+  w: 200,
+  h: 100,
+  borderRadius: [5, 10, 15, 30],
+})
 ```
 
 <c-rect></c-rect>

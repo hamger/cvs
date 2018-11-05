@@ -39,18 +39,24 @@ export default class Path extends Element {
         })
       }
       this.resolve(item, arr)
+      if (index === 0) {
+        const end = pathVal[1].split(' ').map(item => {
+          // 需要将字符串转化为数字
+          return +item
+        })
+        if (this.attr('startArrow')) {
+          const { angle, len } = this.attr('startArrow')
+          this.drawArrow('start', item, arr, end, angle, len)
+        }
+      }
       if (index === pathType.length - 1) {
         const start = pathVal[pathType.length - 2].split(' ').map(item => {
           // 需要将字符串转化为数字
           return +item
         })
-        if (this.opt.endArrow) {
-          const { angle, len } = this.opt.endArrow
-          this.drawArrow('end', start, arr, angle, len)
-        }
-        if (this.opt.startArrow) {
-          const { angle, len } = this.opt.startArrow
-          this.drawArrow('start', start, arr, angle, len)
+        if (this.attr('endArrow')) {
+          const { angle, len } = this.attr('endArrow')
+          this.drawArrow('end', item, start, arr, angle, len)
         }
       }
     })
@@ -136,11 +142,11 @@ export default class Path extends Element {
       this.ctx.closePath()
     }
   }
-  drawArrow (type, startPos, lastPos, angle = this.defaultArrowAngle, len = this.defaultArrowLength) {
+  drawArrow (position, type, startPos, lastPos, angle = this.defaultArrowAngle, len = this.defaultArrowLength) {
     const endAngle = Math.atan2(lastPos[1] - startPos[1], lastPos[0] - startPos[0]) * 180 / Math.PI + 180
     const startAngle = Math.atan2(lastPos[1] - startPos[1], lastPos[0] - startPos[0]) * 180 / Math.PI
-    const initAngle = type === 'end' ? endAngle : startAngle
-    const reference = type === 'end' ? lastPos : startPos
+    const initAngle = position === 'end' ? endAngle : startAngle
+    const reference = position === 'end' ? lastPos : startPos
     const p1Angle = (initAngle + angle) * Math.PI / 180
     const p2Angle = (initAngle - angle) * Math.PI / 180
     const p1 = [reference[0] + len * Math.cos(p1Angle), reference[1] + len * Math.sin(p1Angle)]
@@ -162,5 +168,6 @@ export default class Path extends Element {
     this.ctx.moveTo(p1[0], p1[1])
     this.ctx.lineTo(reference[0], reference[1])
     this.ctx.lineTo(p2[0], p2[1])
+    this.ctx.moveTo(reference[0], reference[1])
   }
 }

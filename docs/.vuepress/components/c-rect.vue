@@ -1,7 +1,7 @@
 <template>
     <div>
       <Container>
-          <div id="text-container" style="width:100%;height:160px"></div>
+          <div id="text-container" style="width:100%;height:500px"></div>
       </Container>
     </div>
 </template>
@@ -26,11 +26,37 @@ export default {
     cvs.add(
       new Rect({
         x: 100,
-        y: 30,
-        fill: '#19da3f',
-        w: 180,
-        h: 80,
-        borderRadius: 10
+        y: 100,
+        w: 200,
+        h: 100,
+        borderRadius: 5,
+      })
+    )
+    cvs.add(
+      new Rect({
+        x: 400,
+        y: 100,
+        w: 200,
+        h: 100,
+        borderRadius: [5, 10],
+      })
+    )
+    cvs.add(
+      new Rect({
+        x: 100,
+        y: 350,
+        w: 200,
+        h: 100,
+        borderRadius: [5, 10, 15],
+      })
+    )
+    cvs.add(
+      new Rect({
+        x: 400,
+        y: 350,
+        w: 200,
+        h: 100,
+        borderRadius: [5, 10, 15, 30],
       })
     )
     cvs.draw()
