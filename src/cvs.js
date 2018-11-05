@@ -13,6 +13,7 @@ class Cvs {
     this.pauseTime = 0 // 暂定总时间
     this.animateTime = 0 // 动画已进行的时间
     this.finishedAinmCount = 0 // 已完成动画的元素个数
+    this.isPause = false // 动画是否被暂停
     this.init()
     this.bind()
   }
@@ -197,6 +198,11 @@ class Cvs {
   cancelAnimate () {
     this.stopTime = new Date()
     if (this.stop) cancelAnim(this.stop)
+  }
+  pauseAnimate () {
+    if (this.isPause) this.animate()
+    else this.cancelAnimate()
+    this.isPause = !this.isPause
   }
   resetAnimate () {
     if (this.stop) cancelAnim(this.stop)

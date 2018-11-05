@@ -66,6 +66,8 @@ commitType: description
 ## Changelog
 
 ### 2018.11.5
+> v0.2.6 添加 pauseAnimate 暂停动画函数
+
 > v0.2.5 添加 preload 资源预加载函数
 
 ### 2018.10.30

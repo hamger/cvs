@@ -25,8 +25,8 @@ export default {
       })
       cvs.add(new Img({
         img: 'safari',
-        dx: 200,
-        dy: 10
+        x: 200,
+        y: 10
       }))
       cvs.draw()
     })()

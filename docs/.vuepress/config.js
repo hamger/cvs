@@ -20,7 +20,7 @@ module.exports = {
       ['/docs/element', 'Element'],
       ['/docs/track', 'Track'],
       {
-        title: 'elements',
+        title: 'Elements',
         collapsable: false,
         children: [
           '/docs/elements/Circle',

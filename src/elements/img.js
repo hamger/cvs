@@ -11,18 +11,18 @@ export default class Img extends Element {
     if (this.cache) this.cacheDraw()
   }
   draw (ctx) {
-    this.w = this.opt.dw ? this.opt.dw : this.opt.img.width
-    this.h = this.opt.dh ? this.opt.dh : this.opt.img.height
+    this.w = this.opt.w ? this.opt.w : this.opt.img.width
+    this.h = this.opt.h ? this.opt.h : this.opt.img.height
     if (this.cache) {
       this.cacheDraw()
-      ctx.drawImage(this.cacheCanvas, this.opt.dx, this.opt.dy)
+      ctx.drawImage(this.cacheCanvas, this.opt.x, this.opt.y)
     } else {
       this.drawUnit()
     }
   }
   drawPath (ctx) {
     ctx.beginPath()
-    ctx.rect(this.opt.dx, this.opt.dy, this.w, this.h)
+    ctx.rect(this.opt.x, this.opt.y, this.w, this.h)
   }
   drawUnit (ctx2) {
     let ctx = ctx2 || this.ctx
@@ -39,11 +39,11 @@ export default class Img extends Element {
           this.opt.sh,
           0,
           0,
-          this.opt.dw,
-          this.opt.dh
+          this.opt.w,
+          this.opt.h
         )
-      } else if (this.opt.dw && this.opt.dh) {
-        ctx.drawImage(img, 0, 0, this.opt.dw, this.opt.dh)
+      } else if (this.opt.w && this.opt.h) {
+        ctx.drawImage(img, 0, 0, this.opt.w, this.opt.h)
       } else {
         ctx.drawImage(img, 0, 0)
       }
@@ -55,15 +55,15 @@ export default class Img extends Element {
           this.opt.sy,
           this.opt.sw,
           this.opt.sh,
-          this.opt.dx,
-          this.opt.dy,
-          this.opt.dw,
-          this.opt.dh
+          this.opt.x,
+          this.opt.y,
+          this.opt.w,
+          this.opt.h
         )
-      } else if (this.opt.dw && this.opt.dh) {
-        ctx.drawImage(img, this.opt.dx, this.opt.dy, this.opt.dw, this.opt.dh)
+      } else if (this.opt.w && this.opt.h) {
+        ctx.drawImage(img, this.opt.x, this.opt.y, this.opt.w, this.opt.h)
       } else {
-        ctx.drawImage(img, this.opt.dx, this.opt.dy)
+        ctx.drawImage(img, this.opt.x, this.opt.y)
       }
     }
     ctx.restore()
