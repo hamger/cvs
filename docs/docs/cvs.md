@@ -22,7 +22,7 @@ let cvs = new Cvs(options);
 
 ### 实例方法
 
-#### *async*  preload(obj)
+#### _async_ preload(obj)
 
 - 描述：
 
@@ -32,22 +32,26 @@ let cvs = new Cvs(options);
 
   - `{Object} obj` 表示资源路径的键值对
 
+- 返回值：`{Object}` 表示资源的键值对
+
 - 示例：
   ```js
-  (async function () {
+  (async function() {
     let cvs = new Cvs({
-      container: document.getElementById('img-container')
-    })
+      container: document.getElementById("img-container")
+    });
     await cvs.preload({
-      safari: require('../../../static/safari.png')
-    })
-    cvs.add(new Img({
-      img: 'safari',
-      dx: 200,
-      dy: 10
-    }))
-    cvs.draw()
-  })()
+      safari: require("../../../static/safari.png")
+    });
+    cvs.add(
+      new Img({
+        img: "safari",
+        dx: 200,
+        dy: 10
+      })
+    );
+    cvs.draw();
+  })();
   ```
 
 #### add(element)
@@ -59,6 +63,7 @@ let cvs = new Cvs(options);
 - 参数：
 
   - `{Element|Array<Element>} element`
+
 - 示例：
   ```js
   cvs.add([element, element2]);
@@ -140,6 +145,18 @@ let cvs = new Cvs(options);
   cvs.animate();
   ```
 
+#### pauseAnimate()
+
+- 描述：
+
+  暂停动画
+
+- 示例：
+
+  ```js
+  cvs.pauseAnimate();
+  ```
+
 #### cancelAnimate()
 
 - 描述：
@@ -148,9 +165,9 @@ let cvs = new Cvs(options);
 
 - 示例：
 
-```js
-cvs.cancelAnimate();
-```
+  ```js
+  cvs.cancelAnimate();
+  ```
 
 #### resetAnimate()
 
@@ -160,6 +177,6 @@ cvs.cancelAnimate();
 
 - 示例：
 
-```js
-cvs.resetAnimate();
-```
+  ```js
+  cvs.resetAnimate();
+  ```

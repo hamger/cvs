@@ -3,11 +3,13 @@ import { Cvs, Img, Bezier } from '@'
   let cvs = new Cvs({
     container: document.getElementById('container')
   })
-  await cvs.preload({
+  var resouce = await cvs.preload({
     robot01: '../../static/robot01.png',
     robot02: '../../static/robot02.png',
     robot03: '../../static/robot03.png'
   })
+
+  console.log(resouce)
 
   let element = new Img({
     img: 'robot01',

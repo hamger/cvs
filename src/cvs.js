@@ -19,11 +19,14 @@ class Cvs {
   }
 
   async preload (obj) {
-    const tasks = []
+    const tasks = [], res = {}
     for (let key in obj) {
-      tasks.push(loadTexture(key, obj[key]))
+      tasks.push(loadTexture(key, obj[key]).then(r => {
+        res[key] = r
+      }))
     }
     await Promise.all(tasks)
+    return res
   }
 
   init () {
@@ -210,6 +213,7 @@ class Cvs {
     this.pauseTime = 0
     this.animateTime = 0
     this.finishedAinmCount = 0
+    this.isPause = false
     this.animChildren.forEach(child => {
       child.finished = false
       child.tracks.forEach(track => {
