@@ -1,6 +1,11 @@
 import Element from './element'
 import { getLocation, animFrame, cancelAnim, arrSort, isMobile } from './utils'
 import { loadTexture } from './resource'
+import Timeline from './timeline'
+import { requestAnimationFrame } from './fast-animation-frame'
+
+const _addUnit = Symbol('addUnit')
+const _removeUnit = Symbol('removeUnit')
 
 class Cvs {
   constructor (opt) {
@@ -19,11 +24,14 @@ class Cvs {
   }
 
   async preload (obj) {
-    const tasks = [], res = {}
+    const tasks = [],
+      res = {}
     for (let key in obj) {
-      tasks.push(loadTexture(key, obj[key]).then(r => {
-        res[key] = r
-      }))
+      tasks.push(
+        loadTexture(key, obj[key]).then(r => {
+          res[key] = r
+        })
+      )
     }
     await Promise.all(tasks)
     return res
@@ -109,7 +117,7 @@ class Cvs {
       }
     })
   }
-  _addUnit (element) {
+  [_addUnit] (element) {
     if (element instanceof Element) {
       this.children.push(element)
       arrSort(this.children, 'opt.zIndex')
@@ -120,16 +128,12 @@ class Cvs {
       throw Error('Function add only accept the instance of Element.')
     }
   }
-  add (element) {
-    if (element instanceof Array) {
-      element.forEach(item => {
-        this._addUnit(item)
-      })
-    } else {
-      this._addUnit(element)
-    }
+  add (...elements) {
+    elements.forEach(item => {
+      this[_addUnit](item)
+    })
   }
-  _removeUnit (element) {
+  [_removeUnit] (element) {
     this.children.some((item, index) => {
       if (item.id === element.id) {
         this.children.splice(index, 1)
@@ -149,19 +153,15 @@ class Cvs {
       }
     })
   }
-  remove (element) {
-    if (!element) {
+  remove (...elements) {
+    if (elements.length) {
+      elements.forEach(item => {
+        this[_removeUnit](item)
+      })
+    } else {
       this.children = []
       this.descChildren = []
       this.animChildren = []
-      return
-    }
-    if (element instanceof Array) {
-      element.forEach(item => {
-        this._removeUnit(item)
-      })
-    } else {
-      this._removeUnit(element)
     }
   }
   draw () {
@@ -182,7 +182,8 @@ class Cvs {
     if (this.initAnimateTime === 0) this.initAnimateTime = new Date()
     if (this.stopTime) this.pauseTime += this.startTime - this.stopTime
     const loopUnit = () => {
-      this.stop = animFrame(loopUnit)
+      // this.stop = animFrame(loopUnit)
+      requestAnimationFrame(loopUnit)
       this.clear()
       this.animateTime = this._getAnimateTime(new Date())
       this.animChildren.forEach(child => {
@@ -196,15 +197,36 @@ class Cvs {
     }
     // 如果所有的动画已结束，停止循环
     if (this.animChildren.length === this.finishedAinmCount) return
-    loopUnit()
+    // loopUnit()
+    requestAnimationFrame(loopUnit)
+
+    // const timeline = new Timeline({ playbackRate: 1 })
+    // this.timeline = timeline
+    // // const startTime = timeline.globalTime
+    // let that = this
+    // let timerID = timeline.setTimeout(function name () {
+    //   that.clear()
+    //   that.animChildren.forEach(child => {
+    //     if (child.finished) {
+    //       that.finishedAinmCount++
+    //       return
+    //     }
+    //     child.runTrack(timeline.currentTime)
+    //   })
+    //   that.draw()
+    //   if (timeline.currentTime > 8000) timeline.clearTimeout(timerID)
+    //   else timeline.setTimeout(name, 20)
+    // }, 0)
   }
   cancelAnimate () {
     this.stopTime = new Date()
     if (this.stop) cancelAnim(this.stop)
   }
   pauseAnimate () {
-    if (this.isPause) this.animate()
-    else this.cancelAnimate()
+    // if (this.isPause) this.animate()
+    // else this.cancelAnimate()
+    if (this.isPause) this.timeline.playbackRate = 1
+    else this.timeline.playbackRate = 0
     this.isPause = !this.isPause
   }
   resetAnimate () {

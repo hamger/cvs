@@ -101,11 +101,11 @@ cvs 对以下图形属性进行了缩写
 
 - 参数：
 
-  - `{Track|Array<Track>} track`
+  - `{Track} track`
 
 - 示例：
   ```js
-  elememt.addTrack([track, track2]);
+  elememt.addTrack(track, track2);
   ```
 
 #### removeTrack(track)
@@ -116,7 +116,7 @@ cvs 对以下图形属性进行了缩写
 
 - 参数：
 
-  - `{Track|Array<Track>} track`
+  - `{Track} track`
 
   ::: tip
   支持不传参数，`elememt.removeTrack()`将删除所有的轨迹
@@ -125,7 +125,7 @@ cvs 对以下图形属性进行了缩写
 - 示例：
 
   ```js
-  elememt.removeTrack([track, track2]);
+  elememt.removeTrack(track, track2);
   ```
 
 ### 自定义元素

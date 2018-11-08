@@ -130,14 +130,10 @@ export default class Element {
       throw Error('Function addTrack only accept the instance of Track.')
     }
   }
-  addTrack (track) {
-    if (track instanceof Array) {
-      track.forEach(item => {
-        this._addTrackUnit(item)
-      })
-    } else {
-      this._addTrackUnit(track)
-    }
+  addTrack (...tracks) {
+    tracks.forEach(item => {
+      this._addTrackUnit(item)
+    })
   }
   _removeTrackUnit (track) {
     this.tracks.some((item, index) => {
@@ -147,16 +143,13 @@ export default class Element {
       }
     })
   }
-  removeTrack (track) {
-    if (!track) {
-      this.tracks = []
-    }
-    if (track instanceof Array) {
-      track.forEach(item => {
+  removeTrack (...tracks) {
+    if (tracks.length) {
+      tracks.forEach(item => {
         this._removeTrackUnit(item)
       })
     } else {
-      this._removeTrackUnit(track)
+      this.tracks = []
     }
   }
 }

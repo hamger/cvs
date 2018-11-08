@@ -16,20 +16,20 @@ export default {
     return {}
   },
   mounted() {
-    (async function () {
-      let cvs = new Cvs({
-        container: document.getElementById('img-container')
-      })
-      await cvs.preload({
-        safari: require('../../../static/safari.png')
-      })
-      cvs.add(new Img({
-        img: 'safari',
-        x: 200,
-        y: 10
-      }))
-      cvs.draw()
-    })()
+    // (async function () {
+    //   let cvs = new Cvs({
+    //     container: document.getElementById('img-container')
+    //   })
+    //   await cvs.preload({
+    //     safari: require('../../../static/safari.png')
+    //   })
+    //   cvs.add(new Img({
+    //     img: 'safari',
+    //     x: 200,
+    //     y: 10
+    //   }))
+    //   cvs.draw()
+    // })()
   }
 }
 </script>

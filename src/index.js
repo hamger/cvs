@@ -14,6 +14,7 @@ import Color from './tracks/color'
 import Elliptic from './tracks/elliptic'
 import Parabola from './tracks/parabola'
 import easing from './easing'
+import Timeline from './timeline'
 
 export {
   Cvs,
@@ -31,5 +32,6 @@ export {
   Round,
   Color,
   Elliptic,
-  Parabola
+  Parabola,
+  Timeline
 }

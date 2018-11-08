@@ -5,6 +5,7 @@ import {loadedResources} from '../resource'
 export default class Img extends Element {
   constructor (opt) {
     super(opt)
+    console.log(loadedResources.has(this.opt.img))
     if (loadedResources.has(this.opt.img)) {
       this.opt.img = loadedResources.get(this.opt.img)
     }

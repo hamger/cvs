@@ -64,16 +64,16 @@ let element4 = new Circle({
 element4.on('click', function (e) {
   console.log('element4: ' + e)
 })
-cvs.add(element4)
+// cvs.add(element4)
 
 let element6 = new Poly({
   zIndex: 9,
   points: [
-    {x: 200, y: 23},
-    {x: 250, y: 53},
-    {x: 260, y: 93},
-    {x: 170, y: 173},
-    {x: 200, y: 23},
+    { x: 200, y: 23 },
+    { x: 250, y: 53 },
+    { x: 260, y: 93 },
+    { x: 170, y: 173 },
+    { x: 200, y: 23 }
   ],
   fill: '#f88a95',
   cache: true
@@ -81,17 +81,17 @@ let element6 = new Poly({
 element6.on('click', function (e) {
   console.log('element6: ' + e)
 })
-cvs.add(element6)
+cvs.add(element4, element6)
 
 let img = new Image()
-img.src = 'http://olislpb6q.bkt.clouddn.com/safari.png'
+img.src = '../../static/safari.png'
 
 // 当图片准备以后再绘制
 img.onload = function () {
   let element5 = new Img({
     img: img,
-    dx: 200,
-    dy: 200
+    x: 200,
+    y: 200
   })
   element5.on('click', function (e) {
     console.log('element5: ' + e)
