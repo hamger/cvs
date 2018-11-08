@@ -13,6 +13,7 @@ import Round from './tracks/round'
 import Color from './tracks/color'
 import Elliptic from './tracks/elliptic'
 import Parabola from './tracks/parabola'
+import Keyframe from './tracks/keyframe'
 import easing from './easing'
 import Timeline from './timeline'
 
@@ -33,5 +34,6 @@ export {
   Color,
   Elliptic,
   Parabola,
-  Timeline
+  Timeline,
+  Keyframe
 }

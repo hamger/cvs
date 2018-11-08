@@ -1,4 +1,4 @@
-import { Cvs, Rect, Img } from '@'
+import { Cvs, Rect, Img, Keyframe } from '@'
   ;(async function () {
   let cvs = new Cvs({
     container: document.getElementById('container')
@@ -24,10 +24,26 @@ import { Cvs, Rect, Img } from '@'
   })
   let element2 = new Img({
     img: 'safari',
-    x: 200,
-    y: 100,
+    x: 10,
+    y: 10,
     transform: [{ rotate: 10 }, { scale: [1.5, 1.1] }]
   })
-  cvs2.add(element2)
-  cvs2.draw()
+  let element3 = new Img({
+    img: 'robot01',
+    x: 400,
+    y: 40,
+  })
+  element3.addTrack(new Keyframe({
+    delay: 110,
+    duration: 4000,
+    retrace: true, // 是否折返
+    iterationCount: 2, // 重复次数
+    keyframe: [
+      {texture: 'robot01'},
+      {texture: 'robot02'},
+      {texture: 'robot03'}
+    ]
+  }))
+  cvs2.add(element2, element3)
+  cvs2.animate()
 })()
