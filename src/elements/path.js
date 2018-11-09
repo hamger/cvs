@@ -40,21 +40,21 @@ export default class Path extends Element {
       }
       this.resolve(item, arr)
       if (index === 0) {
-        const end = pathVal[1].split(' ').map(item => {
-          // 需要将字符串转化为数字
-          return +item
-        })
         if (this.attr('startArrow')) {
+          const end = pathVal[1].split(' ').map(item => {
+            // 需要将字符串转化为数字
+            return +item
+          })
           const { angle, len } = this.attr('startArrow')
           this.drawArrow('start', item, arr, end, angle, len)
         }
       }
       if (index === pathType.length - 1) {
-        const start = pathVal[pathType.length - 2].split(' ').map(item => {
-          // 需要将字符串转化为数字
-          return +item
-        })
         if (this.attr('endArrow')) {
+          const start = pathVal[pathType.length - 2].split(' ').map(item => {
+            // 需要将字符串转化为数字
+            return +item
+          })
           const { angle, len } = this.attr('endArrow')
           this.drawArrow('end', item, start, arr, angle, len)
         }

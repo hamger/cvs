@@ -20,7 +20,8 @@ let elliptic = new Elliptic(options);
 | centerY        | Number  | 规定椭圆运动中心点在 Y 轴上的位置                                           | --       |
 | radiusX        | Number  | 规定椭圆运动在 X 轴上的半径                                                 | `100`    |
 | radiusY        | Number  | 规定椭圆运动在 Y 轴上的半径                                                 | `80`     |
-| angle          | Number  | 规定椭圆运动的初始位置                                                      | `0`      |
+| angle          | Number  | 规定椭圆运动相对于运动中心的初始位置                                                      | `0`      |
+| activeAngle    | Number  | 规定运动的角度，声明此属性后椭圆运动会变成弧运动，不声明则是椭圆运动                | --      |
 | direction      | Number  | 规定椭圆运动的方向                                                          | `true`   |
 | easing         | String  | 规定缓动效果（[可选值](/docs/track.html#easing)）                           | `linear` |
 

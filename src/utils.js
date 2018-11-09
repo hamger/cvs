@@ -120,3 +120,7 @@ export function formatDelay (delay) {
   }
   return delay
 }
+
+export function getRelativePos (x, y, rx, ry) {
+  return { x: x - rx, y: y - ry }
+}

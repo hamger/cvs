@@ -15,6 +15,22 @@ let dot = new Circle({
   fill: 'pink'
 })
 
+let circle = new Circle({
+  zIndex: 1,
+  r: 100,
+  x: cvs.width / 2,
+  y: cvs.height / 2,
+  cache: true,
+  stroke: true
+})
+
+let rect = new Rect({
+  x: 400,
+  y: 100,
+  w: 50,
+  h: 20
+})
+
 // let sdot = new Circle({
 //   zIndex: 1,
 //   relativeX: 10,
@@ -48,7 +64,19 @@ let round = new Round({
   centerX: cvs.width / 2,
   centerY: cvs.height / 2,
   anticlockwise: false,
-  angle: 0
+  relativeX: 25,
+  relativeY: 10,
+  activeAngle: 180,
+})
+let dotRound = new Round({
+  delay: 0,
+  duration: 3000,
+  retrace: false, // 是否折返
+  iterationCount: 1, // 重复次数
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
+  anticlockwise: false,
+  angle: 180
 })
 //
 // let sround = new Round({
@@ -74,12 +102,13 @@ let round = new Round({
 //   direction: false
 // })
 
-dot.addTrack(round)
+rect.addTrack(round)
+dot.addTrack(dotRound)
 // sdot.addTrack(sround)
 // tdot.addTrack(tround)
 
 // cvs.add([dot, sdot, tdot, cd])
-cvs.add([dot, cd])
+cvs.add([cd, rect, circle, dot])
 
 cvs.animate()
 
