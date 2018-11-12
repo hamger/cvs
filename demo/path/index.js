@@ -65,6 +65,7 @@ cvs.add(
 cvs.add(
   new Path({
     startArrow: true,
+    endArrow: true,
     path:
       'M 10 10' +
       'L 100 100' +

@@ -4,9 +4,15 @@ import Track from '../track'
 export default class Elliptic extends Track {
   constructor (opt) {
     super(opt)
-    this.defaultRadiusX = 100
-    this.defaultRadiusY = 80
-    this.defaultAngle = 360
+    // this.activeAngle = opt.activeAngle || 360
+    Object.assign(this, {
+      activeAngle: 360,
+      radiusX: 100,
+      radiusY: 80,
+      relativeX: 0,
+      relativeY: 0,
+      angle: 0
+    }, opt)
   }
   loop (t) {
     if (typeof this.centerX !== 'number' || typeof this.centerY !== 'number') {
@@ -27,26 +33,29 @@ export default class Elliptic extends Track {
     } else {
       p = easing[this.easing](p2)
     }
-    const speed = p * this.defaultAngle
-    let angle
-    if (this.direction === false) {
-      angle = this.angle - speed
-    } else {
-      angle = this.angle + speed
+    const speed = p * this.activeAngle
+    const move = () => {
+      let angle
+      if (this.direction === false) {
+        angle = this.angle - speed
+      } else {
+        angle = this.angle + speed
+      }
+      const { x, y } = this.getPosition(this, angle)
+      this.$ele.attr({
+        x,
+        y
+      })
     }
-    const { x, y } = this.getPosition(this, angle)
-    this.$ele.attr({
-      x,
-      y
-    })
+    if (!this.activeAngle || speed < this.activeAngle) move()
   }
   getPosition (ele, angle) {
-    const relativeX = ele.relativeX || 0
-    const relativeY = ele.relativeY || 0
+    const relativeX = ele.relativeX
+    const relativeY = ele.relativeY
     const centerX = ele.centerX
     const centerY = ele.centerY
-    const radiusX = ele.radiusX || this.defaultRadiusX
-    const radiusY = ele.radiusY || this.defaultRadiusY
+    const radiusX = ele.radiusX
+    const radiusY = ele.radiusY
     const x = centerX + radiusX * Math.cos(angle * Math.PI / 180) - relativeX
     const y = centerY + radiusY * Math.sin(angle * Math.PI / 180) - relativeY
     return { x, y }

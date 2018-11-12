@@ -56,7 +56,8 @@ let selliptic = new Elliptic({
   radiusY: 100,
   centerX: cvs.width / 2,
   centerY: cvs.height / 2,
-  angle: 90
+  angle: 90,
+  activeAngle: 90
 })
 
 let telliptic = new Elliptic({
@@ -72,12 +73,12 @@ let telliptic = new Elliptic({
   direction: false
 })
 
-dot.addTrack(elliptic)
+// dot.addTrack(elliptic)
 sdot.addTrack(selliptic)
-tdot.addTrack(telliptic)
+// tdot.addTrack(telliptic)
 
-cvs.add([dot, sdot, tdot, cd])
-// cvs.add([dot, cd])
+// cvs.add([dot, sdot, tdot, cd])
+cvs.add([sdot, cd])
 
 cvs.animate()
 

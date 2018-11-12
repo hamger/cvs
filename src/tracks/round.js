@@ -4,8 +4,18 @@ import Track from '../track'
 export default class Round extends Track {
   constructor (opt) {
     super(opt)
-    this.defaultR = 100
-    this.defaultAngle = 360
+    // this.activeAngle = opt.activeAngle || 360
+    // this.angle = opt.angle || 0
+    // this.relativeX = opt.relativeX || 0
+    // this.relativeY = opt.relativeY || 0
+    // this.r = opt.r || 100
+    Object.assign(this, {
+      activeAngle: 360,
+      angle: 0,
+      relativeX: 0,
+      relativeY: 0,
+      r: 100
+    }, opt)
   }
   loop (t) {
     if (typeof this.centerX !== 'number' || typeof this.centerY !== 'number') {
@@ -26,25 +36,28 @@ export default class Round extends Track {
     } else {
       p = easing[this.easing](p2)
     }
-    const speed = p * this.defaultAngle
-    let angle
-    if (this.anticlockwise === false) {
-      angle = this.angle - speed
-    } else {
-      angle = this.angle + speed
+    const speed = p * this.activeAngle
+    const move = () => {
+      let angle
+      if (this.anticlockwise === false) {
+        angle = this.angle - speed
+      } else {
+        angle = this.angle + speed
+      }
+      const { x, y } = this.getPosition(this, angle)
+      this.$ele.attr({
+        x,
+        y
+      })
     }
-    const { x, y } = this.getPosition(this, angle)
-    this.$ele.attr({
-      x,
-      y
-    })
+    if (!this.activeAngle || speed < this.activeAngle) move()
   }
   getPosition (ele, angle) {
-    const relativeX = ele.relativeX || 0
-    const relativeY = ele.relativeY || 0
+    const relativeX = ele.relativeX
+    const relativeY = ele.relativeY
     const centerX = ele.centerX
     const centerY = ele.centerY
-    const r = ele.r || this.defaultR
+    const r = ele.r
     let x = centerX + r * Math.cos(angle * Math.PI / 180) - relativeX
     let y = centerY + r * Math.sin(angle * Math.PI / 180) - relativeY
     return { x, y }
