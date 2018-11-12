@@ -108,7 +108,7 @@ dot.addTrack(dotRound)
 // tdot.addTrack(tround)
 
 // cvs.add([dot, sdot, tdot, cd])
-cvs.add([cd, rect, circle, dot])
+cvs.add(cd, rect, circle, dot)
 
 cvs.animate()
 
