@@ -114,10 +114,8 @@ export default class Element {
   }
   runTrack (animateTime) {
     if (!this.timeline) this.timeline = new Timeline({playbackRate: 1})
-    console.log(this.timeline.currentTime)
     let res = this.getCurTrack(this.timeline.currentTime)
     // let res = this.getCurTrack(animateTime)
-    console.log(animateTime)
     // 已执行完所有轨迹
     if (res.index === undefined) {
       this.finished = true

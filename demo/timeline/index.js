@@ -1,4 +1,4 @@
-import { Cvs, Rect, Img, Keyframe } from '@'
+import { Cvs, Rect, Img, Keyframe, Round } from '@'
   ;(async function () {
   let cvs = new Cvs({
     container: document.getElementById('container')
@@ -11,29 +11,50 @@ import { Cvs, Rect, Img, Keyframe } from '@'
     robot03: '../../static/robot03.png'
   })
 
-  let element2 = new Img({
+  let ele = new Img({
     img: 'safari',
-    x: 10,
-    y: 10,
+    // x: 300,
+    // y: 300,
+    w: 80,
+    h: 80
   })
-  let element3 = new Img({
-    img: 'robot01',
-    x: 400,
-    y: 40
+  let round = new Round({
+    delay: 0,
+    duration: 5000,
+    retrace: false, // 是否折返
+    iterationCount: 2, // 重复次数
+    centerX: 300,
+    centerY: 300,
+    r: 150,
+    angle: 180,
+    anticlockwise: false,
+    relativeX: 40,
+    relativeY: 40
   })
-  element3.addTrack(
-    new Keyframe({
-      delay: 110,
-      duration: 4000,
-      retrace: true, // 是否折返
-      iterationCount: 2, // 重复次数
-      keyframe: [
-        { texture: 'robot01' },
-        { texture: 'robot02' },
-        { texture: 'robot03' }
-      ]
-    })
-  )
-  cvs.add(element2, element3)
+  ele.addTrack(round)
+  cvs.add(ele)
+
+  let btn = new Rect({
+    x: 500,
+    y: 500,
+    w: 30,
+    h: 30,
+    fill: '#3F9'
+  })
+  btn.on('click', function () {
+    ele.timeline.playbackRate = 0
+  })
+  let btn2 = new Rect({
+    x: 550,
+    y: 500,
+    w: 30,
+    h: 30
+  })
+  btn.on('click', function () {
+    ele.timeline.playbackRate = 1
+    console.log(ele.timeline.playbackRate)
+  })
+  cvs.add(btn, btn2)
+
   cvs.animate()
 })()
