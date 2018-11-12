@@ -29,7 +29,7 @@ export default class Bezier extends Track {
       }
     } else {
       // 贝塞尔函数涉及的占比比例，0<=p<=1
-      p = easing[this.easing](p2)
+      let p = easing[this.easing](p2)
       this.drawnode(this.nextNodes.length ? this.nextNodes : this.points, p)
     }
   }

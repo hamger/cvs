@@ -56,7 +56,7 @@ export function arrSort (arr, key, isDescend = false) {
 }
 
 // 全局动画循环周期
-export const period = 1000 / 60
+export const period = 16
 
 // 开启动画循环
 export const animFrame = (function () {

@@ -2,7 +2,6 @@ import Element from './element'
 import { getLocation, animFrame, cancelAnim, arrSort, isMobile } from './utils'
 import { loadTexture } from './resource'
 import Timeline from './timeline'
-import { requestAnimationFrame } from './fast-animation-frame'
 
 const _addUnit = Symbol('addUnit')
 const _removeUnit = Symbol('removeUnit')
@@ -19,6 +18,7 @@ class Cvs {
     this.animateTime = 0 // 动画已进行的时间
     this.finishedAinmCount = 0 // 已完成动画的元素个数
     this.isPause = false // 动画是否被暂停
+    this.timeline = new Timeline()
     this.init()
     this.bind()
   }
@@ -181,53 +181,30 @@ class Cvs {
     this.startTime = new Date()
     if (this.initAnimateTime === 0) this.initAnimateTime = new Date()
     if (this.stopTime) this.pauseTime += this.startTime - this.stopTime
-    const loopUnit = () => {
-      // this.stop = animFrame(loopUnit)
-      requestAnimationFrame(loopUnit)
-      this.clear()
-      this.animateTime = this._getAnimateTime(new Date())
-      this.animChildren.forEach(child => {
+
+    var that = this
+    animFrame(function loopUnit () {
+      if (that.animChildren.length === that.finishedAinmCount) return
+      that.stop = animFrame(loopUnit)
+      that.clear()
+      that.animateTime = that._getAnimateTime(new Date())
+      that.animChildren.forEach(child => {
         if (child.finished) {
-          this.finishedAinmCount++
+          that.finishedAinmCount++
           return
         }
-        child.runTrack(this.animateTime)
+        child.runTrack(that.animateTime)
       })
-      this.draw()
-    }
-    // 如果所有的动画已结束，停止循环
-    if (this.animChildren.length === this.finishedAinmCount) return
-    // loopUnit()
-    requestAnimationFrame(loopUnit)
-
-    // const timeline = new Timeline({ playbackRate: 1 })
-    // this.timeline = timeline
-    // // const startTime = timeline.globalTime
-    // let that = this
-    // let timerID = timeline.setTimeout(function name () {
-    //   that.clear()
-    //   that.animChildren.forEach(child => {
-    //     if (child.finished) {
-    //       that.finishedAinmCount++
-    //       return
-    //     }
-    //     child.runTrack(timeline.currentTime)
-    //   })
-    //   that.draw()
-    //   if (timeline.currentTime > 8000) timeline.clearTimeout(timerID)
-    //   else timeline.setTimeout(name, 20)
-    // }, 0)
+      that.draw()
+    })
   }
   cancelAnimate () {
     this.stopTime = new Date()
     if (this.stop) cancelAnim(this.stop)
   }
   pauseAnimate () {
-    // if (this.isPause) this.animate()
-    // else this.cancelAnimate()
-    if (this.isPause) this.timeline.playbackRate = 1
-    else this.timeline.playbackRate = 0
-    this.isPause = !this.isPause
+    if (this.isPause) this.animate()
+    else this.cancelAnimate()
   }
   resetAnimate () {
     if (this.stop) cancelAnim(this.stop)

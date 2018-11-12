@@ -1,4 +1,5 @@
 import Track from './track'
+import Timeline from './timeline'
 
 let id = 0
 export default class Element {
@@ -24,6 +25,7 @@ export default class Element {
     this.finished = false
     this.tracks = []
     this.trackIndex = 0
+    this.timeline = null
   }
   // 设置上下文属性
   setAttr (ctx2) {
@@ -111,7 +113,11 @@ export default class Element {
     return res
   }
   runTrack (animateTime) {
-    let res = this.getCurTrack(animateTime)
+    if (!this.timeline) this.timeline = new Timeline({playbackRate: 1})
+    console.log(this.timeline.currentTime)
+    let res = this.getCurTrack(this.timeline.currentTime)
+    // let res = this.getCurTrack(animateTime)
+    console.log(animateTime)
     // 已执行完所有轨迹
     if (res.index === undefined) {
       this.finished = true
