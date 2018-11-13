@@ -24,8 +24,8 @@ export default {
     })
     this.cvs = cvs
     let dot = new Circle({
-      x: 0,
-      y: 0,
+      x: cvs.width / 2 + 200,
+      y: cvs.height / 2 + 80,
       r: 10,
       cache: true,
       fill: 'pink'
@@ -39,18 +39,17 @@ export default {
 
     let elliptic = new Elliptic({
       delay: 0,
-      duration: 8000,
+      duration: 4000,
       retrace: false, // 是否折返
-      iterationCount: 30, // 重复次数
+      iterationCount: 10, // 重复次数
       centerX: cvs.width / 2,
       centerY: cvs.height / 2,
       radiusX: 200,
       radiusY: 80,
-      angle: 180,
-      direction: false
+      anticlockwise: false
     })
     dot.addTrack(elliptic)
-    cvs.add([dot, cd])
+    cvs.add(dot, cd)
     cvs.animate()
   }
 }

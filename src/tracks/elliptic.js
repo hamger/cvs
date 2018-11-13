@@ -4,17 +4,23 @@ import Track from '../track'
 export default class Elliptic extends Track {
   constructor (opt) {
     super(opt)
-    // this.activeAngle = opt.activeAngle || 360
     Object.assign(this, {
       activeAngle: 360,
       radiusX: 100,
       radiusY: 80,
       relativeX: 0,
       relativeY: 0,
-      angle: 0
+      anticlockwise: true,
     }, opt)
   }
   loop (t) {
+    const { centerX, centerY } = this
+    const x = this.$ele.attr('x')
+    const y = this.$ele.attr('y')
+    const ex = x - centerX
+    const ey = y - centerY
+    const initAngle = ex >= 0 ? Math.atan(ey / ex) * 180 / Math.PI : Math.atan(ey / ex) * 180 / Math.PI + 180
+    if (!this.angle) this.angle = initAngle
     if (typeof this.centerX !== 'number' || typeof this.centerY !== 'number') {
       throw Error('centerX|centerY参数类型错误')
     }
@@ -36,7 +42,7 @@ export default class Elliptic extends Track {
     const speed = p * this.activeAngle
     const move = () => {
       let angle
-      if (this.direction === false) {
+      if (this.anticlockwise === false) {
         angle = this.angle - speed
       } else {
         angle = this.angle + speed

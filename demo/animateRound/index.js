@@ -9,8 +9,8 @@ let flag = true
 let dot = new Circle({
   zIndex: 1,
   r: 10,
-  x: 169,
-  y: 225,
+  x: cvs.width / 2 - 150,
+  y: cvs.height / 2 - 150,
   cache: true,
   fill: 'pink'
 })
@@ -56,18 +56,18 @@ let cd = new Circle({
   y: cvs.height / 2
 })
 
-let round = new Round({
-  delay: 0,
-  duration: 3000,
-  retrace: false, // 是否折返
-  iterationCount: 1, // 重复次数
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
-  anticlockwise: false,
-  relativeX: 25,
-  relativeY: 10,
-  activeAngle: 180,
-})
+// let round = new Round({
+//   delay: 0,
+//   duration: 3000,
+//   retrace: false, // 是否折返
+//   iterationCount: 1, // 重复次数
+//   centerX: cvs.width / 2,
+//   centerY: cvs.height / 2,
+//   anticlockwise: false,
+//   relativeX: 25,
+//   relativeY: 10,
+//   activeAngle: 180,
+// })
 let dotRound = new Round({
   delay: 0,
   duration: 3000,
@@ -75,8 +75,6 @@ let dotRound = new Round({
   iterationCount: 1, // 重复次数
   centerX: cvs.width / 2,
   centerY: cvs.height / 2,
-  anticlockwise: false,
-  angle: 180
 })
 //
 // let sround = new Round({
@@ -102,13 +100,13 @@ let dotRound = new Round({
 //   direction: false
 // })
 
-rect.addTrack(round)
+// rect.addTrack(round)
 dot.addTrack(dotRound)
 // sdot.addTrack(sround)
 // tdot.addTrack(tround)
 
 // cvs.add([dot, sdot, tdot, cd])
-cvs.add(cd, rect, circle, dot)
+cvs.add(cd, circle, dot)
 
 cvs.animate()
 

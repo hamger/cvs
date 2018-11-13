@@ -17,8 +17,8 @@ let dot = new Circle({
 let sdot = new Circle({
   zIndex: 1,
   r: 10,
-  x: 169,
-  y: 225,
+  x: cvs.width / 2 - 100,
+  y: cvs.height / 2 - 100,
   cache: true,
   fill: 'blue'
 })
@@ -51,13 +51,11 @@ let selliptic = new Elliptic({
   delay: 0,
   duration: 5000,
   retrace: false, // 是否折返
-  iterationCount: Infinity, // 重复次数
+  iterationCount: 1,
   radiusX: 300,
   radiusY: 100,
   centerX: cvs.width / 2,
   centerY: cvs.height / 2,
-  angle: 90,
-  activeAngle: 90
 })
 
 let telliptic = new Elliptic({
@@ -78,7 +76,7 @@ sdot.addTrack(selliptic)
 // tdot.addTrack(telliptic)
 
 // cvs.add([dot, sdot, tdot, cd])
-cvs.add([sdot, cd])
+cvs.add(sdot, cd)
 
 cvs.animate()
 
