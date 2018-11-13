@@ -44,9 +44,6 @@ class Cvs {
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.container.appendChild(canvas)
-    // 将画布和上下文环境告知每一个子元素
-    Element.prototype.ctx = this.ctx
-    Element.prototype.canvas = this.canvas
   }
   bind () {
     this.canvas.addEventListener('click', e => {
@@ -55,9 +52,7 @@ class Cvs {
       // 只触发点击区域最前面元素的监听事件
       this.descChildren.some(child => {
         if (!child.opt.visible || !child.click || !child.drawPath) return false
-        child.drawPath.call(child, this.ctx)
-        console.log(child)
-        if (this.ctx.isPointInPath(location.x, location.y)) {
+        if (child.isCollision(location)) {
           temp = child
           return true
         }
@@ -131,6 +126,8 @@ class Cvs {
   }
   add (...elements) {
     elements.forEach(item => {
+      item.ctx = this.ctx
+      item.canvas = this.canvas
       this[_addUnit](item)
     })
   }

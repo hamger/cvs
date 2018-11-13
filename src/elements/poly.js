@@ -11,16 +11,21 @@ export default class Polygon extends Element {
     else this.drawUint()
     ctx.restore()
   }
-  drawUint (ctx2) {
-    let ctx = ctx2 || this.ctx
-    this.setAttr(ctx)
-    this.drawPath(ctx2 || null)
-    this.dye(ctx)
+  drawUint (isCache) {
+    if (isCache) {
+      this.setAttr(this.cacheCtx)
+      this.drawPath(this.cacheCtx)
+      this.dye(this.cacheCtx)
+    } else {
+      this.setAttr()
+      this.drawPath()
+      this.dye()
+    }
   }
-  drawPath (ctx2) {
-    let ctx = ctx2 || this.ctx
+  drawPath (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
     ctx.beginPath()
-    if (ctx2) {
+    if (cacheCtx) {
       this.opt.points.forEach((item, index) => {
         if (index === 0) ctx.moveTo(item.x - this.minX, item.y - this.minY)
         else ctx.lineTo(item.x - this.minX, item.y - this.minY)
@@ -45,6 +50,7 @@ export default class Polygon extends Element {
     this.minY = Math.min(...y)
     this.cacheCanvas.width = Math.max(...x) - this.minX
     this.cacheCanvas.height = Math.max(...y) - this.minY
-    this.drawUint(this.cacheCanvas.getContext('2d'))
+    this.cacheCtx = this.cacheCanvas.getContext('2d')
+    this.drawUint(true)
   }
 }

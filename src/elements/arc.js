@@ -18,17 +18,17 @@ export default class Arc extends Element {
     } else this.drawUnit()
     ctx.restore()
   }
-  drawUnit (ctx2) {
-    let ctx = ctx2 || this.ctx
+  drawUnit (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
     this.setAttr(ctx)
-    this.drawPath(ctx2 || null)
+    this.drawPath(cacheCtx || null)
     if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
   }
-  drawPath (ctx2) {
-    let ctx = ctx2 || this.ctx
+  drawPath (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
     ctx.beginPath()
-    if (ctx2) {
+    if (cacheCtx) {
       ctx.arc(
         this.halfW,
         this.halfH,
