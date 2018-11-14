@@ -71,8 +71,7 @@ class Cvs {
       let temp = null
       this.descChildren.some(child => {
         if (!child.opt.visible || !child.click || !child.drawPath) return false
-        child.drawPath.call(child, this.ctx)
-        if (this.ctx.isPointInPath(location.x, location.y)) {
+        if (child.isCollision(location)) {
           temp = child
           return true
         }
@@ -90,8 +89,7 @@ class Cvs {
       let temp2 = { opt: {} }
       this.descChildren.some(child => {
         if (!child.opt.visible || !child.drawPath) return false
-        child.drawPath.call(child, this.ctx)
-        if (this.ctx.isPointInPath(location.x, location.y)) {
+        if (child.isCollision(location)) {
           temp2 = child
           return true
         }

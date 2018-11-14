@@ -1,4 +1,4 @@
-import { Cvs, Img, Bezier, Timeline } from '@'
+import { Cvs, Img, Bezier, Timeline } from '#'
 
 // let timeline = new Timeline({playbackRate: 0.001})
 

@@ -1,4 +1,4 @@
-import { Cvs, Circle, Color } from '@'
+import { Cvs, Circle, Color } from '#'
 
 let cvs = new Cvs({
   container: document.getElementById('container')

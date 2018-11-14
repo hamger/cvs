@@ -8,7 +8,7 @@ export default class Img extends Element {
     if (loadedResources.has(this.opt.img)) {
       this.opt.img = loadedResources.get(this.opt.img)
     }
-    if (this.cache) this.cacheDraw()
+    if (this.attr('cache')) this.cacheDraw()
   }
   draw (ctx) {
     this.w = this.opt.w ? this.opt.w : this.opt.img.width
@@ -20,7 +20,8 @@ export default class Img extends Element {
       this.drawUnit()
     }
   }
-  drawPath (ctx) {
+  drawPath (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
     ctx.beginPath()
     ctx.rect(this.opt.x, this.opt.y, this.w, this.h)
   }

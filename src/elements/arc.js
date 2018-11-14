@@ -5,7 +5,7 @@ export default class Arc extends Element {
     super(opt)
     this.defaultArrowAngle = 60
     this.defaultArrowLength = 10
-    if (this.cache) this.cacheDraw()
+    if (this.attr('cache')) this.cacheDraw()
   }
   draw (ctx) {
     ctx.save()

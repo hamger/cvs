@@ -3,12 +3,12 @@ import Element from '../element'
 export default class Polygon extends Element {
   constructor (opt) {
     super(opt)
-    if (this.cache) this.cacheDraw()
+    if (this.attr('cache')) this.cacheDraw()
   }
   draw (ctx) {
     ctx.save()
     if (this.cache) ctx.drawImage(this.cacheCanvas, this.minX, this.minY)
-    else this.drawUint()
+    else this.drawUnit()
     ctx.restore()
   }
   drawPath (cacheCtx) {
@@ -39,6 +39,6 @@ export default class Polygon extends Element {
     this.minY = Math.min(...y)
     this.cacheCanvas.width = Math.max(...x) - this.minX
     this.cacheCanvas.height = Math.max(...y) - this.minY
-    this.drawUint(this.cacheCanvas.getContext('2d'))
+    this.drawUnit(this.cacheCanvas.getContext('2d'))
   }
 }
