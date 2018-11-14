@@ -3,7 +3,7 @@ import Element from '../element'
 export default class Circle extends Element {
   constructor (opt) {
     super(opt)
-    if (this.cache) this.cacheDraw()
+    if (this.attr('cache')) this.cacheDraw()
   }
   draw () {
     let ctx = this.ctx
@@ -15,7 +15,7 @@ export default class Circle extends Element {
         this.opt.y - this.halfH
       )
     } else {
-      this.drawUint()
+      this.drawUnit()
     }
     ctx.restore()
   }
@@ -34,6 +34,6 @@ export default class Circle extends Element {
     this.halfH = this.opt.r + this.lw + this.p
     this.cacheCanvas.width = 2 * this.halfW
     this.cacheCanvas.height = 2 * this.halfH
-    this.drawUint(this.cacheCanvas.getContext('2d'))
+    this.drawUnit(this.cacheCanvas.getContext('2d'))
   }
 }

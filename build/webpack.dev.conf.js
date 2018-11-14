@@ -15,7 +15,7 @@ let webpackConfig = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, '../src')
+      '#': path.resolve(__dirname, '../src')
     }
   },
   module: {

@@ -1,4 +1,4 @@
-import { Cvs2, Rect, Img, Keyframe } from '@'
+import { Cvs2, Rect, Img, Keyframe } from '#'
   ;(async function () {
   let cvs = new Cvs2({
     container: document.getElementById('container')

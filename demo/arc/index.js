@@ -1,4 +1,4 @@
-import { Cvs, Element, Arc } from '@'
+import { Cvs, Element, Arc } from '#'
 let cvs = new Cvs({
   container: document.getElementById('container')
 })

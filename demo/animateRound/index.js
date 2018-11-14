@@ -1,4 +1,4 @@
-import { Cvs, Circle, Rect, Bezier, Round, Track, easing } from '@'
+import { Cvs, Circle, Rect, Bezier, Round, Track, easing } from '#'
 let cvs = new Cvs({
   container: document.getElementById('container')
 })

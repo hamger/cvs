@@ -3,7 +3,7 @@ import Element from '../element'
 export default class Rect extends Element {
   constructor (opt) {
     super(opt)
-    if (this.cache) this.cacheDraw()
+    if (this.attr('cache')) this.cacheDraw()
   }
   draw (ctx) {
     ctx.save()

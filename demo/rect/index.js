@@ -1,4 +1,4 @@
-import { Cvs, Rect } from '@'
+import { Cvs, Rect } from '#'
 let cvs = new Cvs({
   container: document.getElementById('container')
 })

@@ -1,4 +1,4 @@
-import { Cvs, Circle, Track } from '@'
+import { Cvs, Circle, Track } from '#'
 let cvs = new Cvs({
   container: document.getElementById('container')
 })
