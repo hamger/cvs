@@ -81,7 +81,7 @@ export default class Element {
     }
   }
   // 绘制单元
-  drawUint (cacheCtx) {
+  drawUnit (cacheCtx) {
     this.setAttr(cacheCtx)
     this.drawPath(cacheCtx)
     this.dye(cacheCtx)

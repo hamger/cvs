@@ -17,16 +17,25 @@ export default class Rect extends Element {
   drawPath (cacheCtx) {
     let ctx = cacheCtx || this.ctx
     ctx.beginPath()
-    if (this.attr('borderRadius')) {
-      this.drawRoundRect(cacheCtx || null)
+    if (cacheCtx) {
+      if (this.attr('borderRadius')) this.drawRoundRect(ctx, this.lw, this.lw)
+      else ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
     } else {
-      if (cacheCtx) ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
+      if (this.attr('borderRadius')) this.drawRoundRect(ctx, this.opt.x, this.opt.y)
       else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
     }
+    // ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
+    // if (this.attr('borderRadius')) {
+    //   this.drawRoundRect(cacheCtx || null)
+    // } else {
+    //   if (cacheCtx) ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
+    //   else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
+    // }
   }
-  drawRoundRect (cacheCtx) {
-    const { x, y, w, h, borderRadius: r } = this.opt
-    const ctx = cacheCtx || this.ctx
+  drawRoundRect (ctx, rx, ry) {
+    const x = rx
+    const y = ry
+    const { w, h, borderRadius: r } = this.opt
     const posA = [x + r, y]
     const posB = [x + w, y]
     const posC = [x + w, y + h]
