@@ -28,8 +28,8 @@ export default class Element {
     this.timeline = null
   }
   // 设置上下文属性
-  setAttr (ctx2) {
-    let ctx = ctx2 || this.ctx
+  setAttr (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
     for (let key in this.opt) {
       if (key === 'opacity') ctx.globalAlpha = this.opt[key]
       else if (key === 'stroke') ctx.strokeStyle = this.opt[key]
@@ -53,8 +53,8 @@ export default class Element {
     }
   }
   // 填充或描边
-  dye (ctx2) {
-    let ctx = ctx2 || this.ctx
+  dye (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
     if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
   }
@@ -79,6 +79,17 @@ export default class Element {
         this.noHover[key] = this.opt[key]
       }
     }
+  }
+  // 绘制单元
+  drawUint (cacheCtx) {
+    this.setAttr(cacheCtx)
+    this.drawPath(cacheCtx)
+    this.dye(cacheCtx)
+  }
+  // 是否点击在元素上
+  isCollision (location) {
+    this.drawPath()
+    return this.ctx.isPointInPath(location.x, location.y)
   }
   on (eventType, callback) {
     this[eventType] = callback
@@ -113,7 +124,7 @@ export default class Element {
     return res
   }
   runTrack (animateTime) {
-    if (!this.timeline) this.timeline = new Timeline({playbackRate: 1})
+    if (!this.timeline) this.timeline = new Timeline({ playbackRate: 1 })
     let res = this.getCurTrack(this.timeline.currentTime)
     // let res = this.getCurTrack(animateTime)
     // 已执行完所有轨迹
@@ -154,6 +165,44 @@ export default class Element {
       })
     } else {
       this.tracks = []
+    }
+  }
+  pointCollision (evt) {
+    /* istanbul ignore if */
+    if (!this.isVisible()) {
+      return false
+    }
+    const offsetXY = this.getOffsetXY(evt)
+    if (!offsetXY) return true
+
+    let [nx, ny] = offsetXY
+    evt.offsetX = nx
+    evt.offsetY = ny
+
+    const [ox, oy, ow, oh] = this.originalRect
+
+    if (nx >= ox && nx - ox < ow && ny >= oy && ny - oy < oh) {
+      if (this.context && this.context.isPointInPath) {
+        const borderWidth = this.attr('border').width,
+          borderRadius = this.attr('borderRadius')
+        if (borderWidth || borderRadius) {
+          const [width, height] = this.outerSize
+          const [x, y, w, h, r] = [
+            0,
+            0,
+            width,
+            height,
+            Math.max(0, borderRadius + borderWidth / 2)
+          ]
+          drawRadiusBox(this.context, { x, y, w, h, r })
+          if (this.layer && this.layer.offset) {
+            nx += this.layer.offset[0]
+            ny += this.layer.offset[1]
+          }
+          return this.context.isPointInPath(nx - ox, ny - oy)
+        }
+      }
+      return true
     }
   }
 }

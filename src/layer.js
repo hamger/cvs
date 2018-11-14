@@ -6,9 +6,11 @@ import { loadTexture } from './resource'
 const _addUnit = Symbol('addUnit')
 const _removeUnit = Symbol('removeUnit')
 
-class Cvs {
+let id = 0
+
+class Layer {
   constructor (opt) {
-    this.container = opt.container
+    this.id = id++
     this.children = [] // 根据 zIndex 升序排列的子元素
     this.descChildren = [] // 根据 zIndex 降序排列的子元素
     this.animChildren = [] // 具有运动轨迹的子元素
@@ -18,6 +20,7 @@ class Cvs {
     this.animateTime = 0 // 动画已进行的时间
     this.finishedAinmCount = 0 // 已完成动画的元素个数
     this.isPause = false // 动画是否被暂停
+    Object.assign(this, {zIndex: 0, handleEvent: false}, opt)
     // this.timeline = new Timeline()
     this.init()
     this.bind()
@@ -39,11 +42,28 @@ class Cvs {
 
   init () {
     let canvas = document.createElement('canvas')
+    canvas.style.cssText = `position: absolute; top: 0px; left: 0px;z-index:${
+      this.zIndex
+    }`
     this.width = canvas.width = this.container.clientWidth
     this.height = canvas.height = this.container.clientHeight
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.container.appendChild(canvas)
+  }
+  dispatchEvent (location) {
+    let temp = null
+    // 只触发点击区域最前面元素的监听事件
+    this.descChildren.some(child => {
+      if (!child.opt.visible || !child.click || !child.drawPath) return false
+      child.drawPath.call(child, this.ctx)
+      console.log(this.ctx.isPointInPath(location.x, location.y))
+      if (this.ctx.isPointInPath(location.x, location.y)) {
+        temp = child
+        return true
+      }
+    })
+    if (temp) temp.click.call(temp, e)
   }
   bind () {
     this.canvas.addEventListener('click', e => {
@@ -52,7 +72,8 @@ class Cvs {
       // 只触发点击区域最前面元素的监听事件
       this.descChildren.some(child => {
         if (!child.opt.visible || !child.click || !child.drawPath) return false
-        if (child.isCollision(location)) {
+        child.drawPath.call(child, this.ctx)
+        if (this.ctx.isPointInPath(location.x, location.y)) {
           temp = child
           return true
         }
@@ -140,13 +161,13 @@ class Cvs {
     })
     this.descChildren.some((item, index) => {
       if (item.id === element.id) {
-        this.descChildren.splice(index, 1)
+        this.children.splice(index, 1)
         return true
       }
     })
     this.animChildren.some((item, index) => {
       if (item.id === element.id) {
-        this.animChildren.splice(index, 1)
+        this.children.splice(index, 1)
         return true
       }
     })
@@ -219,4 +240,4 @@ class Cvs {
     })
   }
 }
-export default Cvs
+export default Layer

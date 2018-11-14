@@ -14,25 +14,19 @@ export default class Rect extends Element {
     }
     ctx.restore()
   }
-  drawUnit (ctx2) {
-    let ctx = ctx2 || this.ctx
-    this.setAttr(ctx)
-    this.drawPath(ctx2 || null)
-    this.dye(ctx)
-  }
-  drawPath (ctx2) {
+  drawPath (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
+    ctx.beginPath()
     if (this.attr('borderRadius')) {
-      this.drawRoundRect(ctx2 || null)
+      this.drawRoundRect(cacheCtx || null)
     } else {
-      let ctx = ctx2 || this.ctx
-      ctx.beginPath()
-      if (ctx2) ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
+      if (cacheCtx) ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
       else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
     }
   }
-  drawRoundRect (ctx2) {
+  drawRoundRect (cacheCtx) {
     const { x, y, w, h, borderRadius: r } = this.opt
-    const ctx = ctx2 || this.ctx
+    const ctx = cacheCtx || this.ctx
     const posA = [x + r, y]
     const posB = [x + w, y]
     const posC = [x + w, y + h]

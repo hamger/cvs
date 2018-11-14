@@ -24,12 +24,12 @@ export default class Img extends Element {
     ctx.beginPath()
     ctx.rect(this.opt.x, this.opt.y, this.w, this.h)
   }
-  drawUnit (ctx2) {
-    let ctx = ctx2 || this.ctx
+  drawUnit (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
     let img = this.opt.img
     ctx.save()
     this.setAttr(ctx)
-    if (ctx2) {
+    if (cacheCtx) {
       if (this.opt.sw && this.opt.sh) {
         ctx.drawImage(
           img,

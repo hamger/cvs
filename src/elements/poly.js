@@ -11,16 +11,10 @@ export default class Polygon extends Element {
     else this.drawUint()
     ctx.restore()
   }
-  drawUint (ctx2) {
-    let ctx = ctx2 || this.ctx
-    this.setAttr(ctx)
-    this.drawPath(ctx2 || null)
-    this.dye(ctx)
-  }
-  drawPath (ctx2) {
-    let ctx = ctx2 || this.ctx
+  drawPath (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
     ctx.beginPath()
-    if (ctx2) {
+    if (cacheCtx) {
       this.opt.points.forEach((item, index) => {
         if (index === 0) ctx.moveTo(item.x - this.minX, item.y - this.minY)
         else ctx.lineTo(item.x - this.minX, item.y - this.minY)

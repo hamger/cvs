@@ -26,29 +26,20 @@ let element2 = new Element({
   w: 180,
   h: 180
 })
-element2.draw = function (ctx) {
-  ctx.save()
-  ctx.fillRect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
-  ctx.restore()
+element2.draw = function () {
+  this.ctx.save()
+  this.ctx.fillRect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
+  this.ctx.restore()
 }
-element2.drawPath = function (ctx) {
-  ctx.save()
-  ctx.rect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
-  ctx.restore()
+element2.drawPath = function () {
+  this.ctx.save()
+  this.ctx.rect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
+  this.ctx.restore()
 }
 element2.on('click', function (e) {
   console.log(e)
 })
 cvs.add(element2)
-
-let element3 = new Rect({
-  x: 400,
-  y: 300,
-  w: 80,
-  h: 80,
-  stroke: '#8d8df3'
-})
-cvs.add(element3)
 
 let element4 = new Circle({
   zIndex: -2,
@@ -64,7 +55,6 @@ let element4 = new Circle({
 element4.on('click', function (e) {
   console.log('element4: ' + e)
 })
-// cvs.add(element4)
 
 let element6 = new Poly({
   zIndex: 9,
@@ -82,20 +72,4 @@ element6.on('click', function (e) {
   console.log('element6: ' + e)
 })
 cvs.add(element4, element6)
-
-let img = new Image()
-img.src = '../../static/safari.png'
-
-// 当图片准备以后再绘制
-img.onload = function () {
-  let element5 = new Img({
-    img: img,
-    x: 200,
-    y: 200
-  })
-  element5.on('click', function (e) {
-    console.log('element5: ' + e)
-  })
-  cvs.add(element5)
-  cvs.draw()
-}
+cvs.draw()
