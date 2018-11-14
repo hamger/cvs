@@ -11,17 +11,6 @@ export default class Polygon extends Element {
     else this.drawUint()
     ctx.restore()
   }
-  drawUint (isCache) {
-    if (isCache) {
-      this.setAttr(this.cacheCtx)
-      this.drawPath(this.cacheCtx)
-      this.dye(this.cacheCtx)
-    } else {
-      this.setAttr()
-      this.drawPath()
-      this.dye()
-    }
-  }
   drawPath (cacheCtx) {
     let ctx = cacheCtx || this.ctx
     ctx.beginPath()
@@ -50,7 +39,6 @@ export default class Polygon extends Element {
     this.minY = Math.min(...y)
     this.cacheCanvas.width = Math.max(...x) - this.minX
     this.cacheCanvas.height = Math.max(...y) - this.minY
-    this.cacheCtx = this.cacheCanvas.getContext('2d')
-    this.drawUint(true)
+    this.drawUint(this.cacheCanvas.getContext('2d'))
   }
 }

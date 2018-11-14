@@ -80,6 +80,17 @@ export default class Element {
       }
     }
   }
+  // 绘制单元
+  drawUint (cacheCtx) {
+    this.setAttr(cacheCtx)
+    this.drawPath(cacheCtx)
+    this.dye(cacheCtx)
+  }
+  // 是否点击在元素上
+  isCollision (location) {
+    this.drawPath()
+    return this.ctx.isPointInPath(location.x, location.y)
+  }
   on (eventType, callback) {
     this[eventType] = callback
   }
@@ -125,10 +136,6 @@ export default class Element {
     if (res.cycle === -1) return
     // 执行当前轨迹循环体，并传入已经运行的事件
     this.tracks[res.index].loop(res.time)
-  }
-  isCollision (location) {
-    this.drawPath()
-    return this.ctx.isPointInPath(location.x, location.y)
   }
   _addTrackUnit (track) {
     if (track instanceof Track) {

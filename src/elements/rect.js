@@ -14,18 +14,12 @@ export default class Rect extends Element {
     }
     ctx.restore()
   }
-  drawUnit (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
-    this.setAttr(ctx)
-    this.drawPath(cacheCtx || null)
-    this.dye(ctx)
-  }
   drawPath (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
+    ctx.beginPath()
     if (this.attr('borderRadius')) {
       this.drawRoundRect(cacheCtx || null)
     } else {
-      let ctx = cacheCtx || this.ctx
-      ctx.beginPath()
       if (cacheCtx) ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
       else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
     }

@@ -18,13 +18,6 @@ export default class Arc extends Element {
     } else this.drawUnit()
     ctx.restore()
   }
-  drawUnit (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
-    this.setAttr(ctx)
-    this.drawPath(cacheCtx || null)
-    if (this.opt.stroke) ctx.stroke()
-    else ctx.fill()
-  }
   drawPath (cacheCtx) {
     let ctx = cacheCtx || this.ctx
     ctx.beginPath()
