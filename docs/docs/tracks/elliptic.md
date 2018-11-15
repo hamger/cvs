@@ -18,7 +18,7 @@ let elliptic = new Elliptic(options);
 | relativeY      | Number  | 元素本身运动中心相对于元素左上角(元素为圆的话是相对于圆心)在 Y 轴上的偏移量 | `0`      |
 | centerX        | Number  | 规定椭圆运动中心点在 X 轴上的位置                                           | --       |
 | centerY        | Number  | 规定椭圆运动中心点在 Y 轴上的位置                                           | --       |
-| radiusX        | Number  | 规定椭圆运动在 X 轴上的半径                                                 | `100`    |
+| radiusX        | Number  | 规定椭圆运动在 X 轴上的半径                                                 | `120`    |
 | radiusY        | Number  | 规定椭圆运动在 Y 轴上的半径                                                 | `80`     |
 | activeAngle    | Number  | 规定运动的角度，声明此属性后椭圆运动会变成弧运动，不声明则是椭圆运动                | --      |
 | anticlockwise  | Number  | 规定椭圆运动的方向                                                          | `true`   |

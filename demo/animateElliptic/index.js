@@ -9,26 +9,16 @@ let flag = true
 let dot = new Circle({
   zIndex: 1,
   r: 10,
-  x: 169,
-  y: 225,
+  x: cvs.width / 2 - 100,
+  y: cvs.height / 2,
   cache: true,
   fill: 'pink'
 })
-let sdot = new Circle({
-  zIndex: 1,
-  r: 10,
-  x: cvs.width / 2 - 100,
-  y: cvs.height / 2 - 100,
-  cache: true,
-  fill: 'blue'
-})
-let tdot = new Circle({
-  zIndex: 1,
-  r: 10,
-  x: 169,
-  y: 225,
-  cache: true,
-  fill: 'red'
+let rect = new Rect({
+  x: cvs.width / 2 - 200,
+  y: cvs.height / 2,
+  w: 50,
+  h: 30
 })
 
 let cd = new Circle({
@@ -40,43 +30,29 @@ let cd = new Circle({
 let elliptic = new Elliptic({
   delay: 0,
   duration: 3000,
-  retrace: true, // 是否折返
+  retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
   centerX: cvs.width / 2,
   centerY: cvs.height / 2,
-  angle: 0
 })
 
-let selliptic = new Elliptic({
+let relliptic = new Elliptic({
   delay: 0,
-  duration: 5000,
-  retrace: false, // 是否折返
-  iterationCount: 1,
-  radiusX: 300,
+  duration: 3000,
+  retrace: false,
+  iterationCount: 1, // 重复次数
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
+  radiusX: 200,
   radiusY: 100,
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
+  relativeX: '50%',
+  relativeY: '50%'
 })
 
-let telliptic = new Elliptic({
-  delay: 0,
-  duration: 8000,
-  retrace: false, // 是否折返
-  iterationCount: 1, // 重复次数
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
-  radiusX: 50,
-  radiusY: 200,
-  angle: 180,
-  direction: false
-})
+dot.addTrack(elliptic)
+rect.addTrack(relliptic)
 
-// dot.addTrack(elliptic)
-sdot.addTrack(selliptic)
-// tdot.addTrack(telliptic)
-
-// cvs.add([dot, sdot, tdot, cd])
-cvs.add(sdot, cd)
+cvs.add(dot, rect, cd)
 
 cvs.animate()
 

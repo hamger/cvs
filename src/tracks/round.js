@@ -1,5 +1,6 @@
 import easing from '../easing'
 import Track from '../track'
+import { getFloatNum } from '../utils'
 
 export default class Round extends Track {
   constructor (opt) {
@@ -56,8 +57,8 @@ export default class Round extends Track {
     if (!this.activeAngle || speed < this.activeAngle) move()
   }
   getPosition (ele, angle) {
-    const relativeX = ele.relativeX
-    const relativeY = ele.relativeY
+    const relativeX = typeof ele.relativeX === 'number' ? ele.relativeX : this.$ele.attr('w') * getFloatNum(ele.relativeX)
+    const relativeY = typeof ele.relativeY === 'number' ? ele.relativeY : this.$ele.attr('h') * getFloatNum(ele.relativeY)
     const centerX = ele.centerX
     const centerY = ele.centerY
     const r = ele.r
