@@ -9,27 +9,29 @@ let flag = true
 let dot = new Circle({
   zIndex: 1,
   r: 10,
-  x: 169,
-  y: 225,
-  cache: true,
+  // x: 169,
+  // y: 225,
+  // cache: true,
   fill: 'pink'
 })
 
 let bezier = new Bezier({
   delay: 0,
   duration: 3000,
-  // retrace: true, // 是否折返
+  retrace: true, // 是否折返
   // iterationCount: 1, // 重复次数
-  points: [
-    { x: 169, y: 225 },
-    { x: 178, y: 442 },
-    { x: 379, y: 119 },
-    { x: 398, y: 430 },
-    { x: 555, y: 160 },
-    { x: 264, y: 312 },
-    { x: 293, y: 508 },
-    { x: 545, y: 513 }
-  ]
+  // points: [{ x: 100, y: 100 }, { x: 416, y: 207 }]
+  points: [{ x: 10, y: 10 }, { x: 0, y: 200 }, { x: 210, y: 210 }]
+  // points: [
+  //   { x: 169, y: 225 },
+  //   { x: 178, y: 442 },
+  //   { x: 379, y: 119 },
+  //   { x: 398, y: 430 },
+  //   { x: 555, y: 160 },
+  //   { x: 264, y: 312 },
+  //   { x: 293, y: 508 },
+  //   { x: 545, y: 513 }
+  // ]
 })
 dot.addTrack(bezier)
 

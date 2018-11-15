@@ -57,6 +57,8 @@ export function arrSort (arr, key, isDescend = false) {
 
 // 全局动画循环周期
 export const period = 16
+// 折返动画容错毫秒
+export const tolerance = 50
 
 // 开启动画循环
 export const animFrame = (function () {

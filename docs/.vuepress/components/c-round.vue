@@ -49,7 +49,7 @@ export default {
     })
     dot.addTrack(round)
 
-    cvs.add([dot, cd])
+    cvs.add(dot, cd)
     cvs.animate()
   }
 }

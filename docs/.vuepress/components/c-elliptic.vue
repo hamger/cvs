@@ -50,7 +50,7 @@ export default {
       direction: false
     })
     dot.addTrack(elliptic)
-    cvs.add([dot, cd])
+    cvs.add(dot, cd)
     cvs.animate()
   }
 }
