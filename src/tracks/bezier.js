@@ -43,11 +43,6 @@ function bezierRule (points, p) {
   let y = 0
   const n = points.length - 1
   points.forEach(function (item, index) {
-    if (index === 0) {
-      x += item.x
-      y += item.y
-      return
-    }
     const a = combination(n, index)
     const b = Math.pow(1 - p, n - index)
     const c = Math.pow(p, index)

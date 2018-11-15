@@ -17,11 +17,19 @@ let dot = new Circle({
 
 let bezier = new Bezier({
   delay: 0,
-  duration: 3000,
+  duration: 6000,
   retrace: true, // 是否折返
   // iterationCount: 1, // 重复次数
   // points: [{ x: 100, y: 100 }, { x: 416, y: 207 }]
-  points: [{ x: 10, y: 10 }, { x: 0, y: 200 }, { x: 210, y: 210 }]
+  // points: [{ x: 10, y: 10 }, { x: 0, y: 200 }, { x: 210, y: 210 }]
+  points: [
+    { x: 188, y: 289 },
+    { x: 225, y: 475 },
+    { x: 466, y: 454 },
+    { x: 484, y: 261 },
+    { x: 517, y: 538 },
+    { x: 538, y: 289 }
+  ]
   // points: [
   //   { x: 169, y: 225 },
   //   { x: 178, y: 442 },

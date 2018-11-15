@@ -75,6 +75,10 @@ commitType: description
 
 ## Changelog
 
+### 2018.11.15
+
+> v0.2.7 优化贝尔曲线运动计算
+
 ### 2018.11.5
 
 > v0.2.6 添加 pauseAnimate 暂停动画函数
