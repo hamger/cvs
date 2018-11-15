@@ -2,6 +2,7 @@
 .vscode
 package-lock.json
 node_modules/
+docs/node_modules/
 dist/
 npm-debug.log
 yarn.lock
