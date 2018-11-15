@@ -9,39 +9,7 @@ import { Cvs2, Rect, Img, Keyframe } from '#'
     robot02: '../../static/robot02.png',
     robot03: '../../static/robot03.png',
   })
-  let bgLayer = cvs.layer({
-    background: '#bcd9f5',
-    handleEvent: true
-  })
   let fgLayer = cvs.layer()
-
-  let btn = new Rect({
-    x: 500,
-    y: 500,
-    w: 30,
-    h: 30,
-    fill: '#3F9'
-  })
-  btn.on('click', function () {
-    ele.timeline.playbackRate = 0
-    console.log(ele.timeline.playbackRate)
-  })
-  let btn2 = new Rect({
-    x: 550,
-    y: 500,
-    w: 30,
-    h: 30
-  })
-  btn.on('click', function () {
-    ele.timeline.playbackRate = 1
-    console.log(ele.timeline.playbackRate)
-  })
-  bgLayer.add(btn, btn2)
-  bgLayer.draw()
-
-  // let cvs2 = new Cvs({
-  //   container: document.getElementById('container2')
-  // })
   let element2 = new Img({
     img: 'safari',
     x: 10,

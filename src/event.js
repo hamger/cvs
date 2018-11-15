@@ -1,4 +1,4 @@
-export default function evDecorator (Layer) {
+export default function event (Layer) {
   let proto = Layer.prototype
   proto._events = {}
 
@@ -12,7 +12,8 @@ export default function evDecorator (Layer) {
       if (!Array.isArray(fn)) {
         fn = [fn]
         // 若 _events 对象下无对应事件名，则新建一个数组，然后将处理函数推入数组
-      }(object._events[eventName] || (object._events[eventName] = [])).push(
+      }
+      ;(object._events[eventName] || (object._events[eventName] = [])).push(
         ...fn
       )
     }

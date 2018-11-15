@@ -63,7 +63,6 @@ export default {
     });
     dot.addTrack(round)
     sdot.addTrack(sround)
-
     cvs.add(dot, sdot, cd);
     cvs.animate();
   }

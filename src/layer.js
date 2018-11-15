@@ -1,7 +1,6 @@
 import Element from './element'
-import { animFrame, cancelAnim, arrSort, isMobile } from './utils'
+import { getLocation, animFrame, cancelAnim, arrSort, isMobile } from './utils'
 import { loadTexture } from './resource'
-// import event from './event'
 // import Timeline from './timeline'
 
 const _addUnit = Symbol('addUnit')
@@ -9,8 +8,7 @@ const _removeUnit = Symbol('removeUnit')
 
 let id = 0
 
-// @event
-export default class Layer {
+class Layer {
   constructor (opt) {
     this.id = id++
     this.children = [] // 根据 zIndex 升序排列的子元素
@@ -52,7 +50,8 @@ export default class Layer {
     this.ctx = canvas.getContext('2d')
     this.container.appendChild(canvas)
   }
-  dispatchEvent (location) {
+  dispatchEvent (e) {
+    let location = getLocation(this.canvas, e)
     let temp = null
     // 只触发点击区域最前面元素的监听事件
     this.descChildren.some(child => {
@@ -170,3 +169,4 @@ export default class Layer {
     })
   }
 }
+export default Layer

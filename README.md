@@ -13,6 +13,7 @@ Cvs (a short name from 'canvas') is a basic canvas framework for 2d drawing, it'
 - 简化曲线运动的调用，并提供工具辅助可视化开发
 
 ## Install
+
 ```bash
 npm install cvs
 ```
@@ -51,11 +52,14 @@ cvs.draw();
 - 支持伪 3D 效果
 
 ## CommitRule
+
 提交信息需遵循以下格式：
+
 ```bash
 commitType: description
 ```
-`commitType`应为以下类型之一：
+
+`commitType`应为以下五种类型之一：
 
 - feat: 增加新特性
 - fix: 问题修复
@@ -63,23 +67,34 @@ commitType: description
 - test: 测试用例修改
 - opti: 代码优化，包括重构，格式、配置修改等
 
+## Reference
+
+- [贝塞尔曲线计算](https://www.jb51.net/html5/595444.html)
+- [SpriteJS](https://github.com/spritejs/spritejs)
+- [antvis/g](https://github.com/antvis/g)
+
 ## Changelog
 
 ### 2018.11.5
+
 > v0.2.6 添加 pauseAnimate 暂停动画函数
 
 > v0.2.5 添加 preload 资源预加载函数
 
 ### 2018.10.30
+
 > v0.2.4 添加圆周运动、椭圆运动、平抛运动
 
 ### 2018.10.18
+
 > v0.2.3 支持自定义元素
 
 ### 2018.10.17
+
 > v0.2.2 修复 hover 事件重复绘制元素
 
 ### 2018.10.16
+
 > v0.2.1 考虑到 duration 是 Infinity 的情况，loop 函数接受的参数改为当前轨迹下已运行的时间
 
 > v0.2.0 重新设计元素动画的实现，添加贝塞尔曲线运动，添加动画重置

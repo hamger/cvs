@@ -1,8 +1,11 @@
 {
+  "plugins": ["transform-decorators-legacy"],
   "presets": [
-    "es2017"
-  ],
-  "plugins":[
-    "transform-decorators-legacy"
+    ["env", {
+      "modules": "commonjs",
+      "targets": {
+        "node": "current"
+      }
+    }]
   ]
 }

@@ -51,12 +51,10 @@ class Cvs2 {
   // 事件委托
   delegateEvents () {
     this.cvs.addEventListener('click', e => {
-      let location = getLocation(this.cvs, e)
-      console.log(location)
       // 优先触发前面图层的事件
       for (let [key, value] of this.layers) {
         if (!value.handleEvent) continue
-        if (value.dispatchEvent(location)) return
+        if (value.dispatchEvent(e)) return
       }
     })
     // 移动端没有 hover 事件
