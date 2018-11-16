@@ -74,6 +74,10 @@ commitType: description
 
 ## Changelog
 
+### 2018.11.16
+
+> v0.2.8 去除 poly 和 arc 元素构造器
+
 ### 2018.11.15
 
 > v0.2.7 优化贝尔曲线运动计算

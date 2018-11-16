@@ -25,8 +25,6 @@ module.exports = {
         children: [
           '/docs/elements/Circle',
           '/docs/elements/Rect',
-          '/docs/elements/Arc',
-          '/docs/elements/Poly',
           '/docs/elements/Path',
           '/docs/elements/Img',
           '/docs/elements/Text'
