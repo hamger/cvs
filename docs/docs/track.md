@@ -51,10 +51,11 @@ let t = easing[key](p);
 ### example
 以下是一个使用`Track`构造器自定义轨迹的例子。
 ```js
-import { Cvs, Circle, Track, easing } from "cvs";
-let cvs = new Cvs({
-  container: document.getElementById("container")
-});
+import { Scene, Circle, Track, easing } from "cvs";
+let scene = new Scene({
+  containerId: 'container'
+})
+let cvs = scene.layer()
 let dot = new Circle({
   x: 10,
   y: 10,

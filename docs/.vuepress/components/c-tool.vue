@@ -1,12 +1,12 @@
 <template>
     <div>
       <Container>
-          <div id="text-container" style="width:100%;height:600px"></div>
+          <div id="container" style="width:100%;height:600px"></div>
       </Container>
     </div>
 </template>
 <script>
-import { Cvs, Circle } from '../../../src/'
+import { Circle, Scene } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {
@@ -16,9 +16,10 @@ export default {
     return {}
   },
   mounted() {
-    let cvs = new Cvs({
-      container: document.getElementById('text-container')
+    let scene = new Scene({
+      containerId: 'container'
     })
+    let cvs = scene.layer()
     cvs.add(
       new Circle({
         r: 50,

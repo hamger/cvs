@@ -40,10 +40,6 @@ let element = new Path(options);
 ### example
 
 ```js
-let cvs = new Cvs({
-  container: document.getElementById("path-container")
-});
-
 cvs.add(
   new Path({
     path:

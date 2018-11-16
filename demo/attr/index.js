@@ -1,7 +1,8 @@
-import { Cvs, Circle, Track } from '#'
-let cvs = new Cvs({
-  container: document.getElementById('container')
+import { Scene, Circle, Track } from '#'
+let scene = new Scene({
+  containerId: 'container'
 })
+let cvs = scene.layer()
 const dotSpeed = 1.5
 const dotCount = 60
 for (let i = 0; i < dotCount; i++) {

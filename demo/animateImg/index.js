@@ -1,9 +1,10 @@
-import { Cvs, Img, Bezier } from '#'
+import { Scene, Img, Bezier } from '#'
 
   ;(async function () {
-  let cvs = new Cvs({
-    container: document.getElementById('container')
+  let scene = new Scene({
+    containerId: 'container'
   })
+  let cvs = scene.layer()
   var resouce = await cvs.preload({
     robot01: '../../static/robot01.png',
     robot02: '../../static/robot02.png',

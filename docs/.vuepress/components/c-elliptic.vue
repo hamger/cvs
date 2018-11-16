@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { Cvs, Elliptic, Circle } from '../../../src/'
+import { Elliptic, Circle, Scene } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {
@@ -19,9 +19,10 @@ export default {
     this.cvs.cancelAnimate()
   },
   mounted() {
-    let cvs = new Cvs({
-      container: document.getElementById('container')
+    let scene = new Scene({
+      containerId: 'container'
     })
+    let cvs = scene.layer()
     this.cvs = cvs
     let dot = new Circle({
       x: cvs.width / 2 + 200,

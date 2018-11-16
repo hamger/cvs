@@ -1,7 +1,7 @@
 import { Cvs2, Rect, Img, Keyframe, Round } from '#'
   ;(async function () {
   let cvs = new Cvs2({
-    container: document.getElementById('container')
+    containerId: 'container'
   })
 
   await cvs.preload({

@@ -1,15 +1,15 @@
-import { Cvs2, Rect, Img, Keyframe } from '#'
+import { Scene, Rect, Img, Keyframe } from '#'
   ;(async function () {
-  let cvs = new Cvs2({
-    container: document.getElementById('container')
+  let scene = new Scene({
+    containerId: 'container'
   })
-  await cvs.preload({
+  await scene.preload({
     safari: '../../static/safari.png',
     robot01: '../../static/robot01.png',
     robot02: '../../static/robot02.png',
     robot03: '../../static/robot03.png',
   })
-  let fgLayer = cvs.layer()
+  let fgLayer = scene.layer()
   let element2 = new Img({
     img: 'safari',
     x: 10,

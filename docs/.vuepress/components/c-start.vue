@@ -1,12 +1,12 @@
 <template>
   <div>
     <Container>
-      <div id="attr-container" style="width:100%;height:500px"></div>
+      <div id="container" style="width:100%;height:500px"></div>
     </Container>
   </div>
 </template>
 <script>
-import { Cvs, Circle, Track } from '../../../src/'
+import { Circle, Track, Scene } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {
@@ -16,9 +16,10 @@ export default {
     return {}
   },
   mounted() {
-    let cvs = new Cvs({
-      container: document.getElementById('attr-container')
+    let scene = new Scene({
+      containerId: 'container'
     })
+    let cvs = scene.layer()
     this.cvs = cvs
     const dotSpeed = 1
     const dotCount = 60

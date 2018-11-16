@@ -21,11 +21,12 @@ npm install cvs
 ## Usage
 
 ```js
-import { Cvs, Circle } from "cvs";
+import { Scene, Circle } from "cvs";
 
-let cvs = new Cvs({
-  container: document.getElementById("container")
-});
+let scene = new Scene({
+  containerId: 'container'
+})
+let cvs = scene.layer()
 
 cvs.add(
   new Circle({

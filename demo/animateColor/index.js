@@ -1,8 +1,10 @@
-import { Cvs, Circle, Color } from '#'
+import { Scene, Circle, Color } from '#'
 
-let cvs = new Cvs({
-  container: document.getElementById('container')
+let scene = new Scene({
+  containerId: 'container'
 })
+
+let cvs = scene.layer()
 
 let dot = new Circle({
   zIndex: 1,

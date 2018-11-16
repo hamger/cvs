@@ -1,12 +1,12 @@
 <template>
     <div>
          <Container>
-             <div id="img-container" style="width:100%;height:160px"></div>
+             <div id="container" style="width:100%;height:160px"></div>
          </Container>
     </div>
 </template>
 <script>
-import { Cvs, Img } from '../../../src/'
+import { Img, Scene } from '../../../src/'
 import Container from '../Container'
 export default {
   components: {
@@ -17,12 +17,13 @@ export default {
   },
   mounted() {
     (async function () {
-      let cvs = new Cvs({
-        container: document.getElementById('img-container')
+      let scene = new Scene({
+        containerId: 'container'
       })
-      await cvs.preload({
+      await scene.preload({
         safari: require('../../../static/safari.png')
       })
+      let cvs = scene.layer()
       cvs.add(new Img({
         img: 'safari',
         x: 200,

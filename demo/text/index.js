@@ -1,7 +1,9 @@
-import { Cvs, Text } from '#'
-let cvs = new Cvs({
-  container: document.getElementById('container')
+import { Scene, Text } from '#'
+let scene = new Scene({
+  containerId: 'container'
 })
+
+let cvs = scene.layer()
 
 cvs.add(
   new Text({

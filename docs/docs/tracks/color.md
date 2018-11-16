@@ -20,11 +20,12 @@ let round = new Color(options);
 ### example
 
 ```js
-import { Cvs, Circle, Color } from "cvs";
+import { Scene, Circle, Color } from "cvs";
 
-let cvs = new Cvs({
-  container: document.getElementById("container")
-});
+let scene = new Scene({
+  containerId: 'container'
+})
+let cvs = scene.layer()
 
 let dot = new Circle({
   zIndex: 1,

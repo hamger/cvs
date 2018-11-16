@@ -1,7 +1,9 @@
-import { Cvs, Rect } from '#'
-let cvs = new Cvs({
-  container: document.getElementById('container')
+import { Scene, Rect } from '#'
+let scene = new Scene({
+  containerId: 'container'
 })
+
+let cvs = scene.layer()
 
 const rect1 = new Rect({
   x: 100,

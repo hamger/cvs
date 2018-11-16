@@ -33,10 +33,11 @@ let round = new Round(options);
 ### example
 
 ```js
-import { Cvs, Circle, Round } from "cvs";
-let cvs = new Cvs({
-  container: document.getElementById("container")
-});
+import { Scene, Circle, Round } from "cvs";
+let scene = new Scene({
+  containerId: 'container'
+})
+let cvs = scene.layer()
 let dot = new Circle({
   x: cvs.width / 2 + 50,
   y: cvs.height / 2,

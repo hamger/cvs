@@ -1,17 +1,12 @@
-import { getLocation, animFrame, cancelAnim, arrSort, isMobile } from './utils'
+import { arrSort } from './utils'
 import { loadTexture } from './resource'
 import Layer from './layer'
 // import Timeline from './timeline'
 
-const _addUnit = Symbol('addUnit')
-const _removeUnit = Symbol('removeUnit')
-
 class Cvs2 {
   constructor (opt) {
-    if (typeof opt.container === 'string') {
-      this.container = document.getElementById(opt.container)
-    } else this.container = opt.container
-    this.layers = new Map() // 根据 zIndex 升序排列的图层
+    this.container = document.getElementById(opt.containerId)
+    this.layers = [] // 根据 zIndex 升序排列的图层
     this.descLayers = [] // 根据 zIndex 降序排列的图层
     this.eventLayers = [] // 具有事件监听的图层
     this.animLayers = [] // 具有运动轨迹的图层
@@ -111,31 +106,25 @@ class Cvs2 {
     //   }
     // })
   }
+  // 添加一个 layer
   layer (opt = {}) {
     Object.assign(opt, {container: this.cvs})
     let layer = new Layer(opt)
-    this.add(layer)
+    this.layers.push(layer)
+    arrSort(this.layers, 'zIndex')
     return layer
   }
-  add (layer) {
-    var arr = Array.from(this.layers), arr2 = []
-    arr.forEach(item => {
-      arr2.push(item[1])
-    })
-    arr2.push(layer)
-    this.layers.clear()
-    // zIndex 大的先 set
-    arrSort(arr2, 'zIndex', true).forEach(item => {
-      this.layers.set(item.id, item)
-    })
-  }
-  remove (...layers) {
-    if (layers.length) {
-      layers.forEach(layer => {
-        this.layers.delete(layer.id)
+  // 删除一个 layer
+  remove (layer) {
+    if (layer) {
+      this.layers.some((item, index) => {
+        if (item.id === layer.id) {
+          this.layers.splice(index, 1)
+          return true
+        }
       })
     } else {
-      this.layers.clear()
+      this.layers = []
     }
   }
 }

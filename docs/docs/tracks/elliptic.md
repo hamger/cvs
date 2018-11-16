@@ -35,10 +35,11 @@ let elliptic = new Elliptic(options);
 ### example
 
 ```js
-import { Cvs, Circle, Elliptic } from "cvs";
-let cvs = new Cvs({
-  container: document.getElementById("container")
-});
+import { Scene, Circle, Elliptic } from "cvs";
+let scene = new Scene({
+  containerId: 'container'
+})
+let cvs = scene.layer()
 let dot = new Circle({
   x: cvs.width / 2 + 200,
   y: cvs.height / 2 + 80,

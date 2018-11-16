@@ -1,12 +1,14 @@
-import { Cvs, Element, Circle, Rect, Img } from '#'
+import { Scene, Element, Circle, Rect, Img } from '#'
 
   ;(async function () {
-  let cvs = new Cvs({
-    container: document.getElementById('container')
+  let scene = new Scene({
+    containerId: 'container'
   })
-  await cvs.preload({
+  await scene.preload({
     safari: '../../static/safari.png'
   })
+
+  let cvs = scene.layer()
 
   let circle = new Circle({
     r: 50,

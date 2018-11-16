@@ -27,10 +27,11 @@ let parabola = new Parabola(options);
 ### example
 
 ```js
-import { Cvs, Circle, Parabola } from "cvs";
-let cvs = new Cvs({
-  container: document.getElementById("container")
-});
+import { Scene, Circle, Parabola } from "cvs";
+let scene = new Scene({
+  containerId: 'container'
+})
+let cvs = scene.layer()
 let dot = new Circle({
   x: 0,
   y: 0,

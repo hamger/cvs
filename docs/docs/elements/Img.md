@@ -31,12 +31,13 @@ let element = new Img(options);
 
 ```js
 (async function() {
-  let cvs = new Cvs({
-    container: document.getElementById("img-container")
-  });
-  await cvs.preload({
+  let scene = new Scene({
+    containerId: 'container'
+  })
+  await scene.preload({
     safari: require("../../../static/safari.png")
   });
+  let cvs = scene.layer()
   cvs.add(
     new Img({
       img: "safari",

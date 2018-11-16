@@ -1,7 +1,9 @@
-import { Cvs, Path } from '#'
-let cvs = new Cvs({
-  container: document.getElementById('container')
+import { Scene, Path } from '#'
+let scene = new Scene({
+  containerId: 'container'
 })
+
+let cvs = scene.layer()
 
 cvs.add(
   new Path({

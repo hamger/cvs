@@ -1,7 +1,9 @@
-import { Cvs, Circle, Rect, Parabola, Track, easing } from '#'
-let cvs = new Cvs({
-  container: document.getElementById('container')
+import { Scene, Circle, Rect, Parabola, Track, easing } from '#'
+let scene = new Scene({
+  containerId: 'container'
 })
+let cvs = scene.layer()
+
 let stopBtn = document.querySelector('.stop')
 let againBtn = document.querySelector('.again')
 let flag = true

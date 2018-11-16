@@ -10,7 +10,7 @@ let cvs = new Cvs(options);
 
 | options.key | value | description                               | default |
 | ----------- | ----- | ----------------------------------------- | ------- |
-| container   | DOM   | 作为容器的 dom 元素，容器大小决定画布大小 | --      |
+| containerId   | String   | 作为容器的 dom 元素的 Id，容器大小决定画布大小 | --      |
 
 ### 实例属性
 
@@ -120,10 +120,11 @@ let cvs = new Cvs(options);
 - 示例：
 
   ```js
-  import { Cvs, Circle, Track } from "cvs";
-  let cvs = new Cvs({
-    container: document.getElementById("container")
-  });
+  import { Scene, Circle, Track } from "cvs";
+  let scene = new Scene({
+    containerId: 'container'
+  })
+  let cvs = scene.layer()
   let dot = new Circle({
     x: 10,
     y: 10,
