@@ -69,7 +69,6 @@ commitType: description
 
 ## Reference
 
-- [贝塞尔曲线计算](https://www.jb51.net/html5/595444.html)
 - [SpriteJS](https://github.com/spritejs/spritejs)
 - [antvis/g](https://github.com/antvis/g)
 
