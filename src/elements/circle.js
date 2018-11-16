@@ -3,6 +3,15 @@ import Element from '../element'
 export default class Circle extends Element {
   constructor (opt) {
     super(opt)
+    if (typeof this.attr('startAngle') === 'number') this.opt.isSector = true
+    this.opt = Object.assign(
+      {
+        startAngle: 0,
+        endAngle: 360,
+        anticlockwise: false
+      },
+      this.opt
+    )
     if (this.attr('cache')) this.cacheDraw()
   }
   draw () {
@@ -11,8 +20,8 @@ export default class Circle extends Element {
     if (this.cache) {
       ctx.drawImage(
         this.cacheCanvas,
-        this.opt.x - this.halfW,
-        this.opt.y - this.halfH
+        this.attr('x') - this.halfW,
+        this.attr('y') - this.halfH
       )
     } else {
       this.drawUnit()
@@ -23,15 +32,33 @@ export default class Circle extends Element {
     let ctx = cacheCtx || this.ctx
     ctx.beginPath()
     if (cacheCtx) {
-      ctx.arc(this.halfW, this.halfH, this.opt.r, 0, Math.PI * 2)
+      if (this.attr('isSector')) ctx.moveTo(this.attr('x'), this.attr('y'))
+      ctx.arc(
+        this.halfW,
+        this.halfH,
+        this.attr('r'),
+        (this.attr('startAngle') * Math.PI) / 180,
+        (this.attr('endAngle') * Math.PI) / 180,
+        this.attr('anticlockwise')
+      )
+      if (this.attr('isSector')) ctx.closePath()
     } else {
-      ctx.arc(this.opt.x, this.opt.y, this.opt.r, 0, Math.PI * 2)
+      if (this.attr('isSector')) ctx.moveTo(this.attr('x'), this.attr('y'))
+      ctx.arc(
+        this.attr('x'),
+        this.attr('y'),
+        this.attr('r'),
+        (this.attr('startAngle') * Math.PI) / 180,
+        (this.attr('endAngle') * Math.PI) / 180,
+        this.attr('anticlockwise')
+      )
+      if (this.attr('isSector')) ctx.closePath()
     }
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
-    this.halfW = this.opt.r + this.lw + this.p
-    this.halfH = this.opt.r + this.lw + this.p
+    this.halfW = this.attr('r') + this.lw + this.p
+    this.halfH = this.attr('r') + this.lw + this.p
     this.cacheCanvas.width = 2 * this.halfW
     this.cacheCanvas.height = 2 * this.halfH
     this.drawUnit(this.cacheCanvas.getContext('2d'))

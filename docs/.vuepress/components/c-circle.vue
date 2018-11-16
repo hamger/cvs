@@ -19,13 +19,20 @@ export default {
     let cvs = new Cvs({
       container: document.getElementById('text-container')
     })
-    cvs.add(
-      new Circle({
-        r: 50,
-        x: 100,
-        y: 60
-      })
-    )
+    var dot = new Circle({
+      r: 50,
+      x: 200,
+      y: 80
+    })
+    var sector = new Circle({
+      r: 50,
+      x: 500,
+      y: 80,
+      startAngle: 0,
+      endAngle: 70,
+      anticlockwise: true,
+    })
+    cvs.add(dot, sector)
     cvs.draw()
   }
 }

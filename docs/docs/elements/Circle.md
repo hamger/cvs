@@ -21,13 +21,29 @@ let element = new Circle(options);
 在动画中，如果只有元素的位置发生变化，推荐开启`cache`，使用离屏渲染提高性能
 :::
 
+Circle 构造器也支持绘制扇形，需增添如下配置项：
+
+| options.key   | value   | description        | default |
+| ------------- | ------- | ------------------ | ------- |
+| startAngle    | Number  | 规定绘制的起始角度 | --      |
+| endAngle      | Number  | 规定绘制的终点角度 | --      |
+| anticlockwise | Boolean | 规定是否逆时针绘制 | `false` |
+
 ### example
 
 ```js
-new Circle({
+var dot = new Circle({
   r: 50,
-  x: 100,
-  y: 100
+  x: 200,
+  y: 80
+});
+var sector = new Circle({
+  r: 50,
+  x: 500,
+  y: 80,
+  startAngle: 0,
+  endAngle: 70,
+  anticlockwise: true
 });
 ```
 

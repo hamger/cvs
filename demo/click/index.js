@@ -33,8 +33,8 @@ import { Cvs, Element, Circle, Rect, Img } from '#'
     fill: '#3e9',
     hover: {
       fill: '#5f1'
-    }
-    // cache: true
+    },
+    cache: true
   })
   circle2.on('click', function (e) {
     console.log('circle2: ' + e)
@@ -48,10 +48,10 @@ import { Cvs, Element, Circle, Rect, Img } from '#'
     x: 450,
     startAngle: 0,
     endAngle: 270,
-    anticlockwise: false,
+    anticlockwise: true,
     lineWidth: 4,
     stroke: '#39e',
-    // cache: true
+    cache: true
   })
   circle3.on('click', function (e) {
     console.log('circle3: ' + e)
@@ -66,8 +66,8 @@ import { Cvs, Element, Circle, Rect, Img } from '#'
     fill: '#3e9',
     hover: {
       fill: '#5f1'
-    }
-    // cache: true
+    },
+    cache: true
   })
   rect.on('click', function (e) {
     console.log('rect: ' + e)
