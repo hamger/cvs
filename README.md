@@ -76,6 +76,8 @@ commitType: description
 
 ### 2018.11.16
 
+> v0.2.10 Circle 构造器支持绘制扇形
+
 > v0.2.9 Rect 构造器支持圆角设置
 
 > v0.2.8 去除 Poly 和 Arc 构造器
