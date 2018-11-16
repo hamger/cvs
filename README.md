@@ -76,6 +76,8 @@ commitType: description
 
 ### 2018.11.16
 
+> v0.2.11 添加 Element 实例方法 clone
+
 > v0.2.10 Circle 构造器支持绘制扇形
 
 > v0.2.9 Rect 构造器支持圆角设置

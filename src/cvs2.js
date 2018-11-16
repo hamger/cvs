@@ -54,7 +54,7 @@ class Cvs2 {
       // 优先触发前面图层的事件
       for (let [key, value] of this.layers) {
         if (!value.handleEvent) continue
-        if (value.dispatchEvent(e)) return
+        if (value.dispatchEvent(e, 'click')) return
       }
     })
     // 移动端没有 hover 事件

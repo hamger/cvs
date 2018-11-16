@@ -1,21 +1,4 @@
-import { Cvs, Img, Bezier, Timeline } from '#'
-
-// let timeline = new Timeline({playbackRate: 0.001})
-
-// var timerID = timeline.setInterval(() => {
-//   console.log((timeline.currentTime).toFixed(3))
-//   if (timeline.currentTime > 3) timeline.clearInterval(timerID)
-// }, 1)
-
-// const timeline = new Timeline({playbackRate: 1})
-
-// const startTime = timeline.globalTime
-
-// var timerID = timeline.setTimeout(function name () {
-//   console.log(timeline.currentTime, timeline.globalTime - startTime)
-//   if (timeline.currentTime > 3000) timeline.clearTimeout(timerID)
-//   else timeline.setTimeout(name, 100)
-// }, 1000)
+import { Cvs, Img, Bezier } from '#'
 
   ;(async function () {
   let cvs = new Cvs({

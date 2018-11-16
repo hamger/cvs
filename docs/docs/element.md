@@ -122,10 +122,39 @@ cvs 对以下图形属性进行了缩写
   支持不传参数，`elememt.removeTrack()`将删除所有的轨迹
   :::
 
+
 - 示例：
 
   ```js
   elememt.removeTrack(track, track2);
+  ```
+
+#### clone(options)
+
+- 描述：
+
+  基于当前元素克隆一个新的元素
+
+- 参数：
+
+  - `{Object} options` 新元素的属性
+
+  ::: tip
+  支持不传参数，将返回一个和原元素属性相同的元素
+  :::
+
+- 返回值：`{Element}` 新的元素
+
+- 示例：
+
+  ```js
+  let rect = new Rect({
+    w: 50,
+    h: 50,
+    x: 150,
+    y: 350,
+  })
+  let rect2 = rect.clone({y: 100})
   ```
 
 ### 自定义元素

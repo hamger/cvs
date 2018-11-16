@@ -82,6 +82,12 @@ export default class Element {
       }
     }
   }
+  // 返回一个元素的克隆
+  clone (opt = {}) {
+    let Cons = this.constructor
+    const options = Object.assign({}, this.opt, opt)
+    return new Cons(options)
+  }
   // 绘制单元
   drawUnit (cacheCtx) {
     this.setAttr(cacheCtx)
