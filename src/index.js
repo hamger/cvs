@@ -24,8 +24,6 @@ export {
   Element,
   Circle,
   Rect,
-  Poly,
-  Arc,
   Img,
   Text,
   Path,

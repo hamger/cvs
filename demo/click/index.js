@@ -1,4 +1,4 @@
-import { Cvs, Element, Circle, Rect, Img, Poly } from '#'
+import { Cvs, Element, Circle, Rect, Img } from '#'
 
   ;(async function () {
   let cvs = new Cvs({
@@ -41,6 +41,20 @@ import { Cvs, Element, Circle, Rect, Img, Poly } from '#'
   })
   cvs.add(circle2)
 
+  let circle3 = new Circle({
+    zIndex: 2,
+    r: 50,
+    y: 350,
+    x: 450,
+    lineWidth: 4,
+    stroke: '#39e',
+    // cache: true
+  })
+  circle3.on('click', function (e) {
+    console.log('circle3: ' + e)
+  })
+  cvs.add(circle3)
+
   let rect = new Rect({
     w: 50,
     h: 50,
@@ -67,21 +81,5 @@ import { Cvs, Element, Circle, Rect, Img, Poly } from '#'
   })
   cvs.add(img)
 
-  let poly = new Poly({
-    zIndex: 9,
-    points: [
-      { x: 200, y: 23 },
-      { x: 250, y: 53 },
-      { x: 260, y: 93 },
-      { x: 170, y: 173 },
-      { x: 200, y: 23 }
-    ],
-    fill: '#f88a95',
-    cache: true
-  })
-  poly.on('click', function (e) {
-    console.log('poly: ' + e)
-  })
-  cvs.add(poly)
   cvs.draw()
 })()
