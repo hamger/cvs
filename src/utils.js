@@ -126,3 +126,7 @@ export function formatDelay (delay) {
 export function getRelativePos (x, y, rx, ry) {
   return { x: x - rx, y: y - ry }
 }
+
+export function getFloatNum (str) {
+  return str.split('%')[0] / 100
+}

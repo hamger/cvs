@@ -151,20 +151,6 @@ export default class Path extends Element {
     const p2Angle = (initAngle - angle) * Math.PI / 180
     const p1 = [reference[0] + len * Math.cos(p1Angle), reference[1] + len * Math.sin(p1Angle)]
     const p2 = [reference[0] + len * Math.cos(p2Angle), reference[1] + len * Math.sin(p2Angle)]
-    // const { fill } = type === 'end' ? this.opt.endArrow || {} : this.opt.startArrow || {}
-    // console.log(fill)
-    // if (fill) {
-    //   this.ctx.fillStyle = fill
-    //   this.ctx.moveTo(reference[0], reference[1])
-    //   this.ctx.lineTo(p1[0], p1[1])
-    //   this.ctx.lineTo(p2[0], p2[1])
-    //   this.ctx.closePath()
-    //   this.ctx.fill()
-    // } else {
-    //   this.ctx.moveTo(p1[0], p1[1])
-    //   this.ctx.lineTo(reference[0], reference[1])
-    //   this.ctx.lineTo(p2[0], p2[1])
-    // }
     this.ctx.moveTo(p1[0], p1[1])
     this.ctx.lineTo(reference[0], reference[1])
     this.ctx.lineTo(p2[0], p2[1])

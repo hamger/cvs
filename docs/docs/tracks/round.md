@@ -19,14 +19,8 @@ let round = new Round(options);
 | relativeY      | Number  | 元素本身运动中心相对于元素左上角(元素为圆的话是相对于圆心)在 Y 轴上的偏移量 | `0`      |
 | centerX        | Number  | 规定圆周运动中心点在 X 轴上的位置                                           | --       |
 | centerY        | Number  | 规定圆周运动中心点在 Y 轴上的位置                                           | --       |
-| r              | Number  | 规定圆周运动的半径                                                          | `50`     |
-| angle          | Number  | 规定圆周运动相对于运动中心的初始位置                                           | `0`      |
 | anticlockwise  | Number  | 规定圆周运动的方向                                                          | `true`   |
 | easing         | String  | 规定缓动效果（[可选值](/docs/track.html#easing)）                           | `linear` |
-
-::: tip
-`angle` 值为元素与中心点的连线跟 X 轴形成的角度  
-:::
 
 ::: tip
 `anticlockwise` 值为`false`时，逆时针转动  
@@ -44,11 +38,18 @@ let cvs = new Cvs({
   container: document.getElementById("container")
 });
 let dot = new Circle({
-  x: 0,
-  y: 0,
+  x: cvs.width / 2 + 50,
+  y: cvs.height / 2,
   r: 10,
   cache: true,
   fill: "pink"
+});
+let sdot = new Circle({
+  x: cvs.width / 2,
+  y: cvs.height / 2 - 100,
+  r: 10,
+  cache: true,
+  fill: "blue"
 });
 let cd = new Circle({
   x: cvs.width / 2,
@@ -58,18 +59,26 @@ let cd = new Circle({
 });
 let round = new Round({
   delay: 0,
-  duration: 8000,
+  duration: 3000,
   retrace: false, // 是否折返
-  iterationCount: 30, // 重复次数
+  iterationCount: 10, // 重复次数
   centerX: cvs.width / 2,
   centerY: cvs.height / 2,
-  r: 150,
-  angle: 180,
   anticlockwise: false
 });
-dot.addTrack(round);
+let sround = new Round({
+  delay: 0,
+  duration: 3000,
+  retrace: false, // 是否折返
+  iterationCount: 10, // 重复次数
+  centerX: cvs.width / 2,
+  centerY: cvs.height / 2,
+  anticlockwise: false
+});
+dot.addTrack(round)
+sdot.addTrack(sround)
 
-cvs.add([dot, cd]);
+cvs.add(dot, sdot, cd);
 cvs.animate();
 ```
 

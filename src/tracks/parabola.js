@@ -1,10 +1,15 @@
 import easing from '../easing'
 import Track from '../track'
+import { getFloatNum } from '../utils'
 
 export default class Parabola extends Track {
   constructor (opt) {
     super(opt)
-    this.defaultA = 0.0004
+    Object.assign(this, {
+      relativeX: 0,
+      relativeY: 0,
+      defaultA: 0.0004
+    }, opt)
   }
   loop (t) {
     if (typeof this.endX !== 'number' || typeof this.endY !== 'number') {
@@ -40,8 +45,8 @@ export default class Parabola extends Track {
     const sy = ele.$ele.opt.y
     const endX = ele.endX
     const endY = ele.endY
-    const relativeX = ele.relativeX || 0
-    const relativeY = ele.relativeY || 0
+    const relativeX = typeof ele.relativeX === 'number' ? ele.relativeX : this.$ele.attr('w') * getFloatNum(ele.relativeX)
+    const relativeY = typeof ele.relativeY === 'number' ? ele.relativeY : this.$ele.attr('h') * getFloatNum(ele.relativeY)
     const a = this.defaultA
     if (!ele._b) ele._b = ((sy - endY) - a * (Math.pow(sx, 2) - Math.pow(endX, 2))) / (sx - endX)
     if (!ele._c) ele._c = sy - a * Math.pow(sx, 2) - ele._b * sx

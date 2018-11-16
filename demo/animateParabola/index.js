@@ -65,7 +65,7 @@ dot.addTrack(parabola)
 sdot.addTrack(sround)
 tdot.addTrack(tround)
 
-cvs.add([dot, sdot, tdot])
+cvs.add(dot, sdot, tdot)
 // cvs.add(dot)
 
 cvs.animate()

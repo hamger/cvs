@@ -13,13 +13,13 @@ let element = new Path(options);
 | options.key | value              | description          | default |
 | ----------- | ------------------ | -------------------- | ------- |
 | path        | String             | 规定路径             | --      |
-| endArrow    | Boolean\|\<object> | 规定路径结束位置箭头 | `false` |
-| startArrow  | Boolean\|\<object> | 规定路径开始箭头     | `false` |
 
+<!-- | endArrow    | Boolean\|\<object> | 规定路径结束位置箭头 | `false` |
+| startArrow  | Boolean\|\<object> | 规定路径开始箭头     | `false` |
 | endArrow.key/startArrow.key | value  | description          | default |
 | --------------------------- | ------ | -------------------- | ------- |
 | angle                       | Number | 规定与路径的夹角大小 | `30`    |
-| len                         | Number | 规定箭头两侧的长度   | `20`    |
+| len                         | Number | 规定箭头两侧的长度   | `20`    | -->
 
 :::tip
 使用字符串描述路径，详情参考 [svg path](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths)
@@ -61,14 +61,6 @@ cvs.add(
   new Path({
     path: "M 400 100 L 600 400",
     stroke: "red",
-    startArrow: {
-      angle: 15,
-      len: 50
-    },
-    endArrow: {
-      angle: 15,
-      len: 30
-    }
   })
 );
 

@@ -1,23 +1,27 @@
 import easing from '../easing'
 import Track from '../track'
+import { getFloatNum } from '../utils'
 
 export default class Round extends Track {
   constructor (opt) {
     super(opt)
-    // this.activeAngle = opt.activeAngle || 360
-    // this.angle = opt.angle || 0
-    // this.relativeX = opt.relativeX || 0
-    // this.relativeY = opt.relativeY || 0
-    // this.r = opt.r || 100
     Object.assign(this, {
       activeAngle: 360,
-      angle: 0,
       relativeX: 0,
       relativeY: 0,
-      r: 100
+      anticlockwise: true,
     }, opt)
   }
   loop (t) {
+    const { centerX, centerY } = this
+    const x = this.$ele.attr('x')
+    const y = this.$ele.attr('y')
+    const ex = x - centerX
+    const ey = y - centerY
+    const initAngle = ex >= 0 ? Math.atan(ey / ex) * 180 / Math.PI : Math.atan(ey / ex) * 180 / Math.PI + 180
+    const initR = Math.sqrt(Math.pow(ey, 2) + Math.pow(ex, 2))
+    if (!this.angle) this.angle = initAngle
+    if (!this.r) this.r = initR
     if (typeof this.centerX !== 'number' || typeof this.centerY !== 'number') {
       throw Error('centerX|centerY参数类型错误')
     }
@@ -53,8 +57,8 @@ export default class Round extends Track {
     if (!this.activeAngle || speed < this.activeAngle) move()
   }
   getPosition (ele, angle) {
-    const relativeX = ele.relativeX
-    const relativeY = ele.relativeY
+    const relativeX = typeof ele.relativeX === 'number' ? ele.relativeX : this.$ele.attr('w') * getFloatNum(ele.relativeX)
+    const relativeY = typeof ele.relativeY === 'number' ? ele.relativeY : this.$ele.attr('h') * getFloatNum(ele.relativeY)
     const centerX = ele.centerX
     const centerY = ele.centerY
     const r = ele.r

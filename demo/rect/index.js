@@ -9,6 +9,7 @@ const rect1 = new Rect({
   w: 200,
   h: 100,
   borderRadius: 5,
+  cache: true
 })
 rect1.on('click', function (e) {
   console.log('click  rect1')
@@ -19,6 +20,7 @@ const rect2 = new Rect({
   w: 200,
   h: 100,
   borderRadius: [5, 10],
+  cache: true
 })
 
 const rect3 = new Rect({
@@ -27,6 +29,7 @@ const rect3 = new Rect({
   w: 200,
   h: 100,
   borderRadius: [5, 10, 15],
+  cache: true
 })
 
 const rect4 = new Rect({
@@ -35,11 +38,13 @@ const rect4 = new Rect({
   w: 200,
   h: 100,
   borderRadius: [5, 10, 15, 30],
+  cache: true
 })
 
 rect4.on('click', function (e) {
   console.log('click  rect4')
 })
-cvs.add([rect1, rect2, rect3, rect4])
+cvs.add(rect1, rect2, rect3, rect4)
+// cvs.add(rect1)
 
 cvs.draw()
