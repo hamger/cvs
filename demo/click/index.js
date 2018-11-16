@@ -46,6 +46,9 @@ import { Cvs, Element, Circle, Rect, Img } from '#'
     r: 50,
     y: 350,
     x: 450,
+    startAngle: 0,
+    endAngle: 270,
+    anticlockwise: false,
     lineWidth: 4,
     stroke: '#39e',
     // cache: true
