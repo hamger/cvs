@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Path, Scene } from '../../../src/'
+import { Path, Scene } from '#'
 import Container from '../Container'
 export default {
   components: {

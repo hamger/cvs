@@ -4,7 +4,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@alias': 'path/to/some/dir'
+        '#': '../../../src'
       }
     }
   },
@@ -15,30 +15,29 @@ module.exports = {
       { text: 'Home', link: '/' }
     ],
     sidebar: [
-      ['/docs/start', 'Start'],
-      ['/docs/scene', 'Scene'],
-      ['/docs/layer', 'Layer'],
-      ['/docs/element', 'Element'],
-      ['/docs/track', 'Track'],
+      ['/docs/start', '快速使用'],
+      ['/docs/scene', '场景 Scene'],
+      ['/docs/layer', '图层 Layer'],
+      ['/docs/element', '元素 Element'],
+      ['/docs/track', '轨迹 Track'],
       {
         title: 'Elements',
-        collapsable: false,
         children: [
-          '/docs/elements/circle',
-          '/docs/elements/rect',
-          '/docs/elements/path',
-          '/docs/elements/img',
-          '/docs/elements/text'
+          ['/docs/elements/circle', '圆形 Circle'],
+          ['/docs/elements/rect', '矩形 Rect'],
+          ['/docs/elements/path', '路径 Path'],
+          ['/docs/elements/image', '图像 Image'],
+          ['/docs/elements/text', '文本 Text']
         ]
       },
       {
         title: 'Tracks',
-        collapsable: false,
+        // collapsable: false,
         children: [
-          '/docs/tracks/bezier',
-          '/docs/tracks/round',
-          '/docs/tracks/elliptic',
-          '/docs/tracks/parabola',
+          ['/docs/tracks/bezier', '曲线 bezier'],
+          ['/docs/tracks/round', '正圆 Round'],
+          ['/docs/tracks/elliptic', '椭圆 Elliptic'],
+          // '/docs/tracks/parabola',
         ]
       }
     ]

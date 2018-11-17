@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Text, Scene } from '../../../src/'
+import { Text, Scene } from '#'
 import Container from '../Container'
 export default {
   components: {

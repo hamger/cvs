@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { Parabola, Circle, Scene } from '../../../src/'
+import { Parabola, Circle, Scene } from '#'
 import Container from '../Container'
 export default {
   components: {

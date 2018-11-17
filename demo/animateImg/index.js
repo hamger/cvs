@@ -1,4 +1,4 @@
-import { Scene, Img, Bezier } from '#'
+import { Scene, Image, Bezier } from '#'
 
   ;(async function () {
   let scene = new Scene({
@@ -13,8 +13,8 @@ import { Scene, Img, Bezier } from '#'
 
   console.log(resouce)
 
-  let element = new Img({
-    img: 'robot01',
+  let element = new Image({
+    image: 'robot01',
     x: 169,
     y: 225,
     h: 51,

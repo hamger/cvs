@@ -1,11 +1,9 @@
 {
-  "plugins": ["transform-decorators-legacy"],
-  "presets": [
-    ["env", {
-      "modules": "commonjs",
-      "targets": {
-        "node": "current"
-      }
-    }]
+  "presets": ["env"],
+  "plugins": [
+    "transform-runtime",
+    "transform-decorators-runtime",
+    "transform-class-properties",
+    "inline-package-json"
   ]
 }

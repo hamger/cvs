@@ -4,12 +4,12 @@ export function loadTexture (key, texture, timeout = 30000) {
   if (!loadedResources.has(key)) {
     const promise = new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
-        reject(new Error('load img timeout'))
+        reject(new Error('load image timeout'))
       }, timeout)
 
-      loadImage(texture).then(img => {
-        resolve(img)
-        loadedResources.set(key, img)
+      loadImage(texture).then(image => {
+        resolve(image)
+        loadedResources.set(key, image)
         clearTimeout(timer)
       })
     })

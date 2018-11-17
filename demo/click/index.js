@@ -1,5 +1,4 @@
-import { Scene, Element, Circle, Rect, Img } from '#'
-
+import { Scene, Element, Circle, Rect, Image } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -8,7 +7,9 @@ import { Scene, Element, Circle, Rect, Img } from '#'
     safari: '../../static/safari.png'
   })
 
-  let layer = scene.layer()
+  let layer = scene.layer({
+    handleEvent: true
+  })
 
   let circle = new Circle({
     r: 50,
@@ -76,15 +77,15 @@ import { Scene, Element, Circle, Rect, Img } from '#'
   })
   layer.add(rect)
 
-  let img = new Img({
-    img: 'safari',
+  let image = new Image({
+    image: 'safari',
     y: 100,
-    x: 340,
+    x: 340
   })
-  img.on('click', function (e) {
-    console.log('img: ' + e)
+  image.on('click', function (e) {
+    console.log('image: ' + e)
   })
-  layer.add(img)
+  layer.add(image)
 
   layer.draw()
 })()

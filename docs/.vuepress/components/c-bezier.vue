@@ -6,7 +6,8 @@
   </div>
 </template>
 <script>
-import { Bezier, Circle, Scene } from '../../../src/'
+// import { Bezier, Circle, Scene } from '#'
+import { Bezier, Circle, Scene } from '#'
 import Container from '../Container'
 export default {
   components: {

@@ -33,11 +33,11 @@ font 属性可以分解成多个属性单独配置，这些配置只有在不设
 
 ```js
 new Text({
-  text: 'hello',
+  text: "hello",
   x: 89,
   y: 76,
-  font: '48px serif'
-})
+  font: "48px serif"
+});
 ```
 
 <ClientOnly><c-text></c-text></ClientOnly>

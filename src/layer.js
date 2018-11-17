@@ -50,18 +50,18 @@ class Layer {
     this.ctx = canvas.getContext('2d')
     this.container.appendChild(canvas)
   }
-  dispatchEvent (e) {
+  dispatchEvent (e, type) {
     let location = getLocation(this.canvas, e)
     let temp = null
     // 只触发点击区域最前面元素的监听事件
     this.descChildren.some(child => {
-      if (!child.opt.visible || !child.click || !child.drawPath) return false
+      if (!child.opt.visible || !child[type] || !child.drawPath) return false
       if (child.isCollision(location)) {
         temp = child
         return true
       }
     })
-    if (temp) temp.click.call(temp, e)
+    if (temp) temp[type].call(temp, e)
   }
   [_addUnit] (element) {
     if (element instanceof Element) {

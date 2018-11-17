@@ -1,9 +1,9 @@
-### Img
+### Image
 
 绘制一个图片元素
 
 ```js
-let element = new Img(options);
+let element = new Image(options);
 ```
 
 ### options
@@ -12,7 +12,7 @@ let element = new Img(options);
 
 | options.key | value   | description                                 | default |
 | ----------- | ------- | ------------------------------------------- | ------- |
-| img         | Object  | canvas 图像源                               | --      |
+| image         | Object  | canvas 图像源                               | --      |
 | x           | Number  | 目标画布的左上角在目标 canvas 上 X 轴的位置 | --      |
 | y           | Number  | 目标画布的左上角在目标 canvas 上 Y 轴的位置 | --      |
 | w           | Number  | 在目标画布上绘制图像的宽度                  | --      |
@@ -39,8 +39,8 @@ let element = new Img(options);
   });
   let layer = scene.layer()
   layer.add(
-    new Img({
-      img: "safari",
+    new Image({
+      image: "safari",
       x: 200,
       y: 10
     })
@@ -49,4 +49,4 @@ let element = new Img(options);
 })();
 ```
 
-<ClientOnly><c-img></c-img></ClientOnly>
+<ClientOnly><c-image></c-image></ClientOnly>

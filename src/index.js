@@ -4,7 +4,7 @@ import Element from './element'
 import Path from './elements/path'
 import Circle from './elements/circle'
 import Rect from './elements/rect'
-import Img from './elements/img'
+import Image from './elements/image'
 import Text from './elements/text'
 import Track from './track'
 import Bezier from './tracks/bezier'
@@ -22,7 +22,7 @@ export {
   Element,
   Circle,
   Rect,
-  Img,
+  Image,
   Text,
   Path,
   Track,

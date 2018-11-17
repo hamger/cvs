@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { Img, Scene } from '../../../src/'
+import { Image, Scene } from '#'
 import Container from '../Container'
 export default {
   components: {
@@ -24,8 +24,8 @@ export default {
         safari: require('../../../static/safari.png')
       })
       let layer = scene.layer()
-      layer.add(new Img({
-        img: 'safari',
+      layer.add(new Image({
+        image: 'safari',
         x: 200,
         y: 10
       }))

@@ -1,4 +1,4 @@
-import { Scene, Rect, Img, Keyframe, Round } from '#'
+import { Scene, Rect, Image, Keyframe, Round } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -17,8 +17,8 @@ import { Scene, Rect, Img, Keyframe, Round } from '#'
   })
   let fgLayer = scene.layer()
 
-  let ele = new Img({
-    img: 'safari',
+  let ele = new Image({
+    image: 'safari',
     w: 80,
     h: 80
   })

@@ -1,58 +1,28 @@
-### Cvs
+### Layer
 
-创建一个绘图对象
+创建一个图层对象
 
 ```js
-let cvs = new Cvs(options);
+var scene = new Scene({ containerId: "container" });
+var layer = scene.layer(options);
 ```
 
 ### options
 
-| options.key | value  | description                                    | default |
-| ----------- | ------ | ---------------------------------------------- | ------- |
-| containerId | String | 作为容器的 dom 元素的 Id，容器大小决定画布大小 | --      |
+| options.key | value   | description                   | default |
+| ----------- | ------- | ----------------------------- | ------- |
+| zIndex      | Number  | 规定图层在 scene 中的前后顺序 | `0`     |
+| handleEvent | Boolean | 规定是否对图层进行事件监听    | `false` |
 
 ### 实例属性
 
-| layer.key | value  | description                                     |
-| ------- | ------ | ----------------------------------------------- |
-| canvas  | DOM    | 生成的 canvas 元素（便于设置其 css 样式）       |
-| width   | Number | canvas 元素标签宽度（等价于 layer.canvas.width）  |
-| height  | Number | canvas 元素标签高度（等价于 layer.canvas.height） |
+| layer.key | value  | description                                       |
+| --------- | ------ | ------------------------------------------------- |
+| canvas    | DOM    | 图层中的画布，即 canvas 元素                      |
+| width     | Number | canvas 元素标签宽度（等价于 layer.canvas.width）  |
+| height    | Number | canvas 元素标签高度（等价于 layer.canvas.height） |
 
 ### 实例方法
-
-#### _async_ preload(obj)
-
-- 描述：
-
-  资源预加载
-
-- 参数：
-
-  - `{Object} obj` 表示资源路径的键值对
-
-- 返回值：`{Object}` 表示资源的键值对
-
-- 示例：
-  ```js
-  (async function() {
-    let cvs = new Cvs({
-      container: document.getElementById("img-container")
-    });
-    await layer.preload({
-      safari: require("../../../static/safari.png")
-    });
-    layer.add(
-      new Img({
-        img: "safari",
-        dx: 200,
-        dy: 10
-      })
-    );
-    layer.draw();
-  })();
-  ```
 
 #### add(element)
 
@@ -84,6 +54,7 @@ let cvs = new Cvs(options);
 :::
 
 - 示例：
+
   ```js
   layer.remove(element);
   ```
@@ -107,6 +78,7 @@ let cvs = new Cvs(options);
   清空画布
 
 - 示例：
+
   ```js
   layer.clear();
   ```

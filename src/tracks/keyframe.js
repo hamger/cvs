@@ -36,7 +36,7 @@ export default class Keyframe extends Track {
       let curFrame = keyframe[i]
       if (curFrame.offset >= p) {
         if (curFrame.texture) {
-          this.$ele.attr({ img: loadedResources.get(curFrame.texture) })
+          this.$ele.attr({ image: loadedResources.get(curFrame.texture) })
         }
         return
       }

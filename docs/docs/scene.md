@@ -14,9 +14,10 @@ let scene = new Scene(options);
 
 ### 实例属性
 
-| scene.key | value         | description      |
-| --------- | ------------- | ---------------- |
-| layers    | Array\<Layer> | 实例中的所有图层 |
+| scene.key | value         | description             |
+| --------- | ------------- | ----------------------- |
+| container | DOM           | 作为图层容器的 dom 元素 |
+| layers    | Array\<Layer> | 场景里的所有图层        |
 
 ### 实例方法
 
@@ -35,15 +36,16 @@ let scene = new Scene(options);
 - 示例：
   ```js
   (async function() {
-    let cvs = new Scene({
-      container: document.getElementById("img-container")
+    let scene = new Scene({
+      containerId: "container"
     });
+    let layer = scene.layer();
     await layer.preload({
       safari: require("../../../static/safari.png")
     });
     layer.add(
-      new Img({
-        img: "safari",
+      new Image({
+        image: "safari",
         dx: 200,
         dy: 10
       })
@@ -52,130 +54,38 @@ let scene = new Scene(options);
   })();
   ```
 
-#### add(element)
+#### layer(opt)
 
 - 描述：
 
-  向画布中添加一个或多个元素
+  向场景中添加一个图层
 
 - 参数：
 
-  - `{Element} element`
+  - `{Object} opt`
+
+- 返回值：`{Layer}` 一个 [Layer 构造器](./layer.md)的实例
 
 - 示例：
   ```js
-  layer.add(element, element2);
+  var layer = scene.layer({ zIndex: 1 });
   ```
 
-#### remove(element)
+#### remove(layer)
 
 - 描述：
 
-  从画布中去除一个或多个元素
+  从场景中去除一个图层
 
 - 参数：
 
-  - `{Element} element`
+  - `{Layer} layer`
 
 ::: tip
-支持不传参数，`layer.remove()`将删除所有的元素
+支持不传参数，`scene.remove()`将删除所有的图层
 :::
 
 - 示例：
   ```js
-  layer.remove(element);
-  ```
-
-#### draw()
-
-- 描述：
-
-  执行一次画布绘制
-
-- 示例：
-
-  ```js
-  layer.draw();
-  ```
-
-#### clear()
-
-- 描述：
-
-  清空画布
-
-- 示例：
-  ```js
-  layer.clear();
-  ```
-
-#### animate()
-
-- 描述：
-
-  执行动画
-
-- 示例：
-
-  ```js
-  import { Scene, Circle, Track } from "cvs";
-  let scene = new Scene({
-    containerId: "container"
-  });
-  let layer = scene.layer();
-  let dot = new Circle({
-    x: 10,
-    y: 10,
-    r: 10,
-    cache: true,
-    fill: "pink"
-  });
-  let customTrack = new Track({
-    delay: 100,
-    duration: 3000,
-    loop: function(p) {
-      this.$ele.attr({
-        x: 400 * p + 10
-      });
-    }
-  });
-  dot.addTrack(customTrack);
-  layer.add(dot);
-  layer.animate();
-  ```
-
-#### pauseAnimate()
-
-- 描述：
-
-  暂停动画
-
-- 示例：
-
-  ```js
-  layer.pauseAnimate();
-  ```
-
-#### cancelAnimate()
-
-- 描述：
-
-  关闭动画
-
-- 示例：
-
-  ```js
-  layer.cancelAnimate();
-  ```
-
-#### resetAnimate()
-
-- 描述：
-
-  重置动画属性（ 再次运动仍需执行`layer.animate()`）
-
-- 示例：
-
-  ```js
-  layer.resetAnimate();
+  scene.remove(layer);
   ```

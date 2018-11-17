@@ -75,6 +75,10 @@ commitType: description
 
 ## Changelog
 
+### 2018.11.17
+
+> v0.3.0 引入 Scene 和 Layer 构造器
+
 ### 2018.11.16
 
 > v0.2.11 添加 Element 实例方法 clone
@@ -139,7 +143,7 @@ commitType: description
 
 ### 2018.9.11
 
-> v0.1.4 添加 Path，Img，Text 构造器
+> v0.1.4 添加 Path，Image，Text 构造器
 
 ### 2018.9.5
 

@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { Elliptic, Circle, Scene } from '../../../src/'
+import { Elliptic, Circle, Scene } from '#'
 import Container from '../Container'
 export default {
   components: {

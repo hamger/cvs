@@ -1,6 +1,6 @@
 {
   "name": "cvs-docs",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "A basic canvas framework for 2d drawing.",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   
   "license": "MIT",
   "dependencies": {
-    "cvs": "^0.2.10"
+    "cvs": "^0.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

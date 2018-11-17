@@ -3,19 +3,10 @@ import { loadTexture } from './resource'
 import Layer from './layer'
 // import Timeline from './timeline'
 
-class Cvs2 {
+export default class Scene {
   constructor (opt) {
     this.container = document.getElementById(opt.containerId)
     this.layers = [] // 根据 zIndex 升序排列的图层
-    this.descLayers = [] // 根据 zIndex 降序排列的图层
-    this.eventLayers = [] // 具有事件监听的图层
-    this.animLayers = [] // 具有运动轨迹的图层
-    this.stop = null // 定时器
-    this.initAnimateTime = 0 // 动画初始时间
-    this.pauseTime = 0 // 暂定总时间
-    this.animateTime = 0 // 动画已进行的时间
-    this.finishedAinmCount = 0 // 已完成动画的元素个数
-    this.isPause = false // 动画是否被暂停
     // this.timeline = new Timeline()
     this.init()
     this.delegateEvents()
@@ -36,21 +27,19 @@ class Cvs2 {
   }
 
   init () {
-    let cvs = document.createElement('div')
-    cvs.style.cssText = `position: relative;height:100%;width:100%;`
-    this.width = cvs.style.width = this.container.clientWidth
-    this.height = cvs.style.height = this.container.clientHeight
-    this.cvs = cvs
-    this.container.appendChild(cvs)
+    this.scene = document.createElement('div')
+    this.scene.style.cssText = `position:relative;height:100%;width:100%;`
+    this.container.appendChild(this.scene)
   }
   // 事件委托
   delegateEvents () {
-    this.cvs.addEventListener('click', e => {
+    this.scene.addEventListener('click', e => {
       // 优先触发前面图层的事件
-      for (let [key, value] of this.layers) {
-        if (!value.handleEvent) continue
-        if (value.dispatchEvent(e, 'click')) return
-      }
+      this.layers.forEach(layer => {
+        console.log(layer)
+        if (!layer.handleEvent) return
+        layer.dispatchEvent(e, 'click')
+      })
     })
     // 移动端没有 hover 事件
     // if (isMobile) return
@@ -58,8 +47,8 @@ class Cvs2 {
     // let count = 0
     // let count2 = 0
     // let hoverEle = null
-    // this.cvs.addEventListener('mousemove', e => {
-    //   let location = getLocation(this.cvs, e)
+    // this.scene.addEventListener('mousemove', e => {
+    //   let location = getLocation(this.scene, e)
     //   // 实现鼠标移动到可点击区域时，光标变化
     //   let temp = null
     //   this.descLayers.some(child => {
@@ -71,11 +60,11 @@ class Cvs2 {
     //     }
     //   })
     //   if (temp && count === 0) {
-    //     this.cvs.style.cursor = 'pointer'
+    //     this.scene.style.cursor = 'pointer'
     //     count++
     //   }
     //   if (!temp && count === 1) {
-    //     this.cvs.style.cursor = 'auto'
+    //     this.scene.style.cursor = 'auto'
     //     count = 0
     //   }
 
@@ -108,7 +97,7 @@ class Cvs2 {
   }
   // 添加一个 layer
   layer (opt = {}) {
-    Object.assign(opt, {container: this.cvs})
+    Object.assign(opt, { container: this.scene })
     let layer = new Layer(opt)
     this.layers.push(layer)
     arrSort(this.layers, 'zIndex')
@@ -128,5 +117,3 @@ class Cvs2 {
     }
   }
 }
-
-export default Cvs2
