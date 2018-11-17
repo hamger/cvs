@@ -16,18 +16,19 @@ module.exports = {
     ],
     sidebar: [
       ['/docs/start', 'Start'],
-      ['/docs/cvs', 'Cvs'],
+      ['/docs/scene', 'Scene'],
+      ['/docs/layer', 'Layer'],
       ['/docs/element', 'Element'],
       ['/docs/track', 'Track'],
       {
         title: 'Elements',
         collapsable: false,
         children: [
-          '/docs/elements/Circle',
-          '/docs/elements/Rect',
-          '/docs/elements/Path',
-          '/docs/elements/Img',
-          '/docs/elements/Text'
+          '/docs/elements/circle',
+          '/docs/elements/rect',
+          '/docs/elements/path',
+          '/docs/elements/img',
+          '/docs/elements/text'
         ]
       },
       {
@@ -38,7 +39,6 @@ module.exports = {
           '/docs/tracks/round',
           '/docs/tracks/elliptic',
           '/docs/tracks/parabola',
-          // '/docs/tracks/color',
         ]
       }
     ]

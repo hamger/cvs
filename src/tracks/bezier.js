@@ -27,9 +27,7 @@ export default class Bezier extends Track {
     this.drawnode(p)
   }
   drawnode (p) {
-    console.log(p)
     const pos = bezierRule(this.points, p)
-    console.log(pos)
     this.$ele.attr({
       x: pos.x,
       y: pos.y
