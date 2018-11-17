@@ -36,7 +36,7 @@ import { Scene, Circle, Bezier } from "cvs";
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 let dot = new Circle({
   x: 0,
   y: 0,
@@ -56,8 +56,8 @@ let bezier = new Bezier({
   ]
 });
 dot.addTrack(bezier);
-cvs.add(dot);
-cvs.animate();
+layer.add(dot);
+layer.animate();
 ```
 
 <ClientOnly><c-bezier></c-bezier></ClientOnly>

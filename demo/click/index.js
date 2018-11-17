@@ -8,7 +8,7 @@ import { Scene, Element, Circle, Rect, Img } from '#'
     safari: '../../static/safari.png'
   })
 
-  let cvs = scene.layer()
+  let layer = scene.layer()
 
   let circle = new Circle({
     r: 50,
@@ -17,15 +17,15 @@ import { Scene, Element, Circle, Rect, Img } from '#'
     fill: '#999'
   })
   circle.on('click', function () {
-    cvs.clear()
+    layer.clear()
     if (this.attr('fill') === '#999') {
       this.attr({ fill: '#23af9a' })
     } else {
       this.attr({ fill: '#999' })
     }
-    cvs.draw()
+    layer.draw()
   })
-  cvs.add(circle)
+  layer.add(circle)
 
   let circle2 = new Circle({
     zIndex: -2,
@@ -41,7 +41,7 @@ import { Scene, Element, Circle, Rect, Img } from '#'
   circle2.on('click', function (e) {
     console.log('circle2: ' + e)
   })
-  cvs.add(circle2)
+  layer.add(circle2)
 
   let circle3 = new Circle({
     zIndex: 2,
@@ -58,7 +58,7 @@ import { Scene, Element, Circle, Rect, Img } from '#'
   circle3.on('click', function (e) {
     console.log('circle3: ' + e)
   })
-  cvs.add(circle3)
+  layer.add(circle3)
 
   let rect = new Rect({
     w: 50,
@@ -74,7 +74,7 @@ import { Scene, Element, Circle, Rect, Img } from '#'
   rect.on('click', function (e) {
     console.log('rect: ' + e)
   })
-  cvs.add(rect)
+  layer.add(rect)
 
   let img = new Img({
     img: 'safari',
@@ -84,7 +84,7 @@ import { Scene, Element, Circle, Rect, Img } from '#'
   img.on('click', function (e) {
     console.log('img: ' + e)
   })
-  cvs.add(img)
+  layer.add(img)
 
-  cvs.draw()
+  layer.draw()
 })()

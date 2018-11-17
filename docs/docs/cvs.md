@@ -8,17 +8,17 @@ let cvs = new Cvs(options);
 
 ### options
 
-| options.key | value | description                               | default |
-| ----------- | ----- | ----------------------------------------- | ------- |
-| containerId   | String   | 作为容器的 dom 元素的 Id，容器大小决定画布大小 | --      |
+| options.key | value  | description                                    | default |
+| ----------- | ------ | ---------------------------------------------- | ------- |
+| containerId | String | 作为容器的 dom 元素的 Id，容器大小决定画布大小 | --      |
 
 ### 实例属性
 
-| cvs.key | value  | description                                     |
+| layer.key | value  | description                                     |
 | ------- | ------ | ----------------------------------------------- |
 | canvas  | DOM    | 生成的 canvas 元素（便于设置其 css 样式）       |
-| width   | Number | canvas 元素标签宽度（等价于 cvs.canvas.width）  |
-| height  | Number | canvas 元素标签高度（等价于 cvs.canvas.height） |
+| width   | Number | canvas 元素标签宽度（等价于 layer.canvas.width）  |
+| height  | Number | canvas 元素标签高度（等价于 layer.canvas.height） |
 
 ### 实例方法
 
@@ -40,17 +40,17 @@ let cvs = new Cvs(options);
     let cvs = new Cvs({
       container: document.getElementById("img-container")
     });
-    await cvs.preload({
+    await layer.preload({
       safari: require("../../../static/safari.png")
     });
-    cvs.add(
+    layer.add(
       new Img({
         img: "safari",
         dx: 200,
         dy: 10
       })
     );
-    cvs.draw();
+    layer.draw();
   })();
   ```
 
@@ -66,7 +66,7 @@ let cvs = new Cvs(options);
 
 - 示例：
   ```js
-  cvs.add(element, element2);
+  layer.add(element, element2);
   ```
 
 #### remove(element)
@@ -80,12 +80,12 @@ let cvs = new Cvs(options);
   - `{Element} element`
 
 ::: tip
-支持不传参数，`cvs.remove()`将删除所有的元素
+支持不传参数，`layer.remove()`将删除所有的元素
 :::
 
 - 示例：
   ```js
-  cvs.remove(element);
+  layer.remove(element);
   ```
 
 #### draw()
@@ -97,7 +97,7 @@ let cvs = new Cvs(options);
 - 示例：
 
   ```js
-  cvs.draw();
+  layer.draw();
   ```
 
 #### clear()
@@ -108,7 +108,7 @@ let cvs = new Cvs(options);
 
 - 示例：
   ```js
-  cvs.clear();
+  layer.clear();
   ```
 
 #### animate()
@@ -122,9 +122,9 @@ let cvs = new Cvs(options);
   ```js
   import { Scene, Circle, Track } from "cvs";
   let scene = new Scene({
-    containerId: 'container'
-  })
-  let cvs = scene.layer()
+    containerId: "container"
+  });
+  let layer = scene.layer();
   let dot = new Circle({
     x: 10,
     y: 10,
@@ -142,8 +142,8 @@ let cvs = new Cvs(options);
     }
   });
   dot.addTrack(customTrack);
-  cvs.add(dot);
-  cvs.animate();
+  layer.add(dot);
+  layer.animate();
   ```
 
 #### pauseAnimate()
@@ -155,7 +155,7 @@ let cvs = new Cvs(options);
 - 示例：
 
   ```js
-  cvs.pauseAnimate();
+  layer.pauseAnimate();
   ```
 
 #### cancelAnimate()
@@ -167,17 +167,17 @@ let cvs = new Cvs(options);
 - 示例：
 
   ```js
-  cvs.cancelAnimate();
+  layer.cancelAnimate();
   ```
 
 #### resetAnimate()
 
 - 描述：
 
-  重置动画属性（ 再次运动仍需执行`cvs.animate()`）
+  重置动画属性（ 再次运动仍需执行`layer.animate()`）
 
 - 示例：
 
   ```js
-  cvs.resetAnimate();
+  layer.resetAnimate();
   ```

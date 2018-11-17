@@ -37,15 +37,15 @@ let element = new Img(options);
   await scene.preload({
     safari: require("../../../static/safari.png")
   });
-  let cvs = scene.layer()
-  cvs.add(
+  let layer = scene.layer()
+  layer.add(
     new Img({
       img: "safari",
       x: 200,
       y: 10
     })
   );
-  cvs.draw();
+  layer.draw();
 })();
 ```
 

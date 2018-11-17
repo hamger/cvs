@@ -2,7 +2,7 @@ import { Scene, Circle, Rect, Bezier, Track, easing } from '#'
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 let stopBtn = document.querySelector('.stop')
 let againBtn = document.querySelector('.again')
 let flag = true
@@ -82,25 +82,25 @@ let rect = new Rect({
 
 // rect.addTrack(customTrack, customTrack2)
 
-cvs.add(dot, rect)
+layer.add(dot, rect)
 
-cvs.animate()
+layer.animate()
 
 stopBtn.onclick = function () {
   if (flag) {
     // 关闭动画
-    cvs.cancelAnimate()
+    layer.cancelAnimate()
     flag = false
   } else {
     // 开启动画
-    cvs.animate()
+    layer.animate()
     flag = true
   }
 }
 
 againBtn.onclick = function () {
   // 重置动画
-  cvs.resetAnimate()
+  layer.resetAnimate()
   // 开启动画
-  cvs.animate()
+  layer.animate()
 }

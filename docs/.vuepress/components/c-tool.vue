@@ -19,15 +19,15 @@ export default {
     let scene = new Scene({
       containerId: 'container'
     })
-    let cvs = scene.layer()
-    cvs.add(
+    let layer = scene.layer()
+    layer.add(
       new Circle({
         r: 50,
         x: 100,
         y: 60
       })
     )
-    cvs.draw()
+    layer.draw()
   }
 }
 </script>

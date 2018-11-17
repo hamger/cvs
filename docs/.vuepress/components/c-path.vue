@@ -19,9 +19,9 @@ export default {
     let scene = new Scene({
       containerId: 'container'
     })
-    let cvs = scene.layer()
+    let layer = scene.layer()
 
-    cvs.add(
+    layer.add(
       new Path({
         path:
           'M 10 10' +
@@ -34,7 +34,7 @@ export default {
         stroke: '#454'
       })
     )
-    cvs.add(
+    layer.add(
       new Path({
         path: 'M 400 100 L 600 400',
         stroke: 'red',
@@ -49,7 +49,7 @@ export default {
       })
     )
 
-    cvs.draw()
+    layer.draw()
   }
 }
 </script>

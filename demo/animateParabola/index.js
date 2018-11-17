@@ -2,7 +2,7 @@ import { Scene, Circle, Rect, Parabola, Track, easing } from '#'
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 
 let stopBtn = document.querySelector('.stop')
 let againBtn = document.querySelector('.again')
@@ -22,7 +22,7 @@ let sdot = new Circle({
   relativeX: 10,
   r: 10,
   x: 0,
-  y: cvs.height,
+  y: layer.height,
   cache: true,
   fill: 'blue'
 })
@@ -41,8 +41,8 @@ let parabola = new Parabola({
   duration: 2000,
   retrace: true, // 是否折返
   iterationCount: 1, // 重复次数
-  endX: cvs.width,
-  endY: cvs.height
+  endX: layer.width,
+  endY: layer.height
 })
 
 let sround = new Parabola({
@@ -50,7 +50,7 @@ let sround = new Parabola({
   duration: 2000,
   retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
-  endX: cvs.width,
+  endX: layer.width,
   endY: 0
 })
 
@@ -59,34 +59,34 @@ let tround = new Parabola({
   duration: 2000,
   retrace: false, // 是否折返
   iterationCount: 1, // 重复次数
-  endX: cvs.width / 2,
-  endY: cvs.height
+  endX: layer.width / 2,
+  endY: layer.height
 })
 
 dot.addTrack(parabola)
 sdot.addTrack(sround)
 tdot.addTrack(tround)
 
-cvs.add(dot, sdot, tdot)
-// cvs.add(dot)
+layer.add(dot, sdot, tdot)
+// layer.add(dot)
 
-cvs.animate()
+layer.animate()
 
 stopBtn.onclick = function () {
   if (flag) {
     // 关闭动画
-    cvs.cancelAnimate()
+    layer.cancelAnimate()
     flag = false
   } else {
     // 开启动画
-    cvs.animate()
+    layer.animate()
     flag = true
   }
 }
 
 againBtn.onclick = function () {
   // 重置动画
-  cvs.resetAnimate()
+  layer.resetAnimate()
   // 开启动画
-  cvs.animate()
+  layer.animate()
 }

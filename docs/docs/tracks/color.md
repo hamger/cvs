@@ -25,7 +25,7 @@ import { Scene, Circle, Color } from "cvs";
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 
 let dot = new Circle({
   zIndex: 1,
@@ -53,7 +53,7 @@ let color = new Color({
 
 dot.addTrack(color);
 
-cvs.add([dot]);
+layer.add([dot]);
 
-cvs.animate();
+layer.animate();
 ```

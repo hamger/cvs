@@ -16,14 +16,14 @@ export default {
     return {}
   },
   destroyed() {
-    this.cvs.cancelAnimate()
+    this.layer.cancelAnimate()
   },
   mounted() {
     let scene = new Scene({
       containerId: 'container'
     })
-    let cvs = scene.layer()
-    this.cvs = cvs
+    let layer = scene.layer()
+    this.layer = layer
     let dot = new Circle({
       x: 0,
       y: 0,
@@ -36,13 +36,13 @@ export default {
       duration: 2000,
       retrace: false, // 是否折返
       iterationCount: 30, // 重复次数
-      endX: cvs.width - 10,
-      endY: cvs.height - 10
+      endX: layer.width - 10,
+      endY: layer.height - 10
     })
     dot.addTrack(parabola)
 
-    cvs.add(dot)
-    cvs.animate()
+    layer.add(dot)
+    layer.animate()
   }
 }
 </script>

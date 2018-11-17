@@ -55,7 +55,7 @@ import { Scene, Circle, Track, easing } from "cvs";
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 let dot = new Circle({
   x: 10,
   y: 10,
@@ -76,6 +76,6 @@ let customTrack = new Track({
   }
 });
 dot.addTrack(customTrack);
-cvs.add(dot);
-cvs.animate();
+layer.add(dot);
+layer.animate();
 ```

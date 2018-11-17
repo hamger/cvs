@@ -2,7 +2,7 @@ import { Scene, Circle, Rect, Bezier, Round, Track, easing } from '#'
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 let stopBtn = document.querySelector('.stop')
 let againBtn = document.querySelector('.again')
 let flag = true
@@ -10,8 +10,8 @@ let flag = true
 let dot = new Circle({
   zIndex: 1,
   r: 10,
-  x: cvs.width / 2 - 150,
-  y: cvs.height / 2 - 150,
+  x: layer.width / 2 - 150,
+  y: layer.height / 2 - 150,
   cache: true,
   fill: 'pink'
 })
@@ -19,15 +19,15 @@ let dot = new Circle({
 let circle = new Circle({
   zIndex: 1,
   r: 100,
-  x: cvs.width / 2,
-  y: cvs.height / 2,
+  x: layer.width / 2,
+  y: layer.height / 2,
   cache: true,
   stroke: true
 })
 
 let rect = new Rect({
-  x: cvs.width / 2 - 100,
-  y: cvs.height / 2,
+  x: layer.width / 2 - 100,
+  y: layer.height / 2,
   w: 50,
   h: 20
 })
@@ -53,8 +53,8 @@ let rect = new Rect({
 
 let cd = new Circle({
   r: 10,
-  x: cvs.width / 2,
-  y: cvs.height / 2
+  x: layer.width / 2,
+  y: layer.height / 2
 })
 
 let round = new Round({
@@ -62,8 +62,8 @@ let round = new Round({
   duration: 3000,
   retrace: false, // 是否折返
   iterationCount: 10, // 重复次数
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
+  centerX: layer.width / 2,
+  centerY: layer.height / 2,
   anticlockwise: false,
   relativeX: '50%',
   relativeY: 10,
@@ -73,8 +73,8 @@ let round = new Round({
 //   duration: 3000,
 //   retrace: false, // 是否折返
 //   iterationCount: 1, // 重复次数
-//   centerX: cvs.width / 2,
-//   centerY: cvs.height / 2,
+//   centerX: layer.width / 2,
+//   centerY: layer.height / 2,
 // })
 //
 // let sround = new Round({
@@ -82,8 +82,8 @@ let round = new Round({
 //   duration: 5000,
 //   retrace: false, // 是否折返
 //   iterationCount: Infinity, // 重复次数
-//   centerX: cvs.width / 2,
-//   centerY: cvs.height / 2,
+//   centerX: layer.width / 2,
+//   centerY: layer.height / 2,
 //   r: 150,
 //   angle: 90
 // })
@@ -93,8 +93,8 @@ let round = new Round({
 //   duration: 8000,
 //   retrace: true, // 是否折返
 //   iterationCount: 1, // 重复次数
-//   centerX: cvs.width / 2,
-//   centerY: cvs.height / 2,
+//   centerX: layer.width / 2,
+//   centerY: layer.height / 2,
 //   r: 200,
 //   angle: 180,
 //   direction: false
@@ -105,26 +105,26 @@ rect.addTrack(round)
 // sdot.addTrack(sround)
 // tdot.addTrack(tround)
 
-// cvs.add([dot, sdot, tdot, cd])
-cvs.add(cd, circle, rect)
+// layer.add([dot, sdot, tdot, cd])
+layer.add(cd, circle, rect)
 
-cvs.animate()
+layer.animate()
 
 stopBtn.onclick = function () {
   if (flag) {
     // 关闭动画
-    cvs.cancelAnimate()
+    layer.cancelAnimate()
     flag = false
   } else {
     // 开启动画
-    cvs.animate()
+    layer.animate()
     flag = true
   }
 }
 
 againBtn.onclick = function () {
   // 重置动画
-  cvs.resetAnimate()
+  layer.resetAnimate()
   // 开启动画
-  cvs.animate()
+  layer.animate()
 }

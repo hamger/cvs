@@ -4,8 +4,8 @@ import { Scene, Img, Bezier } from '#'
   let scene = new Scene({
     containerId: 'container'
   })
-  let cvs = scene.layer()
-  var resouce = await cvs.preload({
+  let layer = scene.layer()
+  var resouce = await layer.preload({
     robot01: '../../static/robot01.png',
     robot02: '../../static/robot02.png',
     robot03: '../../static/robot03.png'
@@ -37,16 +37,16 @@ import { Scene, Img, Bezier } from '#'
     ]
   })
   element.addTrack(bezier)
-  cvs.add(element)
-  cvs.animate()
+  layer.add(element)
+  layer.animate()
 
   document.querySelector('.stop').onclick = function () {
-    cvs.pauseAnimate()
+    layer.pauseAnimate()
   }
   document.querySelector('.again').onclick = function () {
     // 重置动画
-    cvs.resetAnimate()
+    layer.resetAnimate()
     // 开启动画
-    cvs.animate()
+    layer.animate()
   }
 })()

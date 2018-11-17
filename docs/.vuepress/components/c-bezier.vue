@@ -16,14 +16,14 @@ export default {
     return {}
   },
   destroyed() {
-    this.cvs.cancelAnimate()
+    this.layer.cancelAnimate()
   },
   mounted() {
     let scene = new Scene({
       containerId: 'container'
     })
-    let cvs = scene.layer()
-    this.cvs = cvs
+    let layer = scene.layer()
+    this.layer = layer
     let dot = new Circle({
       x: 0,
       y: 0,
@@ -43,8 +43,8 @@ export default {
       ]
     })
     dot.addTrack(bezier)
-    cvs.add(dot)
-    cvs.animate()
+    layer.add(dot)
+    layer.animate()
   }
 }
 </script>

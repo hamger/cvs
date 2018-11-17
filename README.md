@@ -26,7 +26,7 @@ import { Scene, Circle } from "cvs";
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 
 cvs.add(
   new Circle({

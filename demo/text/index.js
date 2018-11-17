@@ -3,9 +3,9 @@ let scene = new Scene({
   containerId: 'container'
 })
 
-let cvs = scene.layer()
+let layer = scene.layer()
 
-cvs.add(
+layer.add(
   new Text({
     text: 'hello',
     x: 89,
@@ -14,7 +14,7 @@ cvs.add(
   })
 )
 
-cvs.add(
+layer.add(
   new Text({
     text: 'hanger',
     x: 189,
@@ -22,4 +22,4 @@ cvs.add(
     fontSize: 43
   })
 )
-cvs.draw()
+layer.draw()

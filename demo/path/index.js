@@ -3,9 +3,9 @@ let scene = new Scene({
   containerId: 'container'
 })
 
-let cvs = scene.layer()
+let layer = scene.layer()
 
-cvs.add(
+layer.add(
   new Path({
     path: 'M 300 100' + 'L 700 500',
     stroke: 'red',
@@ -17,7 +17,7 @@ cvs.add(
   })
 )
 
-cvs.add(
+layer.add(
   new Path({
     startArrow: true,
     endArrow: true,
@@ -33,4 +33,4 @@ cvs.add(
   })
 )
 
-cvs.draw()
+layer.draw()

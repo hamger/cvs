@@ -19,8 +19,8 @@ export default {
     let scene = new Scene({
       containerId: 'container'
     })
-    let cvs = scene.layer()
-    cvs.add(
+    let layer = scene.layer()
+    layer.add(
       new Text({
         text: 'hello',
         x: 89,
@@ -28,7 +28,7 @@ export default {
         font: '48px serif'
       })
     )
-    cvs.draw()
+    layer.draw()
   }
 }
 </script>

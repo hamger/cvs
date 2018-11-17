@@ -37,24 +37,24 @@ import { Scene, Circle, Round } from "cvs";
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 let dot = new Circle({
-  x: cvs.width / 2 + 50,
-  y: cvs.height / 2,
+  x: layer.width / 2 + 50,
+  y: layer.height / 2,
   r: 10,
   cache: true,
   fill: "pink"
 });
 let sdot = new Circle({
-  x: cvs.width / 2,
-  y: cvs.height / 2 - 100,
+  x: layer.width / 2,
+  y: layer.height / 2 - 100,
   r: 10,
   cache: true,
   fill: "blue"
 });
 let cd = new Circle({
-  x: cvs.width / 2,
-  y: cvs.height / 2,
+  x: layer.width / 2,
+  y: layer.height / 2,
   r: 10,
   cache: true
 });
@@ -63,8 +63,8 @@ let round = new Round({
   duration: 3000,
   retrace: false, // 是否折返
   iterationCount: 10, // 重复次数
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
+  centerX: layer.width / 2,
+  centerY: layer.height / 2,
   anticlockwise: false
 });
 let sround = new Round({
@@ -72,15 +72,15 @@ let sround = new Round({
   duration: 3000,
   retrace: false, // 是否折返
   iterationCount: 10, // 重复次数
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
+  centerX: layer.width / 2,
+  centerY: layer.height / 2,
   anticlockwise: false
 });
 dot.addTrack(round)
 sdot.addTrack(sround)
 
-cvs.add(dot, sdot, cd);
-cvs.animate();
+layer.add(dot, sdot, cd);
+layer.animate();
 ```
 
 <ClientOnly><c-round></c-round></ClientOnly>

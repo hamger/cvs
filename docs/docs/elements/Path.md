@@ -40,7 +40,7 @@ let element = new Path(options);
 ### example
 
 ```js
-cvs.add(
+layer.add(
   new Path({
     path:
       "M 10 10" +
@@ -53,14 +53,14 @@ cvs.add(
     stroke: "#454"
   })
 );
-cvs.add(
+layer.add(
   new Path({
     path: "M 400 100 L 600 400",
     stroke: "red",
   })
 );
 
-cvs.draw();
+layer.draw();
 ```
 
 <ClientOnly><c-path></c-path></ClientOnly>

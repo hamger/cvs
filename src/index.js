@@ -1,5 +1,4 @@
-import Cvs from './cvs'
-import Scene from './cvs2'
+import Scene from './Scene'
 import Layer from './layer'
 import Element from './element'
 import Path from './elements/path'
@@ -18,7 +17,6 @@ import easing from './easing'
 import Timeline from './timeline'
 
 export {
-  Cvs,
   Scene,
   Layer,
   Element,

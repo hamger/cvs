@@ -3,7 +3,7 @@ let scene = new Scene({
   containerId: 'container'
 })
 
-let cvs = scene.layer()
+let layer = scene.layer()
 
 const rect1 = new Rect({
   x: 100,
@@ -46,7 +46,7 @@ const rect4 = new Rect({
 rect4.on('click', function (e) {
   console.log('click  rect4')
 })
-cvs.add(rect1, rect2, rect3, rect4)
-// cvs.add(rect1)
+layer.add(rect1, rect2, rect3, rect4)
+// layer.add(rect1)
 
-cvs.draw()
+layer.draw()

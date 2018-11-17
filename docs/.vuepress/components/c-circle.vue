@@ -19,7 +19,7 @@ export default {
     let scene = new Scene({
       containerId: 'container'
     })
-    let cvs = scene.layer()
+    let layer = scene.layer()
     var dot = new Circle({
       r: 50,
       x: 200,
@@ -33,8 +33,8 @@ export default {
       endAngle: 70,
       anticlockwise: true,
     })
-    cvs.add(dot, sector)
-    cvs.draw()
+    layer.add(dot, sector)
+    layer.draw()
   }
 }
 </script>

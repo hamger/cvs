@@ -2,7 +2,7 @@ import { Scene, Circle, Track } from '#'
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 const dotSpeed = 1.5
 const dotCount = 60
 for (let i = 0; i < dotCount; i++) {
@@ -10,8 +10,8 @@ for (let i = 0; i < dotCount; i++) {
   let ele = new Circle({
     zIndex: Math.random() * dotCount,
     r: r,
-    x: Math.random() * (cvs.width - 2 * r) + r,
-    y: Math.random() * (cvs.height - 2 * r) + r,
+    x: Math.random() * (layer.width - 2 * r) + r,
+    y: Math.random() * (layer.height - 2 * r) + r,
     fill: `rgba(${Math.random() * 255}, ${Math.random() *
       255}, ${Math.random() * 255}, ${Math.random()})`,
     cache: true
@@ -25,13 +25,13 @@ for (let i = 0; i < dotCount; i++) {
         const x = this.$ele.attr('x') + this.xa
         const y = this.$ele.attr('y') + this.ya
         const radii = this.$ele.attr('r')
-        this.xa *= x > cvs.width - radii || x < radii ? -1 : 1
-        this.ya *= y > cvs.height - radii || y < radii ? -1 : 1
+        this.xa *= x > layer.width - radii || x < radii ? -1 : 1
+        this.ya *= y > layer.height - radii || y < radii ? -1 : 1
         this.$ele.attr({ x: x, y: y })
       }
     })
   )
-  cvs.add(ele)
+  layer.add(ele)
 }
 
-cvs.animate()
+layer.animate()

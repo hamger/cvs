@@ -39,17 +39,17 @@ import { Scene, Circle, Elliptic } from "cvs";
 let scene = new Scene({
   containerId: 'container'
 })
-let cvs = scene.layer()
+let layer = scene.layer()
 let dot = new Circle({
-  x: cvs.width / 2 + 200,
-  y: cvs.height / 2 + 80,
+  x: layer.width / 2 + 200,
+  y: layer.height / 2 + 80,
   r: 10,
   cache: true,
   fill: 'pink'
 })
 let cd = new Circle({
-  x: cvs.width / 2,
-  y: cvs.height / 2,
+  x: layer.width / 2,
+  y: layer.height / 2,
   r: 10,
   cache: true
 });
@@ -58,15 +58,15 @@ let elliptic = new Elliptic({
   duration: 4000,
   retrace: false, // 是否折返
   iterationCount: 10, // 重复次数
-  centerX: cvs.width / 2,
-  centerY: cvs.height / 2,
+  centerX: layer.width / 2,
+  centerY: layer.height / 2,
   radiusX: 200,
   radiusY: 80,
   direction: false
 });
 dot.addTrack(elliptic);
-cvs.add(dot, cd);
-cvs.animate();
+layer.add(dot, cd);
+layer.animate();
 ```
 
 <ClientOnly><c-elliptic></c-elliptic></ClientOnly>

@@ -183,5 +183,5 @@ element2.drawPath = function(ctx) {
 element2.on("click", function(e) {
   console.log(e);
 });
-cvs.add(element2);
+layer.add(element2);
 ```

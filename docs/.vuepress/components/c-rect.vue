@@ -19,8 +19,8 @@ export default {
     let scene = new Scene({
       containerId: 'container'
     })
-    let cvs = scene.layer()
-    this.cvs = cvs
+    let layer = scene.layer()
+    this.layer = layer
     var rect = new Rect({
       x: 100,
       y: 50,
@@ -53,8 +53,8 @@ export default {
       fill: 'purple',
       borderRadius: [5, 15, 25, 35],
     })
-    cvs.add(rect, rect2, rect3, rect4)
-    cvs.draw()
+    layer.add(rect, rect2, rect3, rect4)
+    layer.draw()
   }
 }
 </script>
