@@ -22,6 +22,7 @@ module.exports = {
       ['/docs/track', '轨迹 Track'],
       {
         title: 'Elements',
+        collapsable: false,
         children: [
           ['/docs/elements/circle', '圆形 Circle'],
           ['/docs/elements/rect', '矩形 Rect'],
@@ -32,7 +33,7 @@ module.exports = {
       },
       {
         title: 'Tracks',
-        // collapsable: false,
+        collapsable: false,
         children: [
           ['/docs/tracks/bezier', '曲线 bezier'],
           ['/docs/tracks/round', '正圆 Round'],
