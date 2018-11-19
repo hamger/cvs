@@ -10,7 +10,7 @@ let track = new Track(options);
 
 | options.key | value    | description      | default |
 | ----------- | -------- | ---------------- | ------- |
-| delay       | Number   | 规定运动延迟时间 | `0`      |
+| delay       | Number   | 规定运动延迟时间 | `0`     |
 | duration    | Number   | 规定运动持续时间 | --      |
 | loop        | Function | 规定动画循环体   | --      |
 
@@ -49,31 +49,29 @@ let t = easing[key](p);
   ```
 
 ### example
-以下是一个使用`Track`构造器自定义轨迹的例子。
+
+以下是一个使用`Track`构造器自定义轨迹（规定时间内到达指定的终点）的例子。
+
 ```js
 import { Scene, Circle, Track, easing } from "cvs";
-let scene = new Scene({
-  containerId: 'container'
-})
-let layer = scene.layer()
-let dot = new Circle({
-  x: 10,
-  y: 10,
-  r: 10,
-  cache: true,
-  fill: "pink"
-});
-let customTrack = new Track({
-  delay: 100,
-  duration: 4000,
-  loop: function(t) {
+let scene = new Scene({ containerId: "container" });
+let layer = scene.layer();
+let dot = new Circle({x: 10, y: 10, r: 10});
+
+class CustomTrack extends Track {
+  loop(t) {
     let p = t / this.duration;
     this.$ele.attr({
-      // 这里的 400 为运动总路程，10 为初始位置
-      x: 400 * easing.easeInQuad(p) + 10,
-      y: 400 * easing.easeInQuad(p) + 10
+      x: this.attr("destination").x * easing[this.easing](p),
+      y: this.attr("destination").y * easing[this.easing](p)
     });
   }
+}
+
+let customTrack = new CustomTrack({
+  delay: 100,
+  duration: 4000,
+  destination: { x: 200, y: 300 }
 });
 dot.addTrack(customTrack);
 layer.add(dot);

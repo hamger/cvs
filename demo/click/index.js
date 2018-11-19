@@ -88,9 +88,6 @@ import { Scene, Element, Circle, Rect, Image } from '#'
   layer.add(image)
 
   class Triangle extends Element {
-    constructor (opt) {
-      super(opt)
-    }
     draw () {
       let ctx = this.ctx
       ctx.save()

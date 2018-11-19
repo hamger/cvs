@@ -166,9 +166,6 @@ let scene = new Scene({ containerId: "container" });
 let layer = scene.layer({ handleEvent: true });
 
 class Triangle extends Element {
-  constructor(opt) {
-    super(opt);
-  }
   draw() {
     let ctx = this.ctx;
     ctx.save();
