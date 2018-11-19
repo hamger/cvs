@@ -87,5 +87,34 @@ import { Scene, Element, Circle, Rect, Image } from '#'
   })
   layer.add(image)
 
+  class Triangle extends Element {
+    constructor (opt) {
+      super(opt)
+    }
+    draw () {
+      let ctx = this.ctx
+      ctx.save()
+      this.drawPath()
+      ctx.fill()
+      ctx.restore()
+    }
+    drawPath () {
+      let ctx = this.ctx
+      let p = this.attr('points')
+      ctx.beginPath()
+      ctx.moveTo(p[0].x, p[0].y)
+      ctx.lineTo(p[1].x, p[1].y)
+      ctx.lineTo(p[2].x, p[2].y)
+      ctx.closePath()
+    }
+  }
+  let triangle = new Triangle({
+    zIndex: 5,
+    points: [{ x: 2, y: 2 }, { x: 102, y: 12 }, { x: 12, y: 92 }]
+  })
+  triangle.on('click', function (e) {
+    console.log(e)
+  })
+  layer.add(triangle)
   layer.draw()
 })()

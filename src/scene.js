@@ -36,7 +36,6 @@ export default class Scene {
     this.scene.addEventListener('click', e => {
       // 优先触发前面图层的事件
       this.layers.forEach(layer => {
-        console.log(layer)
         if (!layer.handleEvent) return
         layer.dispatchEvent(e, 'click')
       })

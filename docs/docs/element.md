@@ -122,8 +122,7 @@ cvs 对以下图形属性进行了缩写
   支持不传参数，`elememt.removeTrack()`将删除所有的轨迹
   :::
 
-
-- 示例：
+* 示例：
 
   ```js
   elememt.removeTrack(track, track2);
@@ -152,36 +151,49 @@ cvs 对以下图形属性进行了缩写
     w: 50,
     h: 50,
     x: 150,
-    y: 350,
-  })
-  let rect2 = rect.clone({y: 100})
+    y: 350
+  });
+  let rect2 = rect.clone({ y: 100 });
   ```
 
 ### 自定义元素
 
-以下是一个使用`Element`构造器自定义元素的例子，你需要定义 `draw` 函数，该函数接受上下文环境`ctx`为第一个参数，且内部的`this`指向元素实例（ 因此不能使用箭头函数来定义），`drawPath`函数同理。
+以下是一个使用`Element`构造器自定义三角形元素的例子，你需要定义一个 `draw` 函数，用来表示如何绘制元素，如果你需要事件监听，需要再定义`drawPath`绘制元素路径。
 
 ```js
-let element2 = new Element({
-  x: 600,
-  y: 100,
-  w: 180,
-  h: 180
+import { Scene, Element } from "cvs";
+let scene = new Scene({ containerId: "container" });
+let layer = scene.layer({ handleEvent: true });
+
+class Triangle extends Element {
+  constructor(opt) {
+    super(opt);
+  }
+  draw() {
+    let ctx = this.ctx;
+    ctx.save();
+    this.drawPath();
+    ctx.fill();
+    ctx.restore();
+  }
+  drawPath() {
+    let ctx = this.ctx;
+    let p = this.attr("points");
+    ctx.beginPath();
+    ctx.moveTo(p[0].x, p[0].y);
+    ctx.lineTo(p[1].x, p[1].y);
+    ctx.lineTo(p[2].x, p[2].y);
+    ctx.closePath();
+  }
+}
+
+let triangle = new Triangle({
+  zIndex: 5,
+  points: [{ x: 2, y: 2 }, { x: 102, y: 12 }, { x: 12, y: 92 }]
 });
-// 需要自定义 draw 函数，且不能使用箭头函数定义
-element2.draw = function(ctx) {
-  ctx.save();
-  ctx.fillRect(this.attr("x"), this.attr("y"), this.attr("w"), this.attr("h"));
-  ctx.restore();
-};
-// 如果你需要启用事件监听（click、hover等），还需要自定义 drawPath 函数
-element2.drawPath = function(ctx) {
-  ctx.save();
-  ctx.rect(this.attr("x"), this.attr("y"), this.attr("w"), this.attr("h"));
-  ctx.restore();
-};
-element2.on("click", function(e) {
+triangle.on("click", function(e) {
   console.log(e);
 });
-layer.add(element2);
+layer.add(triangle);
+layer.draw();
 ```
