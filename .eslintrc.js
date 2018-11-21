@@ -17,7 +17,7 @@ module.exports = {
     'no-unused-vars': IGNORE,
     'no-undef': IGNORE,
     'no-new': IGNORE,
-    'no-ueless-constructor': IGNORE,
+    'no-useless-constructor': IGNORE,
     'operator-linebreak': [ERROR, 'after'],
     'no-proto': IGNORE,
     'new-cap': IGNORE,

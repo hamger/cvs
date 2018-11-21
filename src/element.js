@@ -1,10 +1,10 @@
 import Track from './track'
 import Timeline from './timeline'
-// import event from './event'
+import event from './event'
 
 let id = 0
-// @event()
-export default class Element {
+// @event
+class Element {
   constructor (opt) {
     this.id = id++
     this.execArr = []
@@ -214,3 +214,5 @@ export default class Element {
     }
   }
 }
+
+export default Element
