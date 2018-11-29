@@ -1,7 +1,6 @@
-import Element from '../element'
+import Shape from '../shape'
 import { delBlank } from '../utils'
-
-export default class Path extends Element {
+export default class Path extends Shape {
   constructor (opt) {
     super(opt)
     this.lastPoint = []

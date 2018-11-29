@@ -1,16 +1,9 @@
 {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-        }
-      }
-    ]
-  ],
+  "presets": ["env"],
   "plugins": [
-    ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    ["@babel/plugin-proposal-class-properties", { "loose" : true }]
+    "transform-runtime",
+    "transform-decorators-runtime",
+    "transform-class-properties",
+    "inline-package-json"
   ]
 }

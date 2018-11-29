@@ -1,36 +1,16 @@
-import Element from '../element'
+import Element from './element'
 
 export default class Shape extends Element {
   constructor (opt) {
     super(opt)
-    this.opt.lineWidth = 1
-    this.opt.fontSize = this.opt.fontSize || 10
-    this.opt.fontFamily = this.opt.fontFamily || 'sans-serif'
-    this.opt.fontStyle = this.opt.fontStyle || 'normal'
-    this.opt.fontWeight = this.opt.fontWeight || 'normal'
-    this.opt.fontVariant = this.opt.fontVariant || 'normal'
+    this.originX = 0
+    this.originY = 0
   }
-  draw (ctx) {
-    ctx.beginPath()
-    ctx.save()
-    this.assembleFont()
-    this.setAttr()
-    if (this.opt.stroke) {
-      ctx.strokeText(this.opt.text, this.opt.x, this.opt.y)
-    } else {
-      ctx.fillText(this.opt.text, this.opt.x, this.opt.y)
-    }
-    ctx.restore()
+  setOrigin (x, y) {
+    this.originX = x
+    this.originY = y
   }
-  assembleFont () {
-    if (!this.opt.font) {
-      this.opt.font = [
-        this.opt.fontStyle,
-        this.opt.fontVariant,
-        this.opt.fontWeight,
-        this.opt.fontSize + 'px',
-        this.opt.fontFamily
-      ].join(' ')
-    }
+  set group (val) {
+    console.log(val)
   }
 }

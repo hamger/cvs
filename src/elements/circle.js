@@ -1,6 +1,5 @@
-import Element from '../element'
-
-export default class Circle extends Element {
+import Shape from '../shape'
+export default class Circle extends Shape {
   constructor (opt) {
     super(opt)
     if (typeof this.attr('startAngle') === 'number') this.opt.isSector = true

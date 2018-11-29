@@ -1,6 +1,8 @@
 import Scene from './Scene'
 import Layer from './layer'
 import Element from './element'
+import Group from './group'
+import Shape from './shape'
 import Path from './elements/path'
 import Circle from './elements/circle'
 import Rect from './elements/rect'
@@ -20,6 +22,8 @@ export {
   Scene,
   Layer,
   Element,
+  Group,
+  Shape,
   Circle,
   Rect,
   Image,

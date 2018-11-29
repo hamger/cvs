@@ -1,6 +1,5 @@
-import Element from '../element'
-
-export default class Text extends Element {
+import Shape from '../shape'
+export default class Text extends Shape {
   constructor (opt) {
     super(opt)
     this.opt.lineWidth = 1

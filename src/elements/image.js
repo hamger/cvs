@@ -1,8 +1,9 @@
-import Element from '../element'
+import Shape from '../shape'
 import {loadedResources} from '../resource'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
-export default class Image extends Element {
+export default class Image extends Shape {
+// export default class Image extends element {
   constructor (opt) {
     super(opt)
     if (loadedResources.has(this.opt.image)) {
