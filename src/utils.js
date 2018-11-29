@@ -9,6 +9,20 @@ export function getLocation (container, event) {
     y: y - container.getBoundingClientRect().top
   }
 }
+/**
+ * 删除 arr 中的某项
+ */
+export function remove (arr, item) {
+  const idx = arr.findIndex(ele => {
+    return ele.id === item.id
+  })
+  if (idx > -1) arr.splice(idx, 1)
+}
+
+// 报错提示
+export function error (message) {
+  throw Error('cvs: ' + message)
+}
 
 // 四舍五入取整（将目标数字加上 0.5，然后对结果执行逐位运算以消除小数部分）
 export function int (num) {

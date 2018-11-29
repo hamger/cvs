@@ -1,6 +1,6 @@
 import easing from '../easing'
 import Track from '../track'
-import { getFloatNum } from '../utils'
+import { getFloatNum, error } from '../utils'
 
 export default class Parabola extends Track {
   constructor (opt) {
@@ -13,7 +13,7 @@ export default class Parabola extends Track {
   }
   loop (t) {
     if (typeof this.endX !== 'number' || typeof this.endY !== 'number') {
-      throw Error('endX|endY参数类型错误')
+      error('endX|endY参数类型错误')
     }
     if (!this._s) this._s = this.endX - this.$ele.opt.x
     if (!this._sx) this._sx = this.$ele.opt.x

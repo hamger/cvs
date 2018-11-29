@@ -1,5 +1,6 @@
 import Track from './track'
 import Timeline from './timeline'
+import { remove, error } from './utils'
 import event from './event'
 
 let id = 0
@@ -150,7 +151,7 @@ class Element {
       track.$ele = this
       this.tracks.push(track)
     } else {
-      throw Error('Function addTrack only accept the instance of Track.')
+      error('Function addTrack only accept the instance of Track.')
     }
   }
   addTrack (...tracks) {
@@ -158,18 +159,10 @@ class Element {
       this._addTrackUnit(item)
     })
   }
-  _removeTrackUnit (track) {
-    this.tracks.some((item, index) => {
-      if (item.id === track.id) {
-        this.children.splice(index, 1)
-        return true
-      }
-    })
-  }
   removeTrack (...tracks) {
     if (tracks.length) {
       tracks.forEach(item => {
-        this._removeTrackUnit(item)
+        remove(this.children, item)
       })
     } else {
       this.tracks = []

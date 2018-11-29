@@ -1,5 +1,5 @@
 import Element from './element'
-import { getLocation, animFrame, cancelAnim, arrSort, isMobile } from './utils'
+import { getLocation, animFrame, cancelAnim, arrSort, isMobile, remove, error } from './utils'
 import { loadTexture } from './resource'
 // import Timeline from './timeline'
 
@@ -71,7 +71,7 @@ class Layer {
       this.descChildren.push(element)
       arrSort(this.descChildren, 'opt.zIndex', true)
     } else {
-      throw Error('Function add only accept the instance of Element.')
+      error('Function add only accept the instance of Element.')
     }
   }
   add (...elements) {
@@ -82,24 +82,9 @@ class Layer {
     })
   }
   [_removeUnit] (element) {
-    this.children.some((item, index) => {
-      if (item.id === element.id) {
-        this.children.splice(index, 1)
-        return true
-      }
-    })
-    this.descChildren.some((item, index) => {
-      if (item.id === element.id) {
-        this.children.splice(index, 1)
-        return true
-      }
-    })
-    this.animChildren.some((item, index) => {
-      if (item.id === element.id) {
-        this.children.splice(index, 1)
-        return true
-      }
-    })
+    remove(this.children, element)
+    remove(this.descChildren, element)
+    remove(this.animChildren, element)
   }
   remove (...elements) {
     if (elements.length) {

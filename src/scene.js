@@ -1,4 +1,4 @@
-import { arrSort } from './utils'
+import { arrSort, remove } from './utils'
 import { loadTexture } from './resource'
 import Layer from './layer'
 // import Timeline from './timeline'
@@ -105,12 +105,7 @@ export default class Scene {
   // 删除一个 layer
   remove (layer) {
     if (layer) {
-      this.layers.some((item, index) => {
-        if (item.id === layer.id) {
-          this.layers.splice(index, 1)
-          return true
-        }
-      })
+      remove(this.layers, layer)
     } else {
       this.layers = []
     }

@@ -1,5 +1,5 @@
 import Element from '../element'
-
+import {error} from '../utils'
 export default class Rect extends Element {
   constructor (opt) {
     super(opt)
@@ -109,7 +109,7 @@ export default class Rect extends Element {
         ctx.lineTo(posd2[0], posd2[1])
         ctx.arcTo(posE[0], posE[1], posa1[0], posa1[1], r1)
       } else {
-        throw Error('please provide correct parameter')
+        error('please provide correct parameter')
       }
     } else {
       ctx.beginPath()

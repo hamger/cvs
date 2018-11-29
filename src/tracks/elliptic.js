@@ -1,6 +1,6 @@
 import easing from '../easing'
 import Track from '../track'
-import { getFloatNum } from '../utils'
+import { getFloatNum, error } from '../utils'
 
 export default class Elliptic extends Track {
   constructor (opt) {
@@ -23,7 +23,7 @@ export default class Elliptic extends Track {
     const initAngle = ex >= 0 ? Math.atan(ey / ex) * 180 / Math.PI : Math.atan(ey / ex) * 180 / Math.PI + 180
     if (!this.angle) this.angle = initAngle
     if (typeof this.centerX !== 'number' || typeof this.centerY !== 'number') {
-      throw Error('centerX|centerY参数类型错误')
+      error('centerX|centerY参数类型错误')
     }
     const p2 = t / this.duration
     let p = 0
