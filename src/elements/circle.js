@@ -13,8 +13,7 @@ export default class Circle extends Shape {
     )
     if (this.attr('cache')) this.cacheDraw()
   }
-  draw () {
-    let ctx = this.ctx
+  draw (ctx) {
     ctx.save()
     if (this.cache) {
       ctx.drawImage(

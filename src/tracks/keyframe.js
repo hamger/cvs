@@ -10,7 +10,6 @@ export default class Keyframe extends Track {
     this.keyframe = this.keyframe.map((element, index) => {
       return Object.assign({ offset: p * (index + 1) }, element)
     })
-    console.log(this.keyframe)
   }
   loop (t) {
     const p2 = t / this.duration

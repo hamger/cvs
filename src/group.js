@@ -1,23 +1,23 @@
 import Element from './element'
-import { remove, error } from './utils'
+import { remove, arrSort, error } from './utils'
 
 export default class Group extends Element {
   constructor (opt) {
     super(opt)
     this.shapes = []
-    this.isVirtual = true
   }
   append (...shapes) {
     shapes.forEach(shape => {
-      shape.ctx = this.ctx
-      shape.canvas = this.canvas
+      if (!(shape instanceof Element)) { error('Function add only accept the instance of Element.') }
       shape.group = this
-      if (shape instanceof Element) {
-        this.shapes.push(shape)
-        arrSort(this.shapes, 'opt.zIndex')
-      } else {
-        error('Function add only accept the instance of Element.')
-      }
+      this.shapes.push(shape)
+      arrSort(this.shapes, 'opt.zIndex')
+    })
+  }
+  set ctx (val) {
+    this._ctx = val
+    this.shapes.forEach(shape => {
+      shape.ctx = val
     })
   }
   remove (...shapes) {
@@ -30,24 +30,20 @@ export default class Group extends Element {
     }
   }
   get isVirtual () {
-    console.log(this.attr('w'))
-    if (this.attr('w') && this.attr('h')) {
-      return true
-    } else {
-      return false
-    }
+    // 没有大小的 group 视为虚拟组合
+    if (this.attr('w') && this.attr('h')) return false
+    else return true
   }
-  draw () {
-    let ctx = this.ctx
+  draw (ctx) {
     ctx.save()
     this.drawPath()
     this.shapes.forEach(shape => {
-      shape.drawUnit()
+      shape.draw.call(shape, ctx)
     })
     ctx.restore()
   }
-  drawPath () {
-    let ctx = this.ctx
+  drawPath (cacheCtx) {
+    let ctx = cacheCtx || this._ctx
     if (!this.isVirtual) {
       ctx.beginPath()
       ctx.rect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))

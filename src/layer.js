@@ -1,5 +1,13 @@
 import Element from './element'
-import { getLocation, animFrame, cancelAnim, arrSort, isMobile, remove, error } from './utils'
+import {
+  getLocation,
+  animFrame,
+  cancelAnim,
+  arrSort,
+  isMobile,
+  remove,
+  error
+} from './utils'
 import { loadTexture } from './resource'
 // import Timeline from './timeline'
 
@@ -64,20 +72,19 @@ class Layer {
     if (temp) temp[type].call(temp, e)
   }
   [_addUnit] (element) {
-    if (element instanceof Element) {
-      this.children.push(element)
-      arrSort(this.children, 'opt.zIndex')
-      if (element.tracks.length) this.animChildren.push(element)
-      this.descChildren.push(element)
-      arrSort(this.descChildren, 'opt.zIndex', true)
-    } else {
-      error('Function add only accept the instance of Element.')
-    }
+    this.children.push(element)
+    arrSort(this.children, 'opt.zIndex')
+    if (element.tracks.length) this.animChildren.push(element)
+    this.descChildren.push(element)
+    arrSort(this.descChildren, 'opt.zIndex', true)
   }
   add (...elements) {
     elements.forEach(item => {
+      if (!(item instanceof Element)) {
+        error('Function add only accept the instance of Element.')
+      }
       item.ctx = this.ctx
-      item.canvas = this.canvas
+      // item.canvas = this.canvas
       this[_addUnit](item)
     })
   }
