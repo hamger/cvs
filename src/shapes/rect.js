@@ -7,10 +7,10 @@ export default class Rect extends Shape {
   }
   draw (ctx) {
     ctx.save()
-    if (this.cache) {
+    if (this.attr('cache')) {
       ctx.drawImage(this.cacheCanvas, this.opt.x - this.lw, this.opt.y - this.lw)
     } else {
-      this.drawUnit()
+      this.drawUnit(ctx)
     }
     ctx.restore()
   }
@@ -24,13 +24,6 @@ export default class Rect extends Shape {
       if (this.attr('borderRadius')) this.drawRoundRect(ctx, this.opt.x, this.opt.y)
       else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
     }
-    // ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
-    // if (this.attr('borderRadius')) {
-    //   this.drawRoundRect(cacheCtx || null)
-    // } else {
-    //   if (cacheCtx) ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
-    //   else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
-    // }
   }
   drawRoundRect (ctx, rx, ry) {
     const x = rx

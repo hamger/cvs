@@ -15,14 +15,14 @@ export default class Circle extends Shape {
   }
   draw (ctx) {
     ctx.save()
-    if (this.cache) {
+    if (this.attr('cache')) {
       ctx.drawImage(
         this.cacheCanvas,
         this.attr('x') - this.halfW,
         this.attr('y') - this.halfH
       )
     } else {
-      this.drawUnit()
+      this.drawUnit(ctx)
     }
     ctx.restore()
   }

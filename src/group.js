@@ -8,8 +8,10 @@ export default class Group extends Element {
   }
   append (...shapes) {
     shapes.forEach(shape => {
-      if (!(shape instanceof Element)) { error('Function add only accept the instance of Element.') }
-      shape.group = this
+      if (!(shape instanceof Element)) {
+        error('Function add only accept the instance of Element.')
+      }
+      // shape.group = this
       this.shapes.push(shape)
       arrSort(this.shapes, 'opt.zIndex')
     })
@@ -36,10 +38,9 @@ export default class Group extends Element {
   }
   draw (ctx) {
     ctx.save()
+    if (!this.cacheCanvas) this.cacheDraw()
     this.drawPath(ctx)
-    this.shapes.forEach(shape => {
-      shape.draw.call(shape, ctx)
-    })
+    ctx.drawImage(this.cacheCanvas, this.attr('x'), this.attr('y'))
     ctx.restore()
   }
   drawPath (cacheCtx) {
@@ -51,5 +52,16 @@ export default class Group extends Element {
       this.dye(ctx)
       ctx.clip()
     }
+  }
+  cacheDraw () {
+    this.cacheCanvas = document.createElement('canvas')
+    this.cacheCanvas.width = this.attr('w')
+    this.cacheCanvas.height = this.attr('h')
+    this.drawShape(this.cacheCanvas.getContext('2d'))
+  }
+  drawShape (ctx) {
+    this.shapes.forEach(shape => {
+      shape.draw.call(shape, ctx)
+    })
   }
 }

@@ -95,7 +95,7 @@ class Layer {
         error('Function add only accept the instance of Element.')
       }
       item.ctx = this.ctx
-      // item.canvas = this.canvas
+      item.layer = this.layer
       this[_addUnit](item)
     })
   }

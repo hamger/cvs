@@ -14,11 +14,11 @@ export default class Image extends Shape {
   draw (ctx) {
     this.w = this.opt.w ? this.opt.w : this.opt.image.width
     this.h = this.opt.h ? this.opt.h : this.opt.image.height
-    if (this.cache) {
+    if (this.attr('cache')) {
       this.cacheDraw()
       ctx.drawImage(this.cacheCanvas, this.opt.x, this.opt.y)
     } else {
-      this.drawUnit()
+      this.drawUnit(ctx)
     }
   }
   drawPath (cacheCtx) {

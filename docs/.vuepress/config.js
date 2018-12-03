@@ -21,21 +21,21 @@ module.exports = {
       ['/docs/element', '元素 Element'],
       ['/docs/track', '轨迹 Track'],
       {
-        title: 'Elements',
+        title: 'shapes',
         collapsable: false,
         children: [
-          ['/docs/elements/circle', '圆形 Circle'],
-          ['/docs/elements/rect', '矩形 Rect'],
-          ['/docs/elements/path', '路径 Path'],
-          ['/docs/elements/image', '图像 Image'],
-          ['/docs/elements/text', '文本 Text']
+          ['/docs/shapes/circle', '圆形 Circle'],
+          ['/docs/shapes/rect', '矩形 Rect'],
+          ['/docs/shapes/path', '路径 Path'],
+          ['/docs/shapes/image', '图像 Image'],
+          ['/docs/shapes/text', '文本 Text']
         ]
       },
       {
-        title: 'Tracks',
+        title: 'tracks',
         collapsable: false,
         children: [
-          ['/docs/tracks/bezier', '曲线 bezier'],
+          ['/docs/tracks/bezier', '曲线 Bezier'],
           ['/docs/tracks/round', '正圆 Round'],
           ['/docs/tracks/elliptic', '椭圆 Elliptic'],
           // '/docs/tracks/parabola',
