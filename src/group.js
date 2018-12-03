@@ -36,7 +36,7 @@ export default class Group extends Element {
   }
   draw (ctx) {
     ctx.save()
-    this.drawPath()
+    this.drawPath(ctx)
     this.shapes.forEach(shape => {
       shape.draw.call(shape, ctx)
     })
@@ -46,7 +46,9 @@ export default class Group extends Element {
     let ctx = cacheCtx || this._ctx
     if (!this.isVirtual) {
       ctx.beginPath()
+      this.setAttr(ctx)
       ctx.rect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
+      this.dye(ctx)
       ctx.clip()
     }
   }

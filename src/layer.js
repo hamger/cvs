@@ -1,4 +1,5 @@
 import Element from './element'
+import Group from './group'
 import {
   getLocation,
   animFrame,
@@ -58,19 +59,29 @@ class Layer {
     this.ctx = canvas.getContext('2d')
     this.container.appendChild(canvas)
   }
+  emitUnit (child, location, type, e) {
+    if (!child.opt.visible || !child[type] || !child.drawPath) return false
+    if (child.isCollision(location)) {
+      child[type].call(child, e)
+      return true
+    }
+  }
   dispatchEvent (e, type) {
     let location = getLocation(this.canvas, e)
-    let temp = null
-    // 只触发点击区域最前面元素的监听事件
-    this.descChildren.some(child => {
-      if (!child.opt.visible || !child[type] || !child.drawPath) return false
-      if (child.isCollision(location)) {
-        temp = child
-        return true
+    // 点击区域前面元素的先监听事件
+    this.descChildren.forEach(child => {
+      if (child instanceof Group) {
+        child.shapes.forEach(shape => {
+          this.emitUnit(shape, location, type, e)
+        })
+      } else {
+        this.emitUnit(child, location, type, e)
       }
     })
-    if (temp) temp[type].call(temp, e)
   }
+  // set tempEvent (val) {
+  //   val.call(temp, e)
+  // }
   [_addUnit] (element) {
     this.children.push(element)
     arrSort(this.children, 'opt.zIndex')
