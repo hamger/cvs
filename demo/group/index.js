@@ -12,11 +12,9 @@ import { Scene, Element, Circle, Rect, Image, Group, Bezier } from '#'
   })
   let circle2 = new Circle({
     zIndex: 2,
-    r: 100,
-    y: 100,
-    x: 240,
-    // y: 50,
-    // x: 50,
+    r: 50,
+    y: 50,
+    x: 50,
     fill: '#3e9',
     hover: {
       fill: '#5f1'
@@ -26,11 +24,11 @@ import { Scene, Element, Circle, Rect, Image, Group, Bezier } from '#'
   circle2.on('click', function (e) {
     console.log('circle2: ' + e)
   })
-  // let image = new Image({
-  //   image: 'safari',
-  //   y: 100,
-  //   x: 240
-  // })
+  let image = new Image({
+    image: 'safari',
+    y: 100,
+    x: 240
+  })
   let group = new Group({
     x: 100,
     y: 100,
@@ -38,8 +36,8 @@ import { Scene, Element, Circle, Rect, Image, Group, Bezier } from '#'
     h: 550,
     stroke: '#ddd'
   })
-  // group.append(circle2, image)
-  group.append(circle2)
+  group.append(circle2, image)
+  // group.append(circle2)
   group.addTrack(
     new Bezier({
       delay: 0,
@@ -51,6 +49,6 @@ import { Scene, Element, Circle, Rect, Image, Group, Bezier } from '#'
     })
   )
   layer.add(group)
-  layer.draw()
-  // layer.animate()
+  // layer.draw()
+  layer.animate()
 })()

@@ -14,7 +14,7 @@ import { Scene, Rect, Image, Keyframe } from '#'
     image: 'safari',
     x: 10,
     y: 10,
-    transform: [{ rotate: 10 }, { scale: [1.5, 1.1] }]
+    // transform: [{ rotate: 10 }, { scale: [1.5, 1.1] }]
   })
   let element3 = new Image({
     image: 'robot01',

@@ -13,52 +13,49 @@ export default class Circle extends Shape {
     )
     if (this.attr('cache')) this.cacheDraw()
   }
+  get origin () {
+    if (this.cache) {
+      return {
+        x: this.attr('r') + this.lw + 1,
+        y: this.attr('r') + this.lw + 1
+      }
+    } else {
+      return {
+        x: this.attr('x'),
+        y: this.attr('y')
+      }
+    }
+  }
   draw (ctx) {
     ctx.save()
     if (this.attr('cache')) {
       ctx.drawImage(
         this.cacheCanvas,
-        this.attr('x') - this.halfW,
-        this.attr('y') - this.halfH
+        this.attr('x') - this.origin.x,
+        this.attr('y') - this.origin.y
       )
     } else {
       this.drawUnit(ctx)
     }
     ctx.restore()
   }
-  drawPath (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
+  drawPath (ctx) {
     ctx.beginPath()
-    if (cacheCtx) {
-      if (this.attr('isSector')) ctx.moveTo(this.attr('x'), this.attr('y'))
-      ctx.arc(
-        this.halfW,
-        this.halfH,
-        this.attr('r'),
-        (this.attr('startAngle') * Math.PI) / 180,
-        (this.attr('endAngle') * Math.PI) / 180,
-        this.attr('anticlockwise')
-      )
-      if (this.attr('isSector')) ctx.closePath()
-    } else {
-      if (this.attr('isSector')) ctx.moveTo(this.attr('x'), this.attr('y'))
-      ctx.arc(
-        this.attr('x'),
-        this.attr('y'),
-        this.attr('r'),
-        (this.attr('startAngle') * Math.PI) / 180,
-        (this.attr('endAngle') * Math.PI) / 180,
-        this.attr('anticlockwise')
-      )
-      if (this.attr('isSector')) ctx.closePath()
-    }
+    if (this.attr('isSector')) ctx.moveTo(this.origin.x, this.origin.y)
+    ctx.arc(
+      this.origin.x,
+      this.origin.y,
+      this.attr('r'),
+      (this.attr('startAngle') * Math.PI) / 180,
+      (this.attr('endAngle') * Math.PI) / 180,
+      this.attr('anticlockwise')
+    )
+    if (this.attr('isSector')) ctx.closePath()
   }
   cacheDraw () {
     this.cacheCanvas = document.createElement('canvas')
-    this.halfW = this.attr('r') + this.lw + this.p
-    this.halfH = this.attr('r') + this.lw + this.p
-    this.cacheCanvas.width = 2 * this.halfW
-    this.cacheCanvas.height = 2 * this.halfH
+    this.cacheCanvas.width = 2 * this.origin.x
+    this.cacheCanvas.height = 2 * this.origin.y
     this.drawUnit(this.cacheCanvas.getContext('2d'))
   }
 }

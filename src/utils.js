@@ -137,6 +137,16 @@ export function formatDelay (delay) {
   return delay
 }
 
+// 缓存画布
+export function cacheCtx (ctx, w, h) {
+  let canvas = ctx.canvas.cloneNode()
+  if (w && h) {
+    canvas.width = w
+    canvas.height = h
+  }
+  return canvas.getContext('2d')
+}
+
 export function getRelativePos (x, y, rx, ry) {
   return { x: x - rx, y: y - ry }
 }

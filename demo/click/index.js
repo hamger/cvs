@@ -62,11 +62,13 @@ import { Scene, Element, Circle, Rect, Image } from '#'
   layer.add(circle3)
 
   let rect = new Rect({
+    zIndex: 88,
     w: 50,
     h: 50,
     x: 150,
     y: 350,
     fill: '#3e9',
+    borderRadius: 3,
     hover: {
       fill: '#5f1'
     },

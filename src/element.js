@@ -17,8 +17,6 @@ class Element {
     this.noHover = {}
     this.attr(opt)
     if (this.opt.cache) {
-      // 为离屏 canvas 添加 padding ，使渲染更完整
-      this.p = 2
       // 记录线条宽度，离屏渲染需要遇到
       this.lw = 0
       if (this.opt.stroke && this.opt.lineWidth) {
@@ -30,9 +28,21 @@ class Element {
     this.trackIndex = 0
     this.timeline = null
   }
+  get origin () {
+    if (this.attr('cache')) {
+      return {
+        x: this.lw,
+        y: this.lw
+      }
+    } else {
+      return {
+        x: this.attr('x'),
+        y: this.attr('y')
+      }
+    }
+  }
   // 设置上下文属性
-  setAttr (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
+  setAttr (ctx) {
     for (let key in this.opt) {
       if (key === 'opacity') ctx.globalAlpha = this.opt[key]
       else if (key === 'stroke') ctx.strokeStyle = this.opt[key]
@@ -56,24 +66,39 @@ class Element {
     }
   }
   // 填充或描边
-  dye (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
+  dye (ctx) {
     if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
+  }
+  // 绘制单元
+  drawUnit (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
+    this.setAttr(ctx)
+    this.drawPath(ctx)
+    this.dye(ctx)
   }
   // 设置/获取绘制属性
   attr (opt, isHover) {
     if (typeof opt === 'string') {
       return this.opt[opt]
     }
-    // 更新属性
-    Object.assign(this.opt, opt)
-    // 设置转换函数
-    if (opt.transform) {
-      this.execArr = []
-      opt.transform.forEach(item => {
-        this.execArr.push(item)
-      })
+    for (let key in opt) {
+      let val = opt[key]
+      if (val instanceof Function) {
+        // 支持函数设置
+        let value = val(this.opt[key])
+        this.opt[kay] = value
+      } else {
+        // 设置转换函数
+        if (key === 'transform') {
+          this.execArr = []
+          opt.transform.forEach(item => {
+            this.execArr.push(item)
+          })
+        } else {
+          this.opt[key] = val
+        }
+      }
     }
     // 由 hover 引起的属性变化，不更新 noHover
     if (isHover) return
@@ -89,15 +114,9 @@ class Element {
     const options = Object.assign({}, this.opt, opt)
     return new Cons(options)
   }
-  // 绘制单元
-  drawUnit (cacheCtx) {
-    this.setAttr(cacheCtx)
-    this.drawPath(cacheCtx)
-    this.dye(cacheCtx)
-  }
   // 是否点击在元素上
   isCollision (location) {
-    this.drawPath()
+    this.drawPath(this.ctx)
     return this.ctx.isPointInPath(location.x, location.y)
   }
   on (eventType, callback) {

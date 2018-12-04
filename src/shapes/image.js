@@ -1,28 +1,26 @@
 import Shape from '../shape'
-import {loadedResources} from '../resource'
+import { loadedResources } from '../resource'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
 export default class Image extends Shape {
-// export default class Image extends element {
+  // export default class Image extends element {
   constructor (opt) {
     super(opt)
     if (loadedResources.has(this.opt.image)) {
       this.opt.image = loadedResources.get(this.opt.image)
     }
+    this.w = this.opt.w ? this.opt.w : this.opt.image.width
+    this.h = this.opt.h ? this.opt.h : this.opt.image.height
     if (this.attr('cache')) this.cacheDraw()
   }
   draw (ctx) {
-    this.w = this.opt.w ? this.opt.w : this.opt.image.width
-    this.h = this.opt.h ? this.opt.h : this.opt.image.height
     if (this.attr('cache')) {
-      this.cacheDraw()
       ctx.drawImage(this.cacheCanvas, this.opt.x, this.opt.y)
     } else {
       this.drawUnit(ctx)
     }
   }
-  drawPath (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
+  drawPath (ctx) {
     ctx.beginPath()
     ctx.rect(this.opt.x, this.opt.y, this.w, this.h)
   }
@@ -31,42 +29,22 @@ export default class Image extends Shape {
     let image = this.opt.image
     ctx.save()
     this.setAttr(ctx)
-    if (cacheCtx) {
-      if (this.opt.sw && this.opt.sh) {
-        ctx.drawImage(
-          image,
-          this.opt.sx,
-          this.opt.sy,
-          this.opt.sw,
-          this.opt.sh,
-          0,
-          0,
-          this.opt.w,
-          this.opt.h
-        )
-      } else if (this.opt.w && this.opt.h) {
-        ctx.drawImage(image, 0, 0, this.opt.w, this.opt.h)
-      } else {
-        ctx.drawImage(image, 0, 0)
-      }
+    if (this.opt.sw && this.opt.sh) {
+      ctx.drawImage(
+        image,
+        this.opt.sx,
+        this.opt.sy,
+        this.opt.sw,
+        this.opt.sh,
+        this.origin.x,
+        this.origin.y,
+        this.opt.w,
+        this.opt.h
+      )
+    } else if (this.opt.w && this.opt.h) {
+      ctx.drawImage(image, this.origin.x, this.origin.y, this.opt.w, this.opt.h)
     } else {
-      if (this.opt.sw && this.opt.sh) {
-        ctx.drawImage(
-          image,
-          this.opt.sx,
-          this.opt.sy,
-          this.opt.sw,
-          this.opt.sh,
-          this.opt.x,
-          this.opt.y,
-          this.opt.w,
-          this.opt.h
-        )
-      } else if (this.opt.w && this.opt.h) {
-        ctx.drawImage(image, this.opt.x, this.opt.y, this.opt.w, this.opt.h)
-      } else {
-        ctx.drawImage(image, this.opt.x, this.opt.y)
-      }
+      ctx.drawImage(image, this.origin.x, this.origin.y)
     }
     ctx.restore()
   }

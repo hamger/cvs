@@ -1,5 +1,5 @@
 import Shape from '../shape'
-import {error} from '../utils'
+import { error } from '../utils'
 export default class Rect extends Shape {
   constructor (opt) {
     super(opt)
@@ -8,26 +8,27 @@ export default class Rect extends Shape {
   draw (ctx) {
     ctx.save()
     if (this.attr('cache')) {
-      ctx.drawImage(this.cacheCanvas, this.opt.x - this.lw, this.opt.y - this.lw)
+      ctx.drawImage(
+        this.cacheCanvas,
+        this.attr('x') - this.origin.x,
+        this.attr('y') - this.origin.y
+      )
     } else {
       this.drawUnit(ctx)
     }
     ctx.restore()
   }
-  drawPath (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
+  drawPath (ctx) {
     ctx.beginPath()
-    if (cacheCtx) {
-      if (this.attr('borderRadius')) this.drawRoundRect(ctx, this.lw, this.lw)
-      else ctx.rect(this.lw, this.lw, this.opt.w, this.opt.h)
-    } else {
-      if (this.attr('borderRadius')) this.drawRoundRect(ctx, this.opt.x, this.opt.y)
-      else ctx.rect(this.opt.x, this.opt.y, this.opt.w, this.opt.h)
-    }
+    if (this.attr('borderRadius')) this.drawRoundRect(ctx)
+    else this.drawRect(ctx)
   }
-  drawRoundRect (ctx, rx, ry) {
-    const x = rx
-    const y = ry
+  drawRect (ctx) {
+    ctx.rect(this.origin.x, this.origin.y, this.opt.w, this.opt.h)
+  }
+  drawRoundRect (ctx) {
+    const x = this.origin.x
+    const y = this.origin.y
     const { w, h, borderRadius: r } = this.opt
     const posA = [x + r, y]
     const posB = [x + w, y]

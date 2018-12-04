@@ -55,7 +55,6 @@ class Layer {
     }`
     this.width = canvas.width = this.container.clientWidth
     this.height = canvas.height = this.container.clientHeight
-    this.canvas = canvas
     this.ctx = canvas.getContext('2d')
     this.container.appendChild(canvas)
   }
@@ -67,7 +66,7 @@ class Layer {
     }
   }
   dispatchEvent (e, type) {
-    let location = getLocation(this.canvas, e)
+    let location = getLocation(this.ctx.canvas, e)
     // 点击区域前面元素的先监听事件
     this.descChildren.forEach(child => {
       if (child instanceof Group) {

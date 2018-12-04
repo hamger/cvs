@@ -1,5 +1,5 @@
 import Element from './element'
-import { remove, arrSort, error } from './utils'
+import { remove, arrSort, error, cacheCtx } from './utils'
 
 export default class Group extends Element {
   constructor (opt) {
@@ -9,7 +9,7 @@ export default class Group extends Element {
   append (...shapes) {
     shapes.forEach(shape => {
       if (!(shape instanceof Element)) {
-        error('Function add only accept the instance of Element.')
+        error('Function group.append only accept the instance of Element.')
       }
       // shape.group = this
       this.shapes.push(shape)
@@ -38,13 +38,12 @@ export default class Group extends Element {
   }
   draw (ctx) {
     ctx.save()
-    if (!this.cacheCanvas) this.cacheDraw()
+    if (!this.cacheCtx) this.cacheDraw()
     this.drawPath(ctx)
-    ctx.drawImage(this.cacheCanvas, this.attr('x'), this.attr('y'))
+    ctx.drawImage(this.cacheCtx.canvas, this.attr('x'), this.attr('y'))
     ctx.restore()
   }
-  drawPath (cacheCtx) {
-    let ctx = cacheCtx || this._ctx
+  drawPath (ctx) {
     if (!this.isVirtual) {
       ctx.beginPath()
       this.setAttr(ctx)
@@ -54,10 +53,8 @@ export default class Group extends Element {
     }
   }
   cacheDraw () {
-    this.cacheCanvas = document.createElement('canvas')
-    this.cacheCanvas.width = this.attr('w')
-    this.cacheCanvas.height = this.attr('h')
-    this.drawShape(this.cacheCanvas.getContext('2d'))
+    this.cacheCtx = cacheCtx(this._ctx, this.attr('w'), this.attr('h'))
+    this.drawShape(this.cacheCtx)
   }
   drawShape (ctx) {
     this.shapes.forEach(shape => {
