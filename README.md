@@ -74,6 +74,10 @@ commitType: description
 
 ## Changelog
 
+### 2018.12.5
+
+> v0.4.0 引入 Shape 和 Group 构造器，Element 构造器作为二者的基类
+
 ### 2018.11.17
 
 > v0.3.0 引入 Scene 和 Layer 构造器
