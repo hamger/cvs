@@ -53,7 +53,7 @@ let color = new Color({
 
 dot.addTrack(color);
 
-layer.add([dot]);
+layer.append([dot]);
 
 layer.animate();
 ```

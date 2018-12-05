@@ -1,10 +1,6 @@
 ### Element
 
-支持所有图形的基类，使用该类可自定义元素
-
-```js
-let elememt = new Elememt(options);
-```
+所有图形和组合的基类
 
 ### options
 
@@ -12,7 +8,8 @@ let elememt = new Elememt(options);
 | ----------- | ------- | -------------------------------------------------- | ------- |
 | zIndex      | Number  | 规定元素在 z 轴上的坐标                            | `0`     |
 | visible     | Boolean | 规定元素是否可见                                   | `true`  |
-| hover       | Object  | 规定鼠标移动到元素上时的元素属性（仅在 PC 端生效） | --      |
+
+<!-- | hover       | Object  | 规定鼠标移动到元素上时的元素属性（仅在 PC 端生效） | --      | -->
 
 由于 cvs 是基于 canvas 的框架，所以元素支持应有的 canvas 属性，以下列出了常用的属性，详细信息可参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
 
@@ -122,75 +119,8 @@ cvs 对以下图形属性进行了缩写
   支持不传参数，`elememt.removeTrack()`将删除所有的轨迹
   :::
 
-* 示例：
+- 示例：
 
   ```js
   elememt.removeTrack(track, track2);
   ```
-
-#### clone(options)
-
-- 描述：
-
-  基于当前元素克隆一个新的元素
-
-- 参数：
-
-  - `{Object} options` 新元素的属性
-
-  ::: tip
-  支持不传参数，将返回一个和原元素属性相同的元素
-  :::
-
-- 返回值：`{Element}` 新的元素
-
-- 示例：
-
-  ```js
-  let rect = new Rect({
-    w: 50,
-    h: 50,
-    x: 150,
-    y: 350
-  });
-  let rect2 = rect.clone({ y: 100 });
-  ```
-
-### 自定义元素
-
-以下是一个使用`Element`构造器自定义三角形元素的例子，你需要定义一个 `draw` 函数，用来表示如何绘制元素，如果你需要事件监听，需要再定义`drawPath`绘制元素路径。
-
-```js
-import { Scene, Element } from "cvs";
-let scene = new Scene({ containerId: "container" });
-let layer = scene.layer({ handleEvent: true });
-
-class Triangle extends Element {
-  draw() {
-    let ctx = this.ctx;
-    ctx.save();
-    this.drawPath();
-    ctx.fill();
-    ctx.restore();
-  }
-  drawPath() {
-    let ctx = this.ctx;
-    let p = this.attr("points");
-    ctx.beginPath();
-    ctx.moveTo(p[0].x, p[0].y);
-    ctx.lineTo(p[1].x, p[1].y);
-    ctx.lineTo(p[2].x, p[2].y);
-    ctx.closePath();
-  }
-}
-
-let triangle = new Triangle({
-  zIndex: 5,
-  points: [{ x: 2, y: 2 }, { x: 102, y: 12 }, { x: 12, y: 92 }]
-});
-triangle.on("click", function(e) {
-  console.log(e);
-});
-layer.add(triangle);
-layer.draw();
-```

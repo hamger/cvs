@@ -67,8 +67,8 @@ dot.addTrack(parabola)
 sdot.addTrack(sround)
 tdot.addTrack(tround)
 
-layer.add(dot, sdot, tdot)
-// layer.add(dot)
+layer.append(dot, sdot, tdot)
+// layer.append(dot)
 
 layer.animate()
 

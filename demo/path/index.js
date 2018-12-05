@@ -5,7 +5,7 @@ let scene = new Scene({
 
 let layer = scene.layer()
 
-layer.add(
+layer.append(
   new Path({
     path: 'M 300 100' + 'L 700 500',
     stroke: 'red',
@@ -17,7 +17,7 @@ layer.add(
   })
 )
 
-layer.add(
+layer.append(
   new Path({
     startArrow: true,
     endArrow: true,

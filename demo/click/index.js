@@ -1,4 +1,4 @@
-import { Scene, Element, Circle, Rect, Image } from '#'
+import { Scene, Element, Circle, Rect, Image, Path } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -11,7 +11,7 @@ import { Scene, Element, Circle, Rect, Image } from '#'
     handleEvent: true
   })
 
-  let circle = new Circle({
+  let circle = new Path.Circle({
     r: 50,
     y: 100,
     x: 100,
@@ -26,9 +26,9 @@ import { Scene, Element, Circle, Rect, Image } from '#'
     }
     layer.draw()
   })
-  layer.add(circle)
+  layer.append(circle)
 
-  let circle2 = new Circle({
+  let circle2 = new Path.Circle({
     zIndex: -2,
     r: 50,
     y: 150,
@@ -42,9 +42,9 @@ import { Scene, Element, Circle, Rect, Image } from '#'
   circle2.on('click', function (e) {
     console.log('circle2: ' + e)
   })
-  layer.add(circle2)
+  layer.append(circle2)
 
-  let circle3 = new Circle({
+  let circle3 = new Path.Circle({
     zIndex: 2,
     r: 50,
     y: 350,
@@ -59,9 +59,9 @@ import { Scene, Element, Circle, Rect, Image } from '#'
   circle3.on('click', function (e) {
     console.log('circle3: ' + e)
   })
-  layer.add(circle3)
+  layer.append(circle3)
 
-  let rect = new Rect({
+  let rect = new Path.Rect({
     zIndex: 88,
     w: 50,
     h: 50,
@@ -77,7 +77,7 @@ import { Scene, Element, Circle, Rect, Image } from '#'
   rect.on('click', function (e) {
     console.log('rect: ' + e)
   })
-  layer.add(rect)
+  layer.append(rect)
 
   let image = new Image({
     image: 'safari',
@@ -110,6 +110,6 @@ import { Scene, Element, Circle, Rect, Image } from '#'
   triangle.on('click', function (e) {
     console.log(e)
   })
-  layer.add(triangle, image)
+  layer.append(triangle, image)
   layer.draw()
 })()

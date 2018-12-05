@@ -46,7 +46,7 @@ const rect4 = new Rect({
 rect4.on('click', function (e) {
   console.log('click  rect4')
 })
-layer.add(rect1, rect2, rect3, rect4)
-// layer.add(rect1)
+layer.append(rect1, rect2, rect3, rect4)
+// layer.append(rect1)
 
 layer.draw()

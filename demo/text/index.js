@@ -5,7 +5,7 @@ let scene = new Scene({
 
 let layer = scene.layer()
 
-layer.add(
+layer.append(
   new Text({
     text: 'hello',
     x: 89,
@@ -14,7 +14,7 @@ layer.add(
   })
 )
 
-layer.add(
+layer.append(
   new Text({
     text: 'hanger',
     x: 189,

@@ -49,7 +49,7 @@ let parabola = new Parabola({
 });
 dot.addTrack(parabola);
 
-layer.add(dot);
+layer.append(dot);
 layer.animate();
 ```
 

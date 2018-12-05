@@ -56,7 +56,7 @@ let bezier = new Bezier({
   ]
 });
 dot.addTrack(bezier);
-layer.add(dot);
+layer.append(dot);
 layer.animate();
 ```
 

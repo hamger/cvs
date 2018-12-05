@@ -82,7 +82,7 @@ let rect = new Rect({
 
 // rect.addTrack(customTrack, customTrack2)
 
-layer.add(dot, rect)
+layer.append(dot, rect)
 
 layer.animate()
 

@@ -37,7 +37,7 @@ import { Scene, Image, Bezier } from '#'
     ]
   })
   element.addTrack(bezier)
-  layer.add(element)
+  layer.append(element)
   layer.animate()
 
   document.querySelector('.stop').onclick = function () {

@@ -88,7 +88,7 @@ class Layer {
     this.descChildren.push(element)
     arrSort(this.descChildren, 'opt.zIndex', true)
   }
-  add (...elements) {
+  append (...elements) {
     elements.forEach(item => {
       if (!(item instanceof Element)) {
         error('Function add only accept the instance of Element.')

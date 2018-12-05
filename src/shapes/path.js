@@ -1,6 +1,8 @@
 import Shape from '../shape'
+import Circle from './circle'
+import Rect from './rect'
 import { delBlank } from '../utils'
-export default class Path extends Shape {
+class Path extends Shape {
   constructor (opt) {
     super(opt)
     this.lastPoint = []
@@ -10,9 +12,7 @@ export default class Path extends Shape {
   }
   draw (ctx) {
     ctx.save()
-    this.setAttr()
-    this.drawPath(ctx)
-    this.dye()
+    this.drawUnit(ctx)
     ctx.restore()
   }
   drawPath (ctx) {
@@ -156,3 +156,8 @@ export default class Path extends Shape {
     this.ctx.moveTo(reference[0], reference[1])
   }
 }
+
+Path.Circle = Circle
+Path.Rect = Rect
+
+export default Path

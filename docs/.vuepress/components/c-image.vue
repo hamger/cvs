@@ -24,7 +24,7 @@ export default {
         safari: require('../../../static/safari.png')
       })
       let layer = scene.layer()
-      layer.add(new Image({
+      layer.append(new Image({
         image: 'safari',
         x: 200,
         y: 10

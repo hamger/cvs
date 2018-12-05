@@ -53,7 +53,7 @@ let relliptic = new Elliptic({
 dot.addTrack(elliptic)
 rect.addTrack(relliptic)
 
-layer.add(dot, rect, cd)
+layer.append(dot, rect, cd)
 
 layer.animate()
 

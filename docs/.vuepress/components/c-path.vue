@@ -21,7 +21,7 @@ export default {
     })
     let layer = scene.layer()
 
-    layer.add(
+    layer.append(
       new Path({
         path:
           'M 10 10' +
@@ -34,20 +34,20 @@ export default {
         stroke: '#454'
       })
     )
-    layer.add(
-      new Path({
-        path: 'M 400 100 L 600 400',
-        stroke: 'red',
-        startArrow: {
-          angle: 15,
-          len: 50,
-        },
-        endArrow: {
-          angle: 15,
-          len: 30,
-        }
-      })
-    )
+    // layer.append(
+    //   new Path({
+    //     path: 'M 400 100 L 600 400',
+    //     stroke: 'red',
+    //     startArrow: {
+    //       angle: 15,
+    //       len: 50,
+    //     },
+    //     endArrow: {
+    //       angle: 15,
+    //       len: 30,
+    //     }
+    //   })
+    // )
 
     layer.draw()
   }

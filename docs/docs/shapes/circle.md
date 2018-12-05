@@ -1,6 +1,6 @@
 ### Circle
 
-绘制一个圆形元素
+绘制一个圆形，`Circle`继承自`Shape`。
 
 ```js
 let element = new Circle(options);

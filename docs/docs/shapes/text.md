@@ -1,6 +1,6 @@
 ### Text
 
-绘制一个文本元素
+绘制一个文本，`Text`继承自`Shape`。
 
 ```js
 let element = new Text(options);

@@ -1,6 +1,6 @@
 ### Path
 
-绘制一个路径元素
+绘制一个路径，`Path`继承自`Shape`。
 
 ```js
 let element = new Path(options);
@@ -40,7 +40,7 @@ let element = new Path(options);
 ### example
 
 ```js
-layer.add(
+layer.append(
   new Path({
     path:
       "M 10 10" +
@@ -53,7 +53,7 @@ layer.add(
     stroke: "#454"
   })
 );
-layer.add(
+layer.append(
   new Path({
     path: "M 400 100 L 600 400",
     stroke: "red",

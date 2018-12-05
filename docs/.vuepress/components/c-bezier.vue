@@ -44,7 +44,7 @@ export default {
       ]
     })
     dot.addTrack(bezier)
-    layer.add(dot)
+    layer.append(dot)
     layer.animate()
   }
 }

@@ -40,7 +40,7 @@ for (let i = 0; i < dotCount; i++) {
       }
     })
   );
-  layer.add(ele);
+  layer.append(ele);
 }
 layer.animate();
 ```

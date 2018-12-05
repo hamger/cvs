@@ -24,7 +24,7 @@ var layer = scene.layer(options);
 
 ### 实例方法
 
-#### add(element)
+#### append(element)
 
 - 描述：
 
@@ -36,7 +36,7 @@ var layer = scene.layer(options);
 
 - 示例：
   ```js
-  layer.add(element, element2);
+  layer.append(element, element2);
   ```
 
 #### remove(element)
@@ -114,7 +114,7 @@ var layer = scene.layer(options);
     }
   });
   dot.addTrack(customTrack);
-  layer.add(dot);
+  layer.append(dot);
   layer.animate();
   ```
 

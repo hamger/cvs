@@ -20,7 +20,7 @@ export default {
       containerId: 'container'
     })
     let layer = scene.layer()
-    layer.add(
+    layer.append(
       new Circle({
         r: 50,
         x: 100,

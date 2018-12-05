@@ -105,8 +105,8 @@ rect.addTrack(round)
 // sdot.addTrack(sround)
 // tdot.addTrack(tround)
 
-// layer.add([dot, sdot, tdot, cd])
-layer.add(cd, circle, rect)
+// layer.append([dot, sdot, tdot, cd])
+layer.append(cd, circle, rect)
 
 layer.animate()
 

@@ -108,12 +108,6 @@ class Element {
       }
     }
   }
-  // 返回一个元素的克隆
-  clone (opt = {}) {
-    let Cons = this.constructor
-    const options = Object.assign({}, this.opt, opt)
-    return new Cons(options)
-  }
   // 是否点击在元素上
   isCollision (location) {
     this.drawPath(this.ctx)

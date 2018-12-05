@@ -13,7 +13,7 @@ export default class Text extends Shape {
     ctx.beginPath()
     ctx.save()
     this.assembleFont()
-    this.setAttr()
+    this.setAttr(ctx)
     if (this.opt.stroke) {
       ctx.strokeText(this.opt.text, this.opt.x, this.opt.y)
     } else {

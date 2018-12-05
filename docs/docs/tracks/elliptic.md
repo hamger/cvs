@@ -65,7 +65,7 @@ let elliptic = new Elliptic({
   direction: false
 });
 dot.addTrack(elliptic);
-layer.add(dot, cd);
+layer.append(dot, cd);
 layer.animate();
 ```
 

@@ -1,6 +1,6 @@
 ### Image
 
-绘制一个图片元素
+绘制一个图像，`Image`继承自`Shape`。
 
 ```js
 let element = new Image(options);
@@ -38,7 +38,7 @@ let element = new Image(options);
     safari: require("../../../static/safari.png")
   });
   let layer = scene.layer()
-  layer.add(
+  layer.append(
     new Image({
       image: "safari",
       x: 200,

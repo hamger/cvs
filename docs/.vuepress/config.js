@@ -19,7 +19,8 @@ module.exports = {
       ['/docs/scene', '场景 Scene'],
       ['/docs/layer', '图层 Layer'],
       ['/docs/element', '元素 Element'],
-      ['/docs/track', '轨迹 Track'],
+      ['/docs/group', '组合 Group'],
+      ['/docs/shape', '图形 Shape'],
       {
         title: 'shapes',
         collapsable: false,
@@ -31,6 +32,7 @@ module.exports = {
           ['/docs/shapes/text', '文本 Text']
         ]
       },
+      ['/docs/track', '轨迹 Track'],
       {
         title: 'tracks',
         collapsable: false,

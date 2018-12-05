@@ -32,6 +32,6 @@ import { Scene, Rect, Image, Keyframe } from '#'
       {texture: 'robot03'}
     ]
   }))
-  fgLayer.add(element2, element3)
+  fgLayer.append(element2, element3)
   fgLayer.animate()
 })()

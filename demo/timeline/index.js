@@ -35,7 +35,7 @@ import { Scene, Rect, Image, Keyframe, Round } from '#'
     relativeY: 40
   })
   ele.addTrack(round)
-  fgLayer.add(ele)
+  fgLayer.append(ele)
 
   let btn = new Rect({
     x: 500,
@@ -60,7 +60,7 @@ import { Scene, Rect, Image, Keyframe, Round } from '#'
     ele.timeline.playbackRate = 1
     console.log(ele.timeline.playbackRate)
   })
-  bgLayer.add(btn, btn2)
+  bgLayer.append(btn, btn2)
   bgLayer.draw()
   fgLayer.animate()
 })()

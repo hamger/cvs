@@ -53,7 +53,7 @@ export default {
       fill: 'purple',
       borderRadius: [5, 15, 25, 35],
     })
-    layer.add(rect, rect2, rect3, rect4)
+    layer.append(rect, rect2, rect3, rect4)
     layer.draw()
   }
 }

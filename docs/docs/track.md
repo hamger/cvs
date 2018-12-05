@@ -1,6 +1,6 @@
 ### Track
 
-支持所有运动轨迹的基类，使用该类可自定义运动轨迹
+所有运动轨迹的基类，使用该类可自定义运动轨迹
 
 ```js
 let track = new Track(options);
@@ -74,6 +74,6 @@ let customTrack = new CustomTrack({
   destination: { x: 200, y: 300 }
 });
 dot.addTrack(customTrack);
-layer.add(dot);
+layer.append(dot);
 layer.animate();
 ```

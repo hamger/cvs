@@ -50,7 +50,7 @@ export default {
       anticlockwise: false
     })
     dot.addTrack(elliptic)
-    layer.add(dot, cd)
+    layer.append(dot, cd)
     layer.animate()
   }
 }

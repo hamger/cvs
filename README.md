@@ -28,7 +28,7 @@ let scene = new Scene({
 })
 let layer = scene.layer()
 
-cvs.add(
+cvs.append(
   new Circle({
     x: 100,
     y: 100,

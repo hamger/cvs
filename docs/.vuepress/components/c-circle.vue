@@ -33,7 +33,7 @@ export default {
       endAngle: 70,
       anticlockwise: true,
     })
-    layer.add(dot, sector)
+    layer.append(dot, sector)
     layer.draw()
   }
 }

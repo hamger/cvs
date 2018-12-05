@@ -64,7 +64,7 @@ export default {
     });
     dot.addTrack(round)
     sdot.addTrack(sround)
-    layer.add(dot, sdot, cd);
+    layer.append(dot, sdot, cd);
     layer.animate();
   }
 }

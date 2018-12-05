@@ -43,7 +43,7 @@ let scene = new Scene(options);
     await layer.preload({
       safari: require("../../../static/safari.png")
     });
-    layer.add(
+    layer.append(
       new Image({
         image: "safari",
         dx: 200,

@@ -48,7 +48,7 @@ import { Scene, Element, Circle, Rect, Image, Group, Bezier } from '#'
       ]
     })
   )
-  layer.add(group)
+  layer.append(group)
   // layer.draw()
   layer.animate()
 })()

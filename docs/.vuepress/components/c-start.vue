@@ -49,7 +49,7 @@ export default {
           }
         })
       )
-      layer.add(ele)
+      layer.append(ele)
     }
     layer.animate()
   },
