@@ -14,7 +14,7 @@ export default class Circle extends Shape {
     if (this.attr('cache')) this.cacheDraw()
   }
   get origin () {
-    if (this.cache) {
+    if (this.attr('cache')) {
       return {
         x: this.attr('r') + this.lw + 1,
         y: this.attr('r') + this.lw + 1

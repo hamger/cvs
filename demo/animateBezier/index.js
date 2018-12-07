@@ -12,7 +12,7 @@ let dot = new Circle({
   r: 10,
   // x: 169,
   // y: 225,
-  // cache: true,
+  cache: true,
   fill: 'pink'
 })
 

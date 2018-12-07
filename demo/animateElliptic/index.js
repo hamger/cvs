@@ -10,31 +10,35 @@ let flag = true
 let dot = new Circle({
   zIndex: 1,
   r: 10,
-  x: layer.width / 2 - 100,
-  y: layer.height / 2,
-  cache: true,
-  fill: 'pink'
-})
-let rect = new Rect({
   x: layer.width / 2 - 200,
   y: layer.height / 2,
-  w: 50,
-  h: 30
+  cache: true,
+  fill: 'pink',
 })
+// let rect = new Rect({
+//   x: layer.width / 2 - 200,
+//   y: layer.height / 2,
+//   w: 50,
+//   h: 30
+// })
 
 let cd = new Circle({
   r: 10,
   x: layer.width / 2,
-  y: layer.height / 2
+  y: layer.height / 2,
+  cache: true,
 })
 
 let elliptic = new Elliptic({
   delay: 0,
   duration: 3000,
   retrace: false, // 是否折返
-  iterationCount: 1, // 重复次数
+  radiusX: 200,
+  radiusY: 80,
+  iterationCount: Infinity, // 重复次数
   centerX: layer.width / 2,
   centerY: layer.height / 2,
+  rotate: 45
 })
 
 let relliptic = new Elliptic({
@@ -51,9 +55,9 @@ let relliptic = new Elliptic({
 })
 
 dot.addTrack(elliptic)
-rect.addTrack(relliptic)
+// rect.addTrack(relliptic)
 
-layer.append(dot, rect, cd)
+layer.append(dot, cd)
 
 layer.animate()
 

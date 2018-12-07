@@ -16,21 +16,21 @@ let dot = new Circle({
   fill: 'pink'
 })
 
-let circle = new Circle({
-  zIndex: 1,
-  r: 100,
-  x: layer.width / 2,
-  y: layer.height / 2,
-  cache: true,
-  stroke: true
-})
+// let circle = new Circle({
+//   zIndex: 1,
+//   r: 150,
+//   x: layer.width / 2,
+//   y: layer.height / 2,
+//   // cache: true,
+//   stroke: true
+// })
 
-let rect = new Rect({
-  x: layer.width / 2 - 100,
-  y: layer.height / 2,
-  w: 50,
-  h: 20
-})
+// let rect = new Rect({
+//   x: layer.width / 2 - 100,
+//   y: layer.height / 2,
+//   w: 50,
+//   h: 20
+// })
 
 // let sdot = new Circle({
 //   zIndex: 1,
@@ -51,11 +51,11 @@ let rect = new Rect({
 //   fill: 'red'
 // })
 
-let cd = new Circle({
-  r: 10,
-  x: layer.width / 2,
-  y: layer.height / 2
-})
+// let cd = new Circle({
+//   r: 10,
+//   x: layer.width / 2,
+//   y: layer.height / 2
+// })
 
 let round = new Round({
   delay: 0,
@@ -65,8 +65,8 @@ let round = new Round({
   centerX: layer.width / 2,
   centerY: layer.height / 2,
   anticlockwise: false,
-  relativeX: '50%',
-  relativeY: 10,
+  // relativeX: '50%',
+  // relativeY: 10,
 })
 // let dotRound = new Round({
 //   delay: 0,
@@ -100,13 +100,13 @@ let round = new Round({
 //   direction: false
 // })
 
-rect.addTrack(round)
+dot.addTrack(round)
 // dot.addTrack(dotRound)
 // sdot.addTrack(sround)
 // tdot.addTrack(tround)
 
 // layer.append([dot, sdot, tdot, cd])
-layer.append(cd, circle, rect)
+layer.append(dot)
 
 layer.animate()
 
