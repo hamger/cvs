@@ -101,12 +101,12 @@ class Element {
       }
     }
     // 由 hover 引起的属性变化，不更新 noHover
-    if (isHover) return
-    if (this.opt.hover) {
-      for (let key in this.opt.hover) {
-        this.noHover[key] = this.opt[key]
-      }
-    }
+    // if (isHover) return
+    // if (this.opt.hover) {
+    //   for (let key in this.opt.hover) {
+    //     this.noHover[key] = this.opt[key]
+    //   }
+    // }
   }
   // 是否点击在元素上
   isCollision (location) {

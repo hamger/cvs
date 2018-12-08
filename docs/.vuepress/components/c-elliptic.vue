@@ -47,7 +47,8 @@ export default {
       centerY: layer.height / 2,
       radiusX: 200,
       radiusY: 80,
-      anticlockwise: false
+      rotate: 45,
+      anticlockwise: false,
     })
     dot.addTrack(elliptic)
     layer.append(dot, cd)

@@ -12,6 +12,7 @@ export default class Elliptic extends Track {
       relativeX: 0,
       relativeY: 0,
       anticlockwise: true,
+      rotate: 0
     }, opt)
   }
   loop (t) {
@@ -59,12 +60,17 @@ export default class Elliptic extends Track {
   getPosition (ele, angle) {
     const relativeX = typeof ele.relativeX === 'number' ? ele.relativeX : this.$ele.attr('w') * getFloatNum(ele.relativeX)
     const relativeY = typeof ele.relativeY === 'number' ? ele.relativeY : this.$ele.attr('h') * getFloatNum(ele.relativeY)
+    const rotate = ele.rotate
     const centerX = ele.centerX
     const centerY = ele.centerY
     const radiusX = ele.radiusX
     const radiusY = ele.radiusY
     const x = centerX + radiusX * Math.cos(angle * Math.PI / 180) - relativeX
     const y = centerY + radiusY * Math.sin(angle * Math.PI / 180) - relativeY
-    return { x, y }
+    const rnx = radiusX * Math.cos(angle * Math.PI / 180) - relativeX
+    const rny = radiusY * Math.sin(angle * Math.PI / 180) - relativeY
+    const rx = centerX + rnx * Math.cos(rotate * Math.PI / 180) - rny * Math.sin(rotate * Math.PI / 180)
+    const ry = centerY + rnx * Math.sin(rotate * Math.PI / 180) + rny * Math.cos(rotate * Math.PI / 180)
+    return { x: rx, y: ry }
   }
 }
