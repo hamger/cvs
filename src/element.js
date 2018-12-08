@@ -1,7 +1,7 @@
 import Track from './track'
 import Timeline from './timeline'
 import { remove, error } from './utils'
-import event from './event'
+// import event from './event'
 
 let id = 0
 // @event
