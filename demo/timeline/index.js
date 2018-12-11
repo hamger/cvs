@@ -25,7 +25,7 @@ import { Scene, Rect, Image, Keyframe, Round } from '#'
   let round = new Round({
     delay: 0,
     duration: 5000,
-    iterationCount: 8, // 重复次数
+    iterationCount: 800, // 重复次数
     centerX: 300,
     centerY: 300,
     r: 150,
@@ -46,8 +46,6 @@ import { Scene, Rect, Image, Keyframe, Round } from '#'
   })
   btn.on('click', function () {
     ele.timeline.playbackRate = 0
-    console.log(ele.timeline)
-    console.log(ele.timeline.playbackRate)
   })
   let btn2 = new Rect({
     x: 550,
@@ -58,9 +56,38 @@ import { Scene, Rect, Image, Keyframe, Round } from '#'
   })
   btn2.on('click', function () {
     ele.timeline.playbackRate = 1
-    console.log(ele.timeline.playbackRate)
   })
-  bgLayer.append(btn, btn2)
+  let btn3 = new Rect({
+    x: 600,
+    y: 500,
+    w: 30,
+    h: 30,
+    fill: 'pink'
+  })
+  btn3.on('click', function () {
+    fgLayer.timeline.playbackRate = 0
+  })
+  let btn4 = new Rect({
+    x: 650,
+    y: 500,
+    w: 30,
+    h: 30,
+    fill: 'blue'
+  })
+  btn4.on('click', function () {
+    fgLayer.timeline.playbackRate = 1
+  })
+  let btn5 = new Rect({
+    x: 650,
+    y: 550,
+    w: 30,
+    h: 30,
+    fill: 'orange'
+  })
+  btn5.on('click', function () {
+    scene.timeline.currentTime = 0
+  })
+  bgLayer.append(btn, btn2, btn3, btn4, btn5)
   bgLayer.draw()
   fgLayer.animate()
 })()

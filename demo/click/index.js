@@ -1,4 +1,4 @@
-import { Scene, Element, Circle, Rect, Image, Path } from '#'
+import { Scene, Shape, Circle, Rect, Image, Path } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -85,7 +85,7 @@ import { Scene, Element, Circle, Rect, Image, Path } from '#'
     x: 340
   })
 
-  class Triangle extends Element {
+  class Triangle extends Shape {
     draw () {
       let ctx = this.ctx
       ctx.save()

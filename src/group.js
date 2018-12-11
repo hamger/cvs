@@ -11,7 +11,7 @@ export default class Group extends Element {
       if (!(shape instanceof Element)) {
         error('Function group.append only accept the instance of Element.')
       }
-      // shape.group = this
+      shape.timeline = this.timeline.fork()
       this.shapes.push(shape)
       arrSort(this.shapes, 'opt.zIndex')
     })

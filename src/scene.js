@@ -1,13 +1,13 @@
 import { arrSort, remove } from './utils'
 import { loadTexture } from './resource'
 import Layer from './layer'
-// import Timeline from './timeline'
+import Timeline from './timeline'
 
 export default class Scene {
   constructor (opt) {
     this.container = document.getElementById(opt.containerId)
     this.layers = [] // 根据 zIndex 升序排列的图层
-    // this.timeline = new Timeline()
+    this.timeline = new Timeline()
     this.init()
     this.delegateEvents()
   }
@@ -98,6 +98,7 @@ export default class Scene {
   layer (opt = {}) {
     Object.assign(opt, { container: this.scene })
     let layer = new Layer(opt)
+    layer.timeline = this.timeline.fork()
     this.layers.push(layer)
     arrSort(this.layers, 'zIndex')
     return layer

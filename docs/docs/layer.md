@@ -118,38 +118,6 @@ var layer = scene.layer(options);
   layer.animate();
   ```
 
-#### pauseAnimate()
-
-- 描述：
-
-  暂停动画
-
-- 示例：
-
-  ```js
-  layer.pauseAnimate();
-  ```
-
-#### cancelAnimate()
-
-- 描述：
-
-  关闭动画
-
-- 示例：
-
-  ```js
-  layer.cancelAnimate();
-  ```
-
-#### resetAnimate()
-
-- 描述：
-
-  重置动画属性（ 再次运动仍需执行`layer.animate()`）
-
-- 示例：
-
-  ```js
-  layer.resetAnimate();
-  ```
+  ::: tip
+  cvs 的动画是基于时间轴的，对用动画的控制详见[timeline](/docs/timeline.html)
+  :::

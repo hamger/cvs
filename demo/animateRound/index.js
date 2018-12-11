@@ -122,9 +122,7 @@ stopBtn.onclick = function () {
   }
 }
 
+// 重置动画
 againBtn.onclick = function () {
-  // 重置动画
-  layer.resetAnimate()
-  // 开启动画
-  layer.animate()
+  layer.timeline.currentTime = 0
 }

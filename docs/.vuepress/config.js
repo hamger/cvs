@@ -43,7 +43,8 @@ module.exports = {
           ['/docs/tracks/elliptic', '椭圆 Elliptic'],
           // '/docs/tracks/parabola',
         ]
-      }
+      },
+      ['/docs/timeline', '时间轴 Timeline'],
     ]
   }
 }

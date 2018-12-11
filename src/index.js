@@ -1,6 +1,6 @@
 import Scene from './Scene'
 import Layer from './layer'
-import Element from './element'
+// import Element from './element'
 import Group from './group'
 import Shape from './shape'
 import Path from './shapes/path'
@@ -21,7 +21,7 @@ import Timeline from './timeline'
 export {
   Scene,
   Layer,
-  Element,
+  // Element,
   Group,
   Shape,
   Circle,

@@ -1,5 +1,5 @@
 import Track from './track'
-import Timeline from './timeline'
+// import Timeline from './timeline'
 import { remove, error } from './utils'
 // import event from './event'
 
@@ -26,7 +26,6 @@ class Element {
     this.finished = false
     this.tracks = []
     this.trackIndex = 0
-    this.timeline = null
   }
   get origin () {
     if (this.attr('cache')) {
@@ -145,10 +144,8 @@ class Element {
     })
     return res
   }
-  runTrack (animateTime) {
-    if (!this.timeline) this.timeline = new Timeline({ playbackRate: 1 })
+  runTrack () {
     let res = this.getCurTrack(this.timeline.currentTime)
-    // let res = this.getCurTrack(animateTime)
     // 已执行完所有轨迹
     if (res.index === undefined) {
       this.finished = true

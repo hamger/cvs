@@ -40,13 +40,17 @@ import { Scene, Image, Bezier } from '#'
   layer.append(element)
   layer.animate()
 
+  let isStop = false
   document.querySelector('.stop').onclick = function () {
-    layer.pauseAnimate()
+    if (isStop) {
+      layer.timeline.playbackRate = 1
+      isStop = false
+    } else {
+      layer.timeline.playbackRate = 0
+      isStop = true
+    }
   }
   document.querySelector('.again').onclick = function () {
-    // 重置动画
-    layer.resetAnimate()
-    // 开启动画
-    layer.animate()
+    layer.timeline.currentTime = 0
   }
 })()

@@ -10,7 +10,6 @@ import {
   error
 } from './utils'
 import { loadTexture } from './resource'
-// import Timeline from './timeline'
 
 const _addUnit = Symbol('addUnit')
 const _removeUnit = Symbol('removeUnit')
@@ -26,11 +25,9 @@ class Layer {
     this.stop = null // 定时器
     this.initAnimateTime = 0 // 动画初始时间
     this.pauseTime = 0 // 暂定总时间
-    this.animateTime = 0 // 动画已进行的时间
     this.finishedAinmCount = 0 // 已完成动画的元素个数
     this.isPause = false // 动画是否被暂停
     Object.assign(this, { zIndex: 0, handleEvent: false }, opt)
-    // this.timeline = new Timeline()
     this.init()
   }
 
@@ -95,6 +92,7 @@ class Layer {
       }
       item.ctx = this.ctx
       item.layer = this.layer
+      item.timeline = this.timeline.fork()
       this[_addUnit](item)
     })
   }
@@ -124,51 +122,26 @@ class Layer {
   clear () {
     this.ctx.clearRect(0, 0, this.width, this.height)
   }
-  _getAnimateTime (time) {
-    return time - this.initAnimateTime - this.pauseTime
-  }
   animate () {
-    this.startTime = new Date()
-    if (this.initAnimateTime === 0) this.initAnimateTime = new Date()
-    if (this.stopTime) this.pauseTime += this.startTime - this.stopTime
-
     var that = this
     animFrame(function loopUnit () {
+      // console.log('global: ' + that.timeline.globalTime)
+      // console.log('current: ' + that.timeline.currentTime)
       if (that.animChildren.length === that.finishedAinmCount) return
       that.stop = animFrame(loopUnit)
       that.clear()
-      that.animateTime = that._getAnimateTime(new Date())
       that.animChildren.forEach(child => {
         if (child.finished) {
           that.finishedAinmCount++
           return
         }
-        child.runTrack(that.animateTime)
+        child.runTrack()
       })
       that.draw()
     })
   }
   cancelAnimate () {
-    this.stopTime = new Date()
     if (this.stop) cancelAnim(this.stop)
-  }
-  pauseAnimate () {
-    if (this.isPause) this.animate()
-    else this.cancelAnimate()
-  }
-  resetAnimate () {
-    if (this.stop) cancelAnim(this.stop)
-    this.initAnimateTime = 0
-    this.pauseTime = 0
-    this.animateTime = 0
-    this.finishedAinmCount = 0
-    this.isPause = false
-    this.animChildren.forEach(child => {
-      child.finished = false
-      child.tracks.forEach(track => {
-        track.reset && track.reset()
-      })
-    })
   }
 }
 export default Layer

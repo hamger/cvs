@@ -1,4 +1,4 @@
-import { Scene, Element, Circle, Rect, Image, Group, Bezier } from '#'
+import { Scene, Circle, Rect, Image, Group, Bezier } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
