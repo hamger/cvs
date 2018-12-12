@@ -1,7 +1,7 @@
 import Shape from '../shape'
 import Circle from './circle'
 import Rect from './rect'
-import { delBlank } from '../utils'
+import { delBlank } from '../utils/utils'
 class Path extends Shape {
   constructor (opt) {
     super(opt)

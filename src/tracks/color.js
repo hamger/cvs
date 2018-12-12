@@ -1,4 +1,4 @@
-import easing from '../easing'
+import easing from '../utils/easing'
 import Track from '../track'
 
 export default class Color extends Track {

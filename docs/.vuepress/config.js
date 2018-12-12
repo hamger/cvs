@@ -41,7 +41,6 @@ module.exports = {
           ['/docs/tracks/bezier', '曲线 Bezier'],
           ['/docs/tracks/round', '正圆 Round'],
           ['/docs/tracks/elliptic', '椭圆 Elliptic'],
-          // '/docs/tracks/parabola',
         ]
       },
       ['/docs/timeline', '时间轴 Timeline'],

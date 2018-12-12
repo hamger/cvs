@@ -1,6 +1,5 @@
 import Scene from './Scene'
 import Layer from './layer'
-// import Element from './element'
 import Group from './group'
 import Shape from './shape'
 import Path from './shapes/path'
@@ -13,15 +12,12 @@ import Bezier from './tracks/bezier'
 import Round from './tracks/round'
 import Color from './tracks/color'
 import Elliptic from './tracks/elliptic'
-import Parabola from './tracks/parabola'
 import Keyframe from './tracks/keyframe'
-import easing from './easing'
-import Timeline from './timeline'
+import easing from './utils/easing'
 
 export {
   Scene,
   Layer,
-  // Element,
   Group,
   Shape,
   Circle,
@@ -35,7 +31,5 @@ export {
   Round,
   Color,
   Elliptic,
-  Parabola,
-  Timeline,
   Keyframe
 }

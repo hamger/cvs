@@ -1,7 +1,7 @@
-import { arrSort, remove } from './utils'
-import { loadTexture } from './resource'
+import { arrSort, remove } from './utils/utils'
+import { loadTexture } from './utils/resource'
 import Layer from './layer'
-import Timeline from './timeline'
+import Timeline from './utils/timeline'
 
 export default class Scene {
   constructor (opt) {

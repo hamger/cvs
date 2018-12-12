@@ -1,5 +1,5 @@
 import Shape from '../shape'
-import { error } from '../utils'
+import { error } from '../utils/utils'
 export default class Rect extends Shape {
   constructor (opt) {
     super(opt)

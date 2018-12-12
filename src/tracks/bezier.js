@@ -1,6 +1,6 @@
-import easing from '../easing'
+import easing from '../utils/easing'
 import Track from '../track'
-import { tolerance } from '../utils'
+import { tolerance } from '../utils/utils'
 
 export default class Bezier extends Track {
   constructor (opt) {

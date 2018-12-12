@@ -8,8 +8,8 @@ import {
   isMobile,
   remove,
   error
-} from './utils'
-import { loadTexture } from './resource'
+} from './utils/utils'
+import { loadTexture } from './utils/resource'
 
 const _addUnit = Symbol('addUnit')
 const _removeUnit = Symbol('removeUnit')

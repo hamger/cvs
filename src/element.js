@@ -1,6 +1,5 @@
 import Track from './track'
-// import Timeline from './timeline'
-import { remove, error } from './utils'
+import { remove, error } from './utils/utils'
 // import event from './event'
 
 let id = 0

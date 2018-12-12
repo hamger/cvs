@@ -1,6 +1,6 @@
-import easing from '../easing'
+import easing from '../utils/easing'
 import Track from '../track'
-import { loadedResources } from '../resource'
+import { loadedResources } from '../utils/resource'
 
 export default class Keyframe extends Track {
   constructor (opt) {
