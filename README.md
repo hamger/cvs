@@ -50,23 +50,8 @@ cvs.draw();
 - 添加锚点属性，优化矩阵变换
 - 基于时间线的细粒度动画控制
 - 支持伪 3D 效果
+- 实现元素的碰撞机制
 - 提高单元测试覆盖率
-
-## CommitRule
-
-提交信息需遵循以下格式：
-
-```bash
-commitType: description
-```
-
-`commitType`应为以下五种类型之一：
-
-- feat: 增加新特性
-- fix: 问题修复
-- docs: 文档修改
-- test: 测试用例修改
-- opti: 代码优化，包括重构，格式、配置修改等
 
 ## Reference
 
@@ -74,6 +59,10 @@ commitType: description
 - [antvis/g](https://github.com/antvis/g)
 
 ## Changelog
+
+### 2018.12.12
+
+> v0.5.0 接入时间轴来控制动画
 
 ### 2018.12.10
 
@@ -102,8 +91,6 @@ commitType: description
 > v0.2.7 优化贝尔曲线运动计算
 
 ### 2018.11.5
-
-> v0.2.6 添加 pauseAnimate 暂停动画函数
 
 > v0.2.5 添加 preload 资源预加载函数
 
