@@ -7,6 +7,10 @@ cvs 的时间轴使用的是 [sprite-timeline](https://github.com/spritejs/sprit
 通过控制 timeline.playbackRate (默认值为1) 的值来控制运动的速度，值越大表示运动越快，负值表示反向运动。
 
 ```js
+// 加速动画
+layer.timeline.playbackRate += 0.1
+// 减速动画
+layer.timeline.playbackRate -= 0.1
 // 停止动画
 layer.timeline.playbackRate = 0
 // 开启动画

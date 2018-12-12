@@ -1,4 +1,4 @@
-import { Scene, Rect, Image, Keyframe, Round } from '#'
+import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -77,9 +77,12 @@ import { Scene, Rect, Image, Keyframe, Round } from '#'
   btn4.on('click', function () {
     fgLayer.timeline.playbackRate = 1
   })
-  let btn5 = new Rect({
+  let btn5 = new Text({
     x: 650,
     y: 550,
+    textAlign: 'left',
+    text: 'hello\nmy\nworld',
+    font: 'normal normal normal 63px Arial',
     w: 30,
     h: 30,
     fill: 'orange'
@@ -89,5 +92,5 @@ import { Scene, Rect, Image, Keyframe, Round } from '#'
   })
   bgLayer.append(btn, btn2, btn3, btn4, btn5)
   bgLayer.draw()
-  fgLayer.animate()
+  // fgLayer.animate()
 })()
