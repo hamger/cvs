@@ -39,6 +39,11 @@ class Element {
       }
     }
   }
+  setDefault (opt) {
+    for (let key in opt) {
+      if (!this.attr(key)) this.attr({[key]: opt[key]})
+    }
+  }
   // 设置上下文属性
   setAttr (ctx) {
     for (let key in this.opt) {

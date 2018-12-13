@@ -36,61 +36,28 @@ import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
   })
   ele.addTrack(round)
   fgLayer.append(ele)
-
-  let btn = new Rect({
-    x: 500,
-    y: 500,
-    w: 30,
-    h: 30,
-    fill: 'yellow'
-  })
-  btn.on('click', function () {
-    ele.timeline.playbackRate = 0
-  })
-  let btn2 = new Rect({
-    x: 550,
-    y: 500,
-    w: 30,
-    h: 30,
-    fill: 'green'
-  })
-  btn2.on('click', function () {
-    ele.timeline.playbackRate = 1
-  })
-  let btn3 = new Rect({
+  let start = new Text({
     x: 600,
-    y: 500,
-    w: 30,
-    h: 30,
-    fill: 'pink'
-  })
-  btn3.on('click', function () {
-    fgLayer.timeline.playbackRate = 0
-  })
-  let btn4 = new Rect({
-    x: 650,
-    y: 500,
-    w: 30,
-    h: 30,
+    y: 550,
+    text: '开启',
+    // text: 'hello\nmy\nworld',
+    font: '20px Arial',
     fill: 'blue'
   })
-  btn4.on('click', function () {
-    fgLayer.timeline.playbackRate = 1
-  })
-  let btn5 = new Text({
+  let stop = new Text({
     x: 650,
     y: 550,
-    textAlign: 'left',
-    text: 'hello\nmy\nworld',
-    font: 'normal normal normal 63px Arial',
-    w: 30,
-    h: 30,
+    text: '停止',
+    font: '20px Arial',
     fill: 'orange'
   })
-  btn5.on('click', function () {
-    scene.timeline.currentTime = 0
+  start.on('click', function () {
+    fgLayer.timeline.playbackRate = 1
   })
-  bgLayer.append(btn, btn2, btn3, btn4, btn5)
+  stop.on('click', function () {
+    fgLayer.timeline.playbackRate = 0
+  })
+  bgLayer.append(start, stop)
   bgLayer.draw()
-  // fgLayer.animate()
+  fgLayer.animate()
 })()
