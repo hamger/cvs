@@ -22,9 +22,9 @@ export default {
     let layer = scene.layer()
     layer.append(
       new Text({
-        text: 'hello',
+        text: 'hello\nworld',
         x: 89,
-        y: 76,
+        y: 16,
         font: '48px serif'
       })
     )

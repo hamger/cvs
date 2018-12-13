@@ -15,7 +15,7 @@ export default class Text extends Shape {
   constructor (opt) {
     super(opt)
     this.setDefault({
-      font: 'normal normal normal 16px Arial',
+      font: '16px Arial',
       textAlign: 'left',
       text: ''
     })
