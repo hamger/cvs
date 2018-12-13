@@ -1,18 +1,14 @@
 import Element from './element'
-import Group from './group'
 import {
   getLocation,
   animFrame,
   cancelAnim,
   arrSort,
-  isMobile,
+  forArr,
   remove,
   error
 } from './utils/utils'
 import { loadTexture } from './utils/resource'
-
-const _addUnit = Symbol('addUnit')
-const _removeUnit = Symbol('removeUnit')
 
 let id = 0
 
@@ -20,8 +16,6 @@ class Layer {
   constructor (opt) {
     this.id = id++
     this.children = [] // 根据 zIndex 升序排列的子元素
-    this.descChildren = [] // 根据 zIndex 降序排列的子元素
-    this.animChildren = [] // 具有运动轨迹的子元素
     this.stop = null // 定时器
     this.initAnimateTime = 0 // 动画初始时间
     this.pauseTime = 0 // 暂定总时间
@@ -55,62 +49,44 @@ class Layer {
     this.ctx = canvas.getContext('2d')
     this.container.appendChild(canvas)
   }
-  emitUnit (child, location, type, e) {
-    if (!child.opt.visible || !child[type] || !child.drawPath) return false
-    if (child.isCollision(location)) {
-      child[type].call(child, e)
-      return true
-    }
-  }
-  dispatchEvent (e, type) {
-    let location = getLocation(this.ctx.canvas, e)
-    // 点击区域前面元素的先监听事件
-    this.descChildren.forEach(child => {
-      if (child instanceof Group) {
-        child.shapes.forEach(shape => {
-          this.emitUnit(shape, location, type, e)
-        })
-      } else {
-        this.emitUnit(child, location, type, e)
+  // 触发子元素的事件监听
+  emitEvent (children, type) {
+    forArr(children, child => {
+      if (child.children && child.children.length > 0) {
+        this.emitEvent(child.children, type)
       }
-    })
+      if (!child.opt.visible || !child[type] || !child.drawPath) return
+      if (child.isCollision(this.evt)) child[type].call(child, e)
+    }, true)
+  }
+  // 分发事件
+  dispatchEvent (e, type) {
+    this.evt = getLocation(this.ctx.canvas, e)
+    // zIndex 大的元素先触发监听事件，先子元素优先于父元素触发（冒泡机制）
+    this.emitEvent(this.children, type)
   }
   // set tempEvent (val) {
   //   val.call(temp, e)
   // }
-  [_addUnit] (element) {
-    this.children.push(element)
-    arrSort(this.children, 'opt.zIndex')
-    if (element.tracks.length) this.animChildren.push(element)
-    this.descChildren.push(element)
-    arrSort(this.descChildren, 'opt.zIndex', true)
-  }
   append (...elements) {
-    elements.forEach(item => {
-      if (!(item instanceof Element)) {
+    elements.forEach(child => {
+      if (!(child instanceof Element)) {
         error('Function add only accept the instance of Element.')
       }
-      item.ctx = this.ctx
-      item.layer = this.layer
-      item.timeline = this.timeline.fork()
-      this[_addUnit](item)
+      child._layer = this
+      child._ctx = this.ctx
+      child._timeline = this.timeline.fork()
+      this.children.push(child)
+      arrSort(this.children, 'opt.zIndex')
     })
-  }
-  [_removeUnit] (element) {
-    remove(this.children, element)
-    remove(this.descChildren, element)
-    remove(this.animChildren, element)
+    return this
   }
   remove (...elements) {
     if (elements.length) {
-      elements.forEach(item => {
-        this[_removeUnit](item)
+      elements.forEach(child => {
+        remove(this.children, child)
       })
-    } else {
-      this.children = []
-      this.descChildren = []
-      this.animChildren = []
-    }
+    } else this.children = []
   }
   draw () {
     this.children.forEach(child => {
@@ -125,16 +101,10 @@ class Layer {
   animate () {
     var that = this
     animFrame(function loopUnit () {
-      // console.log('global: ' + that.timeline.globalTime)
-      // console.log('current: ' + that.timeline.currentTime)
-      if (that.animChildren.length === that.finishedAinmCount) return
       that.stop = animFrame(loopUnit)
       that.clear()
-      that.animChildren.forEach(child => {
-        if (child.finished) {
-          that.finishedAinmCount++
-          return
-        }
+      forArr(that.children, child => {
+        if (child.tracks.length === 0) return
         child.runTrack()
       })
       that.draw()

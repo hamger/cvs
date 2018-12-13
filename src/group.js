@@ -4,32 +4,24 @@ import { remove, arrSort, error, cacheCtx } from './utils/utils'
 export default class Group extends Element {
   constructor (opt) {
     super(opt)
-    this.shapes = []
+    this.children = []
   }
-  append (...shapes) {
-    shapes.forEach(shape => {
-      if (!(shape instanceof Element)) {
+  append (...children) {
+    children.forEach(child => {
+      if (!(child instanceof Element)) {
         error('Function group.append only accept the instance of Element.')
       }
-      shape.timeline = this.timeline.fork()
-      this.shapes.push(shape)
-      arrSort(this.shapes, 'opt.zIndex')
+      this.children.push(child)
+      arrSort(this.children, 'opt.zIndex')
     })
+    return this
   }
-  set ctx (val) {
-    this._ctx = val
-    this.shapes.forEach(shape => {
-      shape.ctx = val
-    })
-  }
-  remove (...shapes) {
-    if (shapes.length) {
-      shapes.forEach(shape => {
-        remove(this.shapes, shape)
+  remove (...children) {
+    if (children.length) {
+      children.forEach(child => {
+        remove(this.children, child)
       })
-    } else {
-      this.shapes = []
-    }
+    } else this.children = []
   }
   get isVirtual () {
     // 没有大小的 group 视为虚拟组合
@@ -53,12 +45,24 @@ export default class Group extends Element {
     }
   }
   cacheDraw () {
-    this.cacheCtx = cacheCtx(this._ctx, this.attr('w'), this.attr('h'))
-    this.drawShape(this.cacheCtx)
-  }
-  drawShape (ctx) {
-    this.shapes.forEach(shape => {
-      shape.draw.call(shape, ctx)
+    this.cacheCtx = cacheCtx(this.ctx, this.attr('w'), this.attr('h'))
+    this.children.forEach(child => {
+      child.draw.call(child, this.cacheCtx)
     })
+    // this.drawContent(this.cacheCtx, this)
+  }
+  drawContent (ctx, element) {
+    element.children.forEach(child => {
+      child.draw.call(child, ctx)
+    })
+    // if (element.children && element.children.length > 0) {
+    //   element.children.forEach(child => {
+    //     child.drawContent(ctx, child)
+    //   })
+    // } else {
+    //   element.children.forEach(child => {
+    //     child.draw.call(child, ctx)
+    //   })
+    // }
   }
 }

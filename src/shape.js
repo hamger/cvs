@@ -16,6 +16,13 @@ export default class Shape extends Element {
     const options = Object.assign({}, this.opt, opt)
     return new Cons(options)
   }
+  // 绘制单元
+  drawUnit (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
+    this.setAttr(ctx)
+    this.drawPath(ctx)
+    this.dye(ctx)
+  }
   // 图形在组合中，采用相对于组合的定位
   // set group (val) {
   //   this.attr({x: val.attr('x') + this.attr('x')})

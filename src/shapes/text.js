@@ -1,5 +1,6 @@
-import Shape from '../shape'
+import Element from '../element'
 import parseFont from '../utils/parse-font'
+import { cacheCtx } from '../utils/utils'
 
 // 测量文本的宽
 const getTextWidth = (ctx, text, font) => {
@@ -11,23 +12,22 @@ const getTextWidth = (ctx, text, font) => {
   return Math.round(width)
 }
 
-export default class Text extends Shape {
+export default class Text extends Element {
   constructor (opt) {
     super(opt)
     this.setDefault({
       font: '16px Arial',
-      textAlign: 'left',
-      text: ''
+      textAlign: 'left'
     })
     this.setDefault({lineHeight: parseFont(this.attr('font')).size * 1.2})
   }
   draw (ctx) {
     ctx.beginPath()
     ctx.save()
-    if (!this.cacheCanvas) this.cacheDraw()
+    if (!this.cacheCtx) this.cacheDraw()
     // this.drawPath(ctx)
     // this.dye(ctx)
-    ctx.drawImage(this.cacheCanvas, this.attr('x'), this.attr('y'))
+    ctx.drawImage(this.cacheCtx.canvas, this.attr('x'), this.attr('y'))
     ctx.restore()
   }
   drawPath (ctx) {
@@ -49,10 +49,7 @@ export default class Text extends Shape {
       w: maxW,
       h: this.attr('lineHeight') * lines.length
     })
-    this.cacheCanvas = document.createElement('canvas')
-    this.cacheCanvas.width = this.attr('w')
-    this.cacheCanvas.height = this.attr('h')
-    this.cacheCtx = this.cacheCanvas.getContext('2d')
+    this.cacheCtx = cacheCtx(this.ctx, this.attr('w'), this.attr('h'))
     let left = 0, align = this.attr('textAlign')
     let x = this.attr('x')
     if (align === 'center') left = x + this.attr('w') / 2

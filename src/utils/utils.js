@@ -124,6 +124,20 @@ export function cacheCtx (ctx, w, h) {
   return canvas.getContext('2d')
 }
 
+// 循环遍历数组，vert 表示倒序遍历
+export function forArr (arr, cb, vert) {
+  const len = arr.length
+  if (vert) {
+    for (let i = len - 1; i > -1; i--) {
+      cb(arr[i], i)
+    }
+  } else {
+    for (let i = 0; i < len; i++) {
+      cb(arr[i], i)
+    }
+  }
+}
+
 export function getRelativePos (x, y, rx, ry) {
   return { x: x - rx, y: y - ry }
 }

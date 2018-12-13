@@ -1,8 +1,8 @@
-import Shape from '../shape'
+import Element from '../element'
 import Circle from './circle'
 import Rect from './rect'
 import { delBlank } from '../utils/utils'
-class Path extends Shape {
+class Path extends Element {
   constructor (opt) {
     super(opt)
     this.lastPoint = []
@@ -38,26 +38,26 @@ class Path extends Shape {
         })
       }
       this.resolve(item, arr)
-      if (index === 0) {
-        if (this.attr('startArrow')) {
-          const end = pathVal[1].split(' ').map(item => {
-            // 需要将字符串转化为数字
-            return +item
-          })
-          const { angle, len } = this.attr('startArrow')
-          this.drawArrow('start', item, arr, end, angle, len)
-        }
-      }
-      if (index === pathType.length - 1) {
-        if (this.attr('endArrow')) {
-          const start = pathVal[pathType.length - 2].split(' ').map(item => {
-            // 需要将字符串转化为数字
-            return +item
-          })
-          const { angle, len } = this.attr('endArrow')
-          this.drawArrow('end', item, start, arr, angle, len)
-        }
-      }
+      // if (index === 0) {
+      //   if (this.attr('startArrow')) {
+      //     const end = pathVal[1].split(' ').map(item => {
+      //       // 需要将字符串转化为数字
+      //       return +item
+      //     })
+      //     const { angle, len } = this.attr('startArrow')
+      //     this.drawArrow('start', item, arr, end, angle, len)
+      //   }
+      // }
+      // if (index === pathType.length - 1) {
+      //   if (this.attr('endArrow')) {
+      //     const start = pathVal[pathType.length - 2].split(' ').map(item => {
+      //       // 需要将字符串转化为数字
+      //       return +item
+      //     })
+      //     const { angle, len } = this.attr('endArrow')
+      //     this.drawArrow('end', item, start, arr, angle, len)
+      //   }
+      // }
     })
   }
   resolve (type, val) {

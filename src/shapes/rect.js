@@ -1,6 +1,6 @@
-import Shape from '../shape'
+import Element from '../element'
 import { error } from '../utils/utils'
-export default class Rect extends Shape {
+export default class Rect extends Element {
   constructor (opt) {
     super(opt)
     if (this.attr('cache')) this.cacheDraw()

@@ -26,6 +26,30 @@ class Element {
     this.tracks = []
     this.trackIndex = 0
   }
+  set _ctx (val) {
+    this.ctx = val
+    if (this.children && this.children.length > 0) {
+      this.children.forEach(child => {
+        child._ctx = val
+      })
+    }
+  }
+  set _layer (val) {
+    this.layer = val
+    if (this.children && this.children.length > 0) {
+      this.children.forEach(child => {
+        child._layer = val
+      })
+    }
+  }
+  set _timeline (val) {
+    this.timeline = val
+    if (this.children && this.children.length > 0) {
+      this.children.forEach(child => {
+        child._timeline = val
+      })
+    }
+  }
   get origin () {
     if (this.attr('cache')) {
       return {
@@ -38,6 +62,19 @@ class Element {
         y: this.attr('y')
       }
     }
+  }
+  // 返回一个元素的克隆
+  clone (opt = {}) {
+    let Cons = this.constructor
+    const options = Object.assign({}, this.opt, opt)
+    return new Cons(options)
+  }
+  // 绘制单元
+  drawUnit (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
+    this.setAttr(ctx)
+    this.drawPath(ctx)
+    this.dye(ctx)
   }
   setDefault (opt) {
     for (let key in opt) {
@@ -73,13 +110,6 @@ class Element {
     if (this.opt.stroke) ctx.stroke()
     else ctx.fill()
   }
-  // 绘制单元
-  drawUnit (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
-    this.setAttr(ctx)
-    this.drawPath(ctx)
-    this.dye(ctx)
-  }
   // 设置/获取绘制属性
   attr (opt, isHover) {
     if (typeof opt === 'string') {
@@ -111,7 +141,7 @@ class Element {
     //   }
     // }
   }
-  // 是否点击在元素上
+  // 判断是否点击在元素上
   isCollision (location) {
     this.drawPath(this.ctx)
     return this.ctx.isPointInPath(location.x, location.y)

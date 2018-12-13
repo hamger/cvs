@@ -1,8 +1,8 @@
-import Shape from '../shape'
+import Element from '../element'
 import { loadedResources } from '../utils/resource'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
-export default class Image extends Shape {
+export default class Image extends Element {
   // export default class Image extends element {
   constructor (opt) {
     super(opt)
@@ -17,14 +17,14 @@ export default class Image extends Shape {
     if (this.attr('cache')) {
       ctx.drawImage(this.cacheCanvas, this.opt.x, this.opt.y)
     } else {
-      this.drawUnit(ctx)
+      this.drawImg(ctx)
     }
   }
   drawPath (ctx) {
     ctx.beginPath()
     ctx.rect(this.opt.x, this.opt.y, this.w, this.h)
   }
-  drawUnit (cacheCtx) {
+  drawImg (cacheCtx) {
     let ctx = cacheCtx || this.ctx
     let image = this.opt.image
     ctx.save()
@@ -52,6 +52,6 @@ export default class Image extends Shape {
     this.cacheCanvas = document.createElement('canvas')
     this.cacheCanvas.width = this.w
     this.cacheCanvas.height = this.h
-    this.drawUnit(this.cacheCanvas.getContext('2d'))
+    this.drawImg(this.cacheCanvas.getContext('2d'))
   }
 }
