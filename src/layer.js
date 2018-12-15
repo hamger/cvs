@@ -55,7 +55,7 @@ class Layer {
       if (child.children && child.children.length > 0) {
         this.emitEvent(child.children, type)
       }
-      if (!child.opt.visible || !child[type] || !child.drawPath) return
+      if (!child.opt.visible || !child[type] || !child.outline) return
       if (child.isCollision(this.evt)) child[type].call(child, e)
     }, true)
   }
@@ -104,8 +104,7 @@ class Layer {
       that.stop = animFrame(loopUnit)
       that.clear()
       forArr(that.children, child => {
-        if (child.tracks.length === 0) return
-        child.runTrack()
+        if (child.animatable) child.animate()
       })
       that.draw()
     })

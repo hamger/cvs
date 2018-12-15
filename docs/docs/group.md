@@ -23,7 +23,7 @@ let group = new Group(options);
 
 ### 实例方法
 
-#### append(shape)
+#### append(element)
 
 - 描述：
 
@@ -31,17 +31,17 @@ let group = new Group(options);
 
 - 参数：
 
-  - `{Shape} shape`
+  - `{Element} element`
     ::: tip
     组合中的图形根据组合的位置定位
     :::
 
 - 示例：
   ```js
-  group.append(shape, shape2);
+  group.append(element, element2);
   ```
 
-#### remove(shape)
+#### remove(element)
 
 - 描述：
 
@@ -49,7 +49,7 @@ let group = new Group(options);
 
 - 参数：
 
-  - `{Shape} shape`
+  - `{Element} element`
 
 ::: tip
 支持不传参数，`group.remove()`将删除所有的图形
@@ -58,7 +58,7 @@ let group = new Group(options);
 - 示例：
 
   ```js
-  group.remove(shape);
+  group.remove(element);
   ```
 
 ### example

@@ -1,6 +1,6 @@
 ### Image
 
-绘制一个图像，`Image`继承自`Shape`。
+绘制一个图像，`Image`继承自`Element`。
 
 ```js
 let element = new Image(options);

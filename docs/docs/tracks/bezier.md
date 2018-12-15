@@ -18,7 +18,7 @@ let bezier = new Bezier(options);
 | easing         | String         | 规定缓动效果（[可选值](/docs/track.html#easing)） | `linear` |
 
 ::: tip
-`points` 值为两项数组（表示起点和终点的坐标）时，便可用于绘制直线
+`points` 的值至少需要有两项（分别表示起点和终点的坐标）
 :::
 
 ::: tip

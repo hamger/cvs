@@ -39,7 +39,7 @@ export default class Circle extends Element {
     }
     ctx.restore()
   }
-  drawPath (ctx) {
+  outline (ctx) {
     ctx.beginPath()
     if (this.attr('isSector')) ctx.moveTo(this.origin.x, this.origin.y)
     ctx.arc(

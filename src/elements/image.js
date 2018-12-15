@@ -20,7 +20,7 @@ export default class Image extends Element {
       this.drawImg(ctx)
     }
   }
-  drawPath (ctx) {
+  outline (ctx) {
     ctx.beginPath()
     ctx.rect(this.opt.x, this.opt.y, this.w, this.h)
   }

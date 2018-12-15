@@ -21,16 +21,15 @@ module.exports = {
       ['/docs/layer', '图层 Layer'],
       ['/docs/element', '元素 Element'],
       ['/docs/group', '组合 Group'],
-      ['/docs/shape', '图形 Shape'],
       {
-        title: 'shapes',
+        title: 'elements',
         collapsable: false,
         children: [
-          ['/docs/shapes/circle', '圆形 Circle'],
-          ['/docs/shapes/rect', '矩形 Rect'],
-          ['/docs/shapes/path', '路径 Path'],
-          ['/docs/shapes/image', '图像 Image'],
-          ['/docs/shapes/text', '文本 Text']
+          ['/docs/elements/circle', '圆形 Circle'],
+          ['/docs/elements/rect', '矩形 Rect'],
+          ['/docs/elements/path', '路径 Path'],
+          ['/docs/elements/image', '图像 Image'],
+          ['/docs/elements/text', '文本 Text']
         ]
       },
       ['/docs/track', '轨迹 Track'],

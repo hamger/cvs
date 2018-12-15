@@ -1,6 +1,6 @@
 ### Path
 
-绘制一个路径，`Path`继承自`Shape`。
+绘制一个路径，`Path`继承自`Element`。
 
 ```js
 let element = new Path(options);

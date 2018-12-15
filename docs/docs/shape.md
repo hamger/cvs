@@ -1,6 +1,6 @@
-### Shape
+### Element
 
-构造一个图形，`Shape`继承自`Element`，使用该类可自定义图形。
+构造一个图形，`Element`继承自`Element`，使用该类可自定义图形。
 
 ### 实例方法
 
@@ -34,22 +34,22 @@
 
 ### 自定义图形
 
-以下是一个使用`Shape`构造器自定义一个三角形图形的例子，你需要定义一个 `draw` 函数，用来表示如何绘制图形，如果你需要事件监听，需要再定义`drawPath`绘制图形路径。
+以下是一个使用`Element`构造器自定义一个三角形图形的例子，你需要定义一个 `draw` 函数，用来表示如何绘制图形，如果你需要事件监听，需要再定义`outline`绘制图形路径。
 
 ```js
-import { Scene, Shape } from "cvs";
+import { Scene, Element } from "cvs";
 let scene = new Scene({ containerId: "container" });
 let layer = scene.layer({ handleEvent: true });
 
-class Triangle extends Shape {
+class Triangle extends Element {
   draw() {
     let ctx = this.ctx;
     ctx.save();
-    this.drawPath();
+    this.outline();
     ctx.fill();
     ctx.restore();
   }
-  drawPath() {
+  outline() {
     let ctx = this.ctx;
     let p = this.attr("points");
     ctx.beginPath();

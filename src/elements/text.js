@@ -25,12 +25,12 @@ export default class Text extends Element {
     ctx.beginPath()
     ctx.save()
     if (!this.cacheCtx) this.cacheDraw()
-    // this.drawPath(ctx)
+    // this.outline(ctx)
     // this.dye(ctx)
     ctx.drawImage(this.cacheCtx.canvas, this.attr('x'), this.attr('y'))
     ctx.restore()
   }
-  drawPath (ctx) {
+  outline (ctx) {
     ctx.beginPath()
     ctx.rect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
   }

@@ -15,7 +15,7 @@ class Path extends Element {
     this.drawUnit(ctx)
     ctx.restore()
   }
-  drawPath (ctx) {
+  outline (ctx) {
     ctx.beginPath()
     let path = delBlank(this.opt.path)
     let pathType = path.match(/[A-z]/g)

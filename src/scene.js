@@ -51,8 +51,8 @@ export default class Scene {
     //   // 实现鼠标移动到可点击区域时，光标变化
     //   let temp = null
     //   this.descLayers.some(child => {
-    //     if (!child.opt.visible || !child.click || !child.drawPath) return false
-    //     child.drawPath.call(child, this.ctx)
+    //     if (!child.opt.visible || !child.click || !child.outline) return false
+    //     child.outline.call(child, this.ctx)
     //     if (this.ctx.isPointInPath(location.x, location.y)) {
     //       temp = child
     //       return true
@@ -70,8 +70,8 @@ export default class Scene {
     //   // 模拟 hover 事件监听
     //   let temp2 = { opt: {} }
     //   this.descLayers.some(child => {
-    //     if (!child.opt.visible || !child.drawPath) return false
-    //     child.drawPath.call(child, this.ctx)
+    //     if (!child.opt.visible || !child.outline) return false
+    //     child.outline.call(child, this.ctx)
     //     if (this.ctx.isPointInPath(location.x, location.y)) {
     //       temp2 = child
     //       return true

@@ -5,10 +5,7 @@ import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
   })
 
   await scene.preload({
-    safari: '../../static/safari.png',
-    robot01: '../../static/robot01.png',
-    robot02: '../../static/robot02.png',
-    robot03: '../../static/robot03.png'
+    safari: '../../static/safari.png'
   })
 
   let bgLayer = scene.layer({
@@ -20,27 +17,16 @@ import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
   let img = new Image({
     image: 'safari',
     w: 80,
-    h: 80
+    h: 80,
+    x: 0,
+    y: 0
   })
-  let round = new Round({
-    delay: 0,
-    duration: 5000,
-    iterationCount: 800, // 重复次数
-    centerX: 300,
-    centerY: 300,
-    r: 150,
-    angle: 180,
-    anticlockwise: false,
-    relativeX: 40,
-    relativeY: 40
-  })
-  img.addTrack(round)
+  img.keyframe([{x: 100}, {x: 200}, {x: 300}], 5000)
   fgLayer.append(img)
   let start = new Text({
     x: 600,
     y: 550,
     text: '开启',
-    // text: 'hello\nmy\nworld',
     font: '20px Arial',
     fill: 'blue'
   })

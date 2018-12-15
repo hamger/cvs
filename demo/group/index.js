@@ -29,17 +29,17 @@ import { Scene, Circle, Rect, Image, Group, Bezier } from '#'
   let group = new Group({
     x: 100,
     y: 100,
-    w: 350,
-    h: 350,
-    stroke: '#ddd'
+    // w: 350,
+    // h: 350,
+    // stroke: '#ddd'
   })
   let subGroup = new Group({
     zIndex: 3,
     x: 10,
     y: 200,
-    w: 100,
-    h: 100,
-    stroke: '#ddd'
+    // w: 100,
+    // h: 100,
+    // stroke: '#ddd'
   })
     .append(circle2.clone({ r: 20, y: 30, x: 30, fill: 'pink' }))
     .append(new Rect({ x: 60, y: 60, w: 30, h: 30 }))

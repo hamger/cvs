@@ -1,12 +1,12 @@
 import Scene from './Scene'
 import Layer from './layer'
+import Element from './element'
 import Group from './group'
-import Shape from './shape'
-import Path from './shapes/path'
-import Circle from './shapes/circle'
-import Rect from './shapes/rect'
-import Image from './shapes/image'
-import Text from './shapes/text'
+import Path from './elements/path'
+import Circle from './elements/circle'
+import Rect from './elements/rect'
+import Image from './elements/image'
+import Text from './elements/text'
 import Track from './track'
 import Bezier from './tracks/bezier'
 import Round from './tracks/round'
@@ -18,8 +18,8 @@ import easing from './utils/easing'
 export {
   Scene,
   Layer,
+  Element,
   Group,
-  Shape,
   Circle,
   Rect,
   Image,

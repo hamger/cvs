@@ -1,4 +1,5 @@
 import Track from './track'
+import Keyframe from './keyframe'
 import { remove, error } from './utils/utils'
 // import event from './event'
 
@@ -73,7 +74,7 @@ class Element {
   drawUnit (cacheCtx) {
     let ctx = cacheCtx || this.ctx
     this.setAttr(ctx)
-    this.drawPath(ctx)
+    this.outline(ctx)
     this.dye(ctx)
   }
   setDefault (opt) {
@@ -112,6 +113,7 @@ class Element {
   }
   // 设置/获取绘制属性
   attr (opt, isHover) {
+    if (!opt) return this.opt
     if (typeof opt === 'string') {
       return this.opt[opt]
     }
@@ -143,7 +145,7 @@ class Element {
   }
   // 判断是否点击在元素上
   isCollision (location) {
-    this.drawPath(this.ctx)
+    this.outline(this.ctx)
     return this.ctx.isPointInPath(location.x, location.y)
   }
   on (eventType, callback) {
@@ -151,6 +153,30 @@ class Element {
   }
   off (eventType) {
     this[eventType] = null
+  }
+  get animatable () {
+    if (this.tracks.length > 0 || this.keyframe) return true
+    else return false
+  }
+  keyframe (keyframes, timing) {
+    this.keyframe = new Keyframe(this.attr(), keyframes, timing)
+  }
+  animate () {
+    var t = this.timeline.currentTime
+    if (this.keyframe) {
+      var obj = this.keyframe.result(t)
+      this.attr(obj)
+    }
+    // let res = this.getCurTrack(t)
+    // // 已执行完所有轨迹
+    // if (res.index === undefined) {
+    //   this.finished = true
+    //   return
+    // }
+    // // 轨迹处于延迟状态
+    // if (res.cycle === -1) return
+    // // 执行当前轨迹循环体，并传入已经运行的事件
+    // this.tracks[res.index].loop(res.time)
   }
   getCurTrack (animateTime) {
     let res = {}
@@ -177,18 +203,6 @@ class Element {
       a = b
     })
     return res
-  }
-  runTrack () {
-    let res = this.getCurTrack(this.timeline.currentTime)
-    // 已执行完所有轨迹
-    if (res.index === undefined) {
-      this.finished = true
-      return
-    }
-    // 轨迹处于延迟状态
-    if (res.cycle === -1) return
-    // 执行当前轨迹循环体，并传入已经运行的事件
-    this.tracks[res.index].loop(res.time)
   }
   _addTrackUnit (track) {
     if (track instanceof Track) {

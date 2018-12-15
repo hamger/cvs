@@ -31,11 +31,11 @@ export default class Group extends Element {
   draw (ctx) {
     ctx.save()
     if (!this.cacheCtx) this.cacheDraw()
-    this.drawPath(ctx)
+    this.outline(ctx)
     ctx.drawImage(this.cacheCtx.canvas, this.attr('x'), this.attr('y'))
     ctx.restore()
   }
-  drawPath (ctx) {
+  outline (ctx) {
     if (!this.isVirtual) {
       ctx.beginPath()
       this.setAttr(ctx)

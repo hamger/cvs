@@ -18,7 +18,7 @@ export default class Rect extends Element {
     }
     ctx.restore()
   }
-  drawPath (ctx) {
+  outline (ctx) {
     ctx.beginPath()
     if (this.attr('borderRadius')) this.drawRoundRect(ctx)
     else this.drawRect(ctx)

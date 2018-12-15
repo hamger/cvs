@@ -1,6 +1,6 @@
 ### Rect
 
-绘制一个矩形，`Rect`继承自`Shape`。
+绘制一个矩形，`Rect`继承自`Element`。
 
 ```js
 let element = new Rect(options);
