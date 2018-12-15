@@ -1,4 +1,5 @@
 import Element from '../element'
+import { createCtx } from '../utils/utils'
 import { loadedResources } from '../utils/resource'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
@@ -15,7 +16,7 @@ export default class Image extends Element {
   }
   draw (ctx) {
     if (this.attr('cache')) {
-      ctx.drawImage(this.cacheCanvas, this.opt.x, this.opt.y)
+      ctx.drawImage(this.cacheCtx.canvas, this.opt.x, this.opt.y)
     } else {
       this.drawImg(ctx)
     }
@@ -49,9 +50,7 @@ export default class Image extends Element {
     ctx.restore()
   }
   cacheDraw () {
-    this.cacheCanvas = document.createElement('canvas')
-    this.cacheCanvas.width = this.w
-    this.cacheCanvas.height = this.h
-    this.drawImg(this.cacheCanvas.getContext('2d'))
+    this.cacheCtx = createCtx(this.w, this.h)
+    this.drawImg(this.cacheCtx)
   }
 }

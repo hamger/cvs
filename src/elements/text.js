@@ -1,6 +1,6 @@
 import Element from '../element'
 import parseFont from '../utils/parse-font'
-import { cacheCtx } from '../utils/utils'
+import { createCtx } from '../utils/utils'
 
 // 测量文本的宽
 const getTextWidth = (ctx, text, font) => {
@@ -49,7 +49,7 @@ export default class Text extends Element {
       w: maxW,
       h: this.attr('lineHeight') * lines.length
     })
-    this.cacheCtx = cacheCtx(this.ctx, this.attr('w'), this.attr('h'))
+    this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     let left = 0, align = this.attr('textAlign')
     let x = this.attr('x')
     if (align === 'center') left = x + this.attr('w') / 2

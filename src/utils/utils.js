@@ -114,13 +114,12 @@ export const isMobile = (() => {
   }
 })()
 
-// 缓存画布
-export function cacheCtx (ctx, w, h) {
-  let canvas = ctx.canvas.cloneNode()
-  if (w && h) {
-    canvas.width = w
-    canvas.height = h
-  }
+const cacheCanvas = document.createElement('canvas')
+// 创建 canvas 的上下文环境
+export function createCtx (w, h) {
+  let canvas = cacheCanvas.cloneNode()
+  if (w) canvas.width = w
+  if (h) canvas.height = h
   return canvas.getContext('2d')
 }
 

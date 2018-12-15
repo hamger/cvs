@@ -1,4 +1,5 @@
 import Element from '../element'
+import { createCtx } from '../utils/utils'
 export default class Circle extends Element {
   constructor (opt) {
     super(opt)
@@ -30,7 +31,7 @@ export default class Circle extends Element {
     ctx.save()
     if (this.attr('cache')) {
       ctx.drawImage(
-        this.cacheCanvas,
+        this.cacheCtx.canvas,
         this.attr('x') - this.origin.x,
         this.attr('y') - this.origin.y
       )
@@ -53,9 +54,7 @@ export default class Circle extends Element {
     if (this.attr('isSector')) ctx.closePath()
   }
   cacheDraw () {
-    this.cacheCanvas = document.createElement('canvas')
-    this.cacheCanvas.width = 2 * this.origin.x
-    this.cacheCanvas.height = 2 * this.origin.y
-    this.drawUnit(this.cacheCanvas.getContext('2d'))
+    this.cacheCtx = createCtx(2 * this.origin.x, 2 * this.origin.y)
+    this.drawUnit(this.cacheCtx)
   }
 }

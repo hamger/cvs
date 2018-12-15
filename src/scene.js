@@ -96,7 +96,7 @@ export default class Scene {
   }
   // 添加一个 layer
   layer (opt = {}) {
-    Object.assign(opt, { container: this.scene })
+    Object.assign(opt, { scene: this.scene })
     let layer = new Layer(opt)
     layer.timeline = this.timeline.fork()
     this.layers.push(layer)

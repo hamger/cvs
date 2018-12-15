@@ -1,5 +1,5 @@
 import Element from '../element'
-import { error } from '../utils/utils'
+import { error, createCtx } from '../utils/utils'
 export default class Rect extends Element {
   constructor (opt) {
     super(opt)
@@ -9,7 +9,7 @@ export default class Rect extends Element {
     ctx.save()
     if (this.attr('cache')) {
       ctx.drawImage(
-        this.cacheCanvas,
+        this.cacheCtx.canvas,
         this.attr('x') - this.origin.x,
         this.attr('y') - this.origin.y
       )
@@ -115,9 +115,7 @@ export default class Rect extends Element {
     }
   }
   cacheDraw () {
-    this.cacheCanvas = document.createElement('canvas')
-    this.cacheCanvas.width = this.opt.w + this.lw * 2
-    this.cacheCanvas.height = this.opt.h + this.lw * 2
-    this.drawUnit(this.cacheCanvas.getContext('2d'))
+    this.cacheCtx = createCtx(this.opt.w + this.lw * 2, this.opt.h + this.lw * 2)
+    this.drawUnit(this.cacheCtx)
   }
 }

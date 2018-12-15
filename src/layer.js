@@ -6,7 +6,8 @@ import {
   arrSort,
   forArr,
   remove,
-  error
+  error,
+  createCtx
 } from './utils/utils'
 import { loadTexture } from './utils/resource'
 
@@ -40,14 +41,13 @@ class Layer {
   }
 
   init () {
-    let canvas = document.createElement('canvas')
-    canvas.style.cssText = `position: absolute; top: 0px; left: 0px;z-index:${
+    this.width = this.scene.clientWidth
+    this.height = this.scene.clientWidth
+    this.ctx = createCtx(this.width, this.height)
+    this.ctx.canvas.style.cssText = `position: absolute; top: 0px; left: 0px;z-index:${
       this.zIndex
     }`
-    this.width = canvas.width = this.container.clientWidth
-    this.height = canvas.height = this.container.clientHeight
-    this.ctx = canvas.getContext('2d')
-    this.container.appendChild(canvas)
+    this.scene.appendChild(this.ctx.canvas)
   }
   // 触发子元素的事件监听
   emitEvent (children, type) {
