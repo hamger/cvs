@@ -4,12 +4,8 @@ import { loadedResources } from '../utils/resource'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
 export default class Image extends Element {
-  // export default class Image extends element {
   constructor (opt) {
     super(opt)
-    if (loadedResources.has(this.opt.image)) {
-      this.opt.image = loadedResources.get(this.opt.image)
-    }
     this.w = this.opt.w ? this.opt.w : this.opt.image.width
     this.h = this.opt.h ? this.opt.h : this.opt.image.height
     if (this.attr('cache')) this.cacheDraw()
@@ -27,7 +23,7 @@ export default class Image extends Element {
   }
   drawImg (cacheCtx) {
     let ctx = cacheCtx || this.ctx
-    let image = this.opt.image
+    let image = loadedResources.get(this.attr('image'))
     ctx.save()
     this.setAttr(ctx)
     if (this.opt.sw && this.opt.sh) {

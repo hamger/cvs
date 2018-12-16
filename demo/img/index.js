@@ -1,4 +1,4 @@
-import { Scene, Rect, Image, Keyframe } from '#'
+import { Scene, Image } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -21,17 +21,17 @@ import { Scene, Rect, Image, Keyframe } from '#'
     x: 400,
     y: 40,
   })
-  element3.addTrack(new Keyframe({
+  element3.keyframe([
+    {image: 'robot01'},
+    {image: 'robot02'},
+    {image: 'robot03'},
+    {image: 'robot02'},
+    {image: 'robot01'},
+  ], {
     delay: 110,
     duration: 4000,
-    retrace: true, // 是否折返
     iterationCount: 2, // 重复次数
-    keyframe: [
-      {texture: 'robot01'},
-      {texture: 'robot02'},
-      {texture: 'robot03'}
-    ]
-  }))
+  })
   fgLayer.append(element2, element3)
   fgLayer.animate()
 })()

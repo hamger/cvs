@@ -88,13 +88,12 @@ export default class Keyframe {
     this[_element] = element
   }
   currentFrame (p) {
-    if (p >= 1) return false
     let res = {}
     let frames = this[_keyframes]
     frames.some((item, index) => {
       if (item.offset > p || item.offset === 1) {
-        res.from = item
-        res.to = frames[index - 1]
+        res.from = index === 0 ? item : frames[index - 1]
+        res.to = item
         return true
       }
     })
@@ -104,8 +103,8 @@ export default class Keyframe {
     const p = easing[this[_timing].easing](
       (t - this[_timing].delay) / this[_timing].duration
     )
+    if (p >= 1) return this[_keyframes][this[_keyframes].length - 1]
     let curFrame = this.currentFrame(p)
-    if (!curFrame) return false
     let result = {}
     for (let key in curFrame.from) {
       result[key] = calculate(

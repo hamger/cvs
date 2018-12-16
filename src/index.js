@@ -12,7 +12,6 @@ import Bezier from './tracks/bezier'
 import Round from './tracks/round'
 import Color from './tracks/color'
 import Elliptic from './tracks/elliptic'
-import Keyframe from './tracks/keyframe'
 import easing from './utils/easing'
 
 export {
@@ -30,6 +29,5 @@ export {
   easing,
   Round,
   Color,
-  Elliptic,
-  Keyframe
+  Elliptic
 }
