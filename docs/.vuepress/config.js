@@ -4,7 +4,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '#': '../../../src',
+        '#': '../../../src'
       }
     }
   },
@@ -20,7 +20,8 @@ module.exports = {
       ['/docs/scene', '场景 Scene'],
       ['/docs/layer', '图层 Layer'],
       ['/docs/element', '元素 Element'],
-      ['/docs/group', '组合 Group'],
+      ['/docs/track', '轨迹 Track'],
+      ['/docs/timeline', '时间轴 Timeline'],
       {
         title: 'elements',
         collapsable: false,
@@ -29,20 +30,19 @@ module.exports = {
           ['/docs/elements/rect', '矩形 Rect'],
           ['/docs/elements/path', '路径 Path'],
           ['/docs/elements/image', '图像 Image'],
-          ['/docs/elements/text', '文本 Text']
+          ['/docs/elements/text', '文本 Text'],
+          ['/docs/elements/group', '组合 Group']
         ]
       },
-      ['/docs/track', '轨迹 Track'],
       {
         title: 'tracks',
         collapsable: false,
         children: [
           ['/docs/tracks/bezier', '曲线 Bezier'],
           ['/docs/tracks/round', '正圆 Round'],
-          ['/docs/tracks/elliptic', '椭圆 Elliptic'],
+          ['/docs/tracks/elliptic', '椭圆 Elliptic']
         ]
-      },
-      ['/docs/timeline', '时间轴 Timeline'],
+      }
     ]
   }
 }

@@ -21,7 +21,19 @@ import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
     x: 0,
     y: 0
   })
-  img.keyframe([{x: 100}, {x: 200}, {x: 300}], 5000)
+  img.keyframe([['w', 'h'], { w: 110, h: 110 }, { w: 140, h: 140 }], 5000)
+  img.track('bezier', {
+    points: [
+      { x: 73, y: 59 },
+      { x: 296, y: 76 },
+      { x: 164, y: 227 },
+      { x: 336, y: 313 }
+    ],
+    delay: 0,
+    duration: 5000,
+    // retrace: true,
+    iterationCount: 1
+  })
   fgLayer.append(img)
   let start = new Text({
     x: 600,

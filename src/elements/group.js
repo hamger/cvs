@@ -1,5 +1,5 @@
-import Element from './element'
-import { remove, arrSort, error, cacheCtx } from './utils/utils'
+import Element from '../element'
+import { remove, arrSort, error, cacheCtx } from '../utils/utils'
 
 export default class Group extends Element {
   constructor (opt) {

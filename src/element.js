@@ -1,7 +1,11 @@
-import Track from './track'
+// import Track from './track'
+import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
 import { remove, error } from './utils/utils'
 // import event from './event'
+
+const _keyframeArr = Symbol('keyframeArr'),
+  _trackArr = Symbol('trackArr')
 
 let id = 0
 // @event
@@ -24,8 +28,9 @@ class Element {
       }
     }
     this.finished = false
-    this.tracks = []
     this.trackIndex = 0
+    this[_keyframeArr] = []
+    this[_trackArr] = []
   }
   set _ctx (val) {
     this.ctx = val
@@ -155,34 +160,47 @@ class Element {
     this[eventType] = null
   }
   get animatable () {
-    if (this.tracks.length > 0 || this.keyframe) return true
+    if (this[_trackArr].length > 0 || this[_keyframeArr].length > 0) return true
     else return false
   }
   keyframe (keyframes, timing) {
-    this.keyframe = new Keyframe(this.attr(), keyframes, timing)
+    this[_keyframeArr].push(new Keyframe(this, keyframes, timing))
+    return this
+  }
+  track (type, options) {
+    if (!/(line|bezier|round|elliptic)/.test(type)) {
+      error('the type of track must be line, bezier, round or elliptic.')
+    }
+    let track = null
+    if (type === 'bezier') track = new Bezier(options)
+    track.$ele = this
+    this[_trackArr].push(track)
+    return this
   }
   animate () {
     var t = this.timeline.currentTime
-    if (this.keyframe) {
-      var obj = this.keyframe.result(t)
-      this.attr(obj)
+    this[_keyframeArr].forEach(item => {
+      item.run(t)
+    })
+    let res = this.getCurTrack(t)
+    // 已执行完所有轨迹
+    if (res.index === undefined) {
+      this.finished = true
+      return
     }
-    // let res = this.getCurTrack(t)
-    // // 已执行完所有轨迹
-    // if (res.index === undefined) {
-    //   this.finished = true
-    //   return
-    // }
-    // // 轨迹处于延迟状态
-    // if (res.cycle === -1) return
-    // // 执行当前轨迹循环体，并传入已经运行的事件
-    // this.tracks[res.index].loop(res.time)
+    // 轨迹处于延迟状态
+    if (res.cycle === -1) return
+    // 执行当前轨迹循环体，并传入已经运行的时间
+    this[_trackArr][res.index].loop(res.time)
+  }
+  get state () {
+    return false
   }
   getCurTrack (animateTime) {
     let res = {}
     let a = 0
     let b = 0
-    this.tracks.some((item, index) => {
+    this[_trackArr].some((item, index) => {
       a = a + item.delay
       b = a + item.duration * item.iterationCount
       if (animateTime < a) {
@@ -202,29 +220,12 @@ class Element {
       }
       a = b
     })
+    /**
+     * index: 处于第几个轨迹
+     * time: 处于轨迹自身的什么阶段
+     * cycle: 处于轨迹的第几次循环，-1 表示等待状态
+     */
     return res
-  }
-  _addTrackUnit (track) {
-    if (track instanceof Track) {
-      track.$ele = this
-      this.tracks.push(track)
-    } else {
-      error('Function addTrack only accept the instance of Track.')
-    }
-  }
-  addTrack (...tracks) {
-    tracks.forEach(item => {
-      this._addTrackUnit(item)
-    })
-  }
-  removeTrack (...tracks) {
-    if (tracks.length) {
-      tracks.forEach(item => {
-        remove(this.children, item)
-      })
-    } else {
-      this.tracks = []
-    }
   }
 }
 

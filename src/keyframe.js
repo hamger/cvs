@@ -22,8 +22,9 @@ function calculateFramesOffset (keyframes) {
   const firstFrame = keyframes[0],
     lastFrame = keyframes[keyframes.length - 1]
 
-  lastFrame.offset = lastFrame.offset || 1
-  firstFrame.offset = firstFrame.offset || 0
+  // 第一帧和最后一帧的 offset 是固定的
+  lastFrame.offset = 1
+  firstFrame.offset = 0
 
   let offset = 0,
     offsetFrom = -1
@@ -57,15 +58,20 @@ function calculateFramesOffset (keyframes) {
 // console.log(a)
 
 const _timing = Symbol('timing'),
-  _keyframes = Symbol('keyframes')
+  _keyframes = Symbol('keyframes'),
+  _element = Symbol('element')
 
 export default class Keyframe {
-  constructor (initState, keyframes, timing) {
-    if (Array.isArray(initState)) {
-      // 如果 initState 缺省，默认 keyframes 的第一帧为 initState
-      ;[initState, keyframes, timing] = [initState[0], initState, keyframes]
-    } else {
-      keyframes.unshift(Object.assign({}, initState, { offset: 0 }))
+  constructor (element, keyframes, timing) {
+    if (keyframes.length < 2) {
+      error('keyframes need at least two items.')
+    }
+    if (Array.isArray(keyframes[0])) {
+      let temp = {}
+      keyframes[0].forEach(item => {
+        temp[item] = element.attr(item)
+      })
+      keyframes[0] = temp
     }
     // 支持 duration 省略传参
     if (typeof timing === 'number') timing = { duration: timing }
@@ -79,6 +85,7 @@ export default class Keyframe {
     )
 
     this[_keyframes] = calculateFramesOffset(keyframes)
+    this[_element] = element
   }
   currentFrame (p) {
     if (p >= 1) return false
@@ -94,13 +101,24 @@ export default class Keyframe {
     return res
   }
   result (t) {
-    const p = easing[this[_timing].easing]((t - this[_timing].delay) / this[_timing].duration)
+    const p = easing[this[_timing].easing](
+      (t - this[_timing].delay) / this[_timing].duration
+    )
     let curFrame = this.currentFrame(p)
     if (!curFrame) return false
     let result = {}
     for (let key in curFrame.from) {
-      result[key] = calculate(curFrame.from[key], curFrame.to[key], p, curFrame.from.offset, curFrame.to.offset)
+      result[key] = calculate(
+        curFrame.from[key],
+        curFrame.to[key],
+        p,
+        curFrame.from.offset,
+        curFrame.to.offset
+      )
     }
     return result
+  }
+  run (t) {
+    this[_element].attr(this.result(t))
   }
 }
