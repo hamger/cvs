@@ -30,7 +30,6 @@
     "url": "https://github.com/hamger/cvs.git"
   },
   "devDependencies": {
-    "annotate-webpack-plugin": "^0.1.1",
     "babel-eslint": "^8.2.6",
     "babel-plugin-istanbul": "^2.0.1",
     "babel-preset-es2015": "^6.24.1",
@@ -70,6 +69,7 @@
     "webpack-dev-server": "2.11.1"
   },
   "dependencies": {
+    "bezier-easing": "^2.0.3",
     "color-string": "^1.5.3"
   }
 }

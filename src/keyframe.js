@@ -116,7 +116,7 @@ export default class Keyframe {
           calculate(f[key][0], t[key][0], p, f.offset, t.offset),
           calculate(f[key][1], t[key][1], p, f.offset, t.offset),
           calculate(f[key][2], t[key][2], p, f.offset, t.offset),
-          calculate(f[key][3], t[key][3], p, f.offset, t.offset),
+          calculate(f[key][3], t[key][3], p, f.offset, t.offset)
         ])
       } else {
         result[key] = calculate(f[key], t[key], p, f.offset, t.offset)
@@ -125,9 +125,13 @@ export default class Keyframe {
     return result
   }
   run (t) {
-    const p = easing[this[_timing].easing](
-      (t - this[_timing].delay) / this[_timing].duration
-    )
+    let p = (t - this[_timing].delay) / this[_timing].duration,
+      easingType = this[_timing].easing
+
+    if (typeof easingType === 'string') p = easing[easingType](p)
+    else if (typeof easingType === 'function') p = easingType(p)
+    else error('easing must be string or function')
+
     if (p <= 1) this[_element].attr(this.result(p))
   }
 }

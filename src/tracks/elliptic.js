@@ -31,15 +31,15 @@ export default class Elliptic extends Track {
     if (this.retrace) {
       if (p2 <= 0.5) {
         // 贝塞尔函数涉及的占比比例，0<=p<=1
-        p = easing[this.easing](p2 * 2)
+        p = this.calculateProgress(p2 * 2)
       } else {
         let p3 = 1 - (p2 - 0.5) * 2
         // 防止折返后终点不在起点上
         if ((1 - p2) * this.duration < 80) p3 = 0
-        p = easing[this.easing](p3)
+        p = this.calculateProgress(p3)
       }
     } else {
-      p = easing[this.easing](p2)
+      p = this.calculateProgress(p2)
     }
     const speed = p * this.activeAngle
     const move = () => {
@@ -56,6 +56,13 @@ export default class Elliptic extends Track {
       })
     }
     if (!this.activeAngle || speed < this.activeAngle) move()
+  }
+  calculateProgress (p) {
+    const easingType = this.easing
+    if (typeof easingType === 'string') p = easing[easingType](p)
+    else if (typeof easingType === 'function') p = easingType(p)
+    else error('easing must be string or function')
+    return p
   }
   getPosition (ele, angle) {
     const relativeX = typeof ele.relativeX === 'number' ? ele.relativeX : this.$ele.attr('w') * getFloatNum(ele.relativeX)
