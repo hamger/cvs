@@ -20,7 +20,7 @@ module.exports = {
       ['/docs/scene', '场景 Scene'],
       ['/docs/layer', '图层 Layer'],
       ['/docs/element', '元素 Element'],
-      ['/docs/track', '轨迹 Track'],
+      // ['/docs/track', '轨迹 Track'],
       ['/docs/timeline', '时间轴 Timeline'],
       {
         title: 'elements',

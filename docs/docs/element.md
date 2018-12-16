@@ -4,10 +4,10 @@
 
 ### options
 
-| options.key | value   | description                                        | default |
-| ----------- | ------- | -------------------------------------------------- | ------- |
-| zIndex      | Number  | 规定元素在 z 轴上的坐标                            | `0`     |
-| visible     | Boolean | 规定元素是否可见                                   | `true`  |
+| options.key | value   | description             | default |
+| ----------- | ------- | ----------------------- | ------- |
+| zIndex      | Number  | 规定元素在 z 轴上的坐标 | `0`     |
+| visible     | Boolean | 规定元素是否可见        | `true`  |
 
 <!-- | hover       | Object  | 规定鼠标移动到元素上时的元素属性（仅在 PC 端生效） | --      | -->
 
@@ -81,6 +81,48 @@ cvs 对以下元素属性进行了缩写
   });
   let rect2 = rect.clone({ y: 100 });
   ```
+
+#### keyframe(keyframes, timing)
+
+- 描述：
+
+  为元素添加关键帧动画，支持链式调用
+
+- 参数：
+
+  - `{Array} keyframes` 关键帧的属性描述
+
+  keyframes 至少需要有两项，分别代表第一帧和最后一帧，第一帧中需要指明可能变化的所有属性的初始值，之后的帧中可以省略不变的属性。
+
+  - `{Object} timing` timing 对象支持以下属性
+
+  | timing.key | value  | description            | default  |
+  | ---------- | ------ | ---------------------- | -------- |
+  | delay      | Number | 规定运动延迟时间       | `0`      |
+  | duration   | Number | 规定运动持续时间       | --       |
+  | easing     | String | 规定动画的 easing 函数 | `linear` |
+
+  ::: tip
+  easing 可选值有 `linear`, `ease`, `ease-in`, `ease-out`, `ease-in-out`, `step-start`, `step-end`或者 cubic-bezier 函数比如`cubic-bezier(0.42, 0, 0.58, 1)`
+  :::
+
+* 返回值：`{Element}` 元素自身
+
+* 示例：
+
+  ```js
+  let rect = new Rect({
+    w: 80,
+    h: 80,
+    x: 0,
+    y: 180,
+    fill: "green"
+  });
+  rect.keyframe([{ fill: rect.attr('fill') }, { fill: "red" }], 4000);
+  rect.keyframe(["fill", { fill: "red" }], 4000);
+  fgLayer.append(rect);
+  ```
+  以上代码中 `{ fill: rect.attr('fill') }` 写法显得过于繁琐，因此也支持省略写法：`['fill']`, 如果变化的属性只有一个还可以直接使用字符串，所以可以缩写为：`rect.keyframe(['fill', { fill: "red" }], 4000);`
 
 #### on(eventType, callback)
 
