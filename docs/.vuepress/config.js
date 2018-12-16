@@ -16,7 +16,7 @@ module.exports = {
     ],
     sidebar: [
       ['/docs/start', '快速使用'],
-      ['/docs/structure', '架构'],
+      // ['/docs/structure', '架构'],
       ['/docs/scene', '场景 Scene'],
       ['/docs/layer', '图层 Layer'],
       ['/docs/element', '元素 Element'],

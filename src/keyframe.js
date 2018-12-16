@@ -1,19 +1,24 @@
 import { error } from './utils/utils'
 import easing from './utils/easing'
+import colorString from 'color-string'
+
+function toRgb (arr) {
+  colorString.to.rgb(arr[0], arr[1], arr[2], arr[3])
+}
 /**
  * 计算当前帧属性
- * @form: startFrame
- * @to: endFrame
+ * @f: startFrame
+ * @t: endFrame
  * @p: progress
  * @s: startOffset
  * @e: endOffset
  */
-function calculate (from, to, p, s, e) {
-  if (typeof from === 'number' && typeof to === 'number') {
-    return from + ((p - s) / (e - s)) * (to - from)
+function calculate (f, t, p, s, e) {
+  if (typeof f === 'number' && typeof t === 'number') {
+    return f + ((p - s) / (e - s)) * (t - f)
   }
-  if (p - s > e - p) return to
-  return from
+  if (p - s > e - p) return t
+  return f
 }
 
 // 计算 offset
@@ -44,18 +49,12 @@ function calculateFramesOffset (keyframes) {
     }
     if (i > 0) {
       // 如果中间某个属性没有了，需要从前一帧复制过来
-      keyframes[i] = Object.assign({}, keyframes[i - 1], keyframes[i])
+      // keyframes[i] = Object.assign({}, keyframes[i - 1], keyframes[i])
     }
   }
 
   return keyframes
 }
-// var a = calculateFramesOffset([
-//   { x: 12 },
-//   { x: 44 },
-//   { x: 54 }
-// ])
-// console.log(a)
 
 const _timing = Symbol('timing'),
   _keyframes = Symbol('keyframes'),
@@ -66,12 +65,19 @@ export default class Keyframe {
     if (keyframes.length < 2) {
       error('keyframes need at least two items.')
     }
-    if (Array.isArray(keyframes[0])) {
+    if (Array.isArray(keyframes[0]) || typeof keyframes[0] === 'string') {
       let temp = {}
+      if (typeof keyframes[0] === 'string') keyframes[0] = [keyframes[0]]
       keyframes[0].forEach(item => {
         temp[item] = element.attr(item)
       })
       keyframes[0] = temp
+    }
+    if (keyframes[0].fill || keyframes[0].stroke) {
+      keyframes.forEach(item => {
+        if (item.fill) item.fill = colorString.get.rgb(item.fill)
+        if (item.stroke) item.stroke = colorString.get.rgb(item.stroke)
+      })
     }
     // 支持 duration 省略传参
     if (typeof timing === 'number') timing = { duration: timing }
@@ -83,8 +89,9 @@ export default class Keyframe {
       { iterations: 1, easing: 'linear', delay: 0 },
       timing
     )
-
+    console.log(keyframes)
     this[_keyframes] = calculateFramesOffset(keyframes)
+    // console.log(this[_keyframes])
     this[_element] = element
   }
   currentFrame (p) {
@@ -92,32 +99,35 @@ export default class Keyframe {
     let frames = this[_keyframes]
     frames.some((item, index) => {
       if (item.offset > p || item.offset === 1) {
-        res.from = index === 0 ? item : frames[index - 1]
-        res.to = item
+        res.f = index === 0 ? item : frames[index - 1]
+        res.t = item
         return true
       }
     })
     return res
   }
-  result (t) {
-    const p = easing[this[_timing].easing](
-      (t - this[_timing].delay) / this[_timing].duration
-    )
-    if (p >= 1) return this[_keyframes][this[_keyframes].length - 1]
-    let curFrame = this.currentFrame(p)
+  result (p) {
+    let { f, t } = this.currentFrame(p)
     let result = {}
-    for (let key in curFrame.from) {
-      result[key] = calculate(
-        curFrame.from[key],
-        curFrame.to[key],
-        p,
-        curFrame.from.offset,
-        curFrame.to.offset
-      )
+    for (let key in f) {
+      if (key === 'offset') continue
+      if (/(fill|stroke)/.test(key)) {
+        result[key] = colorString.to.rgb([
+          calculate(f[key][0], t[key][0], p, f.offset, t.offset),
+          calculate(f[key][1], t[key][1], p, f.offset, t.offset),
+          calculate(f[key][2], t[key][2], p, f.offset, t.offset),
+          calculate(f[key][3], t[key][3], p, f.offset, t.offset),
+        ])
+      } else {
+        result[key] = calculate(f[key], t[key], p, f.offset, t.offset)
+      }
     }
     return result
   }
   run (t) {
-    this[_element].attr(this.result(t))
+    const p = easing[this[_timing].easing](
+      (t - this[_timing].delay) / this[_timing].duration
+    )
+    if (p <= 1) this[_element].attr(this.result(p))
   }
 }

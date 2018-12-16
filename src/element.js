@@ -18,7 +18,6 @@ class Element {
       visible: true,
       zIndex: 0
     }
-    this.noHover = {}
     this.attr(opt)
     if (this.opt.cache) {
       // 记录线条宽度，离屏渲染需要遇到
@@ -27,6 +26,9 @@ class Element {
         this.lw = this.opt.lineWidth / 2
       }
     }
+    this.setDefault({
+      fill: '#999'
+    })
     this.finished = false
     this.trackIndex = 0
     this[_keyframeArr] = []
@@ -117,7 +119,7 @@ class Element {
     else ctx.fill()
   }
   // 设置/获取绘制属性
-  attr (opt, isHover) {
+  attr (opt) {
     if (!opt) return this.opt
     if (typeof opt === 'string') {
       return this.opt[opt]
@@ -140,13 +142,6 @@ class Element {
         }
       }
     }
-    // 由 hover 引起的属性变化，不更新 noHover
-    // if (isHover) return
-    // if (this.opt.hover) {
-    //   for (let key in this.opt.hover) {
-    //     this.noHover[key] = this.opt[key]
-    //   }
-    // }
   }
   // 判断是否点击在元素上
   isCollision (location) {
@@ -159,6 +154,9 @@ class Element {
   off (eventType) {
     this[eventType] = null
   }
+  // get state () {
+  //   return false
+  // }
   get animatable () {
     if (this[_trackArr].length > 0 || this[_keyframeArr].length > 0) return true
     else return false
@@ -192,9 +190,6 @@ class Element {
     if (res.cycle === -1) return
     // 执行当前轨迹循环体，并传入已经运行的时间
     this[_trackArr][res.index].loop(res.time)
-  }
-  get state () {
-    return false
   }
   getCurTrack (animateTime) {
     let res = {}

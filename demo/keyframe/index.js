@@ -35,6 +35,17 @@ import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
     iterationCount: 1
   })
   fgLayer.append(img)
+
+  let rect = new Rect({
+    w: 80,
+    h: 80,
+    x: 0,
+    y: 180,
+    fill: 'green'
+  })
+  rect.keyframe(['fill', { fill: 'red' }], 4000)
+  fgLayer.append(rect)
+
   let start = new Text({
     x: 600,
     y: 550,
@@ -56,6 +67,6 @@ import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
     fgLayer.timeline.playbackRate = 0
   })
   bgLayer.append(start, stop)
-  bgLayer.draw()
+  // bgLayer.draw()
   fgLayer.animate()
 })()
