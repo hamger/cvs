@@ -1,4 +1,3 @@
-import easing from '../utils/easing'
 import Track from '../track'
 import { error, tolerance } from '../utils/utils'
 
@@ -8,30 +7,24 @@ export default class Bezier extends Track {
   }
   loop (t) {
     const p2 = t / this.duration
+    if (p2 > 1) return
     let p = 0
     // 设置了折返的的情况
     if (this.retrace) {
       if (p2 <= 0.5) {
         // 贝塞尔函数涉及的占比比例，0<=p<=1
-        p = this.calculateProgress(p2 * 2)
+        p = this.calculatePercentage(p2 * 2)
       } else {
         let p3 = 1 - (p2 - 0.5) * 2
         // 防止折返后终点不在起点上
         if ((1 - p2) * this.duration < tolerance) p3 = 0
-        p = this.calculateProgress(p3)
+        p = this.calculatePercentage(p3)
       }
     } else {
       // 贝塞尔函数涉及的占比比例，0<=p<=1
-      p = this.calculateProgress(p2)
+      p = this.calculatePercentage(p2)
     }
     this.drawnode(p)
-  }
-  calculateProgress (p) {
-    const easingType = this.easing
-    if (typeof easingType === 'string') p = easing[easingType](p)
-    else if (typeof easingType === 'function') p = easingType(p)
-    else error('easing must be string or function')
-    return p
   }
   drawnode (p) {
     const pos = bezierRule(this.points, p)

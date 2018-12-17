@@ -100,10 +100,10 @@ cvs 对以下元素属性进行了缩写
   | ---------- | ------ | ---------------------- | -------- |
   | delay      | Number | 规定运动延迟时间       | `0`      |
   | duration   | Number | 规定运动持续时间       | --       |
-  | easing     | String \| Function | 规定动画的 easing 函数 | `linear` |
+  | easing     | String \| Array | 规定动画的 easing 函数 | `linear` |
 
   ::: tip
-  easing 可选值有 `linear`, `ease`, `ease-in`, `ease-out`, `ease-in-out` 或者 cubic-bezier 函数比如`cubic-bezier(0.42, 0, 0.58, 1)`
+  easing 可选值有 `linear`, `ease`, `ease-in`, `ease-out`, `ease-in-out` 或者一个代表[ cubic-bezier 函数](https://blog.csdn.net/wjnf012/article/details/78795573)传参的数组，如`[0.42, 0, 0.58, 1]`
   :::
 
 * 返回值：`{Element}` 元素自身

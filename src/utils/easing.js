@@ -20,4 +20,4 @@ const Easings = {
   'ease-in-out': getBezierEasing(0.42, 0, 0.58, 1)
 }
 
-export default Easings
+export { Easings, getBezierEasing }

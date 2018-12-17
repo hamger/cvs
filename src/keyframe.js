@@ -1,10 +1,7 @@
 import { error } from './utils/utils'
-import easing from './utils/easing'
+import { Easings, getBezierEasing } from './utils/easing'
 import colorString from 'color-string'
 
-function toRgb (arr) {
-  colorString.to.rgb(arr[0], arr[1], arr[2], arr[3])
-}
 /**
  * 计算当前帧属性
  * @f: startFrame
@@ -89,9 +86,7 @@ export default class Keyframe {
       { iterations: 1, easing: 'linear', delay: 0 },
       timing
     )
-    console.log(keyframes)
     this[_keyframes] = calculateFramesOffset(keyframes)
-    // console.log(this[_keyframes])
     this[_element] = element
   }
   currentFrame (p) {
@@ -127,11 +122,10 @@ export default class Keyframe {
   run (t) {
     let p = (t - this[_timing].delay) / this[_timing].duration,
       easingType = this[_timing].easing
-
-    if (typeof easingType === 'string') p = easing[easingType](p)
-    else if (typeof easingType === 'function') p = easingType(p)
-    else error('easing must be string or function')
-
-    if (p <= 1) this[_element].attr(this.result(p))
+    if (p > 1) return
+    if (typeof easingType === 'string') p = Easings[easingType](p)
+    else if (Array.isArray(easingType)) p = getBezierEasing(...easingType)(p)
+    else error('easing must be string or array')
+    this[_element].attr(this.result(p))
   }
 }

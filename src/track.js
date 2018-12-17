@@ -1,3 +1,4 @@
+import { Easings, getBezierEasing } from './utils/easing'
 let id = 0
 export default class Track {
   constructor (opt) {
@@ -10,5 +11,11 @@ export default class Track {
     this.iterationCount = 1
     this.easing = 'linear'
     Object.assign(this, opt)
+  }
+  calculatePercentage (p) {
+    const easingType = this.easing
+    if (typeof easingType === 'string') return Easings[easingType](p)
+    else if (Array.isArray(easingType)) return getBezierEasing(easingType)(p)
+    else error('easing must be string or array')
   }
 }
