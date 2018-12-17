@@ -1,9 +1,9 @@
-### Elliptic
+### Ellipse
 
 定义一段椭圆运动
 
 ```js
-let elliptic = new Elliptic(options);
+let ellipse = new Ellipse(options);
 ```
 
 ### options
@@ -36,7 +36,7 @@ let elliptic = new Elliptic(options);
 ### example
 
 ```js
-import { Scene, Circle, Elliptic } from "cvs";
+import { Scene, Circle, Ellipse } from "cvs";
 let scene = new Scene({
   containerId: 'container'
 })
@@ -54,7 +54,7 @@ let cd = new Circle({
   r: 10,
   cache: true
 });
-let elliptic = new Elliptic({
+let ellipse = new Ellipse({
   delay: 0,
   duration: 4000,
   retrace: false, // 是否折返
@@ -65,9 +65,9 @@ let elliptic = new Elliptic({
   radiusY: 80,
   direction: false
 });
-dot.addTrack(elliptic);
+dot.addTrack(ellipse);
 layer.append(dot, cd);
 layer.animate();
 ```
 
-<ClientOnly><c-elliptic></c-elliptic></ClientOnly>
+<ClientOnly><c-ellipse></c-ellipse></ClientOnly>

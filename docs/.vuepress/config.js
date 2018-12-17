@@ -39,7 +39,7 @@ module.exports = {
         children: [
           ['/docs/tracks/bezier', '曲线 Bezier'],
           ['/docs/tracks/round', '正圆 Round'],
-          ['/docs/tracks/elliptic', '椭圆 Elliptic']
+          ['/docs/tracks/ellipse', '椭圆 Ellipse']
         ]
       }
     ]

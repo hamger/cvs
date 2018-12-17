@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { Elliptic, Circle, Scene } from '#'
+import { Ellipse, Circle, Scene } from '#'
 import Container from '../Container'
 export default {
   components: {
@@ -38,7 +38,7 @@ export default {
       cache: true,
     })
 
-    let elliptic = new Elliptic({
+    let ellipse = new Ellipse({
       delay: 0,
       duration: 4000,
       retrace: false, // 是否折返
@@ -50,7 +50,7 @@ export default {
       rotate: 45,
       anticlockwise: false,
     })
-    dot.addTrack(elliptic)
+    dot.addTrack(ellipse)
     layer.append(dot, cd)
     layer.animate()
   }

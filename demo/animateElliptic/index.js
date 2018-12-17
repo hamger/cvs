@@ -1,4 +1,4 @@
-import { Scene, Circle, Rect, Bezier, Elliptic, Track, easing } from '#'
+import { Scene, Circle, Rect, Bezier, Ellipse, Track, easing } from '#'
 let scene = new Scene({
   containerId: 'container'
 })
@@ -29,7 +29,7 @@ let cd = new Circle({
   cache: true,
 })
 
-let elliptic = new Elliptic({
+let ellipse = new Ellipse({
   delay: 0,
   duration: 3000,
   retrace: false, // 是否折返
@@ -41,7 +41,7 @@ let elliptic = new Elliptic({
   rotate: 45
 })
 
-let relliptic = new Elliptic({
+let rellipse = new Ellipse({
   delay: 0,
   duration: 3000,
   retrace: false,
@@ -54,8 +54,8 @@ let relliptic = new Elliptic({
   relativeY: '50%'
 })
 
-dot.addTrack(elliptic)
-// rect.addTrack(relliptic)
+dot.addTrack(ellipse)
+// rect.addTrack(rellipse)
 
 layer.append(dot, cd)
 

@@ -10,7 +10,7 @@ import Text from './elements/text'
 import Track from './track'
 import Bezier from './tracks/bezier'
 import Round from './tracks/round'
-import Elliptic from './tracks/elliptic'
+import Ellipse from './tracks/ellipse'
 import easing from './utils/easing'
 
 export {
@@ -25,7 +25,7 @@ export {
   Path,
   Track,
   Bezier,
-  easing,
   Round,
-  Elliptic
+  Ellipse,
+  easing
 }

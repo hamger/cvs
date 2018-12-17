@@ -1,7 +1,7 @@
 import Track from '../track'
 import { getFloatNum, error } from '../utils/utils'
 
-export default class Elliptic extends Track {
+export default class Ellipse extends Track {
   constructor (opt) {
     super(opt)
     Object.assign(this, {

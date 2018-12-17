@@ -166,8 +166,8 @@ class Element {
     return this
   }
   track (type, options) {
-    if (!/(line|bezier|round|elliptic)/.test(type)) {
-      error('the type of track must be line, bezier, round or elliptic.')
+    if (!/(line|bezier|round|ellipse)/.test(type)) {
+      error('the type of track must be line, bezier, round or ellipse.')
     }
     let track = null
     if (type === 'bezier') track = new Bezier(options)
