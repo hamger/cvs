@@ -13,6 +13,7 @@ export default class Track {
     Object.assign(this, opt)
   }
   calculatePercentage (p) {
+    if (p > 1) return 1
     const easingType = this.easing
     if (typeof easingType === 'string') return Easings[easingType](p)
     else if (Array.isArray(easingType)) return getBezierEasing(easingType)(p)
