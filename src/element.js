@@ -2,6 +2,7 @@
 import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
 import { remove, error } from './utils/utils'
+import SvgPath from 'svg-path-to-canvas'
 // import event from './event'
 
 const _keyframeArr = Symbol('keyframeArr'),
@@ -12,7 +13,6 @@ let id = 0
 class Element {
   constructor (opt) {
     this.id = id++
-    this.execArr = []
     this.opt = {
       cache: false,
       visible: true,
@@ -101,15 +101,6 @@ class Element {
         )
       ) {
         ctx[key] = this.opt[key]
-      } else if (key === 'transform') {
-        this.execArr.forEach(item => {
-          let k = Object.keys(item)[0]
-          let val = item[k]
-          if (/(scale|translate|transform|setTransform)/.test(k)) {
-            ctx[k](...val)
-          }
-          if (k === 'rotate') ctx[k]((val * Math.PI) / 180)
-        })
       }
     }
   }
@@ -131,22 +122,15 @@ class Element {
         let value = val(this.opt[key])
         this.opt[kay] = value
       } else {
-        // 设置转换函数
-        if (key === 'transform') {
-          this.execArr = []
-          opt.transform.forEach(item => {
-            this.execArr.push(item)
-          })
-        } else {
-          this.opt[key] = val
-        }
+        this.opt[key] = val
+        if (key === 'offsetPath') this[key] = new SvgPath(val)
       }
     }
   }
   // 判断是否点击在元素上
   isCollision (location) {
-    this.outline(this.ctx)
-    return this.ctx.isPointInPath(location.x, location.y)
+    return this.outline(this.ctx, location)
+    // return this.ctx.isPointInPath(location.x, location.y)
   }
   on (eventType, callback) {
     this[eventType] = callback

@@ -126,6 +126,17 @@ export default class Keyframe {
     if (typeof easingType === 'string') p = Easings[easingType](p)
     else if (Array.isArray(easingType)) p = getBezierEasing(...easingType)(p)
     else error('easing must be string or array')
-    this[_element].attr(this.result(p))
+
+    let newAttr = this.result(p)
+    if (newAttr.offsetDistance != null) {
+      const len = this[_element].offsetPath.getTotalLength()
+      const [x, y] = this[_element].offsetPath.getPointAtLength(
+        len * newAttr.offsetDistance
+      )
+      newAttr.x = x
+      newAttr.y = y
+      delete newAttr.offsetDistance
+    }
+    this[_element].attr(newAttr)
   }
 }

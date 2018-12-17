@@ -50,12 +50,13 @@ class Layer {
     this.scene.appendChild(this.ctx.canvas)
   }
   // 触发子元素的事件监听
-  emitEvent (children, type) {
+  emitEvent (children, type, e) {
     forArr(children, child => {
       if (child.children && child.children.length > 0) {
         this.emitEvent(child.children, type)
       }
       if (!child.opt.visible || !child[type] || !child.outline) return
+      console.log(this.evt)
       if (child.isCollision(this.evt)) child[type].call(child, e)
     }, true)
   }
@@ -63,7 +64,7 @@ class Layer {
   dispatchEvent (e, type) {
     this.evt = getLocation(this.ctx.canvas, e)
     // zIndex 大的元素先触发监听事件，先子元素优先于父元素触发（冒泡机制）
-    this.emitEvent(this.children, type)
+    this.emitEvent(this.children, type, e)
   }
   // set tempEvent (val) {
   //   val.call(temp, e)

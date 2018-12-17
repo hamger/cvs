@@ -1,64 +1,89 @@
 import Element from '../element'
 import Circle from './circle'
 import Rect from './rect'
-import { delBlank } from '../utils/utils'
+// import { delBlank } from '../utils/utils'
+import SvgPath from 'svg-path-to-canvas'
 class Path extends Element {
   constructor (opt) {
     super(opt)
-    this.lastPoint = []
-    this.lastCpoint = []
-    this.defaultArrowAngle = 30
-    this.defaultArrowLength = 20
+    this.path = new SvgPath(this.attr('path'))
   }
-  draw (ctx) {
-    ctx.save()
-    this.drawUnit(ctx)
-    ctx.restore()
+  get center () {
+    return this.path.center
   }
-  outline (ctx) {
-    ctx.beginPath()
-    let path = delBlank(this.opt.path)
-    let pathType = path.match(/[A-z]/g)
-    let pathVal = path
-      .split(/[A-z]/)
-      .filter(function (item) {
-        // 过滤掉空的项
-        return item !== ''
-      })
-      .map(function (item) {
-        // 去除多余的空格
-        return delBlank(item)
-      })
-    pathType.forEach((item, index) => {
-      let arr = []
-      if (pathVal[index]) {
-        arr = pathVal[index].split(' ').map(item => {
-          // 需要将字符串转化为数字
-          return Number(item)
+  get bounds () {
+    return this.path.bounds
+  }
+  setAttr (opt) {
+    let p = this.path
+    for (let key in opt) {
+      if (key === 'stroke') p.strokeStyle(opt[key])
+      else if (key === 'fill') p.fillStyle(opt[key])
+      else if (/(lineCap|lineJoin|lineWidth)/.test(key)) {
+        if (Array.isArray(opt[key])) p[key](...opt[key])
+        else p[key](opt[key])
+      } else if (/(transform)/.test(key)) {
+        opt[key].forEach(item => {
+          const [type, val] = Object.entries(item)[0]
+          if (/(translate|rotate|scale|skew)/.test(type)) {
+            if (Array.isArray(val)) p[type](...val)
+            else p[type](val)
+          }
         })
       }
-      this.resolve(item, arr)
-      // if (index === 0) {
-      //   if (this.attr('startArrow')) {
-      //     const end = pathVal[1].split(' ').map(item => {
-      //       // 需要将字符串转化为数字
-      //       return +item
-      //     })
-      //     const { angle, len } = this.attr('startArrow')
-      //     this.drawArrow('start', item, arr, end, angle, len)
-      //   }
-      // }
-      // if (index === pathType.length - 1) {
-      //   if (this.attr('endArrow')) {
-      //     const start = pathVal[pathType.length - 2].split(' ').map(item => {
-      //       // 需要将字符串转化为数字
-      //       return +item
-      //     })
-      //     const { angle, len } = this.attr('endArrow')
-      //     this.drawArrow('end', item, start, arr, angle, len)
-      //   }
-      // }
-    })
+    }
+  }
+  draw (ctx) {
+    this.setAttr(this.attr())
+    if (this.attr('stroke')) this.path.to(ctx).stroke()
+    else this.path.to(ctx).fill()
+  }
+  outline (ctx, { x, y }) {
+    return this.path.isPointInPath(x, y)
+    // ctx.beginPath()
+    // let path = delBlank(this.attr('path'))
+    // let pathType = path.match(/[A-z]/g)
+    // let pathVal = path
+    //   .split(/[A-z]/)
+    //   .filter(function (item) {
+    //     // 过滤掉空的项
+    //     return item !== ''
+    //   })
+    //   .map(function (item) {
+    //     // 去除多余的空格
+    //     return delBlank(item)
+    //   })
+    // pathType.forEach((item, index) => {
+    //   let arr = []
+    //   if (pathVal[index]) {
+    //     if (/,/.test(pathVal[index])) {
+    //       arr = pathVal[index].split(',').map(item => Number(item))
+    //     } else {
+    //       arr = pathVal[index].split(' ').map(item => Number(item))
+    //     }
+    //   }
+    //   this.resolve(item, arr)
+    //   // if (index === 0) {
+    //   //   if (this.attr('startArrow')) {
+    //   //     const end = pathVal[1].split(' ').map(item => {
+    //   //       // 需要将字符串转化为数字
+    //   //       return +item
+    //   //     })
+    //   //     const { angle, len } = this.attr('startArrow')
+    //   //     this.drawArrow('start', item, arr, end, angle, len)
+    //   //   }
+    //   // }
+    //   // if (index === pathType.length - 1) {
+    //   //   if (this.attr('endArrow')) {
+    //   //     const start = pathVal[pathType.length - 2].split(' ').map(item => {
+    //   //       // 需要将字符串转化为数字
+    //   //       return +item
+    //   //     })
+    //   //     const { angle, len } = this.attr('endArrow')
+    //   //     this.drawArrow('end', item, start, arr, angle, len)
+    //   //   }
+    //   // }
+    // })
   }
   resolve (type, val) {
     if (/(M|m)/.test(type)) {
@@ -140,20 +165,6 @@ class Path extends Element {
     if (/(Z|z)/.test(type)) {
       this.ctx.closePath()
     }
-  }
-  drawArrow (position, type, startPos, lastPos, angle = this.defaultArrowAngle, len = this.defaultArrowLength) {
-    const endAngle = Math.atan2(lastPos[1] - startPos[1], lastPos[0] - startPos[0]) * 180 / Math.PI + 180
-    const startAngle = Math.atan2(lastPos[1] - startPos[1], lastPos[0] - startPos[0]) * 180 / Math.PI
-    const initAngle = position === 'end' ? endAngle : startAngle
-    const reference = position === 'end' ? lastPos : startPos
-    const p1Angle = (initAngle + angle) * Math.PI / 180
-    const p2Angle = (initAngle - angle) * Math.PI / 180
-    const p1 = [reference[0] + len * Math.cos(p1Angle), reference[1] + len * Math.sin(p1Angle)]
-    const p2 = [reference[0] + len * Math.cos(p2Angle), reference[1] + len * Math.sin(p2Angle)]
-    this.ctx.moveTo(p1[0], p1[1])
-    this.ctx.lineTo(reference[0], reference[1])
-    this.ctx.lineTo(p2[0], p2[1])
-    this.ctx.moveTo(reference[0], reference[1])
   }
 }
 

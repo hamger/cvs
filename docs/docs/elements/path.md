@@ -14,13 +14,6 @@ let element = new Path(options);
 | ----------- | ------------------ | -------------------- | ------- |
 | path        | String             | 规定路径             | --      |
 
-<!-- | endArrow    | Boolean\|\<object> | 规定路径结束位置箭头 | `false` |
-| startArrow  | Boolean\|\<object> | 规定路径开始箭头     | `false` |
-| endArrow.key/startArrow.key | value  | description          | default |
-| --------------------------- | ------ | -------------------- | ------- |
-| angle                       | Number | 规定与路径的夹角大小 | `30`    |
-| len                         | Number | 规定箭头两侧的长度   | `20`    | -->
-
 :::tip
 使用字符串描述路径，详情参考 [svg path](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths)
 :::
@@ -30,7 +23,7 @@ let element = new Path(options);
 - `L/l x y`表示`ctx.lineTo(x, y)`
 - `H/h x`表示水平移动`x`距离
 - `V/v y`表示垂直移动`y`距离
-- `A/a x y r startAngle endAngle anticlockwise`表示绘制圆弧`ctx.arc(x, y, r, startAngle, endAngle, anticlockwise)`
+- `A/a rx ry x-axis-rotation large-arc-flag sweep-flag x y`表示绘制弧形
 - `Q/q x1 y1 x y`表示绘制二次贝塞尔曲线`ctx.quadraticCurveTo(x1, y1, x, y)`
 - `T/t x y`表示绘制光滑的二次贝塞尔曲线
 - `C/c x1 y1 x2 y2 x y`表示绘制三次贝塞尔曲线`ctx.bezierCurveTo(x1, y1, x2, y2, x, y)`
@@ -40,27 +33,12 @@ let element = new Path(options);
 ### example
 
 ```js
-layer.append(
-  new Path({
-    path:
-      "M 10 10" +
-      "L 100 100" +
-      "l 30 -50" +
-      "C 100 100 200 200 300 200" +
-      "s 50 50 100 100" +
-      "T 130 350" +
-      "a 0 50 50 -90 180",
-    stroke: "#454"
-  })
-);
-layer.append(
-  new Path({
-    path: "M 400 100 L 600 400",
-    stroke: "red",
-  })
-);
-
-layer.draw();
+new Path({
+  path: 'M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z',
+  stroke: 'red',
+  transform: [{translate: [-10, -10]}, {rotate: 45}, {scale: 6}, {translate: [200, 200]}],
+  lineWidth: 4
+})
 ```
 
 <ClientOnly><c-path></c-path></ClientOnly>
