@@ -13,10 +13,15 @@ export function getLocation (container, event) {
  * 删除 arr 中的某项
  */
 export function remove (arr, item) {
-  const idx = arr.findIndex(ele => {
-    return ele.id === item.id
-  })
+  const idx = arr.findIndex(ele => ele.id === item.id)
   if (idx > -1) arr.splice(idx, 1)
+}
+/**
+ * 获取 arr 中的某项
+ */
+export function getItem (arr, id) {
+  const idx = arr.findIndex(ele => ele.id === id)
+  return arr[idx]
 }
 
 // 报错提示

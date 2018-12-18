@@ -12,7 +12,10 @@ let id = 0
 // @event
 class Element {
   constructor (opt) {
-    this.id = id++
+    if (typeof opt.id === 'string') {
+      this.id = opt.id
+      delete opt.id
+    } else this.id = id++
     this.opt = {
       cache: false,
       visible: true,
@@ -30,7 +33,6 @@ class Element {
       fill: '#999'
     })
     this.finished = false
-    this.trackIndex = 0
     this[_keyframeArr] = []
     this[_trackArr] = []
   }
@@ -76,13 +78,6 @@ class Element {
     let Cons = this.constructor
     const options = Object.assign({}, this.opt, opt)
     return new Cons(options)
-  }
-  // 绘制单元
-  drawUnit (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
-    this.setAttr(ctx)
-    this.outline(ctx)
-    this.dye(ctx)
   }
   setDefault (opt) {
     for (let key in opt) {

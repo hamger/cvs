@@ -1,4 +1,4 @@
-import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
+import { Scene, Rect, Image, Path, Round, Text } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -46,7 +46,16 @@ import { Scene, Rect, Image, Keyframe, Round, Text } from '#'
     fill: 'green',
   })
   rect.keyframe([{fill: 'green', offsetDistance: 0}, { fill: 'red', offsetDistance: 1 }], {duration: 8000})
-  fgLayer.append(rect)
+  let p = new Path({
+    zindex: 22,
+    id: 'line',
+    path: d2,
+    x: 0,
+    y: 300,
+    stroke: '#454'
+  })
+  p.keyframe([['x'], { x: 400 }], {duration: 5000})
+  fgLayer.append(p, rect)
 
   let start = new Text({
     x: 600,

@@ -14,8 +14,9 @@ function drawEllipse (ctx, x, y, rx, ry) {
   ctx.stroke()
 }
 
-;(function () {
-  var canvas = document.getElementById('canvas')
-  var ctx = canvas.getContext('2d')
-  drawEllipse(ctx, 100, 100, 50, 80)
-})()
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d')
+// drawEllipse(ctx, 100, 100, 50, 80)
+
+ctx.transform(1, 0.3, 0.1, 1, 0, 0)
+ctx.fillRect(0, 0, 100, 100)

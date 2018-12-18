@@ -6,6 +6,7 @@ import {
   arrSort,
   forArr,
   remove,
+  getItem,
   error,
   createCtx
 } from './utils/utils'
@@ -22,7 +23,7 @@ class Layer {
     this.pauseTime = 0 // 暂定总时间
     this.finishedAinmCount = 0 // 已完成动画的元素个数
     this.isPause = false // 动画是否被暂停
-    Object.assign(this, { zIndex: 0, handleEvent: false }, opt)
+    Object.assign(this, { zIndex: 0, handleEvent: true }, opt)
     this.init()
   }
 
@@ -39,7 +40,6 @@ class Layer {
     await Promise.all(tasks)
     return res
   }
-
   init () {
     this.width = this.scene.clientWidth
     this.height = this.scene.clientWidth
@@ -49,6 +49,9 @@ class Layer {
     }`
     this.scene.appendChild(this.ctx.canvas)
   }
+  element (id) {
+    return getItem(this.children, id)
+  }
   // 触发子元素的事件监听
   emitEvent (children, type, e) {
     forArr(children, child => {
@@ -56,7 +59,6 @@ class Layer {
         this.emitEvent(child.children, type)
       }
       if (!child.opt.visible || !child[type] || !child.outline) return
-      console.log(this.evt)
       if (child.isCollision(this.evt)) child[type].call(child, e)
     }, true)
   }

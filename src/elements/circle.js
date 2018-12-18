@@ -40,6 +40,13 @@ export default class Circle extends Element {
     }
     ctx.restore()
   }
+  // 绘制单元
+  drawUnit (cacheCtx) {
+    let ctx = cacheCtx || this.ctx
+    this.setAttr(ctx)
+    this.outline(ctx)
+    this.dye(ctx)
+  }
   outline (ctx) {
     ctx.beginPath()
     if (this.attr('isSector')) ctx.moveTo(this.origin.x, this.origin.y)
