@@ -7,15 +7,10 @@ class Path extends Element {
   constructor (opt) {
     super(opt)
     this.path = new SvgPath(this.attr('path'))
+    this.drawPath(this.path, this.attr())
+    this.path.restore()
   }
-  get center () {
-    return this.path.center
-  }
-  get bounds () {
-    return this.path.bounds
-  }
-  setAttr (opt) {
-    let p = this.path
+  drawPath (p, opt) {
     p.save().beginPath()
     for (let key in opt) {
       if (key === 'stroke') p.strokeStyle(opt[key])
@@ -33,16 +28,24 @@ class Path extends Element {
         })
       }
     }
+    this.center = this.path.center.slice()
+    this.bounds = this.path.bounds.slice()
   }
   draw (ctx) {
     ctx.save()
-    this.setAttr(this.attr())
+    this.drawPath(this.path, this.attr())
     if (this.attr('stroke')) this.path.to(ctx).stroke()
     else this.path.to(ctx).fill()
+    this.center = this.path.center.slice()
+    this.bounds = this.path.bounds.slice()
+    this.path.restore()
     ctx.restore()
   }
   outline (ctx, { x, y }) {
-    return this.path.isPointInPath(x, y)
+    this.drawPath(this.path, this.attr())
+    const isInpath = this.path.isPointInPath(x, y)
+    this.path.restore()
+    return isInpath
   }
 }
 

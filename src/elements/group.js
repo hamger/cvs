@@ -1,5 +1,5 @@
 import Element from '../element'
-import { remove, arrSort, error, cacheCtx } from '../utils/utils'
+import { remove, arrSort, error, createCtx } from '../utils/utils'
 
 export default class Group extends Element {
   constructor (opt) {
@@ -31,6 +31,7 @@ export default class Group extends Element {
   draw (ctx) {
     ctx.save()
     if (!this.cacheCtx) this.cacheDraw()
+    if (this.attr('transform')) ctx.transform(...this.attr('transform'))
     this.outline(ctx)
     ctx.drawImage(this.cacheCtx.canvas, this.attr('x'), this.attr('y'))
     ctx.restore()
@@ -45,24 +46,15 @@ export default class Group extends Element {
     }
   }
   cacheDraw () {
-    this.cacheCtx = cacheCtx(this.ctx, this.attr('w'), this.attr('h'))
+    this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     this.children.forEach(child => {
       child.draw.call(child, this.cacheCtx)
     })
-    // this.drawContent(this.cacheCtx, this)
+    this.drawContent(this.cacheCtx, this)
   }
   drawContent (ctx, element) {
     element.children.forEach(child => {
       child.draw.call(child, ctx)
     })
-    // if (element.children && element.children.length > 0) {
-    //   element.children.forEach(child => {
-    //     child.drawContent(ctx, child)
-    //   })
-    // } else {
-    //   element.children.forEach(child => {
-    //     child.draw.call(child, ctx)
-    //   })
-    // }
   }
 }
