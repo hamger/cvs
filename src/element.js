@@ -30,11 +30,29 @@ class Element {
       }
     }
     this.setDefault({
-      fill: '#999'
+      fill: '#000',
+      anchorX: 0,
+      anchorY: 0,
+      x: 0,
+      y: 0
     })
     this.finished = false
     this[_keyframeArr] = []
     this[_trackArr] = []
+  }
+  // get pos() {
+  //   this.outline.
+  // }
+  useTransform (contour, transforms) {
+    transforms.forEach(item => {
+      const [type, val] = Object.entries(item)[0]
+      if (type === 'rotate') {
+        contour[type].translate()
+      } else if (/\b(translate|scale|skew|transform)\b/.test(type)) {
+        if (Array.isArray(val)) contour[type](...val)
+        else contour[type](val)
+      }
+    })
   }
   set _ctx (val) {
     this.ctx = val
@@ -91,7 +109,7 @@ class Element {
       else if (key === 'stroke') ctx.strokeStyle = this.opt[key]
       else if (key === 'fill') ctx.fillStyle = this.opt[key]
       else if (
-        /(shadowColor|shadowBlur|shadowOffsetX|shadowOffsetY|lineCap|lineJoin|lineWidth|miterLimit|font|textAlign|textBaseline|globalCompositeOperation)/.test(
+        /\b(shadowColor|shadowBlur|shadowOffsetX|shadowOffsetY|lineCap|lineJoin|lineWidth|miterLimit|font|textAlign|textBaseline|globalCompositeOperation)\b/.test(
           key
         )
       ) {
@@ -145,7 +163,7 @@ class Element {
     return this
   }
   track (type, options) {
-    if (!/(line|bezier|round|ellipse)/.test(type)) {
+    if (!/\b(line|bezier|round|ellipse)\b/.test(type)) {
       error('the type of track must be line, bezier, round or ellipse.')
     }
     let track = null

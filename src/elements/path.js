@@ -15,13 +15,13 @@ class Path extends Element {
     for (let key in opt) {
       if (key === 'stroke') p.strokeStyle(opt[key])
       else if (key === 'fill') p.fillStyle(opt[key])
-      else if (/(lineCap|lineJoin|lineWidth)/.test(key)) {
+      else if (/\b(lineCap|lineJoin|lineWidth)\b/.test(key)) {
         if (Array.isArray(opt[key])) p[key](...opt[key])
         else p[key](opt[key])
-      } else if (/(transform)/.test(key)) {
+      } else if (/\b(transform)\b/.test(key)) {
         opt[key].forEach(item => {
           const [type, val] = Object.entries(item)[0]
-          if (/(translate|rotate|scale|skew|transform)/.test(type)) {
+          if (/\b(translate|rotate|scale|skew|transform)\b/.test(type)) {
             if (Array.isArray(val)) p[type](...val)
             else p[type](val)
           }
@@ -30,6 +30,7 @@ class Path extends Element {
     }
     this.center = this.path.center.slice()
     this.bounds = this.path.bounds.slice()
+    this.d = this.path.d
   }
   draw (ctx) {
     ctx.save()

@@ -11,14 +11,15 @@ var ele = new Path({
   zIndex: 2,
   path: d2,
   transform: [
-    { translate: [-10, -10] },
+    // { translate: [-10, -10] },
     { rotate: 45 },
-    { scale: 10 },
+    // { scale: 10 },
     { translate: [350, 350] }
   ],
   stroke: 'red',
   lineWidth: 4
 })
+console.log(ele.d)
 ele.on('click', () => {
   console.log('haha')
 })

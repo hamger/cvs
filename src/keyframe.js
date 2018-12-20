@@ -106,7 +106,7 @@ export default class Keyframe {
     let result = {}
     for (let key in f) {
       if (key === 'offset') continue
-      if (/(fill|stroke)/.test(key)) {
+      if (/\b(fill|stroke)\b/.test(key)) {
         result[key] = colorString.to.rgb([
           calculate(f[key][0], t[key][0], p, f.offset, t.offset),
           calculate(f[key][1], t[key][1], p, f.offset, t.offset),
