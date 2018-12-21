@@ -1,14 +1,13 @@
 import Element from '../element'
 import { createCtx } from '../utils/utils'
 import { loadedResources } from '../utils/resource'
+import SvgPath from 'svg-path-to-canvas'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
 export default class Image extends Element {
   constructor (opt) {
     super(opt)
-    this.w = this.opt.w ? this.opt.w : this.opt.image.width
-    this.h = this.opt.h ? this.opt.h : this.opt.image.height
-    if (this.attr('cache')) this.cacheDraw()
+    this.cacheDraw()
   }
   draw (ctx) {
     if (this.attr('cache')) {
@@ -17,15 +16,12 @@ export default class Image extends Element {
       this.drawImg(ctx)
     }
   }
-  outline (ctx) {
-    ctx.beginPath()
-    ctx.rect(this.opt.x, this.opt.y, this.w, this.h)
-  }
   drawImg (cacheCtx) {
     let ctx = cacheCtx || this.ctx
     let image = loadedResources.get(this.attr('image'))
     ctx.save()
     this.setAttr(ctx)
+    this.drawOutline(this.outline, this.attr())
     if (this.opt.sw && this.opt.sh) {
       ctx.drawImage(
         image,
@@ -46,7 +42,11 @@ export default class Image extends Element {
     ctx.restore()
   }
   cacheDraw () {
-    this.cacheCtx = createCtx(this.w, this.h)
+    this.w = this.opt.w ? this.opt.w : this.opt.image.width
+    this.h = this.opt.h ? this.opt.h : this.opt.image.height
+    this.outline = new SvgPath(`M ${this.attr('x')} ${this.attr('y')} h ${this.attr('w')} v ${this.attr('h')} h -${this.attr('w')} z`)
+    this.cacheCtx.width = this.w
+    this.cacheCtx.height = this.h
     this.drawImg(this.cacheCtx)
   }
 }

@@ -10,16 +10,13 @@ let layer = scene.layer({ handleEvent: true })
 var ele = new Path({
   zIndex: 2,
   path: d2,
-  transform: [
-    // { translate: [-10, -10] },
-    { rotate: 45 },
-    // { scale: 10 },
-    { translate: [350, 350] }
-  ],
+  translate: [200, 200],
+  scale: 10,
+  rotate: 45,
   stroke: 'red',
   lineWidth: 4
 })
-console.log(ele.d)
+
 ele.on('click', () => {
   console.log('haha')
 })
@@ -32,38 +29,39 @@ layer.append(
     stroke: '#540'
   })
 )
-let rect = new Path({
-  path: 'M100 100 h 90 v 90 h -90 z',
-  fill: '#153'
-})
-let group = new Group({
-  x: 100,
-  y: 100,
-  w: 350,
-  h: 350,
-  stroke: '#ddd',
-  // transform: [1, 1, 0, 1, 0, 0]
-})
-group.append(rect)
-layer.append(group)
+// let rect = new Path({
+//   path: 'M100 100 h 90 v 90 h -90 z',
+//   fill: '#153'
+// })
+// let group = new Group({
+//   x: 100,
+//   y: 100,
+//   w: 350,
+//   h: 350,
+//   stroke: '#ddd'
+//   // transform: [1, 1, 0, 1, 0, 0]
+// })
+// group.append(rect)
+// layer.append(group)
 
-var a = ele.bounds
-let rect2 = new Path({
-  zIndex: -1,
-  path: `M ${a[0]} ${a[1]} h ${a[2] - a[0]} v ${a[3] - a[1]} h ${-1 *
-    (a[2] - a[0])} z`,
-  stroke: '#153'
-})
-let flag = true
-rect2.on('click', () => {
-  if (flag) {
-    ele.attr({ stroke: 'blue' })
-  } else {
-    ele.attr({ stroke: 'red' })
-  }
-  flag = !flag
-  layer.clear()
-  layer.draw()
-})
-layer.append(rect2)
+// var a = ele.pos
+// var b = ele.size
+// console.log(ele.pos)
+// let rect2 = new Path({
+//   zIndex: -1,
+//   path: `M ${a.x} ${a.y} h ${b.w} v ${b.h} h ${-1 * b.w} z`,
+//   stroke: '#153'
+// })
+// let flag = true
+// rect2.on('click', () => {
+//   if (flag) {
+//     ele.attr({ stroke: 'blue' })
+//   } else {
+//     ele.attr({ stroke: 'red' })
+//   }
+//   flag = !flag
+//   layer.clear()
+//   layer.draw()
+// })
+// layer.append(rect2)
 layer.draw()

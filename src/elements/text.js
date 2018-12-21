@@ -27,6 +27,8 @@ export default class Text extends Element {
     if (!this.cacheCtx) this.cacheDraw()
     // this.outline(ctx)
     // this.dye(ctx)
+    ctx.translate(100, 100)
+    ctx.scale(2, 1)
     ctx.drawImage(this.cacheCtx.canvas, this.attr('x'), this.attr('y'))
     ctx.restore()
   }

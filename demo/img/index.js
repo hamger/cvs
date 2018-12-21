@@ -16,6 +16,9 @@ import { Scene, Image } from '#'
     y: 10,
     // transform: [{ rotate: 10 }, { scale: [1.5, 1.1] }]
   })
+  element2.on('click', () => {
+    console.log(123324243)
+  })
   let element3 = new Image({
     image: 'robot01',
     x: 400,
