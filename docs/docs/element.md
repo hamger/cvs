@@ -13,23 +13,21 @@
 
 由于 cvs 是基于 canvas 的框架，所以元素支持应有的 canvas 属性，以下列出了常用的属性，详细信息可参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
 
-| options.key              | value  | description                        | default |
-| ------------------------ | ------ | ---------------------------------- | ------- |
-| fill                     | String | 设置用于填充绘画的颜色、渐变或模式 | --      |
-| stroke                   | String | 设置用于笔触的颜色、渐变或模式     | --      |
-| shadowColor              | String | 设置用于阴影的颜色                 | --      |
-| shadowBlur               | Number | 设置用于阴影的模糊级别             | --      |
-| shadowOffsetX            | Number | 设置阴影距形状的水平距离           | --      |
-| shadowOffsetY            | Number | 设置阴影距形状的垂直距离           | --      |
-| opacity                  | Number | 设置绘图的当前 alpha 或透明值      | --      |
-| globalCompositeOperation | String | 设置新图像如何绘制到已有的图像上   | --      |
+| options.key   | value  | description                        | default |
+| ------------- | ------ | ---------------------------------- | ------- |
+| fill          | String | 设置用于填充绘画的颜色、渐变或模式 | `#000`  |
+| stroke        | String | 设置用于笔触的颜色、渐变或模式     | --      |
+| shadowColor   | String | 设置用于阴影的颜色                 | --      |
+| shadowBlur    | Number | 设置用于阴影的模糊级别             | --      |
+| shadowOffsetX | Number | 设置阴影距形状的水平距离           | --      |
+| shadowOffsetY | Number | 设置阴影距形状的垂直距离           | --      |
+| globalAlpha   | Number | 设置绘图的当前 alpha 或透明值      | --      |
 
 ::: tip
-cvs 对以下元素属性进行了缩写
+cvs 只对两个常用属性进行了缩写
 
 - `fillStyle` 缩写为 `fill`
-- `stokeStyle` 缩写为 `stroke`
-- `globalAlpha` 缩写为 `opacity`
+- `strokeStyle` 缩写为 `stroke`
 
 :::
 
@@ -96,10 +94,10 @@ cvs 对以下元素属性进行了缩写
 
   - `{Object} timing` timing 对象支持以下属性
 
-  | timing.key | value  | description            | default  |
-  | ---------- | ------ | ---------------------- | -------- |
-  | delay      | Number | 规定运动延迟时间       | `0`      |
-  | duration   | Number | 规定运动持续时间       | --       |
+  | timing.key | value           | description            | default  |
+  | ---------- | --------------- | ---------------------- | -------- |
+  | delay      | Number          | 规定运动延迟时间       | `0`      |
+  | duration   | Number          | 规定运动持续时间       | --       |
   | easing     | String \| Array | 规定动画的 easing 函数 | `linear` |
 
   ::: tip
@@ -118,10 +116,11 @@ cvs 对以下元素属性进行了缩写
     y: 180,
     fill: "green"
   });
-  rect.keyframe([{ fill: rect.attr('fill') }, { fill: "red" }], 4000);
+  rect.keyframe([{ fill: rect.attr("fill") }, { fill: "red" }], 4000);
   rect.keyframe(["fill", { fill: "red" }], 4000);
   fgLayer.append(rect);
   ```
+
   以上代码中 `{ fill: rect.attr('fill') }` 写法显得过于繁琐，因此也支持省略写法：`['fill']`, 如果变化的属性只有一个还可以直接使用字符串，所以可以缩写为：`rect.keyframe(['fill', { fill: "red" }], 4000);`
 
 #### on(eventType, callback)

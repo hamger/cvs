@@ -5,7 +5,8 @@ import { remove, error, createCtx, transform } from './utils/utils'
 import SvgPath from 'svg-path-to-canvas'
 
 const _keyframeArr = Symbol('keyframeArr'),
-  _trackArr = Symbol('trackArr')
+  _trackArr = Symbol('trackArr'),
+  _attribute = Symbol('attribute')
 
 let id = 0
 class Element {
@@ -29,8 +30,8 @@ class Element {
     this.attr(opt)
     this.setDefault({
       fill: '#000',
-      anchorX: 0,
-      anchorY: 0,
+      anchor: [0, 0],
+      pos: [0, 0],
       x: 0,
       y: 0
     })
@@ -39,42 +40,24 @@ class Element {
     this[_trackArr] = []
     // this.cacheCtx = createCtx()
   }
-  get size () {
-    const size = this.outline.size.slice()
-    return {
-      w: size[0],
-      h: size[1]
-    }
+  get o () {
+    return [
+      this.attr('pos')[0] + this.attr('anchor')[0] * this.size[0],
+      this.attr('pos')[1] + this.attr('anchor')[1] * this.size[1]
+    ]
   }
-  get pos () {
-    const bounds = this.outline.bounds.slice()
-    return {
-      x: bounds[0],
-      y: bounds[1]
-    }
+  get size () {
+    return this.outline.size.slice()
+  }
+  get bounds () {
+    return this.outline.bounds.map((item, index) => {
+      return item
+    })
   }
   get center () {
-    const center = this.outline.center.slice()
-    return {
-      x: center[0],
-      y: center[1]
-    }
-  }
-  rotate (outline, rotate) {
-    console.log(this.size)
-    console.log(this.pos)
-    console.log(this.center)
-    // outline.translate(
-    //   -1 * this.attr('anchorX') * this.size.w,
-    //   -1 * this.attr('anchorY') * this.size.h
-    // )
-    // outline.translate(
-    //   this.center.x,
-    //   this.center.y
-    // )
-    outline.translate(1 * this.center.x, 1 * this.center.y)
-    outline.rotate(rotate)
-    outline.translate(-1 * this.center.x, -1 * this.center.y)
+    return this.outline.center.map((item, index) => {
+      return item
+    })
   }
   set _ctx (val) {
     this.ctx = val
@@ -124,22 +107,6 @@ class Element {
       if (!this.attr(key)) this.attr({ [key]: opt[key] })
     }
   }
-  drawOutline (outline, opt) {
-    outline
-      .restore()
-      .save()
-      .beginPath()
-    for (let key in opt) {
-      let val = opt[key]
-      if (key === 'stroke') outline.strokeStyle(val)
-      else if (key === 'fill') outline.fillStyle(val)
-      else if (/\b(lineCap|lineJoin|lineWidth)\b/.test(key)) {
-        outline[key](val)
-      } else if (/\b(transform)\b/.test(key)) {
-        transform(outline, val, true)
-      }
-    }
-  }
   setForm (ctx, isOutline) {
     if (isOutline) {
       ctx
@@ -147,40 +114,29 @@ class Element {
         .save()
         .beginPath()
     }
-    // if (this.opt.rotate) this.rotate(ctx, this.opt.rotate)
-    if (this.opt.transform && this.opt.transform.length > 0) {
-      transform(ctx, this.opt.transform, isOutline)
+    ctx.translate(...this.o)
+    // ctx.translate(...this.center)
+    if (this.opt.transform) {
+      console.log(this.opt)
+      console.log(this.o)
+      transform(ctx, this.attr('transform'), isOutline)
     }
+    // ctx.translate(-this.center[0], -this.center[1])
   }
   // 设置上下文属性
   setAttr (ctx) {
-    for (let key in this.opt) {
-      let val = this.opt[key]
-      this.setCommon(ctx, key, val)
-      this.setText(ctx, key, val)
-      this.setLine(ctx, key, val)
+    const attrs = this.attr()
+    for (let key in attrs) {
+      let val = attrs[key]
+      if (key === 'stroke') ctx.strokeStyle = val
+      else if (key === 'fill') ctx.fillStyle = val
+      else ctx[key] = val
     }
   }
-  setCommon (ctx, key, val) {
-    if (key === 'opacity') ctx.globalAlpha = this.opt[key]
-    else if (key === 'stroke') ctx.strokeStyle = this.opt[key]
-    else if (key === 'fill') ctx.fillStyle = this.opt[key]
-    else if (
-      /\b(shadowColor|shadowBlur|shadowOffsetX|shadowOffsetY|globalCompositeOperation)\b/.test(
-        key
-      )
-    ) {
-      ctx[key] = val
-    }
-  }
-  setText (ctx, key, val) {
-    if (/\b(font|textAlign)\b/.test(key)) {
-      ctx[key] = val
-    }
-  }
-  setLine (ctx, key, val) {
-    if (/\b(lineCap|lineJoin|lineWidth)\b/.test(key)) {
-      ctx[key] = val
+  setSvgAttr (svgPath) {
+    const attrs = this.attr()
+    for (let key in attrs) {
+      if (/\b(lineCap|lineJoin|lineWidth)\b/.test(key)) svgPath[key](attrs[key])
     }
   }
   // 填充或描边
@@ -198,7 +154,7 @@ class Element {
       let val = opt[key]
       if (val instanceof Function) {
         // 支持函数设置
-        let value = val(this.opt[key])
+        let value = val(val)
         this.opt[kay] = value
       } else {
         this.opt[key] = val

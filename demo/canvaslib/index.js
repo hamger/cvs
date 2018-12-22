@@ -20,7 +20,7 @@ var ctx = canvas.getContext('2d')
 
 ctx.translate(100, 100)
 // ctx.transform(1, 0.2, 0.2, 1, 0, 0)
-ctx.scale(2, 2)
+// ctx.scale(2, 2)
 ctx.rotate((45 * Math.PI) / 180)
 ctx.translate(-100, -100)
 ctx.fillRect(100, 100, 100, 100)

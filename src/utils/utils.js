@@ -144,8 +144,8 @@ export function forArr (arr, cb, vert) {
 
 // 执行矩阵矩阵变换
 export function transform (ctx, transforms, isOutline) {
-  forArr(transforms, item => {
-    let [key, val] = Object.entries(item)[0]
+  forArr(Object.entries(transforms), item => {
+    let [key, val] = item
     if (/\b(scale|translate)\b/.test(key)) {
       if (typeof val === 'number') ctx[key](val, val)
       else ctx[key](...val)
