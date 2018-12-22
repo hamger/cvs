@@ -1,23 +1,17 @@
 import Element from '../element'
 import SvgPath from 'svg-path-to-canvas'
-import { error, createCtx } from '../utils/utils'
+import { error, createCtx, rect2svg, circle2svg } from '../utils/utils'
 
 class Path extends Element {
   constructor (opt) {
     super(opt)
-    var d = this.attr('path')
+    var d = this.attr('d')
     if (typeof d === 'object') {
-      let temp = ''
       if (d.type === 'rect') {
-        temp = `M ${d.x} ${d.y} h ${d.w} v ${d.h} h ${-d.w} z`
+        d = rect2svg(d)
       } else if (d.type === 'circle') {
-        let r = []
-        if (typeof d.r === 'number') r = [d.r, d.r]
-        else r = d.r
-        temp = `M ${d.cx - r[0]} ${d.cy - r[1]} a ${r[0]} ${r[1]} ${d.rotate || 0} 1 0 0 1 z`
-        console.log(temp)
+        d = circle2svg(d)
       } else error('unexpected type of path.')
-      d = temp
     }
     this.path = new SvgPath(d)
     this.outline = new SvgPath(d)
