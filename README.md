@@ -57,6 +57,7 @@ cvs.draw();
 
 - [SpriteJS](https://github.com/spritejs/spritejs)
 - [antvis/g](https://github.com/antvis/g)
+- [svg-path-to-canvas](https://github.com/akira-cn/svg-path-to-canvas)
 
 ## Changelog
 

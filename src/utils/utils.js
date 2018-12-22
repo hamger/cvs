@@ -29,26 +29,26 @@ export function error (message) {
   throw Error('cvs: ' + message)
 }
 
-// 四舍五入取整（将目标数字加上 0.5，然后对结果执行逐位运算以消除小数部分）
-export function int (num) {
-  let rounded
-  // With a bitwise or.
-  rounded = (0.5 + num) | 0
-  // A double bitwise not.
-  rounded = ~~(0.5 + num)
-  // Finally, a left bitwise shift.
-  rounded = (0.5 + num) << 0
-  return rounded
-}
+// // 四舍五入取整（将目标数字加上 0.5，然后对结果执行逐位运算以消除小数部分）
+// export function int (num) {
+//   let rounded
+//   // With a bitwise or.
+//   rounded = (0.5 + num) | 0
+//   // A double bitwise not.
+//   rounded = ~~(0.5 + num)
+//   // Finally, a left bitwise shift.
+//   rounded = (0.5 + num) << 0
+//   return rounded
+// }
 
-/**
- * 去除字符串两侧的空格，内含的多个空格转化为一个空格
- * @param {需要处理的字符串} str
- */
-export function delBlank (str) {
-  let regEx = /\s+/g
-  return str.trim().replace(regEx, ' ')
-}
+// /**
+//  * 去除字符串两侧的空格，内含的多个空格转化为一个空格
+//  * @param {需要处理的字符串} str
+//  */
+// export function delBlank (str) {
+//   let regEx = /\s+/g
+//   return str.trim().replace(regEx, ' ')
+// }
 
 /**
  * 根据 key 获取对象中的值
@@ -140,6 +140,41 @@ export function forArr (arr, cb, vert) {
       cb(arr[i], i)
     }
   }
+}
+
+// 执行矩阵矩阵变换
+export function transform (ctx, transforms, isOutline) {
+  forArr(transforms, item => {
+    let [key, val] = Object.entries(item)[0]
+    if (/\b(scale|translate)\b/.test(key)) {
+      if (typeof val === 'number') ctx[key](val, val)
+      else ctx[key](...val)
+    } else if (key === 'rotate') {
+      if (isOutline) ctx[key](val)
+      // else ctx[key](val * Math.PI / 180)
+      else {
+        ctx.transform(
+          Math.cos((θ * Math.PI) / 180),
+          Math.sin((θ * Math.PI) / 180),
+          -Math.sin((θ * Math.PI) / 180),
+          Math.cos((θ * Math.PI) / 180),
+          0,
+          0
+        )
+      }
+    } else if (key === 'transform') {
+      ctx[key](...val)
+    } else if (key === 'skew') {
+      const arr = [1, 0, 0, 1, 0, 0]
+      if (typeof val === 'number') {
+        arr[1] = arr[2] = val
+      } else {
+        arr[1] = val[0]
+        arr[2] = val[1]
+      }
+      ctx.transform(...arr)
+    }
+  })
 }
 
 export function getRelativePos (x, y, rx, ry) {

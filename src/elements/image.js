@@ -21,7 +21,7 @@ export default class Image extends Element {
     let image = loadedResources.get(this.attr('image'))
     ctx.save()
     this.setAttr(ctx)
-    this.drawOutline(this.outline, this.attr())
+    this.setForm(this.outline, true)
     if (this.opt.sw && this.opt.sh) {
       ctx.drawImage(
         image,

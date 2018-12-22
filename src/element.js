@@ -1,7 +1,7 @@
 // import Track from './track'
 import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
-import { remove, error, createCtx } from './utils/utils'
+import { remove, error, createCtx, transform } from './utils/utils'
 import SvgPath from 'svg-path-to-canvas'
 
 const _keyframeArr = Symbol('keyframeArr'),
@@ -53,51 +53,28 @@ class Element {
       y: bounds[1]
     }
   }
+  get center () {
+    const center = this.outline.center.slice()
+    return {
+      x: center[0],
+      y: center[1]
+    }
+  }
   rotate (outline, rotate) {
     console.log(this.size)
-    outline.translate(
-      -1 * this.attr('anchorX') * this.size.w,
-      -1 * this.attr('anchorY') * this.size.h
-    )
+    console.log(this.pos)
+    console.log(this.center)
+    // outline.translate(
+    //   -1 * this.attr('anchorX') * this.size.w,
+    //   -1 * this.attr('anchorY') * this.size.h
+    // )
+    // outline.translate(
+    //   this.center.x,
+    //   this.center.y
+    // )
+    outline.translate(1 * this.center.x, 1 * this.center.y)
     outline.rotate(rotate)
-  }
-  transform (outline, transform) {
-    if (Array.isArray(transform)) {
-      outline.transform(...transform)
-    } else {
-      let arr = [1, 0, 0, 1, 0, 0]
-      for (let key in transform) {
-        let val = transform[key]
-        if (key === 'translate') {
-          if (typeof val === 'number') {
-            arr[4] = val
-            arr[5] = val
-          } else {
-            arr[4] = val[0]
-            arr[5] = val[1]
-          }
-        }
-        if (key === 'scale') {
-          if (typeof val === 'number') {
-            arr[0] = val
-            arr[3] = val
-          } else {
-            arr[0] = val[0]
-            arr[3] = val[1]
-          }
-        }
-        if (key === 'skew') {
-          if (typeof val === 'number') {
-            arr[1] = val
-            arr[2] = val
-          } else {
-            arr[1] = val[0]
-            arr[2] = val[1]
-          }
-        }
-      }
-      outline.transform(...arr)
-    }
+    outline.translate(-1 * this.center.x, -1 * this.center.y)
   }
   set _ctx (val) {
     this.ctx = val
@@ -148,50 +125,32 @@ class Element {
     }
   }
   drawOutline (outline, opt) {
-    let arr = [1, 0, 0, 1, 0, 0]
-    let hasTransform = false
-    outline.restore().save().beginPath()
+    outline
+      .restore()
+      .save()
+      .beginPath()
     for (let key in opt) {
       let val = opt[key]
-      if (key === 'stroke') outline.strokeStyle(opt[key])
-      else if (key === 'fill') outline.fillStyle(opt[key])
+      if (key === 'stroke') outline.strokeStyle(val)
+      else if (key === 'fill') outline.fillStyle(val)
       else if (/\b(lineCap|lineJoin|lineWidth)\b/.test(key)) {
-        if (Array.isArray(opt[key])) outline[key](...opt[key])
-        else outline[key](opt[key])
-      } else if (/\b(scale|rotate|skew)\b/.test(key)) {
-        hasTransform = true
-        if (key === 'translate') {
-          if (typeof val === 'number') {
-            arr[4] = val
-            arr[5] = val
-          } else {
-            arr[4] = val[0]
-            arr[5] = val[1]
-          }
-        }
-        if (key === 'scale') {
-          if (typeof val === 'number') {
-            arr[0] = val
-            arr[3] = val
-          } else {
-            arr[0] = val[0]
-            arr[3] = val[1]
-          }
-        }
-        if (key === 'skew') {
-          if (typeof val === 'number') {
-            arr[1] = val
-            arr[2] = val
-          } else {
-            arr[1] = val[0]
-            arr[2] = val[1]
-          }
-        }
+        outline[key](val)
+      } else if (/\b(transform)\b/.test(key)) {
+        transform(outline, val, true)
       }
     }
-    if (opt.transform) this.transform(outline, opt.transform)
-    else if (hasTransform) this.transform(outline, ...arr)
-    if (opt.rotate) this.rotate(outline, opt.rotate)
+  }
+  setForm (ctx, isOutline) {
+    if (isOutline) {
+      ctx
+        .restore()
+        .save()
+        .beginPath()
+    }
+    // if (this.opt.rotate) this.rotate(ctx, this.opt.rotate)
+    if (this.opt.transform && this.opt.transform.length > 0) {
+      transform(ctx, this.opt.transform, isOutline)
+    }
   }
   // 设置上下文属性
   setAttr (ctx) {
@@ -201,8 +160,6 @@ class Element {
       this.setText(ctx, key, val)
       this.setLine(ctx, key, val)
     }
-    if (this.attr('transform')) this.transform(ctx, this.attr('transform'))
-    if (this.attr('rotate')) this.rotate(ctx, this.attr('rotate'))
   }
   setCommon (ctx, key, val) {
     if (key === 'opacity') ctx.globalAlpha = this.opt[key]
@@ -248,7 +205,7 @@ class Element {
         if (key === 'offsetPath') this[key] = new SvgPath(val)
       }
     }
-    // this.cacheDraw()
+    // this.update()
   }
   // 判断是否点击在元素上
   isCollision ({ x, y }) {
