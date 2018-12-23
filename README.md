@@ -9,7 +9,6 @@ Cvs (a short name from 'canvas') is a basic canvas framework for 2d drawing, it'
 - 支持高度自由的自定义元素和轨迹，应用灵活
 - 基于时间轴的细粒度动画控制
 - 元素支持基础事件绑定，增强画布的交互性
-- 鼠标移入具有点击事件的元素，光标变化
 - 利用 Canvas 离屏渲染，实现缓存机制
 
 ## Install
@@ -64,7 +63,7 @@ cvs.draw();
 
 ### 2018.12.17
 
-> v0.5.6 去除 Rect 和 Circle 构造器，使用 Path 构造器代替
+> v0.5.7 去除 Rect 和 Circle 构造器，使用 Path 构造器代替
 
 ### 2018.12.17
 
