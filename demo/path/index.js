@@ -11,18 +11,16 @@ let layer = scene.layer({ handleEvent: true })
 var ele = new Path({
   zIndex: 2,
   d: d2,
-  pos: [50, 50],
-  // anchor: [0.5, 0.5],
-  transform: {
-    // skew: 0.3,
-    scale: 8,
-    translate: [50, 50],
-    // rotate: 45,
-  },
-  stroke: '#54F',
+  // pos: [50, 50],
+  transform: [
+    { translate: [-10, -10] },
+    { rotate: 45 },
+    { scale: 6 },
+    { translate: [200, 200] }
+  ],
+  stroke: 'pink',
   lineWidth: 4
 })
-
 ele.on('click', () => {
   console.log('haha')
 })
@@ -68,7 +66,7 @@ let circle = new Path({
   d: {
     type: 'circle',
     cx: 300,
-    cy: 200,
+    cy: 500,
     r: [50, 34],
     rotate: 90,
   },

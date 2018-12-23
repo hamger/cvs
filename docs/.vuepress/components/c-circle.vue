@@ -1,12 +1,12 @@
 <template>
-    <div>
-      <Container>
-          <div id="container" style="width:100%;height:160px"></div>
-      </Container>
-    </div>
+  <div>
+    <Container>
+      <div id="circle-container" style="width:100%;height:200px"></div>
+    </Container>
+  </div>
 </template>
 <script>
-import { Circle, Scene } from '#'
+import { Path, Scene } from '#'
 import Container from '../Container'
 export default {
   components: {
@@ -17,23 +17,33 @@ export default {
   },
   mounted() {
     let scene = new Scene({
-      containerId: 'container'
+      containerId: 'circle-container'
     })
     let layer = scene.layer()
-    var dot = new Circle({
-      r: 50,
-      x: 200,
-      y: 80
+
+    let circle = new Path({
+      d: {
+        type: 'circle',
+        cx: 200,
+        cy: 160,
+        r: [60, 40],
+        rotate: 45,
+      },
+      stroke: 'red'
     })
-    var sector = new Circle({
-      r: 50,
-      x: 500,
-      y: 80,
-      startAngle: 0,
-      endAngle: 70,
-      anticlockwise: true,
+
+    let ellipse = new Path({
+      d: {
+        type: 'circle',
+        cx: 400,
+        cy: 150,
+        r: 40
+      },
+      fill: '#153'
     })
-    layer.append(dot, sector)
+
+    layer.append(circle, ellipse)
+
     layer.draw()
   }
 }

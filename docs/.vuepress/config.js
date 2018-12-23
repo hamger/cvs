@@ -25,8 +25,8 @@ module.exports = {
         title: 'elements',
         collapsable: false,
         children: [
-          ['/docs/elements/circle', '圆形 Circle'],
-          ['/docs/elements/rect', '矩形 Rect'],
+          // ['/docs/elements/circle', '圆形 Circle'],
+          // ['/docs/elements/rect', '矩形 Rect'],
           ['/docs/elements/path', '路径 Path'],
           ['/docs/elements/image', '图像 Image'],
           ['/docs/elements/text', '文本 Text'],

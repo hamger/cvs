@@ -12,7 +12,11 @@ export function rect2svg (d) {
       h = d.h
     if (radius instanceof Array) {
       if (radius.length >= 4) r = radius.slice(0, 4)
-      else if (radius.length >= 2) {
+      else if (radius.length === 3) {
+        r[1] = r[3] = radius[1]
+        r[0] = radius[0]
+        r[2] = radius[2]
+      } else if (radius.length === 2) {
         r[0] = r[2] = radius[0]
         r[1] = r[3] = radius[1]
       }

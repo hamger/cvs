@@ -116,7 +116,7 @@ class Element {
         .save()
         .beginPath()
     }
-    ctx.translate(...this.o)
+    // ctx.translate(...this.o)
     // ctx.translate(...this.center)
     if (this.opt.transform) {
       transform(ctx, this.attr('transform'), isOutline)
