@@ -1,3 +1,4 @@
+import { error } from './utils/utils'
 import { Easings, getBezierEasing } from './utils/easing'
 let id = 0
 export default class Track {
