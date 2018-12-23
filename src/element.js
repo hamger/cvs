@@ -1,12 +1,14 @@
 // import Track from './track'
 import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
-import { remove, error, createCtx, transform } from './utils/utils'
+import { error, createCtx, transform } from './utils/utils'
 import SvgPath from 'svg-path-to-canvas'
 
 const _keyframeArr = Symbol('keyframeArr'),
   _trackArr = Symbol('trackArr'),
   _attribute = Symbol('attribute')
+
+const property = ['lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'font', 'textAlign', 'textBaseline', 'globalAlpha', 'shadowColor', 'shadowBlur', 'shadowOffsetX', 'shadowOffsetY']
 
 let id = 0
 class Element {
@@ -117,8 +119,6 @@ class Element {
     ctx.translate(...this.o)
     // ctx.translate(...this.center)
     if (this.opt.transform) {
-      console.log(this.opt)
-      console.log(this.o)
       transform(ctx, this.attr('transform'), isOutline)
     }
     // ctx.translate(-this.center[0], -this.center[1])
@@ -130,7 +130,7 @@ class Element {
       let val = attrs[key]
       if (key === 'stroke') ctx.strokeStyle = val
       else if (key === 'fill') ctx.fillStyle = val
-      else ctx[key] = val
+      else if (property.indexOf(key) > -1) ctx[key] = val
     }
   }
   setSvgAttr (svgPath) {

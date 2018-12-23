@@ -1,6 +1,7 @@
 import Element from '../element'
 import SvgPath from 'svg-path-to-canvas'
-import { error, createCtx, rect2svg, circle2svg } from '../utils/utils'
+import { rect2svg, circle2svg } from '../utils/toSvg'
+import { error, createCtx } from '../utils/utils'
 
 class Path extends Element {
   constructor (opt) {

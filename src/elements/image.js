@@ -7,46 +7,47 @@ import SvgPath from 'svg-path-to-canvas'
 export default class Image extends Element {
   constructor (opt) {
     super(opt)
-    this.cacheDraw()
+    this.update()
   }
   draw (ctx) {
     if (this.attr('cache')) {
-      ctx.drawImage(this.cacheCtx.canvas, this.opt.x, this.opt.y)
+      ctx.drawImage(this.cacheCtx.canvas, this.attr('x'), this.attr('y'))
     } else {
       this.drawImg(ctx)
     }
   }
   drawImg (cacheCtx) {
     let ctx = cacheCtx || this.ctx
-    let image = loadedResources.get(this.attr('image'))
     ctx.save()
     this.setAttr(ctx)
-    this.setForm(this.outline, true)
+    this.setForm(ctx)
     if (this.opt.sw && this.opt.sh) {
       ctx.drawImage(
-        image,
+        this.image,
         this.opt.sx,
         this.opt.sy,
         this.opt.sw,
         this.opt.sh,
         this.origin.x,
         this.origin.y,
-        this.opt.w,
-        this.opt.h
+        this.attr('w'),
+        this.attr('h')
       )
-    } else if (this.opt.w && this.opt.h) {
-      ctx.drawImage(image, this.origin.x, this.origin.y, this.opt.w, this.opt.h)
+    } else if (this.attr('w') && this.attr('h')) {
+      ctx.drawImage(this.image, this.origin.x, this.origin.y, this.attr('w'), this.attr('h'))
     } else {
-      ctx.drawImage(image, this.origin.x, this.origin.y)
+      ctx.drawImage(this.image, this.origin.x, this.origin.y)
     }
     ctx.restore()
   }
-  cacheDraw () {
-    this.w = this.opt.w ? this.opt.w : this.opt.image.width
-    this.h = this.opt.h ? this.opt.h : this.opt.image.height
-    this.outline = new SvgPath(`M ${this.attr('x')} ${this.attr('y')} h ${this.attr('w')} v ${this.attr('h')} h -${this.attr('w')} z`)
-    this.cacheCtx.width = this.w
-    this.cacheCtx.height = this.h
+  update () {
+    this.image = loadedResources.get(this.attr('image'))
+    this.w = this.attr('w') ? this.attr('w') : this.image.width
+    this.h = this.attr('h') ? this.attr('h') : this.image.height
+    this.outline = new SvgPath(`M ${this.attr('x')} ${this.attr('y')} h ${this.w} v ${this.h} h -${this.w} z`)
+    this.setSvgAttr(this.outline)
+    this.setForm(this.outline, true)
+    this.cacheCtx = createCtx(this.w, this.h)
     this.drawImg(this.cacheCtx)
   }
 }
