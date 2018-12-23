@@ -1,25 +1,28 @@
-import { Scene, Text } from '#'
+import { Scene, Text, Path } from '#'
 let scene = new Scene({
   containerId: 'container'
 })
 
 let layer = scene.layer()
-
-layer.append(
-  new Text({
-    text: 'hello',
-    x: 89,
-    y: 76,
-    font: '48px serif'
-  })
-)
-
-layer.append(
-  new Text({
-    text: 'hanger',
-    x: 189,
-    y: 76,
-    fontSize: 43
-  })
-)
+var text = new Text({
+  text: '狂拽酷炫吊炸天\n哈哈哈哈哈哈哈哈\n欧耶！！！',
+  // text: 'hello\nbig\nworld',
+  x: 89,
+  y: 76,
+  font: '24px serif'
+})
+text.on('click', (e) => {
+  console.log(e)
+})
+let rect = new Path({
+  d: {
+    type: 'rect',
+    x: text.bounds[0],
+    y: text.bounds[1],
+    w: text.size[0],
+    h: text.size[1],
+  },
+  stroke: '#153'
+})
+layer.append(text, rect)
 layer.draw()

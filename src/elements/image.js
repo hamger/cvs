@@ -1,5 +1,5 @@
 import Element from '../element'
-import { createCtx } from '../utils/utils'
+// import { createCtx } from '../utils/utils'
 import { loadedResources } from '../utils/resource'
 import SvgPath from 'svg-path-to-canvas'
 // ctx.drawImage() 参数解释:
@@ -7,17 +7,12 @@ import SvgPath from 'svg-path-to-canvas'
 export default class Image extends Element {
   constructor (opt) {
     super(opt)
-    this.update()
+    this.getOutline()
   }
   draw (ctx) {
-    if (this.attr('cache')) {
-      ctx.drawImage(this.cacheCtx.canvas, this.attr('x'), this.attr('y'))
-    } else {
-      this.drawImg(ctx)
-    }
+    this.drawImg(ctx)
   }
-  drawImg (cacheCtx) {
-    let ctx = cacheCtx || this.ctx
+  drawImg (ctx = this.ctx) {
     ctx.save()
     this.setAttr(ctx)
     this.setForm(ctx)
@@ -28,26 +23,24 @@ export default class Image extends Element {
         this.opt.sy,
         this.opt.sw,
         this.opt.sh,
-        this.origin.x,
-        this.origin.y,
+        this.attr('x'),
+        this.attr('y'),
         this.attr('w'),
         this.attr('h')
       )
     } else if (this.attr('w') && this.attr('h')) {
-      ctx.drawImage(this.image, this.origin.x, this.origin.y, this.attr('w'), this.attr('h'))
+      ctx.drawImage(this.image, this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
     } else {
-      ctx.drawImage(this.image, this.origin.x, this.origin.y)
+      ctx.drawImage(this.image, this.attr('x'), this.attr('y'))
     }
     ctx.restore()
   }
-  update () {
+  getOutline () {
     this.image = loadedResources.get(this.attr('image'))
     this.w = this.attr('w') ? this.attr('w') : this.image.width
     this.h = this.attr('h') ? this.attr('h') : this.image.height
     this.outline = new SvgPath(`M ${this.attr('x')} ${this.attr('y')} h ${this.w} v ${this.h} h -${this.w} z`)
     this.setSvgAttr(this.outline)
     this.setForm(this.outline, true)
-    this.cacheCtx = createCtx(this.w, this.h)
-    this.drawImg(this.cacheCtx)
   }
 }

@@ -14,26 +14,20 @@ class Path extends Element {
         d = circle2svg(d)
       } else error('unexpected type of path.')
     }
-    this.path = new SvgPath(d)
-    this.outline = new SvgPath(d)
-    this.setSvgAttr(this.outline)
-    this.setForm(this.outline, true)
-    // this.cacheCtx = createCtx()
+    this.d = d
+    this.getOutline()
   }
   draw (ctx) {
     ctx.save()
-    this.update(this.ctx)
-    // ctx.drawImage(this.cacheCtx.canvas, 0, 0)
+    this.setAttr(ctx)
+    if (this.attr('stroke')) this.outline.to(ctx).stroke()
+    else this.outline.to(ctx).fill()
     ctx.restore()
   }
-  update (ctx) {
-    ctx.save()
-    this.setAttr(ctx)
-    this.setSvgAttr(this.path)
-    this.setForm(this.path, true)
-    if (this.attr('stroke')) this.path.to(ctx).stroke()
-    else this.path.to(ctx).fill()
-    ctx.restore()
+  getOutline () {
+    this.outline = new SvgPath(this.d)
+    this.setSvgAttr(this.outline)
+    this.setForm(this.outline, true)
   }
 }
 

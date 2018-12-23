@@ -1,4 +1,5 @@
 // import Track from './track'
+import { Matrix } from 'sprite-math'
 import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
 import { error, createCtx, transform } from './utils/utils'
@@ -8,7 +9,20 @@ const _keyframeArr = Symbol('keyframeArr'),
   _trackArr = Symbol('trackArr'),
   _attribute = Symbol('attribute')
 
-const property = ['lineCap', 'lineJoin', 'lineWidth', 'miterLimit', 'font', 'textAlign', 'textBaseline', 'globalAlpha', 'shadowColor', 'shadowBlur', 'shadowOffsetX', 'shadowOffsetY']
+const property = [
+  'lineCap',
+  'lineJoin',
+  'lineWidth',
+  'miterLimit',
+  'font',
+  'textAlign',
+  'textBaseline',
+  'globalAlpha',
+  'shadowColor',
+  'shadowBlur',
+  'shadowOffsetX',
+  'shadowOffsetY'
+]
 
 let id = 0
 class Element {
@@ -40,7 +54,18 @@ class Element {
     this.finished = false
     this[_keyframeArr] = []
     this[_trackArr] = []
-    // this.cacheCtx = createCtx()
+  }
+  get transform () {
+    const transform = new Matrix(this[_attr].get('transformMatrix'))
+    const transformOrigin = this.attr('transformOrigin')
+    if (transformOrigin) {
+      const t = new Matrix()
+      t.translate(...transformOrigin)
+      t.multiply(transform)
+      t.translate(...transformOrigin.map(v => -v))
+      return t
+    }
+    return transform
   }
   get o () {
     return [
@@ -166,7 +191,6 @@ class Element {
   // 判断是否点击在元素上
   isCollision ({ x, y }) {
     return this.outline.isPointInPath(x, y)
-    // return this.ctx.isPointInPath(location.x, location.y)
   }
   on (eventType, callback) {
     this[eventType] = callback
@@ -174,9 +198,6 @@ class Element {
   off (eventType) {
     this[eventType] = null
   }
-  // get state () {
-  //   return false
-  // }
   get animatable () {
     if (this[_trackArr].length > 0 || this[_keyframeArr].length > 0) return true
     else return false

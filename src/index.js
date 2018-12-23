@@ -3,8 +3,6 @@ import Layer from './layer'
 import Element from './element'
 import Group from './elements/group'
 import Path from './elements/path'
-import Circle from './elements/circle'
-import Rect from './elements/rect'
 import Image from './elements/image'
 import Text from './elements/text'
 import Track from './track'
@@ -18,8 +16,6 @@ export {
   Layer,
   Element,
   Group,
-  Circle,
-  Rect,
   Image,
   Text,
   Path,
