@@ -1,7 +1,8 @@
+
 import Element from '../element'
 import SvgPath from 'svg-path-to-canvas'
 import { rect2svg, circle2svg } from '../utils/toSvg'
-import { error, createCtx } from '../utils/utils'
+import { error, getMatrix } from '../utils/utils'
 
 class Path extends Element {
   constructor (opt) {
@@ -14,7 +15,7 @@ class Path extends Element {
         d = circle2svg(d)
       } else error('unexpected type of path.')
     }
-    this.d = d
+    this.outline = new SvgPath(d)
     this.getOutline()
   }
   draw (ctx) {
@@ -25,9 +26,13 @@ class Path extends Element {
     ctx.restore()
   }
   getOutline () {
-    this.outline = new SvgPath(this.d)
+    this.outline
+      .restore()
+      .save()
+      .beginPath()
+    var matrix = getMatrix(this.attr('pos'), this.attr('transform'))
     this.setSvgAttr(this.outline)
-    this.setForm(this.outline, true)
+    this.outline.transform(...matrix)
   }
 }
 

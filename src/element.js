@@ -3,11 +3,12 @@ import { Matrix } from 'sprite-math'
 import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
 import { error, createCtx, transform } from './utils/utils'
+import ElementAttr from './utils/elementAttr'
 import SvgPath from 'svg-path-to-canvas'
 
 const _keyframeArr = Symbol('keyframeArr'),
   _trackArr = Symbol('trackArr'),
-  _attribute = Symbol('attribute')
+  _attr = Symbol('attribute')
 
 const property = [
   'lineCap',
@@ -27,6 +28,7 @@ const property = [
 let id = 0
 class Element {
   constructor (opt) {
+    this[_attr] = new ElementAttr(this)
     if (typeof opt.id === 'string') {
       this.id = opt.id
       delete opt.id
@@ -48,6 +50,7 @@ class Element {
       fill: '#000',
       anchor: [0, 0],
       pos: [0, 0],
+      transform: [],
       x: 0,
       y: 0
     })
@@ -55,22 +58,14 @@ class Element {
     this[_keyframeArr] = []
     this[_trackArr] = []
   }
-  get transform () {
-    const transform = new Matrix(this[_attr].get('transformMatrix'))
-    const transformOrigin = this.attr('transformOrigin')
-    if (transformOrigin) {
-      const t = new Matrix()
-      t.translate(...transformOrigin)
-      t.multiply(transform)
-      t.translate(...transformOrigin.map(v => -v))
-      return t
-    }
-    return transform
-  }
   get o () {
+    console.log(this.initialBounds)
     return [
-      this.attr('pos')[0] + this.attr('anchor')[0] * this.size[0],
-      this.attr('pos')[1] + this.attr('anchor')[1] * this.size[1]
+      this.attr('pos')[0] -
+        this.attr('anchor')[0] *
+          (this.initialBounds[2] - this.initialBounds[0]),
+      this.attr('pos')[1] -
+        this.attr('anchor')[1] * (this.initialBounds[3] - this.initialBounds[1])
     ]
   }
   get size () {
@@ -110,19 +105,6 @@ class Element {
       })
     }
   }
-  get origin () {
-    if (this.attr('cache')) {
-      return {
-        x: this.lw,
-        y: this.lw
-      }
-    } else {
-      return {
-        x: this.attr('x'),
-        y: this.attr('y')
-      }
-    }
-  }
   // 返回一个元素的克隆
   clone (opt = {}) {
     let Cons = this.constructor
@@ -136,17 +118,22 @@ class Element {
   }
   setForm (ctx, isOutline) {
     if (isOutline) {
-      ctx
-        .restore()
-        .save()
-        .beginPath()
+      this.setSvgAttr(ctx)
     }
-    // ctx.translate(...this.o)
-    // ctx.translate(...this.center)
-    if (this.opt.transform) {
+    if (this.attr('transform') && this.attr('transform').length > 0) {
       transform(ctx, this.attr('transform'), isOutline)
     }
-    // ctx.translate(-this.center[0], -this.center[1])
+  }
+  // toOrigin (ctx, start) {
+  //   console.log(this.o)
+  //   if (start) {
+  //     ctx.translate(this.o[0], this.o[1])
+  //   } else {
+  //     ctx.translate(-this.o[0], -this.o[1])
+  //   }
+  // }
+  usePos (ctx) {
+    ctx.translate(...this.attr('pos'))
   }
   // 设置上下文属性
   setAttr (ctx) {
@@ -187,6 +174,27 @@ class Element {
       }
     }
     // this.update()
+  }
+  get xy () {
+    return this.attr('pos')
+  }
+  get transform () {
+    const transform = new Matrix(this[_attr].get('transformMatrix'))
+    const transformOrigin = this.attr('transformOrigin')
+    if (transformOrigin) {
+      const t = new Matrix()
+      t.translate(...transformOrigin)
+      t.multiply(transform)
+      t.translate(...transformOrigin.map(v => -v))
+      return t
+    }
+    return transform
+  }
+  render (drawingContext) {
+    drawingContext.save()
+    drawingContext.translate(...this.xy)
+    console.log(this.transform.m)
+    drawingContext.transform(...this.transform.m)
   }
   // 判断是否点击在元素上
   isCollision ({ x, y }) {

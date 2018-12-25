@@ -1,3 +1,4 @@
+import Matrix from './matrix'
 // 获取相对于容器的坐标
 export function getLocation (container, event) {
   let hastouch = 'ontouchstart' in window
@@ -142,39 +143,61 @@ export function forArr (arr, cb, vert) {
   }
 }
 
+export function getMatrix (pos, transforms) {
+  let matrix = new Matrix()
+  matrix.translate(...pos)
+  if (typeof transforms[0] === 'number') {
+    matrix.multiply(transforms)
+  } else {
+    transforms.forEach(item => {
+      let [key, val] = Object.entries(item)[0]
+      if (/\b(scale|translate|skew)\b/.test(key)) {
+        matrix[key](...oneOrTwoValues(val))
+      } else if (key === 'rotate') {
+        matrix[key](val)
+      } else if (key === 'transform') {
+        matrix.multiply(val)
+      }
+    })
+  }
+  return matrix.m
+}
+
 // 执行矩阵矩阵变换
-export function transform (ctx, transforms, isOutline) {
-  transforms.forEach(item => {
-    let [key, val] = Object.entries(item)[0]
-    if (/\b(scale|translate)\b/.test(key)) {
-      if (typeof val === 'number') ctx[key](val, val)
-      else ctx[key](...val)
-    } else if (key === 'rotate') {
-      if (isOutline) ctx[key](val)
-      // else ctx[key](val * Math.PI / 180)
-      else {
-        ctx.transform(
-          Math.cos((θ * Math.PI) / 180),
-          Math.sin((θ * Math.PI) / 180),
-          -Math.sin((θ * Math.PI) / 180),
-          Math.cos((θ * Math.PI) / 180),
-          0,
-          0
-        )
+export function transform (ctx, transforms) {
+  if (typeof transforms[0] === 'number') {
+    ctx.transform(...transforms)
+  } else {
+    transforms.forEach(item => {
+      let [key, val] = Object.entries(item)[0]
+      if (/\b(scale|translate)\b/.test(key)) {
+        ctx[key](...oneOrTwoValues(val))
+      } else if (key === 'rotate') {
+        ctx[key]((val * Math.PI) / 180)
+      } else if (key === 'transform') {
+        ctx[key](...val)
+      } else if (key === 'skew') {
+        const arr = [1, 0, 0, 1, 0, 0]
+        if (typeof val === 'number') {
+          arr[1] = arr[2] = val
+        } else {
+          arr[1] = val[0]
+          arr[2] = val[1]
+        }
+        ctx.transform(...arr)
       }
-    } else if (key === 'transform') {
-      ctx[key](...val)
-    } else if (key === 'skew') {
-      const arr = [1, 0, 0, 1, 0, 0]
-      if (typeof val === 'number') {
-        arr[1] = arr[2] = val
-      } else {
-        arr[1] = val[0]
-        arr[2] = val[1]
-      }
-      ctx.transform(...arr)
-    }
-  })
+    })
+  }
+}
+
+export function oneOrTwoValues (val) {
+  if (!Array.isArray(val)) {
+    return [val, val]
+  }
+  if (val.length === 1) {
+    return [val[0], val[0]]
+  }
+  return val
 }
 
 export function getRelativePos (x, y, rx, ry) {

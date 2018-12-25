@@ -61,6 +61,7 @@ export default class Text extends Element {
       )} h -${this.attr('w')} z`
     )
     this.setSvgAttr(this.outline)
+    this.initialBounds = this.outline.bounds.slice()
     this.setForm(this.outline, true)
   }
 }
