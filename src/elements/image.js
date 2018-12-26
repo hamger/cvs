@@ -57,7 +57,6 @@ export default class Image extends Element {
       .restore()
       .save()
       .beginPath()
-    this.setSvgAttr(this.outline)
     this.outline.transform(...this.matrix)
   }
 }

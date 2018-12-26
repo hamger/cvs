@@ -1,4 +1,4 @@
-import { Scene, Circle, Rect, Image, Group, Bezier, Path } from '#'
+import { Scene, Image, Group, Bezier, Path } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -10,11 +10,14 @@ import { Scene, Circle, Rect, Image, Group, Bezier, Path } from '#'
   let layer = scene.layer({
     handleEvent: true
   })
-  let circle2 = new Circle({
+  let circle2 = new Path({
+    d: {
+      type: 'circle',
+      r: 50,
+      cy: 50,
+      cx: 50
+    },
     zIndex: 2,
-    r: 50,
-    y: 50,
-    x: 50,
     fill: '#3e9',
     cache: true
   })
@@ -23,26 +26,36 @@ import { Scene, Circle, Rect, Image, Group, Bezier, Path } from '#'
   })
   let image = new Image({
     image: 'safari',
-    y: 100,
-    x: 200
+    y: 0,
+    x: 0
   })
   let group = new Group({
     x: 100,
     y: 100,
-    w: 350,
-    h: 350,
+    w: 300,
+    h: 300,
     stroke: '#ddd'
   })
   let subGroup = new Group({
     zIndex: 3,
-    x: 10,
+    x: 0,
     y: 200,
-    // w: 100,
-    // h: 100,
-    // stroke: '#ddd'
+    w: 100,
+    h: 100,
+    stroke: '#ddd'
   })
-    .append(circle2.clone({ r: 20, y: 30, x: 30, fill: 'pink' }))
-    .append(new Rect({ x: 60, y: 60, w: 30, h: 30 }))
+    .append(
+      new Path({
+        d: {
+          type: 'circle',
+          r: 20,
+          cy: 20,
+          cx: 20
+        },
+        fill: 'pink'
+      })
+    )
+    .append(new Path({ d: { type: 'rect', x: 0, y: 0, w: 30, h: 30 } }))
 
   group.append(circle2, image, subGroup)
   // group.addTrack(
@@ -53,6 +66,19 @@ import { Scene, Circle, Rect, Image, Group, Bezier, Path } from '#'
   //   })
   // )
   layer.append(group)
+  // let ruler = new Path({
+  //   zIndex: 2,
+  //   d: {
+  //     type: 'rect',
+  //     x: 100,
+  //     y: 100,
+  //     w: 350,
+  //     h: 350,
+  //   },
+  //   linewidth: 4,
+  //   stroke: 'red'
+  // })
+  // layer.append(ruler)
   layer.draw()
   // layer.animate()
 })()

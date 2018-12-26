@@ -43,6 +43,6 @@ export function circle2svg (d) {
   let r = []
   if (typeof d.r === 'number') r = [d.r, d.r]
   else r = d.r
-  return `M ${d.cx - r[0]} ${d.cy - r[1]} a ${r[0]} ${r[1]} ${d.rotate ||
-    0} 1 0 0 1 z`
+  return `M ${d.cx - r[0]} ${d.cy} a ${r[0]} ${r[1]} ${d.rotate ||
+    0} 1 1 0 1 z`
 }

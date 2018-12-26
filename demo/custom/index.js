@@ -7,8 +7,12 @@ import { Scene, Image, Group, Text, Path } from '#'
   let layer = scene.layer({ handleEvent: true })
 
   let rect = new Path({
-    path: 'M10 10 h 70 v 50 h -70 z',
+    d: 'M0 0 h 70 v 50 h -70 z',
     stroke: '#153'
+  })
+
+  rect.on('click', () => {
+    console.log(123)
   })
 
   let button = new Group({
@@ -21,13 +25,28 @@ import { Scene, Image, Group, Text, Path } from '#'
     .append(
       new Text({
         text: '确定',
-        x: 20,
-        y: 20,
+        x: 0,
+        y: 0,
         font: '24px serif'
       })
     )
     .append(rect)
 
+  console.log(rect.outline)
+  button.outline = rect.outline
   layer.append(button)
+
+  let ruler = new Path({
+    zIndex: -1,
+    d: {
+      type: 'rect',
+      x: 0,
+      y: 0,
+      w: 200,
+      h: 200
+    },
+    stroke: '#444'
+  })
+  layer.append(ruler)
   layer.draw()
 })()

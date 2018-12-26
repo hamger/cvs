@@ -78,17 +78,17 @@ let ruler = new Path({
 })
 layer.append(ruler)
 
-// let circle = new Path({
-//   d: {
-//     type: 'circle',
-//     cx: 300,
-//     cy: 500,
-//     r: [50, 34],
-//     rotate: 90,
-//   },
-//   stroke: 'red'
-// })
-// layer.append(circle)
+let circle = new Path({
+  d: {
+    type: 'circle',
+    cx: 200,
+    cy: 200,
+    r: [100, 50],
+    rotate: 90,
+  },
+  stroke: 'red'
+})
+layer.append(circle)
 
 layer.draw()
 
