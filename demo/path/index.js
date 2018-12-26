@@ -12,7 +12,8 @@ let layer = scene.layer({ handleEvent: true })
 var ele = new Path({
   zIndex: 2,
   d: d4,
-  pos: [200, 200],
+  x: 200,
+  y: 200,
   transform: [
     // { translate: [-16, -14.8] },
     { rotate: 45 },

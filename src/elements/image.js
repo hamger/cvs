@@ -1,5 +1,5 @@
 import Element from '../element'
-import { getMatrix } from '../utils/utils'
+import { getMatrix, createCtx } from '../utils/utils'
 import { loadedResources } from '../utils/resource'
 import SvgPath from 'svg-path-to-canvas'
 // ctx.drawImage() 参数解释:
@@ -7,22 +7,25 @@ import SvgPath from 'svg-path-to-canvas'
 export default class Image extends Element {
   constructor (opt) {
     super(opt)
+    this.preload()
+  }
+  draw (ctx) {
+    ctx.save()
+    ctx.transform(...this.matrix)
+    ctx.drawImage(this.cacheCtx.canvas, 0, 0)
+    ctx.restore()
+  }
+  preload () {
     this.image = loadedResources.get(this.attr('image'))
     this.w = this.attr('w') ? this.attr('w') : this.image.width
     this.h = this.attr('h') ? this.attr('h') : this.image.height
-    this.outline = new SvgPath(
-      `M ${0} ${0} h ${this.w} v ${this.h} h -${this.w} z`
-    )
-    this.getOutline()
+    this.cacheCtx = createCtx(this.w, this.h)
+    this.drawImg(this.cacheCtx)
+    this.setOutline()
   }
-  draw (ctx) {
-    this.drawImg(ctx)
-  }
-  drawImg (ctx = this.ctx) {
+  drawImg (ctx) {
     ctx.save()
     this.setAttr(ctx)
-    this.usePos(ctx)
-    this.setForm(ctx)
     if (this.attr('sw') && this.attr('sh')) {
       ctx.drawImage(
         this.image,
@@ -42,13 +45,19 @@ export default class Image extends Element {
     }
     ctx.restore()
   }
-  getOutline () {
+  setOutline () {
+    this.outline = new SvgPath(
+      `M ${0} ${0} h ${this.w} v ${this.h} h -${this.w} z`
+    )
+    this.matrix = getMatrix(
+      [this.attr('x'), this.attr('y')],
+      this.attr('transform')
+    )
     this.outline
       .restore()
       .save()
       .beginPath()
-    var matrix = getMatrix(this.attr('pos'), this.attr('transform'))
     this.setSvgAttr(this.outline)
-    this.outline.transform(...matrix)
+    this.outline.transform(...this.matrix)
   }
 }

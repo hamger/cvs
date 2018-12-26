@@ -14,7 +14,8 @@ import { Scene, Image, Path } from '#'
   let fgLayer = scene.layer()
   let ele = new Image({
     image: 'safari',
-    pos: [200, 200],
+    x: 200,
+    y: 200,
     // anchor: [0.5, 0.5],
     // w: 100,
     // h: 100,

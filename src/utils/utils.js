@@ -143,6 +143,7 @@ export function forArr (arr, cb, vert) {
   }
 }
 
+// 获得变换矩阵
 export function getMatrix (pos, transforms) {
   let matrix = new Matrix()
   matrix.translate(...pos)
@@ -161,33 +162,6 @@ export function getMatrix (pos, transforms) {
     })
   }
   return matrix.m
-}
-
-// 执行矩阵矩阵变换
-export function transform (ctx, transforms) {
-  if (typeof transforms[0] === 'number') {
-    ctx.transform(...transforms)
-  } else {
-    transforms.forEach(item => {
-      let [key, val] = Object.entries(item)[0]
-      if (/\b(scale|translate)\b/.test(key)) {
-        ctx[key](...oneOrTwoValues(val))
-      } else if (key === 'rotate') {
-        ctx[key]((val * Math.PI) / 180)
-      } else if (key === 'transform') {
-        ctx[key](...val)
-      } else if (key === 'skew') {
-        const arr = [1, 0, 0, 1, 0, 0]
-        if (typeof val === 'number') {
-          arr[1] = arr[2] = val
-        } else {
-          arr[1] = val[0]
-          arr[2] = val[1]
-        }
-        ctx.transform(...arr)
-      }
-    })
-  }
 }
 
 export function oneOrTwoValues (val) {

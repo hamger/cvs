@@ -1,9 +1,8 @@
 // import Track from './track'
-import { Matrix } from 'sprite-math'
+// import ElementAttr from './utils/elementAttr'
 import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
-import { error, createCtx, transform } from './utils/utils'
-import ElementAttr from './utils/elementAttr'
+import { error } from './utils/utils'
 import SvgPath from 'svg-path-to-canvas'
 
 const _keyframeArr = Symbol('keyframeArr'),
@@ -28,7 +27,7 @@ const property = [
 let id = 0
 class Element {
   constructor (opt) {
-    this[_attr] = new ElementAttr(this)
+    // this[_attr] = new ElementAttr(this)
     if (typeof opt.id === 'string') {
       this.id = opt.id
       delete opt.id
@@ -57,16 +56,6 @@ class Element {
     this.finished = false
     this[_keyframeArr] = []
     this[_trackArr] = []
-  }
-  get o () {
-    console.log(this.initialBounds)
-    return [
-      this.attr('pos')[0] -
-        this.attr('anchor')[0] *
-          (this.initialBounds[2] - this.initialBounds[0]),
-      this.attr('pos')[1] -
-        this.attr('anchor')[1] * (this.initialBounds[3] - this.initialBounds[1])
-    ]
   }
   get size () {
     return this.outline.size.slice()
@@ -116,25 +105,6 @@ class Element {
       if (!this.attr(key)) this.attr({ [key]: opt[key] })
     }
   }
-  setForm (ctx, isOutline) {
-    if (isOutline) {
-      this.setSvgAttr(ctx)
-    }
-    if (this.attr('transform') && this.attr('transform').length > 0) {
-      transform(ctx, this.attr('transform'), isOutline)
-    }
-  }
-  // toOrigin (ctx, start) {
-  //   console.log(this.o)
-  //   if (start) {
-  //     ctx.translate(this.o[0], this.o[1])
-  //   } else {
-  //     ctx.translate(-this.o[0], -this.o[1])
-  //   }
-  // }
-  usePos (ctx) {
-    ctx.translate(...this.attr('pos'))
-  }
   // 设置上下文属性
   setAttr (ctx) {
     const attrs = this.attr()
@@ -145,11 +115,11 @@ class Element {
       else if (property.indexOf(key) > -1) ctx[key] = val
     }
   }
-  setSvgAttr (svgPath) {
+  setSvgAttr (outline) {
     const attrs = this.attr()
-    for (let key in attrs) {
-      if (/\b(lineCap|lineJoin|lineWidth)\b/.test(key)) svgPath[key](attrs[key])
-    }
+    if (attrs.lineWidth) outline.lineWidth(attrs.lineWidth)
+    if (attrs.lineCap) outline.lineCap(attrs.lineCap)
+    if (attrs.lineJoin) outline.lineJoin(attrs.lineJoin)
   }
   // 填充或描边
   dye (ctx) {
@@ -174,27 +144,6 @@ class Element {
       }
     }
     // this.update()
-  }
-  get xy () {
-    return this.attr('pos')
-  }
-  get transform () {
-    const transform = new Matrix(this[_attr].get('transformMatrix'))
-    const transformOrigin = this.attr('transformOrigin')
-    if (transformOrigin) {
-      const t = new Matrix()
-      t.translate(...transformOrigin)
-      t.multiply(transform)
-      t.translate(...transformOrigin.map(v => -v))
-      return t
-    }
-    return transform
-  }
-  render (drawingContext) {
-    drawingContext.save()
-    drawingContext.translate(...this.xy)
-    console.log(this.transform.m)
-    drawingContext.transform(...this.transform.m)
   }
   // 判断是否点击在元素上
   isCollision ({ x, y }) {
