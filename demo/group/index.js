@@ -27,7 +27,7 @@ import { Scene, Image, Group, Path } from '#'
   let image = new Image({
     image: 'safari',
     y: 0,
-    x: 0
+    x: 200
   })
   let group = new Group({
     x: 100,
@@ -48,14 +48,14 @@ import { Scene, Image, Group, Path } from '#'
       new Path({
         d: {
           type: 'circle',
-          r: 20,
-          cy: 20,
-          cx: 20
+          r: 15,
+          cy: 15,
+          cx: 15
         },
         fill: 'pink'
       })
     )
-    .append(new Path({ d: { type: 'rect', x: 0, y: 0, w: 30, h: 30 } }))
+    .append(new Path({ d: { type: 'rect', x: 70, y: 0, w: 30, h: 30 } }))
 
   group.append(circle2, image, subGroup)
   group.keyframe([['x'], { x: 600 }], {duration: 3000}, function () {
