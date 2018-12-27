@@ -55,10 +55,11 @@ function calculateFramesOffset (keyframes) {
 
 const _timing = Symbol('timing'),
   _keyframes = Symbol('keyframes'),
-  _element = Symbol('element')
+  _element = Symbol('element'),
+  _cb = Symbol('cb')
 
 export default class Keyframe {
-  constructor (element, keyframes, timing) {
+  constructor (element, keyframes, timing, cb) {
     if (keyframes.length < 2) {
       error('keyframes need at least two items.')
     }
@@ -88,6 +89,8 @@ export default class Keyframe {
     )
     this[_keyframes] = calculateFramesOffset(keyframes)
     this[_element] = element
+    this[_cb] = cb
+    this.cbEmitCount = 0
   }
   currentFrame (p) {
     let res = {}
@@ -122,7 +125,14 @@ export default class Keyframe {
   run (t) {
     let p = (t - this[_timing].delay) / this[_timing].duration,
       easingType = this[_timing].easing
-    if (p > 1) return
+    if (p > 1 && this.cbEmitCount === 0) {
+      this[_cb] && this[_cb].call(this[_element], this[_element])
+      return
+    } else if (p > 1) {
+      this.cbEmitCount = 1
+      return
+    }
+    this.cbEmitCount = 0
     if (typeof easingType === 'string') p = Easings[easingType](p)
     else if (Array.isArray(easingType)) p = getBezierEasing(...easingType)(p)
     else error('easing must be string or array')

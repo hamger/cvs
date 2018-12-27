@@ -1,4 +1,4 @@
-import { Scene, Image, Group, Bezier, Path } from '#'
+import { Scene, Image, Group, Path } from '#'
   ;(async function () {
   let scene = new Scene({
     containerId: 'container'
@@ -58,12 +58,16 @@ import { Scene, Image, Group, Bezier, Path } from '#'
     .append(new Path({ d: { type: 'rect', x: 0, y: 0, w: 30, h: 30 } }))
 
   group.append(circle2, image, subGroup)
-  // group.addTrack(
-  //   new Bezier({
+  group.keyframe([['x'], { x: 600 }], {duration: 3000}, function () {
+    layer.cancelAnimate()
+  })
+  // group.track(
+  //   'bezier',
+  //   {
   //     delay: 0,
   //     duration: 3000,
   //     points: [{ x: 100, y: 100 }, { x: 600, y: 200 }]
-  //   })
+  //   }
   // )
   layer.append(group)
   // let ruler = new Path({
@@ -79,6 +83,6 @@ import { Scene, Image, Group, Bezier, Path } from '#'
   //   stroke: 'red'
   // })
   // layer.append(ruler)
-  layer.draw()
-  // layer.animate()
+  // layer.draw()
+  layer.animate()
 })()

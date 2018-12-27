@@ -7,7 +7,6 @@ export default class Group extends Element {
   constructor (opt) {
     super(opt)
     this.children = []
-    this.setOutline()
   }
   append (...children) {
     children.forEach(child => {
@@ -28,13 +27,28 @@ export default class Group extends Element {
   }
   draw (ctx) {
     ctx.save()
-    ctx.strokeStyle = this.attr('stroke')
-    ctx.rect(this.attr('x'), this.attr('y'), this.attr('w'), this.attr('h'))
-    ctx.stroke()
-    ctx.translate(this.attr('x'), this.attr('y'))
-    if (!this.cacheCtx) this.cacheDraw()
+    this.matrix = getMatrix(
+      [this.attr('x'), this.attr('y')],
+      this.attr('transform')
+    )
+    console.log(this.attr('x'))
+    ctx.transform(...this.matrix)
+    if (!this.cacheCtx || this.needUpdate) this.preload()
+    if (this.attr('stroke')) {
+      ctx.strokeStyle = this.attr('stroke')
+      ctx.rect(0, 0, this.attr('w'), this.attr('h'))
+      ctx.stroke()
+    }
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
+  }
+  preload () {
+    this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
+    if (this.attr('clip')) this.clip(this.cacheCtx)
+    this.children.forEach(child => {
+      child.draw.call(child, this.cacheCtx)
+    })
+    this.setOutline()
   }
   clip (ctx) {
     var d = this.attr('clip')
@@ -45,35 +59,24 @@ export default class Group extends Element {
         d = circle2svg(d)
       } else error('unexpected type of path.')
     }
-    this.outline = new SvgPath(d)
-    this.outline
+    this.clipPath = new SvgPath(d)
+    this.clipPath
       .restore()
       .save()
       .beginPath()
-    this.matrix = getMatrix(
+    this.clipMatrix = getMatrix(
       [0, 0],
       this.attr('clip').transform || []
     )
-    this.outline.transform(...this.matrix)
-    this.outline.to(ctx)
+    this.clipPath.transform(...this.clipMatrix)
+    this.clipPath.to(ctx)
     ctx.clip()
-  }
-  cacheDraw () {
-    this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
-    if (this.attr('clip')) this.clip(this.cacheCtx)
-    this.children.forEach(child => {
-      child.draw.call(child, this.cacheCtx)
-    })
   }
   setOutline () {
     this.outline = new SvgPath(
       `M ${0} ${0} h ${this.attr('w')} v ${this.attr('h')} h -${this.attr(
         'w'
       )} z`
-    )
-    this.matrix = getMatrix(
-      [this.attr('x'), this.attr('y')],
-      this.attr('transform')
     )
     this.outline
       .restore()

@@ -7,11 +7,16 @@ import SvgPath from 'svg-path-to-canvas'
 export default class Image extends Element {
   constructor (opt) {
     super(opt)
-    this.preload()
+    // this.preload()
   }
   draw (ctx) {
     ctx.save()
+    this.matrix = getMatrix(
+      [this.attr('x'), this.attr('y')],
+      this.attr('transform')
+    )
     ctx.transform(...this.matrix)
+    if (!this.cacheCtx || this.needUpdate) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
@@ -48,10 +53,6 @@ export default class Image extends Element {
   setOutline () {
     this.outline = new SvgPath(
       `M ${0} ${0} h ${this.w} v ${this.h} h -${this.w} z`
-    )
-    this.matrix = getMatrix(
-      [this.attr('x'), this.attr('y')],
-      this.attr('transform')
     )
     this.outline
       .restore()

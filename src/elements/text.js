@@ -22,11 +22,16 @@ export default class Text extends Element {
       textAlign: 'left'
     })
     this.setDefault({ lineHeight: parseFont(this.attr('font')).size * 1.2 })
-    this.preload()
+    // this.preload()
   }
   draw (ctx) {
     ctx.save()
+    this.matrix = getMatrix(
+      [this.attr('x'), this.attr('y')],
+      this.attr('transform')
+    )
     ctx.transform(...this.matrix)
+    if (!this.cacheCtx || this.needUpdate) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
@@ -49,17 +54,14 @@ export default class Text extends Element {
     this.attr('text')
       .split(/\n/)
       .forEach((line, index) => {
-        if (this.attr('stroke')) { this.cacheCtx.strokeText(line, left, (index + 0.5) * lh) } else this.cacheCtx.fillText(line, left, (index + 0.5) * lh)
+        if (this.attr('stroke')) this.cacheCtx.strokeText(line, left, (index + 0.5) * lh)
+        else this.cacheCtx.fillText(line, left, (index + 0.5) * lh)
       })
     this.setOutline()
   }
   setOutline () {
     this.outline = new SvgPath(
       `M 0 0 h ${this.attr('w')} v ${this.attr('h')} h -${this.attr('w')} z`
-    )
-    this.matrix = getMatrix(
-      [this.attr('x'), this.attr('y')],
-      this.attr('transform')
     )
     this.outline
       .restore()

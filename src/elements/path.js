@@ -6,10 +6,15 @@ import { error, getMatrix } from '../utils/utils'
 class Path extends Element {
   constructor (opt) {
     super(opt)
-    this.preload()
+    // this.preload()
   }
   draw (ctx) {
     ctx.save()
+    this.matrix = getMatrix(
+      [this.attr('x'), this.attr('y')],
+      this.attr('transform')
+    )
+    if (!this.cacheCtx || this.needUpdate) this.preload()
     this.setAttr(ctx)
     if (this.attr('stroke')) this.outline.to(ctx).stroke()
     else this.outline.to(ctx).fill()
@@ -33,10 +38,6 @@ class Path extends Element {
       .restore()
       .save()
       .beginPath()
-    this.matrix = getMatrix(
-      [this.attr('x'), this.attr('y')],
-      this.attr('transform')
-    )
     this.setSvgAttr(this.outline)
     this.outline.transform(...this.matrix)
   }

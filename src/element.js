@@ -44,7 +44,18 @@ class Element {
         this.lw = this.opt.lineWidth / 2
       }
     }
-    this.attr(opt)
+    for (let key in opt) {
+      let val = opt[key]
+      if (val instanceof Function) {
+        // 支持函数设置
+        let value = val(val)
+        this.opt[kay] = value
+      } else {
+        this.opt[key] = val
+        if (key === 'offsetPath') this[key] = new SvgPath(val)
+      }
+    }
+    // this.attr(opt)
     this.setDefault({
       fill: '#000',
       anchor: [0, 0],
@@ -53,7 +64,7 @@ class Element {
       x: 0,
       y: 0
     })
-    this.finished = false
+    this.needUpdate = false
     this[_keyframeArr] = []
     this[_trackArr] = []
   }
@@ -129,10 +140,10 @@ class Element {
   // 设置/获取绘制属性
   attr (opt) {
     if (!opt) return this.opt
-    if (typeof opt === 'string') {
-      return this.opt[opt]
-    }
+    if (typeof opt === 'string') return this.opt[opt]
+    this.needUpdate = false
     for (let key in opt) {
+      if (!/\b(x|y|transform)\b/.test(key)) this.needUpdate = true
       let val = opt[key]
       if (val instanceof Function) {
         // 支持函数设置
@@ -143,7 +154,6 @@ class Element {
         if (key === 'offsetPath') this[key] = new SvgPath(val)
       }
     }
-    // this.update()
   }
   // 判断是否点击在元素上
   isCollision ({ x, y }) {
@@ -159,8 +169,8 @@ class Element {
     if (this[_trackArr].length > 0 || this[_keyframeArr].length > 0) return true
     else return false
   }
-  keyframe (keyframes, timing) {
-    this[_keyframeArr].push(new Keyframe(this, keyframes, timing))
+  keyframe (keyframes, timing, cb) {
+    this[_keyframeArr].push(new Keyframe(this, keyframes, timing, cb))
     return this
   }
   track (type, options) {
@@ -178,16 +188,16 @@ class Element {
     this[_keyframeArr].forEach(item => {
       item.run(t)
     })
-    let res = this.getCurTrack(t)
-    // 已执行完所有轨迹
-    if (res.index === undefined) {
-      this.finished = true
-      return
-    }
-    // 轨迹处于延迟状态
-    if (res.cycle === -1) return
-    // 执行当前轨迹循环体，并传入已经运行的时间
-    this[_trackArr][res.index].loop(res.time)
+    // let res = this.getCurTrack(t)
+    // // 已执行完所有轨迹
+    // if (res.index === undefined) {
+    //   this.finished = true
+    //   return
+    // }
+    // // 轨迹处于延迟状态
+    // if (res.cycle === -1) return
+    // // 执行当前轨迹循环体，并传入已经运行的时间
+    // this[_trackArr][res.index].loop(res.time)
   }
   getCurTrack (animateTime) {
     let res = {}
