@@ -51,20 +51,6 @@ layer.append(ele)
 // // group.append(rect)
 // layer.append(group)
 
-let rect2 = new Path({
-  zIndex: -1,
-  d: {
-    type: 'rect',
-    x: ele.bounds[0],
-    y: ele.bounds[1],
-    w: ele.size[0],
-    h: ele.size[1],
-    borderRadius: 2,
-  },
-  stroke: '#153'
-})
-layer.append(rect2)
-
 let ruler = new Path({
   zIndex: -1,
   d: {

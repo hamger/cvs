@@ -16,8 +16,8 @@ class Path extends Element {
     )
     if (!this.cacheCtx || this.needUpdate) this.preload()
     this.setAttr(ctx)
+    if (this.attr('fill')) this.outline.to(ctx).fill()
     if (this.attr('stroke')) this.outline.to(ctx).stroke()
-    else this.outline.to(ctx).fill()
     ctx.restore()
   }
   preload () {

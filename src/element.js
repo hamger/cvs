@@ -57,7 +57,6 @@ class Element {
     }
     // this.attr(opt)
     this.setDefault({
-      fill: '#000',
       anchor: [0, 0],
       pos: [0, 0],
       transform: [],

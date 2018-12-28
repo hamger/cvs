@@ -34,7 +34,10 @@ import { Scene, Image, Group, Path } from '#'
     y: 100,
     w: 300,
     h: 300,
-    stroke: '#ddd'
+    stroke: '#ddd',
+    transform: [
+      {rotate: 45}
+    ]
   })
   let subGroup = new Group({
     zIndex: 3,
@@ -42,7 +45,8 @@ import { Scene, Image, Group, Path } from '#'
     y: 200,
     w: 100,
     h: 100,
-    stroke: '#ddd'
+    // stroke: '#ddd'
+    stroke: 'red'
   })
     .append(
       new Path({
@@ -57,6 +61,7 @@ import { Scene, Image, Group, Path } from '#'
     )
     .append(new Path({ d: { type: 'rect', x: 70, y: 0, w: 30, h: 30 } }))
 
+  // group.append(circle2, image)
   group.append(circle2, image, subGroup)
   group.keyframe([['x'], { x: 600 }], {duration: 3000}, function () {
     layer.cancelAnimate()

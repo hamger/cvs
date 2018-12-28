@@ -34,17 +34,22 @@ export default class Group extends Element {
     console.log(this.attr('x'))
     ctx.transform(...this.matrix)
     if (!this.cacheCtx || this.needUpdate) this.preload()
-    if (this.attr('stroke')) {
-      ctx.strokeStyle = this.attr('stroke')
-      ctx.rect(0, 0, this.attr('w'), this.attr('h'))
-      ctx.stroke()
-    }
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
   preload () {
     this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     if (this.attr('clip')) this.clip(this.cacheCtx)
+    if (this.attr('fill')) {
+      this.cacheCtx.fillStyle = this.attr('fill')
+      this.cacheCtx.rect(0, 0, this.attr('w'), this.attr('h'))
+      this.cacheCtx.fill()
+    }
+    if (this.attr('stroke')) {
+      this.cacheCtx.strokeStyle = this.attr('stroke')
+      this.cacheCtx.rect(0, 0, this.attr('w'), this.attr('h'))
+      this.cacheCtx.stroke()
+    }
     this.children.forEach(child => {
       child.draw.call(child, this.cacheCtx)
     })

@@ -54,8 +54,8 @@ export default class Text extends Element {
     this.attr('text')
       .split(/\n/)
       .forEach((line, index) => {
+        if (this.attr('fill')) this.cacheCtx.fillText(line, left, (index + 0.5) * lh)
         if (this.attr('stroke')) this.cacheCtx.strokeText(line, left, (index + 0.5) * lh)
-        else this.cacheCtx.fillText(line, left, (index + 0.5) * lh)
       })
     this.setOutline()
   }
