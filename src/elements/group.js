@@ -27,13 +27,13 @@ export default class Group extends Element {
   }
   draw (ctx) {
     ctx.save()
-    ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('transformMatrix'))
     if (!this.cacheCtx || this.needUpdate) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
   preload () {
+    this.setOutline()
     this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     if (this.attr('clip')) this.clip(this.cacheCtx)
     if (this.attr('fill')) {
@@ -49,7 +49,6 @@ export default class Group extends Element {
     this.children.forEach(child => {
       child.draw.call(child, this.cacheCtx)
     })
-    this.setOutline()
   }
   clip (ctx) {
     var d = this.attr('clip')
@@ -74,6 +73,7 @@ export default class Group extends Element {
     ctx.clip()
   }
   setOutline () {
+    if (this.outline && !this.needUpdate) return
     this.outline = new SvgPath(
       `M ${0} ${0} h ${this.attr('w')} v ${this.attr('h')} h -${this.attr(
         'w'
@@ -83,6 +83,6 @@ export default class Group extends Element {
       .restore()
       .save()
       .beginPath()
-    this.outline.transform(this.attr('transformMatrix'))
+    this.outline.transform(...this.attr('transformMatrix'))
   }
 }

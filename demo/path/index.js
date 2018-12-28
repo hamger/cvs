@@ -14,12 +14,11 @@ var ele = new Path({
   d: d4,
   x: 200,
   y: 200,
-  translate: 50,
+  // translate: 50,
   scale: 2,
   stroke: 'pink',
   lineWidth: 4
 })
-// console.log(ele.center) // [16, 14.8]
 ele.on('click', () => {
   console.log('haha')
 })
@@ -72,7 +71,7 @@ layer.append(ruler)
 // })
 // layer.append(circle)
 
-ele.keyframe([['x'], {x: 500}], 3000, function () {
+ele.keyframe([['rotate'], {rotate: 500}], 5000, function () {
   layer.cancelAnimate()
 })
 layer.animate()

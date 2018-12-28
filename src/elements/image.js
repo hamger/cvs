@@ -7,22 +7,18 @@ import SvgPath from 'svg-path-to-canvas'
 export default class Image extends Element {
   constructor (opt) {
     super(opt)
-    // this.preload()
   }
   draw (ctx) {
     ctx.save()
     ctx.transform(...this.attr('transformMatrix'))
-    if (!this.cacheCtx || this.needUpdate) this.preload()
+    if (!this.cacheCtx) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
   preload () {
-    this.image = loadedResources.get(this.attr('image'))
-    this.w = this.attr('w') ? this.attr('w') : this.image.width
-    this.h = this.attr('h') ? this.attr('h') : this.image.height
+    this.setOutline()
     this.cacheCtx = createCtx(this.w, this.h)
     this.drawImg(this.cacheCtx)
-    this.setOutline()
   }
   drawImg (ctx) {
     ctx.save()
@@ -47,6 +43,10 @@ export default class Image extends Element {
     ctx.restore()
   }
   setOutline () {
+    // if (this.outline && !this.needUpdate) return
+    this.image = loadedResources.get(this.attr('image'))
+    this.w = this.attr('w') ? this.attr('w') : this.image.width
+    this.h = this.attr('h') ? this.attr('h') : this.image.height
     this.outline = new SvgPath(
       `M ${0} ${0} h ${this.w} v ${this.h} h -${this.w} z`
     )
@@ -54,6 +54,6 @@ export default class Image extends Element {
       .restore()
       .save()
       .beginPath()
-    this.outline.transform(this.attr('transformMatrix'))
+    this.outline.transform(...this.attr('transformMatrix'))
   }
 }

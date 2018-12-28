@@ -2,19 +2,18 @@ import Matrix from './matrix'
 import SvgPath from 'svg-path-to-canvas'
 
 function oneOrTwoValues (val) {
-  if (!Array.isArray(val)) {
-    return [val, val]
-  }
-  if (val.length === 1) {
-    return [val[0], val[0]]
-  }
+  if (!Array.isArray(val)) return [val, val]
+  if (val.length === 1) return [val[0], val[0]]
   return val
 }
 
+const _ele = Symbol('ele')
+
 export default class Attribute {
-  constructor () {
+  constructor (ele) {
     Object.assign(this, {
       visible: true,
+      // anchor: [0.5, 0.5],
       anchor: [0, 0],
       enableCache: false,
       _x: 0,
@@ -22,19 +21,21 @@ export default class Attribute {
       opacity: 1,
       width: '',
       height: '',
-      layoutX: 0,
-      layoutY: 0,
       _rotate: 0,
       _scale: [1, 1],
       _translate: [0, 0],
       _skew: [0, 0],
       transformOrigin: '',
       transformMatrix: [1, 0, 0, 1, 0, 0],
-      display: '',
       padding: [0, 0, 0, 0],
       margin: [0, 0, 0, 0],
       zIndex: 0
     })
+    this[_ele] = ele
+    // console.log(ele)
+    // console.log(ele.size())
+    // this.transformMatrix[4] = this.anchor[0] * ele.size()[0]
+    // this.transformMatrix[5] = this.anchor[1] * ele.size()[1]
   }
 
   get (key) {

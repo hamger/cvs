@@ -22,23 +22,16 @@ export default class Text extends Element {
       textAlign: 'left'
     })
     this.setDefault({ lineHeight: parseFont(this.attr('font')).size * 1.2 })
-    // this.preload()
   }
   draw (ctx) {
     ctx.save()
     ctx.transform(...this.attr('transformMatrix'))
-    if (!this.cacheCtx || this.needUpdate) this.preload()
+    if (!this.cacheCtx) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
   preload () {
-    const lines = this.attr('text').split(/\n/)
-    let maxW = 0
-    lines.forEach(line => {
-      let lineW = getTextWidth(line, this.attr('font'))
-      if (lineW > maxW) maxW = lineW
-    })
-    this.attr({ w: maxW, h: this.attr('lineHeight') * lines.length })
+    this.setOutline()
     this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     this.cacheCtx.textBaseline = 'middle'
     let left = 0,
@@ -47,15 +40,20 @@ export default class Text extends Element {
     else if (align === 'right') left = maxW / 2
     let lh = this.attr('lineHeight')
     this.setAttr(this.cacheCtx)
-    this.attr('text')
-      .split(/\n/)
-      .forEach((line, index) => {
-        if (this.attr('fill')) this.cacheCtx.fillText(line, left, (index + 0.5) * lh)
-        if (this.attr('stroke')) this.cacheCtx.strokeText(line, left, (index + 0.5) * lh)
-      })
-    this.setOutline()
+    this.lines.forEach((line, index) => {
+      if (this.attr('fill')) { this.cacheCtx.fillText(line, left, (index + 0.5) * lh) }
+      if (this.attr('stroke')) { this.cacheCtx.strokeText(line, left, (index + 0.5) * lh) }
+    })
   }
   setOutline () {
+    // if (this.outline && !this.needUpdate) return
+    this.lines = this.attr('text').split(/\n/)
+    let maxW = 0
+    this.lines.forEach(line => {
+      let lineW = getTextWidth(line, this.attr('font'))
+      if (lineW > maxW) maxW = lineW
+    })
+    this.attr({ w: maxW, h: this.attr('lineHeight') * this.lines.length })
     this.outline = new SvgPath(
       `M 0 0 h ${this.attr('w')} v ${this.attr('h')} h -${this.attr('w')} z`
     )
@@ -64,6 +62,6 @@ export default class Text extends Element {
       .save()
       .beginPath()
     this.setSvgAttr(this.outline)
-    this.outline.transform(this.attr('transformMatrix'))
+    this.outline.transform(...this.attr('transformMatrix'))
   }
 }

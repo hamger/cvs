@@ -9,13 +9,16 @@ class Path extends Element {
   }
   draw (ctx) {
     ctx.save()
-    if (!this.cacheCtx || this.needUpdate) this.preload()
+    if (!this.cacheCtx) this.preload()
     this.setAttr(ctx)
     if (this.attr('fill')) this.outline.to(ctx).fill()
     if (this.attr('stroke')) this.outline.to(ctx).stroke()
     ctx.restore()
   }
   preload () {
+    this.setOutline()
+  }
+  setOutline () {
     var d = this.attr('d')
     if (typeof d === 'object') {
       if (d.type === 'rect') {
@@ -24,11 +27,7 @@ class Path extends Element {
         d = circle2svg(d)
       } else error('unexpected type of path.')
     }
-    this.d = d
-    this.setOutline()
-  }
-  setOutline () {
-    this.outline = new SvgPath(this.d)
+    this.outline = new SvgPath(d)
     this.outline
       .restore()
       .save()

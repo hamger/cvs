@@ -14,8 +14,8 @@ import { Scene, Image, Path } from '#'
   let fgLayer = scene.layer()
   let ele = new Image({
     image: 'safari',
-    x: 200,
-    y: 200,
+    x: 20,
+    y: 20,
     // anchor: [0.5, 0.5],
     // w: 100,
     // h: 100,
@@ -34,18 +34,17 @@ import { Scene, Image, Path } from '#'
   ele.on('click', () => {
     console.log(123324243)
   })
-  // console.log(ele.bounds)
-  // var rect = new Path({
-  //   d: {
-  //     type: 'rect',
-  //     x: ele.bounds[0],
-  //     y: ele.bounds[1],
-  //     w: ele.size[0],
-  //     h: ele.size[1]
-  //   },
-  //   stroke: '#513'
-  // })
-  // fgLayer.append(ele, rect)
+  var rect = new Path({
+    d: {
+      type: 'rect',
+      x: ele.bounds[0],
+      y: ele.bounds[1],
+      w: ele.size[0],
+      h: ele.size[1]
+    },
+    stroke: '#513'
+  })
+  fgLayer.append(ele, rect)
 
   // let element3 = new Image({
   //   image: 'robot01',

@@ -5,10 +5,17 @@ import { Scene, Image, Group, Text, Path } from '#'
   })
 
   let layer = scene.layer({ handleEvent: true })
+  let text = new Text({
+    zIndex: 1,
+    text: '确定',
+    x: 100,
+    y: 100,
+    font: '24px serif'
+  })
 
   let rect = new Path({
     d: 'M0 0 h 70 v 50 h -70 z',
-    stroke: '#153'
+    stroke: 'red'
   })
 
   rect.on('click', () => {
@@ -21,19 +28,9 @@ import { Scene, Image, Group, Text, Path } from '#'
     w: 350,
     h: 350,
     stroke: '#ddd'
-  })
-    .append(
-      new Text({
-        text: '确定',
-        x: 0,
-        y: 0,
-        font: '24px serif'
-      })
-    )
-    .append(rect)
+  }).append(text, rect)
 
-  console.log(rect.outline)
-  button.outline = rect.outline
+  // button.outline = rect.outline
   layer.append(button)
 
   let ruler = new Path({

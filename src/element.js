@@ -41,19 +41,18 @@ class Element {
     this[_trackArr] = []
     this.needUpdate = false
   }
-  // get size () {
-  //   return this.outline.size.slice()
-  // }
-  // get bounds () {
-  //   return this.outline.bounds.map((item, index) => {
-  //     return item
-  //   })
-  // }
-  // get center () {
-  //   return this.outline.center.map((item, index) => {
-  //     return item
-  //   })
-  // }
+  get size () {
+    if (!this.outline) this.setOutline()
+    return this.outline.size.slice()
+  }
+  get bounds () {
+    if (!this.outline) this.setOutline()
+    return this.outline.bounds.slice()
+  }
+  get center () {
+    if (!this.outline) this.setOutline()
+    return this.outline.center.slice()
+  }
   set _ctx (val) {
     this.ctx = val
     if (this.children && this.children.length > 0) {
@@ -111,9 +110,13 @@ class Element {
     if (!opt) return this[_attr]
     if (typeof opt === 'string') return this[_attr].get(opt)
     this.needUpdate = false
+    // x,y 比矩阵变换属性先设置
+    if (opt.x != null) this[_attr].x = opt.x
+    if (opt.y != null) this[_attr].y = opt.y
     Object.entries(opt).forEach(item => {
       let [key, val] = item
-      if (!/\b(x|y|transform)\b/.test(key)) this.needUpdate = true
+      if (/\b(x|y)\b/.test(key)) return
+      if (!/\b(x|y|transform|scale|skew|rotate)\b/.test(key)) this.needUpdate = true
       this[_attr][key] = val
     })
   }
