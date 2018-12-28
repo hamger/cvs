@@ -1,19 +1,14 @@
 import Element from '../element'
 import SvgPath from 'svg-path-to-canvas'
 import { rect2svg, circle2svg } from '../utils/toSvg'
-import { error, getMatrix } from '../utils/utils'
+import { error } from '../utils/utils'
 
 class Path extends Element {
   constructor (opt) {
     super(opt)
-    // this.preload()
   }
   draw (ctx) {
     ctx.save()
-    this.matrix = getMatrix(
-      [this.attr('x'), this.attr('y')],
-      this.attr('transform')
-    )
     if (!this.cacheCtx || this.needUpdate) this.preload()
     this.setAttr(ctx)
     if (this.attr('fill')) this.outline.to(ctx).fill()
@@ -39,7 +34,7 @@ class Path extends Element {
       .save()
       .beginPath()
     this.setSvgAttr(this.outline)
-    this.outline.transform(...this.matrix)
+    this.outline.transform(...this.attr('transformMatrix'))
   }
 }
 

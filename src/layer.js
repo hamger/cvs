@@ -58,7 +58,7 @@ class Layer {
       if (child.children && child.children.length > 0) {
         this.emitEvent(child.children, type)
       }
-      if (!child.opt.visible || !child[type] || !child.outline) return
+      if (!child.attr('visible') || !child[type] || !child.outline) return
       if (child.isCollision(this.evt)) child[type].call(child, e)
     }, true)
   }
@@ -80,7 +80,7 @@ class Layer {
       child._ctx = this.ctx
       child._timeline = this.timeline.fork()
       this.children.push(child)
-      arrSort(this.children, 'opt.zIndex')
+      arrSort(this.children, 'zIndex')
     })
     return this
   }
@@ -93,7 +93,7 @@ class Layer {
   }
   draw () {
     this.children.forEach(child => {
-      if (child.opt.visible) {
+      if (child.attr('visible')) {
         child.draw.call(child, this.ctx)
       }
     })

@@ -14,12 +14,8 @@ var ele = new Path({
   d: d4,
   x: 200,
   y: 200,
-  transform: [
-    // { translate: [-16, -14.8] },
-    { rotate: 45 },
-    { scale: 2 },
-    // { translate: [16, 14.8] },
-  ],
+  translate: 50,
+  scale: 2,
   stroke: 'pink',
   lineWidth: 4
 })
@@ -64,19 +60,23 @@ let ruler = new Path({
 })
 layer.append(ruler)
 
-let circle = new Path({
-  d: {
-    type: 'circle',
-    cx: 200,
-    cy: 200,
-    r: [100, 50],
-    rotate: 90,
-  },
-  stroke: 'red'
-})
-layer.append(circle)
+// let circle = new Path({
+//   d: {
+//     type: 'circle',
+//     cx: 200,
+//     cy: 200,
+//     r: [100, 50],
+//     rotate: 90,
+//   },
+//   stroke: 'red'
+// })
+// layer.append(circle)
 
-layer.draw()
+ele.keyframe([['x'], {x: 500}], 3000, function () {
+  layer.cancelAnimate()
+})
+layer.animate()
+// layer.draw()
 
 // let flag = true
 // rect2.on('click', () => {

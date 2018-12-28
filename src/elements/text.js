@@ -26,11 +26,7 @@ export default class Text extends Element {
   }
   draw (ctx) {
     ctx.save()
-    this.matrix = getMatrix(
-      [this.attr('x'), this.attr('y')],
-      this.attr('transform')
-    )
-    ctx.transform(...this.matrix)
+    ctx.transform(...this.attr('transformMatrix'))
     if (!this.cacheCtx || this.needUpdate) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
@@ -68,6 +64,6 @@ export default class Text extends Element {
       .save()
       .beginPath()
     this.setSvgAttr(this.outline)
-    this.outline.transform(...this.matrix)
+    this.outline.transform(this.attr('transformMatrix'))
   }
 }

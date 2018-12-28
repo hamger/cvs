@@ -1,9 +1,9 @@
 // import Track from './track'
 // import ElementAttr from './utils/elementAttr'
+import Attribute from './utils/attribute'
 import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
 import { error } from './utils/utils'
-import SvgPath from 'svg-path-to-canvas'
 
 const _keyframeArr = Symbol('keyframeArr'),
   _trackArr = Symbol('trackArr'),
@@ -27,59 +27,33 @@ const property = [
 let id = 0
 class Element {
   constructor (opt) {
-    // this[_attr] = new ElementAttr(this)
+    this[_attr] = new Attribute()
     if (typeof opt.id === 'string') {
       this.id = opt.id
       delete opt.id
     } else this.id = id++
-    this.opt = {
-      cache: false,
-      visible: true,
-      zIndex: 0
-    }
-    if (this.opt.cache) {
-      // 记录线条宽度，离屏渲染需要遇到
-      this.lw = 0
-      if (this.opt.stroke && this.opt.lineWidth) {
-        this.lw = this.opt.lineWidth / 2
-      }
-    }
-    for (let key in opt) {
-      let val = opt[key]
-      if (val instanceof Function) {
-        // 支持函数设置
-        let value = val(val)
-        this.opt[kay] = value
-      } else {
-        this.opt[key] = val
-        if (key === 'offsetPath') this[key] = new SvgPath(val)
-      }
-    }
-    // this.attr(opt)
-    this.setDefault({
-      anchor: [0, 0],
-      pos: [0, 0],
-      transform: [],
-      x: 0,
-      y: 0
+    this.index = opt.index || 0
+    Object.entries(opt).forEach(item => {
+      let [key, val] = item
+      this[_attr][key] = val
     })
-    this.needUpdate = false
     this[_keyframeArr] = []
     this[_trackArr] = []
+    this.needUpdate = false
   }
-  get size () {
-    return this.outline.size.slice()
-  }
-  get bounds () {
-    return this.outline.bounds.map((item, index) => {
-      return item
-    })
-  }
-  get center () {
-    return this.outline.center.map((item, index) => {
-      return item
-    })
-  }
+  // get size () {
+  //   return this.outline.size.slice()
+  // }
+  // get bounds () {
+  //   return this.outline.bounds.map((item, index) => {
+  //     return item
+  //   })
+  // }
+  // get center () {
+  //   return this.outline.center.map((item, index) => {
+  //     return item
+  //   })
+  // }
   set _ctx (val) {
     this.ctx = val
     if (this.children && this.children.length > 0) {
@@ -111,9 +85,10 @@ class Element {
     return new Cons(options)
   }
   setDefault (opt) {
-    for (let key in opt) {
-      if (!this.attr(key)) this.attr({ [key]: opt[key] })
-    }
+    Object.entries(opt).forEach(item => {
+      let [key, val] = item
+      if (!this.attr(key)) this[_attr][key] = val
+    })
   }
   // 设置上下文属性
   setAttr (ctx) {
@@ -131,28 +106,16 @@ class Element {
     if (attrs.lineCap) outline.lineCap(attrs.lineCap)
     if (attrs.lineJoin) outline.lineJoin(attrs.lineJoin)
   }
-  // 填充或描边
-  dye (ctx) {
-    if (this.opt.stroke) ctx.stroke()
-    else ctx.fill()
-  }
   // 设置/获取绘制属性
   attr (opt) {
-    if (!opt) return this.opt
-    if (typeof opt === 'string') return this.opt[opt]
+    if (!opt) return this[_attr]
+    if (typeof opt === 'string') return this[_attr].get(opt)
     this.needUpdate = false
-    for (let key in opt) {
+    Object.entries(opt).forEach(item => {
+      let [key, val] = item
       if (!/\b(x|y|transform)\b/.test(key)) this.needUpdate = true
-      let val = opt[key]
-      if (val instanceof Function) {
-        // 支持函数设置
-        let value = val(val)
-        this.opt[kay] = value
-      } else {
-        this.opt[key] = val
-        if (key === 'offsetPath') this[key] = new SvgPath(val)
-      }
-    }
+      this[_attr][key] = val
+    })
   }
   // 判断是否点击在元素上
   isCollision ({ x, y }) {

@@ -36,7 +36,7 @@ import { Scene, Image, Group, Path } from '#'
     h: 300,
     stroke: '#ddd',
     transform: [
-      {rotate: 45}
+      // {rotate: 45}
     ]
   })
   let subGroup = new Group({

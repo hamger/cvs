@@ -19,32 +19,34 @@ import { Scene, Image, Path } from '#'
     // anchor: [0.5, 0.5],
     // w: 100,
     // h: 100,
-    transform: [
-      // { translate: [200, 0] },
-      // { rotate: 45 },
-      // { skew: [1, 0] },
-      { scale: 2 },
-      {transform: [1, 1, 0, 1, 0, 0]},
-      // { translate: [200, 0] },
-    ]
+    scale: 2,
+    // transform: [
+    //   // { translate: [200, 0] },
+    //   // { rotate: 45 },
+    //   // { skew: [1, 0] },
+    //   { scale: 2 },
+    //   {transform: [1, 1, 0, 1, 0, 0]},
+    //   // { translate: [200, 0] },
+    // ]
     // transform: [1, 0.1, 0.2, 1, 100, 100],
     // cache: true,
   })
   ele.on('click', () => {
     console.log(123324243)
   })
-  console.log(ele.bounds)
-  var rect = new Path({
-    d: {
-      type: 'rect',
-      x: ele.bounds[0],
-      y: ele.bounds[1],
-      w: ele.size[0],
-      h: ele.size[1]
-    },
-    stroke: '#513'
-  })
-  fgLayer.append(ele, rect)
+  // console.log(ele.bounds)
+  // var rect = new Path({
+  //   d: {
+  //     type: 'rect',
+  //     x: ele.bounds[0],
+  //     y: ele.bounds[1],
+  //     w: ele.size[0],
+  //     h: ele.size[1]
+  //   },
+  //   stroke: '#513'
+  // })
+  // fgLayer.append(ele, rect)
+
   // let element3 = new Image({
   //   image: 'robot01',
   //   x: 600,

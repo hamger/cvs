@@ -15,7 +15,7 @@
 
 | options.key   | value  | description                        | default |
 | ------------- | ------ | ---------------------------------- | ------- |
-| fill          | String | 设置用于填充绘画的颜色、渐变或模式 | `#000`  |
+| fill          | String | 设置用于填充绘画的颜色、渐变或模式 | --  |
 | stroke        | String | 设置用于笔触的颜色、渐变或模式     | --      |
 | shadowColor   | String | 设置用于阴影的颜色                 | --      |
 | shadowBlur    | Number | 设置用于阴影的模糊级别             | --      |
@@ -29,6 +29,7 @@ cvs 只对两个常用属性进行了缩写
 - `fillStyle` 缩写为 `fill`
 - `strokeStyle` 缩写为 `stroke`
 
+这两个属性支持同时设置
 :::
 
 ### 实例方法

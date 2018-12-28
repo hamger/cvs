@@ -132,8 +132,6 @@ export default class ElementAttr {
         }
       })
     }
-    console.log(123)
-    console.log(this.get('transformMatrix'))
   }
 
   set transformOrigin (val) {
