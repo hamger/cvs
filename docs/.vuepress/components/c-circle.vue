@@ -25,7 +25,7 @@ export default {
       d: {
         type: 'circle',
         cx: 200,
-        cy: 160,
+        cy: 100,
         r: [60, 40],
         rotate: 45,
       },
@@ -36,7 +36,7 @@ export default {
       d: {
         type: 'circle',
         cx: 400,
-        cy: 150,
+        cy: 100,
         r: 40
       },
       fill: '#153'

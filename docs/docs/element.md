@@ -4,32 +4,30 @@
 
 ### options
 
-| options.key | value   | description             | default |
-| ----------- | ------- | ----------------------- | ------- |
-| zIndex      | Number  | 规定元素在 z 轴上的坐标 | `0`     |
-| visible     | Boolean | 规定元素是否可见        | `true`  |
+| options.key     | value         | description                                  | default              |
+| --------------- | ------------- | -------------------------------------------- | -------------------- |
+| id              | String        | 规定元素的 id                                | 一个整数             |
+| zIndex          | Number        | 规定元素在 z 轴上的坐标                      | `0`                  |
+| visible         | Boolean       | 规定元素是否可见                             | `true`               |
+| x               | Number        | 规定元素矩阵变换前的左上角 x 轴坐标          | `0`                  |
+| y               | Number        | 规定元素矩阵变换前的左上角 y 轴坐标          | `0`                  |
+| fill            | String        | 设置用于填充绘画的颜色、渐变或模式           | --                   |
+| stroke          | String        | 设置用于笔触的颜色、渐变或模式               | --                   |
+| transformOrigin | Number\|Array | 规定元素矩阵变换的的原点与元素左上角的偏移量 | --                   |
+| rotate          | Number        | 规定元素矩阵变换中旋转的角度                 | `0`                  |
+| scale           | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴缩放的倍数     | `[1, 1]`             |
+| translate       | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴移动的距离     | `[0, 0]`             |
+| skew            | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴倾斜的角度     | `[0, 0]`             |
+| transform       | Array         | 规定元素矩阵变换中的矩阵                     | `[1, 0, 0, 1, 0, 0]` |
+| globalAlpha     | Number        | 设置绘图的当前 alpha 或透明值                | --                   |
 
-<!-- | hover       | Object  | 规定鼠标移动到元素上时的元素属性（仅在 PC 端生效） | --      | -->
-
-由于 cvs 是基于 canvas 的框架，所以元素支持应有的 canvas 属性，以下列出了常用的属性，详细信息可参考[canvas 属性](http://www.w3school.com.cn/tags/html_ref_canvas.asp)。
-
-| options.key   | value  | description                        | default |
-| ------------- | ------ | ---------------------------------- | ------- |
-| fill          | String | 设置用于填充绘画的颜色、渐变或模式 | --  |
-| stroke        | String | 设置用于笔触的颜色、渐变或模式     | --      |
-| shadowColor   | String | 设置用于阴影的颜色                 | --      |
-| shadowBlur    | Number | 设置用于阴影的模糊级别             | --      |
-| shadowOffsetX | Number | 设置阴影距形状的水平距离           | --      |
-| shadowOffsetY | Number | 设置阴影距形状的垂直距离           | --      |
-| globalAlpha   | Number | 设置绘图的当前 alpha 或透明值      | --      |
+<!-- | shadowColor   | String  | 设置用于阴影的颜色                 | --      |
+| shadowBlur    | Number  | 设置用于阴影的模糊级别             | --      |
+| shadowOffsetX | Number  | 设置阴影距形状的水平距离           | --      |
+| shadowOffsetY | Number  | 设置阴影距形状的垂直距离           | --      | -->
 
 ::: tip
-cvs 只对两个常用属性进行了缩写
-
-- `fillStyle` 缩写为 `fill`
-- `strokeStyle` 缩写为 `stroke`
-
-这两个属性支持同时设置
+`transformOrigin: [50, 50]`表示元素矩阵变换的原点为`[x + 50, y + 50]`，可以缩写为`transformOrigin: 50`。`scale`、`translate`、`skew`的缩写形式同理。
 :::
 
 ### 实例方法
@@ -129,9 +127,6 @@ cvs 只对两个常用属性进行了缩写
 - 描述：
 
   为元素绑定事件监听
-  ::: warning
-  cvs 内部使用`isPointInPath()`判断是否在元素区域内，如果路径指定了变形，将以变形前为基准，因此不要为变形后的元素绑定事件监听
-  :::
 
 - 参数：
 

@@ -8,14 +8,12 @@ let group = new Group(options);
 
 ### options
 
-除了支持[公共属性](/docs/element.html#options)外，还支持以下属性：
+除了支持元素的[基础属性](/docs/element.html#options)外，还支持以下属性：
 
-| options.key | value  | description     | default     |
-| ----------- | ------ | --------------- | ----------- |
-| x           | Number | 规定组合 x 坐标 | --          |
-| y           | Number | 规定组合 y 坐标 | --          |
-| w           | Number | 规定组合宽度    | `undefined` |
-| h           | Number | 规定组合高度    | `undefined` |
+| options.key | value  | description  | default |
+| ----------- | ------ | ------------ | ------- |
+| w           | Number | 规定组合宽度 | --      |
+| h           | Number | 规定组合高度 | --      |
 
 ::: tip
 组合可以不设置宽高，这样的组合称为虚拟节点，即没有边界的组合
@@ -27,13 +25,13 @@ let group = new Group(options);
 
 - 描述：
 
-  向画布中添加一个或多个图形
+  向画布中添加一个或多个元素
 
 - 参数：
 
   - `{Element} element`
     ::: tip
-    组合中的图形根据组合的位置定位
+    组合中的元素根据组合的位置定位
     :::
 
 - 示例：
@@ -45,14 +43,14 @@ let group = new Group(options);
 
 - 描述：
 
-  从画布中去除一个或多个图形
+  从画布中去除一个或多个元素
 
 - 参数：
 
   - `{Element} element`
 
 ::: tip
-支持不传参数，`group.remove()`将删除所有的图形
+支持不传参数，`group.remove()`将删除所有的元素
 :::
 
 - 示例：
