@@ -171,12 +171,8 @@ export function getMatrix (pos, transforms) {
 }
 
 export function oneOrTwoValues (val) {
-  if (!Array.isArray(val)) {
-    return [val, val]
-  }
-  if (val.length === 1) {
-    return [val[0], val[0]]
-  }
+  if (!Array.isArray(val)) return [val, val]
+  if (val.length === 1) return [val[0], val[0]]
   return val
 }
 

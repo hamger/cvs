@@ -56,8 +56,8 @@ let ellipse = new Path({
 
 | d.key        | value                   | description         | default |
 | ------------ | ----------------------- | ------------------- | ------- |
-| x            | Number                  | 矩形左上角 x 轴坐标 | --      |
-| y            | Number                  | 矩形左上角 y 轴坐标 | --      |
+| x            | Number                  | 矩形左上角 x 轴坐标 | `0`      |
+| y            | Number                  | 矩形左上角 y 轴坐标 | `0`      |
 | w            | Number                  | 矩形宽度            | --      |
 | h            | Number                  | 矩形高度            | --      |
 | borderRadius | Number\|Array\<Number\> | 矩形圆角的半径      | `0`     |

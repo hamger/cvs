@@ -24,8 +24,7 @@ var ele = new Path({
 ele.on('click', () => {
   console.log('haha')
 })
-// console.log(ele.size)
-layer.append(ele)
+// layer.append(ele)
 
 // layer.append(
 //   new Path({
@@ -63,17 +62,18 @@ let ruler = new Path({
 layer.append(ruler)
 ruler.keyframe([['x'], {x: 300}], 3000)
 
-// let circle = new Path({
-//   d: {
-//     type: 'circle',
-//     cx: 200,
-//     cy: 200,
-//     r: [100, 50],
-//     rotate: 90,
-//   },
-//   stroke: 'red'
-// })
-// layer.append(circle)
+let circle = new Path({
+  d: {
+    type: 'circle',
+    cx: 200,
+    cy: 200,
+    r: [100, 50],
+    // rotate: 30,
+    rotate: 320,
+  },
+  stroke: 'red'
+})
+layer.append(circle)
 
 ele.keyframe([['x', 'rotate'], {x: 450, rotate: 900}], 3000, function () {
   layer.cancelAnimate()
@@ -81,8 +81,8 @@ ele.keyframe([['x', 'rotate'], {x: 450, rotate: 900}], 3000, function () {
 // ele.keyframe([['rotate'], {rotate: 900}], 5000, function () {
 //   layer.cancelAnimate()
 // })
-layer.animate()
-// layer.draw()
+// layer.animate()
+layer.draw()
 
 // let flag = true
 // rect2.on('click', () => {

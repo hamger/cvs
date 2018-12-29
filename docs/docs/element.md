@@ -20,11 +20,10 @@
 | skew            | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴倾斜的角度     | `[0, 0]`             |
 | transform       | Array         | 规定元素矩阵变换中的矩阵                     | `[1, 0, 0, 1, 0, 0]` |
 | globalAlpha     | Number        | 设置绘图的当前 alpha 或透明值                | --                   |
-
-<!-- | shadowColor   | String  | 设置用于阴影的颜色                 | --      |
-| shadowBlur    | Number  | 设置用于阴影的模糊级别             | --      |
-| shadowOffsetX | Number  | 设置阴影距形状的水平距离           | --      |
-| shadowOffsetY | Number  | 设置阴影距形状的垂直距离           | --      | -->
+| shadowColor     | String        | 设置用于阴影的颜色                           | --                   |
+| shadowBlur      | Number        | 设置用于阴影的模糊级别                       | --                   |
+| shadowOffsetX   | Number        | 设置阴影距形状的水平距离                     | --                   |
+| shadowOffsetY   | Number        | 设置阴影距形状的垂直距离                     | --                   |
 
 ::: tip
 `transformOrigin: [50, 50]`表示元素矩阵变换的原点为`[x + 50, y + 50]`，可以缩写为`transformOrigin: 50`。`scale`、`translate`、`skew`的缩写形式同理。

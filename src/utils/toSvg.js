@@ -1,13 +1,13 @@
-
+import { oneOrTwoValues } from './utils'
 // 矩形转成 svg 路径
 export function rect2svg (d) {
   if (!d.borderRadius) {
-    return `M ${d.x} ${d.y} h ${d.w} v ${d.h} h ${-d.w} z`
+    return `M ${d.x || 0} ${d.y || 0} h ${d.w} v ${d.h} h -${d.w} z`
   } else {
     let r = [],
       radius = d.borderRadius,
-      x = d.x,
-      y = d.y,
+      x = d.x || 0,
+      y = d.y || 0,
       w = d.w,
       h = d.h
     if (radius instanceof Array) {
@@ -40,9 +40,28 @@ export function rect2svg (d) {
 
 // 圆形、椭圆转成 svg 路径
 export function circle2svg (d) {
-  let r = []
-  if (typeof d.r === 'number') r = [d.r, d.r]
-  else r = d.r
-  return `M ${d.cx - r[0]} ${d.cy} a ${r[0]} ${r[1]} ${d.rotate ||
-    0} 1 1 0 1 z`
+  const [rx, ry] = oneOrTwoValues(d.r),
+    { cx, cy, rotate = 0 } = d
+  const calc = calculate({ cx, cy, rx, ry, rotate })
+  const start = calc(0)
+  const end = calc(-1)
+  return `M ${start.x} ${start.y} A ${rx} ${ry} ${rotate} 1 1 ${end.x} ${
+    end.y
+  } z`
+}
+
+function calculate ({ cx, cy, rx, ry, rotate }) {
+  return function (angle) {
+    const rnx = rx * Math.cos((angle * Math.PI) / 180)
+    const rny = ry * Math.sin((angle * Math.PI) / 180)
+    const x =
+      cx +
+      rnx * Math.cos((rotate * Math.PI) / 180) -
+      rny * Math.sin((rotate * Math.PI) / 180)
+    const y =
+      cy +
+      rnx * Math.sin((rotate * Math.PI) / 180) +
+      rny * Math.cos((rotate * Math.PI) / 180)
+    return { x, y }
+  }
 }

@@ -1,11 +1,6 @@
 import Matrix from './matrix'
 import SvgPath from 'svg-path-to-canvas'
-
-function oneOrTwoValues (val) {
-  if (!Array.isArray(val)) return [val, val]
-  if (val.length === 1) return [val[0], val[0]]
-  return val
-}
+import { oneOrTwoValues } from './utils'
 
 export default class Attribute {
   constructor () {
