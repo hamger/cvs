@@ -71,7 +71,6 @@
   "dependencies": {
     "bezier-easing": "^2.0.3",
     "color-string": "^1.5.3",
-    "sprite-math": "^1.0.5",
     "svg-path-to-canvas": "^1.9.6"
   }
 }

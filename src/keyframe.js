@@ -1,4 +1,4 @@
-import { error } from './utils/utils'
+import { error, forObj } from './utils/utils'
 import { Easings, getBezierEasing } from './utils/easing'
 import colorString from 'color-string'
 
@@ -107,46 +107,50 @@ export default class Keyframe {
   result (p) {
     let { f, t } = this.currentFrame(p)
     let result = {}
-    for (let key in f) {
-      if (key === 'offset') continue
+    forObj(f, (key, val) => {
+      if (/\b(offset)\b/.test(key)) return
       if (/\b(fill|stroke)\b/.test(key)) {
         result[key] = colorString.to.rgb([
-          calculate(f[key][0], t[key][0], p, f.offset, t.offset),
-          calculate(f[key][1], t[key][1], p, f.offset, t.offset),
-          calculate(f[key][2], t[key][2], p, f.offset, t.offset),
-          calculate(f[key][3], t[key][3], p, f.offset, t.offset)
+          calculate(val[0], t[key][0], p, f.offset, t.offset),
+          calculate(val[1], t[key][1], p, f.offset, t.offset),
+          calculate(val[2], t[key][2], p, f.offset, t.offset),
+          calculate(val[3], t[key][3], p, f.offset, t.offset)
         ])
       } else {
-        result[key] = calculate(f[key], t[key], p, f.offset, t.offset)
+        result[key] = calculate(val, t[key], p, f.offset, t.offset)
       }
-    }
+    })
     return result
   }
   run (t) {
     let p = (t - this[_timing].delay) / this[_timing].duration,
       easingType = this[_timing].easing
-    if (p > 1 && this.cbEmitCount === 0) {
-      this[_cb] && this[_cb].call(this[_element], this[_element])
+    if (p >= 1 && this.cbEmitCount === 0) {
+      // 保证最后一帧是终点
+      this[_element].attr(this.handle(this.result(1)))
+      this.cbEmitCount++
       return
-    } else if (p > 1) {
-      this.cbEmitCount = 1
+    } else if (p >= 1 && this.cbEmitCount === 1) {
+      this[_cb] && this[_cb].call(this[_element], this[_element])
+      this.cbEmitCount++
       return
     }
     this.cbEmitCount = 0
     if (typeof easingType === 'string') p = Easings[easingType](p)
     else if (Array.isArray(easingType)) p = getBezierEasing(...easingType)(p)
     else error('easing must be string or array')
-
-    let newAttr = this.result(p)
-    if (newAttr.offsetDistance != null) {
+    this[_element].attr(this.handle(this.result(p)))
+  }
+  handle (arg) {
+    if (arg.offsetDistance != null) {
       const len = this[_element].offsetPath.getTotalLength()
       const [x, y] = this[_element].offsetPath.getPointAtLength(
-        len * newAttr.offsetDistance
+        len * arg.offsetDistance
       )
-      newAttr.x = x
-      newAttr.y = y
-      delete newAttr.offsetDistance
+      arg.x = x
+      arg.y = y
+      delete arg.offsetDistance
     }
-    this[_element].attr(newAttr)
+    return arg
   }
 }

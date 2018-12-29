@@ -7,10 +7,11 @@ class Path extends Element {
   constructor (opt) {
     super(opt)
   }
-  draw (ctx) {
+  render (ctx) {
     ctx.save()
     if (!this.cacheCtx) this.preload()
     this.setAttr(ctx)
+    ctx.translate(this.attr('x'), this.attr('y'))
     if (this.attr('fill')) this.outline.to(ctx).fill()
     if (this.attr('stroke')) this.outline.to(ctx).stroke()
     ctx.restore()
@@ -33,7 +34,8 @@ class Path extends Element {
       .save()
       .beginPath()
     this.setSvgAttr(this.outline)
-    this.outline.transform(...this.attr('transformMatrix'))
+    this.outline.transform(...this.attr('lastMatrix'))
+    // this.outline.translate(this.attr('x'), this.attr('y'))
   }
 }
 

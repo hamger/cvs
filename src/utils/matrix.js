@@ -89,13 +89,13 @@ Matrix.prototype.rotate = function (deg) {
     (ty, 1, 0)
  */
 Matrix.prototype.skew = function (degX, degY) {
-  // degY |= 0
-  // const radX = (degX * Math.PI) / 180,
-  //   radY = (degY * Math.PI) / 180
-  // const tx = Math.tan(radX),
-  //   ty = Math.tan(radY)
+  degY |= 0
+  const radX = (degX * Math.PI) / 180,
+    radY = (degY * Math.PI) / 180
+  const tx = Math.tan(radX),
+    ty = Math.tan(radY)
 
-  return this.multiply([1, degX, degY, 1, 0, 0])
+  return this.multiply([1, ty, tx, 1, 0, 0])
 }
 
 /**

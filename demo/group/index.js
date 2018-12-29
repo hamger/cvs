@@ -35,9 +35,9 @@ import { Scene, Image, Group, Path } from '#'
     w: 300,
     h: 300,
     stroke: '#ddd',
-    transform: [
-      // {rotate: 45}
-    ]
+    // transformOrigin: 150,
+    fill: 'green',
+    rotate: 45
   })
   let subGroup = new Group({
     zIndex: 3,
@@ -63,7 +63,7 @@ import { Scene, Image, Group, Path } from '#'
 
   // group.append(circle2, image)
   group.append(circle2, image, subGroup)
-  group.keyframe([['x'], { x: 600 }], {duration: 3000}, function () {
+  group.keyframe([['x'], { x: 600, rotate: 900 }], {duration: 3000}, function () {
     layer.cancelAnimate()
   })
   // group.track(

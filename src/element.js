@@ -3,7 +3,7 @@
 import Attribute from './utils/attribute'
 import Bezier from './tracks/bezier'
 import Keyframe from './keyframe'
-import { error } from './utils/utils'
+import { error, forObj } from './utils/utils'
 
 const _keyframeArr = Symbol('keyframeArr'),
   _trackArr = Symbol('trackArr'),
@@ -27,14 +27,13 @@ const property = [
 let id = 0
 class Element {
   constructor (opt) {
-    this[_attr] = new Attribute()
+    this[_attr] = new Attribute(this)
     if (typeof opt.id === 'string') {
       this.id = opt.id
       delete opt.id
     } else this.id = id++
     this.index = opt.index || 0
-    Object.entries(opt).forEach(item => {
-      let [key, val] = item
+    forObj(opt, (key, val) => {
       this[_attr][key] = val
     })
     this[_keyframeArr] = []
@@ -83,12 +82,6 @@ class Element {
     const options = Object.assign({}, this.opt, opt)
     return new Cons(options)
   }
-  setDefault (opt) {
-    Object.entries(opt).forEach(item => {
-      let [key, val] = item
-      if (!this.attr(key)) this[_attr][key] = val
-    })
-  }
   // 设置上下文属性
   setAttr (ctx) {
     const attrs = this.attr()
@@ -111,18 +104,17 @@ class Element {
     if (typeof opt === 'string') return this[_attr].get(opt)
     this.needUpdate = false
     // x,y 比矩阵变换属性先设置
-    if (opt.x != null) this[_attr].x = opt.x
-    if (opt.y != null) this[_attr].y = opt.y
-    Object.entries(opt).forEach(item => {
-      let [key, val] = item
-      if (/\b(x|y)\b/.test(key)) return
-      if (!/\b(x|y|transform|scale|skew|rotate)\b/.test(key)) this.needUpdate = true
+    // if (opt.x != null) this[_attr].x = opt.x
+    // if (opt.y != null) this[_attr].y = opt.y
+    forObj(opt, (key, val) => {
+      // if (/\b(x|y)\b/.test(key)) return
+      // if (!/\b(x|y|transform|scale|skew|rotate)\b/.test(key)) this.needUpdate = true
       this[_attr][key] = val
     })
   }
   // 判断是否点击在元素上
   isCollision ({ x, y }) {
-    return this.outline.isPointInPath(x, y)
+    return this.outline.isPointInPath(x - this.attr('x'), y - this.attr('y'))
   }
   on (eventType, callback) {
     this[eventType] = callback

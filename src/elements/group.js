@@ -25,9 +25,10 @@ export default class Group extends Element {
       })
     } else this.children = []
   }
-  draw (ctx) {
+  render (ctx) {
     ctx.save()
-    ctx.transform(...this.attr('transformMatrix'))
+    ctx.translate(this.attr('x'), this.attr('y'))
+    ctx.transform(...this.attr('lastMatrix'))
     if (!this.cacheCtx || this.needUpdate) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
@@ -47,7 +48,7 @@ export default class Group extends Element {
       this.cacheCtx.stroke()
     }
     this.children.forEach(child => {
-      child.draw.call(child, this.cacheCtx)
+      child.render.call(child, this.cacheCtx)
     })
   }
   clip (ctx) {
@@ -83,6 +84,6 @@ export default class Group extends Element {
       .restore()
       .save()
       .beginPath()
-    this.outline.transform(...this.attr('transformMatrix'))
+    this.outline.transform(...this.attr('lastMatrix'))
   }
 }

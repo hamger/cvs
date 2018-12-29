@@ -8,9 +8,10 @@ export default class Image extends Element {
   constructor (opt) {
     super(opt)
   }
-  draw (ctx) {
+  render (ctx) {
     ctx.save()
-    ctx.transform(...this.attr('transformMatrix'))
+    ctx.translate(this.attr('x'), this.attr('y'))
+    ctx.transform(...this.attr('lastMatrix'))
     if (!this.cacheCtx) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
@@ -54,6 +55,6 @@ export default class Image extends Element {
       .restore()
       .save()
       .beginPath()
-    this.outline.transform(...this.attr('transformMatrix'))
+    this.outline.transform(...this.attr('lastMatrix'))
   }
 }

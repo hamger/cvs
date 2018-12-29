@@ -17,15 +17,12 @@ const getTextWidth = (text, font) => {
 export default class Text extends Element {
   constructor (opt) {
     super(opt)
-    this.setDefault({
-      font: '16px Arial',
-      textAlign: 'left'
-    })
-    this.setDefault({ lineHeight: parseFont(this.attr('font')).size * 1.2 })
+    if (!this.attr('lineHeight')) this.attr({lineHeight: parseFont(this.attr('font')).size * 1.2})
   }
-  draw (ctx) {
+  render (ctx) {
     ctx.save()
-    ctx.transform(...this.attr('transformMatrix'))
+    ctx.translate(this.attr('x'), this.attr('y'))
+    ctx.transform(...this.attr('lastMatrix'))
     if (!this.cacheCtx) this.preload()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
@@ -62,6 +59,6 @@ export default class Text extends Element {
       .save()
       .beginPath()
     this.setSvgAttr(this.outline)
-    this.outline.transform(...this.attr('transformMatrix'))
+    this.outline.transform(...this.attr('lastMatrix'))
   }
 }

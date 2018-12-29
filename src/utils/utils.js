@@ -143,6 +143,12 @@ export function forArr (arr, cb, vert) {
   }
 }
 
+export function forObj (obj, cb) {
+  Object.entries(obj).forEach(item => {
+    let [key, val] = item
+    cb(key, val)
+  })
+}
 // 获得变换矩阵
 export function getMatrix (pos, transforms) {
   let matrix = new Matrix()

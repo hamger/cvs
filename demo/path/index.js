@@ -6,22 +6,25 @@ const d =
   'M10 315 L 110 215 A 30 50 0 0 1 162.55 162.45 L 172.55 152.45 A 30 50 -45 0 1 215.1 109.9 L 315 10'
 const d2 =
   'M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z'
-const d3 = 'M 200 200 L 300 250 L 200 300 z'
+const d3 = 'M 0 0 h 100 v 100 h -100 z'
 const d4 = 'M 0 0 L 100 50 L 0 100 z'
 let layer = scene.layer({ handleEvent: true })
 var ele = new Path({
   zIndex: 2,
-  d: d4,
-  x: 200,
-  y: 200,
-  // translate: 50,
-  scale: 2,
+  d: d3,
+  x: 150,
+  y: 150,
+  transformOrigin: [50, 50],
+  // translate: -50,
+  rotate: 90,
+  // scale: 2,
   stroke: 'pink',
   lineWidth: 4
 })
 ele.on('click', () => {
   console.log('haha')
 })
+// console.log(ele.size)
 layer.append(ele)
 
 // layer.append(
@@ -58,6 +61,7 @@ let ruler = new Path({
   stroke: '#444'
 })
 layer.append(ruler)
+ruler.keyframe([['x'], {x: 300}], 3000)
 
 // let circle = new Path({
 //   d: {
@@ -71,9 +75,12 @@ layer.append(ruler)
 // })
 // layer.append(circle)
 
-ele.keyframe([['rotate'], {rotate: 500}], 5000, function () {
+ele.keyframe([['x', 'rotate'], {x: 450, rotate: 900}], 3000, function () {
   layer.cancelAnimate()
 })
+// ele.keyframe([['rotate'], {rotate: 900}], 5000, function () {
+//   layer.cancelAnimate()
+// })
 layer.animate()
 // layer.draw()
 

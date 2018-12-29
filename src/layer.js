@@ -94,7 +94,7 @@ class Layer {
   draw () {
     this.children.forEach(child => {
       if (child.attr('visible')) {
-        child.draw.call(child, this.ctx)
+        child.render.call(child, this.ctx)
       }
     })
   }
