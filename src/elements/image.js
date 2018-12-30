@@ -1,5 +1,5 @@
 import Element from '../element'
-import { getMatrix, createCtx } from '../utils/utils'
+import { createCtx } from '../utils/utils'
 import { loadedResources } from '../utils/resource'
 import SvgPath from 'svg-path-to-canvas'
 // ctx.drawImage() 参数解释:

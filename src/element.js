@@ -104,13 +104,11 @@ class Element {
     if (!opt) return this[_attr]
     if (typeof opt === 'string') return this[_attr].get(opt)
     this.needUpdate = false
-    // x,y 比矩阵变换属性先设置
-    // if (opt.x != null) this[_attr].x = opt.x
-    // if (opt.y != null) this[_attr].y = opt.y
     forObj(opt, (key, val) => {
-      // if (/\b(x|y)\b/.test(key)) return
-      // if (!/\b(x|y|transform|scale|skew|rotate)\b/.test(key)) this.needUpdate = true
-      this[_attr][key] = val
+      if (!/\b(x|y|transform|scale|skew|rotate)\b/.test(key) || property.indexOf(key) > -1) this.needUpdate = true
+      if (typeof val === 'function') this[_attr][key] = val(this[_attr].get(key))
+      else if (typeof val === 'object') this[_attr][key] = Object.assign({}, this[_attr].get(key) || {}, val)
+      else this[_attr][key] = val
     })
   }
   // 判断是否点击在元素上

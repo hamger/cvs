@@ -25,7 +25,8 @@ export default class Attribute {
       padding: [0, 0, 0, 0],
       margin: [0, 0, 0, 0],
       font: '16px Arial',
-      textAlign: 'left'
+      textAlign: 'left',
+      lineWidth: 1
     })
   }
 

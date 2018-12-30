@@ -41,7 +41,7 @@ export function rect2svg (d) {
 // 圆形、椭圆转成 svg 路径
 export function circle2svg (d) {
   const [rx, ry] = oneOrTwoValues(d.r),
-    { cx, cy, rotate = 0 } = d
+    { cx = rx, cy = ry, rotate = 0 } = d
   const calc = calculate({ cx, cy, rx, ry, rotate })
   const start = calc(0)
   const end = calc(-1)

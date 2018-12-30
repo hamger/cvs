@@ -22,9 +22,9 @@ let element = new Path(options);
 
 | d.key  | value                   | description                             | default |
 | ------ | ----------------------- | --------------------------------------- | ------- |
-| cx     | Number                  | 圆形/椭圆中心 x 轴坐标                  | --      |
-| cy     | Number                  | 圆形/椭圆中心 y 轴坐标                  | --      |
 | r      | Number\|Array\<Number\> | 圆形的半径\| 椭圆的 x 轴半径和 y 轴半径 | --      |
+| cx     | Number                  | 圆形/椭圆中心 x 轴坐标                  | `r[0]`  |
+| cy     | Number                  | 圆形/椭圆中心 y 轴坐标                  | `r[1]`  |
 | rotate | Number                  | 椭圆倾斜角度, 正数为顺时针旋转          | `0`     |
 
 ```js
@@ -56,8 +56,8 @@ let ellipse = new Path({
 
 | d.key        | value                   | description         | default |
 | ------------ | ----------------------- | ------------------- | ------- |
-| x            | Number                  | 矩形左上角 x 轴坐标 | `0`      |
-| y            | Number                  | 矩形左上角 y 轴坐标 | `0`      |
+| x            | Number                  | 矩形左上角 x 轴坐标 | `0`     |
+| y            | Number                  | 矩形左上角 y 轴坐标 | `0`     |
 | w            | Number                  | 矩形宽度            | --      |
 | h            | Number                  | 矩形高度            | --      |
 | borderRadius | Number\|Array\<Number\> | 矩形圆角的半径      | `0`     |

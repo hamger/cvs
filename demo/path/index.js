@@ -7,19 +7,19 @@ const d =
 const d2 =
   'M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z'
 const d3 = 'M 0 0 h 100 v 100 h -100 z'
-const d4 = 'M 0 0 L 100 50 L 0 100 z'
+const d4 = 'M 0 0 L 300 50 L 0 100 z'
 let layer = scene.layer({ handleEvent: true })
 var ele = new Path({
   zIndex: 2,
-  d: d3,
+  d: d4,
   x: 150,
   y: 150,
   transformOrigin: [50, 50],
   // translate: -50,
-  rotate: 90,
+  // rotate: 90,
   // scale: 2,
   stroke: 'pink',
-  lineWidth: 4
+  lineWidth: 10
 })
 ele.on('click', () => {
   console.log('haha')
@@ -30,7 +30,7 @@ ele.on('click', () => {
 // ele.keyframe([['rotate'], {rotate: 900}], 5000, function () {
 //   layer.cancelAnimate()
 // })
-// layer.append(ele)
+layer.append(ele)
 
 // layer.append(
 //   new Path({
@@ -71,17 +71,18 @@ ruler.keyframe([['x'], {x: 300}], 3000)
 let circle = new Path({
   d: {
     type: 'circle',
-    cx: 200,
-    cy: 200,
-    r: [100, 50],
+    // cx: 200,
+    // cy: 200,
+    // r: [100, 50],
+    r: 100,
     // rotate: 30,
     rotate: 320,
   },
   stroke: 'red'
 })
 layer.append(circle)
-layer.animate()
-// layer.draw()
+// layer.animate()
+layer.draw()
 
 // let flag = true
 // rect2.on('click', () => {
