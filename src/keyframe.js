@@ -54,6 +54,7 @@ function calculateFramesOffset (keyframes) {
 }
 
 const _timing = Symbol('timing'),
+  _easing = Symbol('easing'),
   _keyframes = Symbol('keyframes'),
   _element = Symbol('element'),
   _cb = Symbol('cb')
@@ -87,6 +88,10 @@ export default class Keyframe {
       { iterations: 1, easing: 'linear', delay: 0 },
       timing
     )
+    const easingType = this[_timing].easing
+    if (typeof easingType === 'string') this[_easing] = Easings[easingType]
+    else if (Array.isArray(easingType) && easingType.length === 4) this[_easing] = getBezierEasing(...easingType)
+    else error('easing must be a string or an array has four items')
     this[_keyframes] = calculateFramesOffset(keyframes)
     this[_element] = element
     this[_cb] = cb
@@ -123,34 +128,32 @@ export default class Keyframe {
     return result
   }
   run (t) {
-    let p = (t - this[_timing].delay) / this[_timing].duration,
-      easingType = this[_timing].easing
+    if (this.cbEmitCount === 2) return
+    let p = (t - this[_timing].delay) / this[_timing].duration
     if (p >= 1 && this.cbEmitCount === 0) {
       // 保证最后一帧是终点
       this[_element].attr(this.handle(this.result(1)))
-      this.cbEmitCount++
+      this.cbEmitCount = 1
       return
     } else if (p >= 1 && this.cbEmitCount === 1) {
       this[_cb] && this[_cb].call(this[_element], this[_element])
-      this.cbEmitCount++
+      this.cbEmitCount = 2
       return
     }
-    this.cbEmitCount = 0
-    if (typeof easingType === 'string') p = Easings[easingType](p)
-    else if (Array.isArray(easingType)) p = getBezierEasing(...easingType)(p)
-    else error('easing must be string or array')
+    // this.cbEmitCount = 0
+    p = this[_easing](p)
     this[_element].attr(this.handle(this.result(p)))
   }
-  handle (arg) {
-    if (arg.offsetDistance != null) {
+  handle (obj) {
+    if (obj.offsetDistance != null) {
       const len = this[_element].offsetPath.getTotalLength()
       const [x, y] = this[_element].offsetPath.getPointAtLength(
-        len * arg.offsetDistance
+        len * obj.offsetDistance
       )
-      arg.x = x
-      arg.y = y
-      delete arg.offsetDistance
+      obj.x = x
+      obj.y = y
+      delete obj.offsetDistance
     }
-    return arg
+    return obj
   }
 }

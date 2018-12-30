@@ -1,6 +1,9 @@
 import { error } from './utils/utils'
 import { Easings, getBezierEasing } from './utils/easing'
 let id = 0
+
+const _easing = Symbol('easing')
+
 export default class Track {
   constructor (opt) {
     this.id = id++
@@ -12,12 +15,13 @@ export default class Track {
     this.iterationCount = 1
     this.easing = 'linear'
     Object.assign(this, opt)
+    const easingType = this.easing
+    if (typeof easingType === 'string') this[_easing] = Easings[easingType]
+    else if (Array.isArray(easingType) && easingType.length === 4) this[_easing] = getBezierEasing(...easingType)
+    else error('easing must be a string or an array has four items')
   }
   calculatePercentage (p) {
     if (p > 1) return 1
-    const easingType = this.easing
-    if (typeof easingType === 'string') return Easings[easingType](p)
-    else if (Array.isArray(easingType)) return getBezierEasing(easingType)(p)
-    else error('easing must be string or array')
+    return this[_easing](p)
   }
 }

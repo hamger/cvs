@@ -2,6 +2,7 @@
 // import ElementAttr from './utils/elementAttr'
 import Attribute from './utils/attribute'
 import Bezier from './tracks/bezier'
+import Track from './track'
 import Keyframe from './keyframe'
 import { error, forObj } from './utils/utils'
 
@@ -131,11 +132,12 @@ class Element {
     return this
   }
   track (type, options) {
-    if (!/\b(line|bezier|round|ellipse)\b/.test(type)) {
+    if (!/\b(line|bezier|round|ellipse|custom)\b/.test(type)) {
       error('the type of track must be line, bezier, round or ellipse.')
     }
     let track = null
     if (type === 'bezier') track = new Bezier(options)
+    if (type === 'custom') track = new Track(options)
     track.$ele = this
     this[_trackArr].push(track)
     return this

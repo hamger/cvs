@@ -24,6 +24,12 @@ var ele = new Path({
 ele.on('click', () => {
   console.log('haha')
 })
+// ele.keyframe([['x', 'rotate'], {x: 450, rotate: 900}], 3000, function () {
+//   layer.cancelAnimate()
+// })
+// ele.keyframe([['rotate'], {rotate: 900}], 5000, function () {
+//   layer.cancelAnimate()
+// })
 // layer.append(ele)
 
 // layer.append(
@@ -74,15 +80,8 @@ let circle = new Path({
   stroke: 'red'
 })
 layer.append(circle)
-
-ele.keyframe([['x', 'rotate'], {x: 450, rotate: 900}], 3000, function () {
-  layer.cancelAnimate()
-})
-// ele.keyframe([['rotate'], {rotate: 900}], 5000, function () {
-//   layer.cancelAnimate()
-// })
-// layer.animate()
-layer.draw()
+layer.animate()
+// layer.draw()
 
 // let flag = true
 // rect2.on('click', () => {
