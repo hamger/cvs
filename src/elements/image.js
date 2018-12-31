@@ -1,7 +1,7 @@
 import Element from '../element'
 import { createCtx } from '../utils/utils'
 import { loadedResources } from '../utils/resource'
-import SvgPath from 'svg-path-to-canvas'
+import SvgPath from '../svgPath'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
 export default class Image extends Element {

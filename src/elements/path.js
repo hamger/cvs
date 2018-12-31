@@ -1,7 +1,7 @@
 import Element from '../element'
-import SvgPath from 'svg-path-to-canvas'
 import { rect2svg, circle2svg } from '../utils/toSvg'
 import { error, createCtx } from '../utils/utils'
+import SvgPath from '../svgPath'
 
 class Path extends Element {
   constructor (opt) {
@@ -18,10 +18,11 @@ class Path extends Element {
     const lw = this.attr('lineWidth')
     this.setOutline()
     this.cacheCtx = createCtx(this.bounds[2] + 2 * lw, this.bounds[3] + 2 * lw)
-    this.setAttr(this.cacheCtx)
     this.cacheCtx.translate(lw, lw)
+    this.setAttr(this.cacheCtx)
     if (this.attr('fill')) this.outline.to(this.cacheCtx).fill()
     if (this.attr('stroke')) this.outline.to(this.cacheCtx).stroke()
+    this.cacheCtx.closePath()
   }
   setOutline () {
     var d = this.attr('d')

@@ -1,7 +1,7 @@
 import Element from '../element'
 import parseFont from '../utils/parse-font'
-import { createCtx, getMatrix } from '../utils/utils'
-import SvgPath from 'svg-path-to-canvas'
+import { createCtx } from '../utils/utils'
+import SvgPath from '../svgPath'
 
 const tempCtx = createCtx()
 

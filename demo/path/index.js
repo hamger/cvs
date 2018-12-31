@@ -54,35 +54,37 @@ layer.append(ele)
 // // group.append(rect)
 // layer.append(group)
 
-let ruler = new Path({
-  zIndex: -1,
-  d: {
-    type: 'rect',
-    x: 0,
-    y: 0,
-    w: 200,
-    h: 200
-  },
-  stroke: '#444'
-})
-layer.append(ruler)
-ruler.keyframe([['x'], {x: 300}], 3000)
+// let ruler = new Path({
+//   zIndex: -1,
+//   d: {
+//     type: 'rect',
+//     x: 0,
+//     y: 0,
+//     w: 200,
+//     h: 200
+//   },
+//   stroke: '#444'
+// })
+// layer.append(ruler)
+// ruler.keyframe([['x'], {x: 300}], 3000)
 
-let circle = new Path({
-  d: {
-    type: 'circle',
-    // cx: 200,
-    // cy: 200,
-    // r: [100, 50],
-    r: 100,
-    // rotate: 30,
-    rotate: 320,
-  },
-  stroke: 'red'
-})
-layer.append(circle)
+// let circle = new Path({
+//   d: {
+//     type: 'circle',
+//     // cx: 200,
+//     // cy: 200,
+//     // r: [100, 50],
+//     r: 100,
+//     // rotate: 30,
+//     rotate: 320,
+//   },
+//   stroke: 'red'
+// })
+// layer.append(circle)
 // layer.animate()
 layer.draw()
+
+console.log(ele.outline.path)
 
 // let flag = true
 // rect2.on('click', () => {

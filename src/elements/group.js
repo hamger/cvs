@@ -1,7 +1,7 @@
 import Element from '../element'
 import { remove, arrSort, error, createCtx, getMatrix } from '../utils/utils'
 import { rect2svg, circle2svg } from '../utils/toSvg'
-import SvgPath from 'svg-path-to-canvas'
+import SvgPath from '../svgPath'
 
 export default class Group extends Element {
   constructor (opt) {

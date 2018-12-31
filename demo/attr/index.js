@@ -3,7 +3,7 @@ let scene = new Scene({ containerId: 'container' })
 let layer = scene.layer()
 
 const dotSpeed = 1.5
-const dotCount = 20
+const dotCount = 60
 for (let i = 0; i < dotCount; i++) {
   let r = Math.random() * 30 + 10
   layer.append(
@@ -17,8 +17,7 @@ for (let i = 0; i < dotCount; i++) {
       xa: (Math.random() * 2 - 1) * dotSpeed,
       ya: (Math.random() * 2 - 1) * dotSpeed,
       zIndex: Math.random() * dotCount,
-      lineWidth: 4,
-      stroke: `rgba(${Math.random() * 255}, ${Math.random() *
+      fill: `rgba(${Math.random() * 255}, ${Math.random() *
         255}, ${Math.random() * 255}, ${Math.random()})`
     })
   )
@@ -34,8 +33,8 @@ requestAnimationFrame(function loopUnit () {
     const x = ele.attr('x') + ele.attr('xa')
     const y = ele.attr('y') + ele.attr('ya')
     const r = ele.attr('d').r
-    if (x > layer.width - 2 * r || x < 0) ele.attr({xa: v => -v})
-    if (y > layer.height - 2 * r || y < 0) ele.attr({ya: v => -v})
+    if (x > layer.width - 2 * r - 1 || x < 0) ele.attr({xa: v => -v})
+    if (y > layer.height - 2 * r - 1 || y < 0) ele.attr({ya: v => -v})
     ele.attr({x, y})
   })
   layer.draw()

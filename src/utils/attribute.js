@@ -1,5 +1,5 @@
 import Matrix from './matrix'
-import SvgPath from 'svg-path-to-canvas'
+import SvgPath from '../svgPath'
 import { oneOrTwoValues } from './utils'
 
 export default class Attribute {
