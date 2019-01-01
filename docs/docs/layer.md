@@ -39,6 +39,21 @@ var layer = scene.layer(options);
   layer.append(element, element2);
   ```
 
+#### element(elementId)
+
+- 描述：
+
+  获取指定 Id 的元素
+
+- 参数：
+
+  - `{String} elementId`
+
+- 示例：
+  ```js
+  layer.element('a');
+  ```
+
 #### remove(element)
 
 - 描述：

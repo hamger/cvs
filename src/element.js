@@ -18,7 +18,6 @@ const property = [
   'font',
   'textAlign',
   'textBaseline',
-  'globalAlpha',
   'shadowColor',
   'shadowBlur',
   'shadowOffsetX',
@@ -83,13 +82,14 @@ class Element {
     const options = Object.assign({}, this.opt, opt)
     return new Cons(options)
   }
-  // 设置上下文属性
-  setAttr (ctx) {
+  // 改变上下文环境的状态
+  changeState (ctx) {
     const attrs = this.attr()
     for (let key in attrs) {
       let val = attrs[key]
       if (key === 'stroke') ctx.strokeStyle = val
       else if (key === 'fill') ctx.fillStyle = val
+      else if (key === 'opacity') ctx.globalAlpha = val
       else if (property.indexOf(key) > -1) ctx[key] = val
     }
   }
@@ -105,10 +105,11 @@ class Element {
     if (typeof opt === 'string') return this[_attr].get(opt)
     this.needUpdate = false
     forObj(opt, (key, val) => {
-      if (!/\b(x|y|transform|scale|skew|rotate)\b/.test(key) || property.indexOf(key) > -1) this.needUpdate = true
-      if (typeof val === 'function') this[_attr][key] = val(this[_attr].get(key))
-      else if (typeof val === 'object') this[_attr][key] = Object.assign({}, this[_attr].get(key) || {}, val)
-      else this[_attr][key] = val
+      if (
+        !/\b(x|y|transform|scale|skew|rotate)\b/.test(key) ||
+        property.indexOf(key) > -1
+      ) { this.needUpdate = true }
+      if (typeof val === 'function') { this[_attr][key] = val(this[_attr].get(key)) } else if (typeof val === 'object') { this[_attr][key] = Object.assign({}, this[_attr].get(key) || {}, val) } else this[_attr][key] = val
     })
   }
   // 判断是否点击在元素上

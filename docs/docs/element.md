@@ -6,7 +6,7 @@
 
 | options.key     | value         | description                                  | default              |
 | --------------- | ------------- | -------------------------------------------- | -------------------- |
-| id              | String        | 规定元素的 id                                | 一个整数             |
+| id              | String        | 规定元素的 id                                | 一个自然数           |
 | zIndex          | Number        | 规定元素在 z 轴上的坐标                      | `0`                  |
 | visible         | Boolean       | 规定元素是否可见                             | `true`               |
 | x               | Number        | 规定元素矩阵变换前的左上角 x 轴坐标          | `0`                  |
@@ -19,7 +19,7 @@
 | translate       | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴移动的距离     | `[0, 0]`             |
 | skew            | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴倾斜的角度     | `[0, 0]`             |
 | transform       | Array         | 规定元素矩阵变换中的矩阵                     | `[1, 0, 0, 1, 0, 0]` |
-| globalAlpha     | Number        | 设置绘图的当前 alpha 或透明值                | --                   |
+| opacity         | Number        | 规定元素的透明度                             | `1.0`                |
 | shadowColor     | String        | 设置用于阴影的颜色                           | --                   |
 | shadowBlur      | Number        | 设置用于阴影的模糊级别                       | --                   |
 | shadowOffsetX   | Number        | 设置阴影距形状的水平距离                     | --                   |

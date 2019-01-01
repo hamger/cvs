@@ -13,7 +13,7 @@ export default class Image extends Element {
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
     if (!this.cacheCtx) this.preload()
-    this.setAttr(ctx)
+    this.changeState(ctx)
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
@@ -24,7 +24,7 @@ export default class Image extends Element {
   }
   drawImg (ctx) {
     ctx.save()
-    this.setAttr(ctx)
+    this.changeState(ctx)
     if (this.attr('sw') && this.attr('sh')) {
       ctx.drawImage(
         this.image,

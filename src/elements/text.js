@@ -24,7 +24,7 @@ export default class Text extends Element {
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
     if (!this.cacheCtx) this.preload()
-    this.setAttr(ctx)
+    this.changeState(ctx)
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
@@ -37,7 +37,7 @@ export default class Text extends Element {
     if (align === 'center') left = maxW
     else if (align === 'right') left = maxW / 2
     let lh = this.attr('lineHeight')
-    this.setAttr(this.cacheCtx)
+    this.changeState(this.cacheCtx)
     this.lines.forEach((line, index) => {
       if (this.attr('fill')) { this.cacheCtx.fillText(line, left, (index + 0.5) * lh) }
       if (this.attr('stroke')) { this.cacheCtx.strokeText(line, left, (index + 0.5) * lh) }

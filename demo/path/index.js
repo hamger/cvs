@@ -14,12 +14,14 @@ var ele = new Path({
   d: d4,
   x: 150,
   y: 150,
+  globalAlpha: 0.4,
   transformOrigin: [50, 50],
   // translate: -50,
-  // rotate: 90,
+  rotate: 90,
   // scale: 2,
   stroke: 'pink',
-  lineWidth: 10
+  lineWidth: 16,
+  miterLimit: 100
 })
 ele.on('click', () => {
   console.log('haha')
@@ -54,19 +56,19 @@ layer.append(ele)
 // // group.append(rect)
 // layer.append(group)
 
-// let ruler = new Path({
-//   zIndex: -1,
-//   d: {
-//     type: 'rect',
-//     x: 0,
-//     y: 0,
-//     w: 200,
-//     h: 200
-//   },
-//   stroke: '#444'
-// })
-// layer.append(ruler)
-// ruler.keyframe([['x'], {x: 300}], 3000)
+let ruler = new Path({
+  zIndex: -1,
+  d: {
+    type: 'rect',
+    x: 0,
+    y: 0,
+    w: 200,
+    h: 200
+  },
+  stroke: '#444'
+})
+layer.append(ruler)
+ruler.keyframe([['x'], {x: 300}], 3000)
 
 // let circle = new Path({
 //   d: {

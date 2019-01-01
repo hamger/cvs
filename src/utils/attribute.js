@@ -13,20 +13,14 @@ export default class Attribute {
       _skew: [0, 0],
       anchorX: 0.5,
       anchorY: 0.5,
-      zIndex: 0,
       visible: true,
       anchor: [0, 0],
       enableCache: false,
       opacity: 1,
-      width: '',
-      height: '',
       transformOrigin: '',
       transformMatrix: [1, 0, 0, 1, 0, 0],
-      padding: [0, 0, 0, 0],
-      margin: [0, 0, 0, 0],
       font: '16px Arial',
-      textAlign: 'left',
-      lineWidth: 1
+      textAlign: 'left'
     })
   }
 

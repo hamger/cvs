@@ -30,7 +30,7 @@ export default class Group extends Element {
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
     if (!this.cacheCtx || this.needUpdate) this.preload()
-    this.setAttr(ctx)
+    this.changeState(ctx)
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }

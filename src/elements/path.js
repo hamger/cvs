@@ -15,11 +15,11 @@ class Path extends Element {
     ctx.restore()
   }
   preload () {
-    const lw = this.attr('lineWidth')
+    const lw = this.attr('lineWidth') || 0
     this.setOutline()
     this.cacheCtx = createCtx(this.bounds[2] + 2 * lw, this.bounds[3] + 2 * lw)
     this.cacheCtx.translate(lw, lw)
-    this.setAttr(this.cacheCtx)
+    this.changeState(this.cacheCtx)
     if (this.attr('fill')) this.outline.to(this.cacheCtx).fill()
     if (this.attr('stroke')) this.outline.to(this.cacheCtx).stroke()
     this.cacheCtx.closePath()
