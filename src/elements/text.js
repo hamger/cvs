@@ -30,12 +30,13 @@ export default class Text extends Element {
   }
   buffer () {
     this.setOutline()
+    // this.cacheCtx = createCtx(this.size[0] + 2 * (lw + 1), this.size[1] + 2 * (lw + 1))
     this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     this.cacheCtx.textBaseline = 'middle'
     let left = 0,
       align = this.attr('textAlign')
-    if (align === 'center') left = maxW
-    else if (align === 'right') left = maxW / 2
+    if (align === 'center') left = this.attr('w')
+    else if (align === 'right') left = this.attr('w') / 2
     let lh = this.attr('lineHeight')
     this.changeState(this.cacheCtx)
     this.lines.forEach((line, index) => {

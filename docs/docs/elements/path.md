@@ -10,9 +10,16 @@ let element = new Path(options);
 
 除了支持元素的[基础属性](/docs/element.html#options)外，还支持以下属性：
 
-| options.key | value          | description | default |
-| ----------- | -------------- | ----------- | ------- |
-| d           | String\|Object | 规定路径    | --      |
+| options.key   | value          | description                        | default |
+| ------------- | -------------- | ---------------------------------- | ------- |
+| d             | String\|Object | 规定路径                           | --      |
+| fill          | String         | 设置用于填充绘画的颜色、渐变或模式 | --      |
+| stroke        | String         | 设置用于笔触的颜色、渐变或模式     | --      |
+| opacity       | Number         | 规定元素的透明度                   | `1.0`   |
+| shadowColor   | String         | 设置用于阴影的颜色                 | --      |
+| shadowBlur    | Number         | 设置用于阴影的模糊级别             | --      |
+| shadowOffsetX | Number         | 设置阴影距形状的水平距离           | --      |
+| shadowOffsetY | Number         | 设置阴影距形状的垂直距离           | --      |
 
 #### d 为对象的情况
 

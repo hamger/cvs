@@ -11,19 +11,12 @@
 | visible         | Boolean       | 规定元素是否可见                             | `true`               |
 | x               | Number        | 规定元素矩阵变换前的左上角 x 轴坐标          | `0`                  |
 | y               | Number        | 规定元素矩阵变换前的左上角 y 轴坐标          | `0`                  |
-| fill            | String        | 设置用于填充绘画的颜色、渐变或模式           | --                   |
-| stroke          | String        | 设置用于笔触的颜色、渐变或模式               | --                   |
 | transformOrigin | Number\|Array | 规定元素矩阵变换的的原点与元素左上角的偏移量 | --                   |
 | rotate          | Number        | 规定元素矩阵变换中旋转的角度                 | `0`                  |
 | scale           | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴缩放的倍数     | `[1, 1]`             |
 | translate       | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴移动的距离     | `[0, 0]`             |
 | skew            | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴倾斜的角度     | `[0, 0]`             |
 | transform       | Array         | 规定元素矩阵变换中的矩阵                     | `[1, 0, 0, 1, 0, 0]` |
-| opacity         | Number        | 规定元素的透明度                             | `1.0`                |
-| shadowColor     | String        | 设置用于阴影的颜色                           | --                   |
-| shadowBlur      | Number        | 设置用于阴影的模糊级别                       | --                   |
-| shadowOffsetX   | Number        | 设置阴影距形状的水平距离                     | --                   |
-| shadowOffsetY   | Number        | 设置阴影距形状的垂直距离                     | --                   |
 
 ::: tip
 `transformOrigin: [50, 50]`表示元素矩阵变换的原点为`[x + 50, y + 50]`，可以缩写为`transformOrigin: 50`。`scale`、`translate`、`skew`的缩写形式同理。
