@@ -21,6 +21,10 @@ let element = new Path(options);
 | shadowOffsetX | Number         | 设置阴影距形状的水平距离           | --      |
 | shadowOffsetY | Number         | 设置阴影距形状的垂直距离           | --      |
 
+::: tip
+`fill`和`stroke`支持都设置。
+:::
+
 #### d 为对象的情况
 
 当`d`为对象时表示一个规则图形的描述，现支持两种类型。

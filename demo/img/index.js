@@ -14,8 +14,8 @@ import { Scene, Image, Path } from '#'
   let fgLayer = scene.layer()
   let ele = new Image({
     image: 'safari',
-    x: 20,
-    y: 20,
+    x: 100,
+    y: 100,
     // anchor: [0.5, 0.5],
     // w: 100,
     // h: 100,
@@ -34,6 +34,7 @@ import { Scene, Image, Path } from '#'
   ele.on('click', () => {
     console.log(123324243)
   })
+  console.log(ele.bounds)
   var rect = new Path({
     d: {
       type: 'rect',
@@ -66,17 +67,17 @@ import { Scene, Image, Path } from '#'
   //   }
   // )
   // fgLayer.append(element3)
-  let ruler = new Path({
-    d: {
-      type: 'rect',
-      x: 0,
-      y: 0,
-      w: 200,
-      h: 200
-    },
-    stroke: 'red'
-  })
-  fgLayer.append(ruler)
+  // let ruler = new Path({
+  //   d: {
+  //     type: 'rect',
+  //     x: 0,
+  //     y: 0,
+  //     w: 200,
+  //     h: 200
+  //   },
+  //   stroke: 'red'
+  // })
+  // fgLayer.append(ruler)
   fgLayer.draw()
   // fgLayer.animate()
 })()

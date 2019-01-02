@@ -14,10 +14,10 @@ var ele = new Path({
   d: d4,
   x: 150,
   y: 150,
-  opacity: 0.4,
-  transformOrigin: [50, 50],
+  // opacity: 0.4,
+  // transformOrigin: [50, 50],
   // translate: -50,
-  rotate: 90,
+  // rotate: 90,
   // scale: 2,
   stroke: 'pink',
   fill: '#344',
@@ -87,7 +87,7 @@ ruler.keyframe([['x'], {x: 300}], 3000)
 // layer.animate()
 layer.draw()
 
-console.log(ele.outline.path)
+console.log(ele.outline.bounds)
 
 // let flag = true
 // rect2.on('click', () => {

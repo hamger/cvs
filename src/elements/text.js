@@ -35,13 +35,14 @@ export default class Text extends Element {
     this.cacheCtx.textBaseline = 'middle'
     let left = 0,
       align = this.attr('textAlign')
-    if (align === 'center') left = this.attr('w')
-    else if (align === 'right') left = this.attr('w') / 2
+    if (align === 'center') left = this.attr('w') / 2
+    else if (align === 'right') left = this.attr('w')
     let lh = this.attr('lineHeight')
     this.changeState(this.cacheCtx)
+    this.cacheCtx.translate(left, 0)
     this.lines.forEach((line, index) => {
-      if (this.attr('fill')) { this.cacheCtx.fillText(line, left, (index + 0.5) * lh) }
-      if (this.attr('stroke')) { this.cacheCtx.strokeText(line, left, (index + 0.5) * lh) }
+      if (this.attr('fill')) { this.cacheCtx.fillText(line, 0, (index + 0.5) * lh) }
+      if (this.attr('stroke')) { this.cacheCtx.strokeText(line, 0, (index + 0.5) * lh) }
     })
   }
   setOutline () {
