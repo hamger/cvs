@@ -1,20 +1,14 @@
 <template>
-    <div :key="key" class="main-contaienr">
-        <button @click="changeKey" class="restart">restart</button>
+    <div class="main-contaienr">
         <slot></slot>
     </div>
 </template>
 <script>
 export default {
   data() {
-    return {
-      key: 0
-    }
+    return {}
   },
   methods: {
-    changeKey() {
-      this.key++
-    }
   }
 }
 </script>
@@ -23,12 +17,6 @@ export default {
   position: relative;
   border: 1px solid #afafaf;
   border-radius: 10px;
-}
-.restart {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: none;
 }
 </style>
 

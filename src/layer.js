@@ -42,7 +42,7 @@ class Layer {
   }
   init () {
     this.width = this.scene.clientWidth
-    this.height = this.scene.clientWidth
+    this.height = this.scene.clientHeight
     this.ctx = createCtx(this.width, this.height)
     this.ctx.canvas.style.cssText = `position: absolute; top: 0px; left: 0px;z-index:${
       this.zIndex
