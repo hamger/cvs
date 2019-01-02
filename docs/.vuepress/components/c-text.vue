@@ -25,7 +25,9 @@ export default {
         text: 'hello\nworld',
         x: 89,
         y: 16,
-        font: '48px serif'
+        font: '48px serif',
+        stroke: 'blue',
+        fill: 'red',
       })
     )
     layer.draw()

@@ -24,8 +24,6 @@ for (let i = 0; i < dotCount; i++) {
 }
 
 var timer = null
-console.log(layer.width)
-console.log(layer.height)
 requestAnimationFrame(function loopUnit () {
   timer = requestAnimationFrame(loopUnit)
   layer.clear()

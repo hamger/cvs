@@ -22,25 +22,29 @@ export default {
     let layer = scene.layer()
 
     let circle = new Path({
+      x: 130,
+      y: 60,
       d: {
         type: 'circle',
-        cx: 200,
-        cy: 100,
-        r: [60, 40],
-        rotate: 45,
+        r: 40
       },
+      fill: '#153',
       stroke: 'red'
     })
 
     let ellipse = new Path({
+      x: 300,
+      y: 60,
       d: {
         type: 'circle',
-        cx: 400,
-        cy: 100,
-        r: 40
+        r: [60, 40],
       },
-      fill: '#153'
+      transformOrigin: [60, 40],
+      rotate: 45,
+      fill: '#329',
+      stroke: 'red'
     })
+
 
     layer.append(circle, ellipse)
 

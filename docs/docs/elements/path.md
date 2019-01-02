@@ -10,20 +10,20 @@ let element = new Path(options);
 
 除了支持元素的[基础属性](/docs/element.html#options)外，还支持以下属性：
 
-| options.key   | value          | description                        | default |
-| ------------- | -------------- | ---------------------------------- | ------- |
-| d             | String\|Object | 规定路径                           | --      |
-| fill          | String         | 设置用于填充绘画的颜色、渐变或模式 | --      |
-| stroke        | String         | 设置用于笔触的颜色、渐变或模式     | --      |
-| opacity       | Number         | 规定元素的透明度                   | `1.0`   |
-| shadowColor   | String         | 设置用于阴影的颜色                 | --      |
-| shadowBlur    | Number         | 设置用于阴影的模糊级别             | --      |
-| shadowOffsetX | Number         | 设置阴影距形状的水平距离           | --      |
-| shadowOffsetY | Number         | 设置阴影距形状的垂直距离           | --      |
-
-::: tip
-`fill`和`stroke`支持都设置。
-:::
+| options.key   | value                     | description                                  | default |
+| ------------- | ------------------------- | -------------------------------------------- | ------- |
+| d             | String\|Object            | 规定路径                                     | --      |
+| fill          | String                    | 设置用于填充绘画的颜色、渐变或模式           | --      |
+| stroke        | String                    | 设置用于笔触的颜色、渐变或模式               | --      |
+| opacity       | Number                    | 规定元素的透明度                             | `1.0`   |
+| shadowColor   | String                    | 设置用于阴影的颜色                           | --      |
+| shadowBlur    | Number                    | 设置用于阴影的模糊级别                       | --      |
+| shadowOffsetX | Number                    | 设置阴影距形状的水平距离                     | --      |
+| shadowOffsetY | Number                    | 设置阴影距形状的垂直距离                     | --      |
+| lineWidth     | Number                    | 规定描边宽度                                 | `1.0`   |
+| lineCap       | `butt`\|`round`\|`square` | 规定如何绘制每一条线段末端                   | `butt`  |
+| lineJoin      | `round`\|`bevel`\|`miter` | 规定 2 个长度不为 0 的相连部分如何连接在一起 | `miter` |
+| miterLimit    | Number                    | 规定斜接面限制比例                           | `10.0`  |
 
 #### d 为对象的情况
 
@@ -31,33 +31,37 @@ let element = new Path(options);
 
 - `d.type: "circle"`表示圆形/椭圆
 
-| d.key  | value                   | description                             | default |
-| ------ | ----------------------- | --------------------------------------- | ------- |
-| r      | Number\|Array\<Number\> | 圆形的半径\| 椭圆的 x 轴半径和 y 轴半径 | --      |
-| cx     | Number                  | 圆形/椭圆中心 x 轴坐标                  | `r[0]`  |
-| cy     | Number                  | 圆形/椭圆中心 y 轴坐标                  | `r[1]`  |
-| rotate | Number                  | 椭圆倾斜角度, 正数为顺时针旋转          | `0`     |
+| d.key | value                   | description                             | default |
+| ----- | ----------------------- | --------------------------------------- | ------- |
+| r     | Number\|Array\<Number\> | 圆形的半径\| 椭圆的 x 轴半径和 y 轴半径 | --      |
+
+::: tip
+圆形/椭圆路径的中心坐标为`(x + r[0], y + r[1])`，
+:::
 
 ```js
 let circle = new Path({
+  x: 130,
+  y: 60,
   d: {
     type: "circle",
-    cx: 200,
-    cy: 100,
-    r: [60, 40],
-    rotate: 45
+    r: 40
   },
+  fill: "#153",
   stroke: "red"
 });
 
 let ellipse = new Path({
+  x: 300,
+  y: 60,
   d: {
     type: "circle",
-    cx: 400,
-    cy: 100,
-    r: 40
+    r: [60, 40]
   },
-  fill: "#153"
+  transformOrigin: [60, 40],
+  rotate: 45,
+  fill: "#329",
+  stroke: "red"
 });
 ```
 
@@ -65,24 +69,23 @@ let ellipse = new Path({
 
 - `d.type: "rect"`表示(圆角)矩形
 
-| d.key        | value                   | description         | default |
-| ------------ | ----------------------- | ------------------- | ------- |
-| x            | Number                  | 矩形左上角 x 轴坐标 | `0`     |
-| y            | Number                  | 矩形左上角 y 轴坐标 | `0`     |
-| w            | Number                  | 矩形宽度            | --      |
-| h            | Number                  | 矩形高度            | --      |
-| borderRadius | Number\|Array\<Number\> | 矩形圆角的半径      | `0`     |
+| d.key        | value                   | description    | default |
+| ------------ | ----------------------- | -------------- | ------- |
+| w            | Number                  | 矩形宽度       | --      |
+| h            | Number                  | 矩形高度       | --      |
+| borderRadius | Number\|Array\<Number\> | 矩形圆角的半径 | `0`     |
 
 ::: tip
+(圆角)矩形路径的左上角坐标通过`x`和`y`设置，
 borderRadius 的值遵循 css3 中 border-radius 的设置规则，但不区分水平半径和垂直半径
 :::
 
 ```js
 var rect = new Path({
+  x: 100,
+  y: 50,
   d: {
     type: "rect",
-    x: 100,
-    y: 50,
     w: 200,
     h: 100,
     borderRadius: 5
@@ -90,21 +93,21 @@ var rect = new Path({
   fill: "blue"
 });
 var rect2 = new Path({
+  x: 400,
+  y: 50,
   d: {
     type: "rect",
-    x: 400,
-    y: 50,
     w: 200,
     h: 100,
     borderRadius: [5, 25]
   },
-  fill: "green"
+  stroke: "green"
 });
 var rect3 = new Path({
+  x: 100,
+  y: 250,
   d: {
     type: "rect",
-    x: 100,
-    y: 250,
     w: 200,
     h: 100,
     borderRadius: [5, 15, 35]
@@ -112,15 +115,15 @@ var rect3 = new Path({
   fill: "pink"
 });
 var rect4 = new Path({
+  x: 400,
+  y: 250,
   d: {
     type: "rect",
-    x: 400,
-    y: 250,
     w: 200,
     h: 100,
     borderRadius: [5, 15, 25, 35]
   },
-  fill: "purple"
+  stroke: "purple"
 });
 ```
 

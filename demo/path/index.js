@@ -1,4 +1,4 @@
-import { Scene, Path, Group, Text } from '#'
+import { Scene, Path } from '#'
 let scene = new Scene({
   containerId: 'container'
 })
@@ -12,13 +12,12 @@ let layer = scene.layer({ handleEvent: true })
 var ele = new Path({
   zIndex: 2,
   d: d4,
-  x: 150,
-  y: 150,
+  x: 0,
+  y: 0,
   // opacity: 0.4,
   // transformOrigin: [50, 50],
   // translate: -50,
   // rotate: 90,
-  // scale: 2,
   stroke: 'pink',
   fill: '#344',
   lineWidth: 4,
@@ -71,24 +70,49 @@ let ruler = new Path({
 layer.append(ruler)
 ruler.keyframe([['x'], {x: 300}], 3000)
 
-// let circle = new Path({
+// let ellipse = new Path({
+//   x: 200,
+//   y: 70,
 //   d: {
 //     type: 'circle',
-//     // cx: 200,
-//     // cy: 200,
-//     // r: [100, 50],
-//     r: 100,
-//     // rotate: 30,
-//     rotate: 320,
+//     r: [60, 40],
+//     rotate: 90,
 //   },
+//   fill: '#329',
 //   stroke: 'red'
 // })
-// layer.append(circle)
+// layer.append(ellipse)
+let circle = new Path({
+  x: 200,
+  y: 200,
+  d: {
+    type: 'circle',
+    r: [100, 50],
+  },
+  transformOrigin: [100, 50],
+  rotate: 90,
+  lineWidth: 4,
+  stroke: '#444'
+})
+layer.append(circle)
 // layer.animate()
+
+console.log(circle.bounds)
+console.log(circle.size)
+let rect = new Path({
+  zIndex: 22,
+  x: circle.bounds[0],
+  y: circle.bounds[1],
+  d: {
+    type: 'rect',
+    w: circle.size[0],
+    h: circle.size[1],
+  },
+  stroke: 'red'
+})
+layer.append(rect)
+
 layer.draw()
-
-console.log(ele.bounds)
-
 // let flag = true
 // rect2.on('click', () => {
 //   if (flag) {

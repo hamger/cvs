@@ -5,21 +5,19 @@ let scene = new Scene({
 
 let layer = scene.layer()
 var text = new Text({
+  font: '98px serif',
   text: '狂拽酷炫吊炸天\n123456789\nhello',
-  x: 200,
-  y: 200,
-  // text: 'hello\nbig\nworld',
-  // {scale: 2},
+  x: 18,
+  y: 18,
+  lineWidth: 5,
   stroke: 'blue',
   fill: 'red',
-  linewidth: 10,
   // opacity: 0.4,
   // shadowColor: '#444',
   // shadowOffsetX: 10,
   // shadowOffsetY: 10,
   // textAlign: 'center',
   textAlign: 'right',
-  font: '48px serif'
 })
 text.on('click', e => {
   console.log(e)

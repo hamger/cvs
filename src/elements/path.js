@@ -5,27 +5,27 @@ import { error, createCtx } from '../utils/utils'
 class Path extends Element {
   constructor (opt) {
     super(opt)
+    // 考虑线宽和 1 像素的图像截断
+    this.p = (this.attr('lineWidth') || 0) + 1
   }
   render (ctx) {
     ctx.save()
     ctx.translate(this.attr('x'), this.attr('y'))
-    ctx.transform(...this.attr('lastMatrix'))
     if (!this.cacheCtx || this.needUpdate) this.buffer()
-    ctx.translate(this.path.bounds[0], this.path.bounds[1])
+    ctx.translate(this.outline.bounds[0] - this.p, this.outline.bounds[1] - this.p)
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
   buffer () {
     const lw = this.attr('lineWidth') || 0
     this.setOutline()
-    this.cacheCtx = createCtx(this.path.size[0] + 2 * (lw + 1), this.path.size[1] + 2 * (lw + 1))
+    this.cacheCtx = createCtx(this.outline.size[0] + 2 * this.p, this.outline.size[1] + 2 * this.p)
     this.changeState(this.cacheCtx)
-    this.cacheCtx.translate(-this.path.bounds[0] + (lw + 1), -this.path.bounds[0] + (lw + 1))
-    if (this.attr('fill')) this.path.to(this.cacheCtx).fill()
-    if (this.attr('stroke')) this.path.to(this.cacheCtx).stroke()
+    this.cacheCtx.translate(-this.outline.bounds[0] + this.p, -this.outline.bounds[1] + this.p)
+    if (this.attr('fill')) this.outline.to(this.cacheCtx).fill()
+    if (this.attr('stroke')) this.outline.to(this.cacheCtx).stroke()
   }
   setOutline () {
-    this.path = toSvg(this.attr('d'))
     this.outline = toSvg(this.attr('d'))
     this.outline
       .restore()

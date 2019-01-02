@@ -22,10 +22,10 @@ export default {
     let layer = scene.layer()
     this.layer = layer
     var rect = new Path({
+      x: 100,
+      y: 50,
       d: {
         type: 'rect',
-        x: 100,
-        y: 50,
         w: 200,
         h: 100,
         borderRadius: 5,
@@ -33,10 +33,10 @@ export default {
       fill: 'blue',
     })
     var rect2 = new Path({
+      x: 400,
+      y: 50,
       d: {
         type: 'rect',
-        x: 400,
-        y: 50,
         w: 200,
         h: 100,
         borderRadius: [5, 25],
@@ -44,10 +44,10 @@ export default {
       stroke: 'green',
     })
     var rect3 = new Path({
+      x: 100,
+      y: 250,
       d: {
         type: 'rect',
-        x: 100,
-        y: 250,
         w: 200,
         h: 100,
         borderRadius: [5, 15, 35],
@@ -55,10 +55,10 @@ export default {
       fill: 'pink',
     })
     var rect4 = new Path({
+      x: 400,
+      y: 250,
       d: {
         type: 'rect',
-        x: 400,
-        y: 250,
         w: 200,
         h: 100,
         borderRadius: [5, 15, 25, 35],
