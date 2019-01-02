@@ -87,7 +87,7 @@ ruler.keyframe([['x'], {x: 300}], 3000)
 // layer.animate()
 layer.draw()
 
-console.log(ele.outline.bounds)
+console.log(ele.bounds)
 
 // let flag = true
 // rect2.on('click', () => {

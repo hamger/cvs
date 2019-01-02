@@ -27,8 +27,8 @@ text.on('click', e => {
 let rect = new Path({
   d: {
     type: 'rect',
-    x: text.bounds[0] + text.attr('x'),
-    y: text.bounds[1] + text.attr('y'),
+    x: text.bounds[0],
+    y: text.bounds[1],
     w: text.size[0],
     h: text.size[1],
   },

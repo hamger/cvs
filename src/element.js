@@ -46,11 +46,19 @@ class Element {
   }
   get bounds () {
     if (!this.outline) this.setOutline()
-    return this.outline.bounds.slice()
+    const x = this.attr('x'), y = this.attr('y')
+    return this.outline.bounds.map((item, index) => {
+      if (index % 2) return item + y
+      else return item + x
+    })
   }
   get center () {
     if (!this.outline) this.setOutline()
-    return this.outline.center.slice()
+    const x = this.attr('x'), y = this.attr('y')
+    return this.outline.center.map((item, index) => {
+      if (index % 2) return item + y
+      else return item + x
+    })
   }
   set _ctx (val) {
     this.ctx = val
