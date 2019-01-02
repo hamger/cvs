@@ -1,7 +1,6 @@
 import Element from '../element'
 import { remove, arrSort, error, createCtx, getMatrix } from '../utils/utils'
-import { rect2svg, circle2svg } from '../utils/toSvg'
-import SvgPath from '../svgPath'
+import toSvg from '../utils/toSvg'
 
 export default class Group extends Element {
   constructor (opt) {
@@ -29,12 +28,12 @@ export default class Group extends Element {
     ctx.save()
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
-    if (!this.cacheCtx || this.needUpdate) this.preload()
     this.changeState(ctx)
+    if (!this.cacheCtx || this.needUpdate) this.buffer()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
-  preload () {
+  buffer () {
     this.setOutline()
     this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     if (this.attr('clip')) this.clip(this.cacheCtx)
@@ -53,30 +52,19 @@ export default class Group extends Element {
     })
   }
   clip (ctx) {
-    var d = this.attr('clip')
-    if (typeof d === 'object') {
-      if (d.type === 'rect') {
-        d = rect2svg(d)
-      } else if (d.type === 'circle') {
-        d = circle2svg(d)
-      } else error('unexpected type of path.')
-    }
-    this.clipPath = new SvgPath(d)
+    this.clipPath = toSvg(this.attr('clip'))
     this.clipPath
       .restore()
       .save()
       .beginPath()
-    this.clipMatrix = getMatrix(
-      [0, 0],
-      this.attr('clip').transform || []
-    )
+    this.clipMatrix = getMatrix([0, 0], this.attr('clip').transform || [])
     this.clipPath.transform(...this.clipMatrix)
     this.clipPath.to(ctx)
     ctx.clip()
   }
   setOutline () {
     if (this.outline && !this.needUpdate) return
-    this.outline = new SvgPath(
+    this.outline = toSvg(
       `M ${0} ${0} h ${this.attr('w')} v ${this.attr('h')} h -${this.attr(
         'w'
       )} z`

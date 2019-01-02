@@ -7,20 +7,21 @@ const d =
 const d2 =
   'M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z'
 const d3 = 'M 0 0 h 100 v 100 h -100 z'
-const d4 = 'M 0 0 L 300 50 L 0 100 z'
+const d4 = 'M 50 50 L 350 100 L 50 150 z'
 let layer = scene.layer({ handleEvent: true })
 var ele = new Path({
   zIndex: 2,
   d: d4,
   x: 150,
   y: 150,
-  globalAlpha: 0.4,
+  opacity: 0.4,
   transformOrigin: [50, 50],
   // translate: -50,
   rotate: 90,
   // scale: 2,
   stroke: 'pink',
-  lineWidth: 16,
+  fill: '#344',
+  lineWidth: 4,
   miterLimit: 100
 })
 ele.on('click', () => {

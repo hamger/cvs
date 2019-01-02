@@ -1,7 +1,7 @@
 import Element from '../element'
 import { createCtx } from '../utils/utils'
 import { loadedResources } from '../utils/resource'
-import SvgPath from '../svgPath'
+import toSvg from '../utils/toSvg'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
 export default class Image extends Element {
@@ -12,12 +12,12 @@ export default class Image extends Element {
     ctx.save()
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
-    if (!this.cacheCtx) this.preload()
     this.changeState(ctx)
+    if (!this.cacheCtx) this.buffer()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
-  preload () {
+  buffer () {
     this.setOutline()
     this.cacheCtx = createCtx(this.w, this.h)
     this.drawImg(this.cacheCtx)
@@ -49,7 +49,7 @@ export default class Image extends Element {
     this.image = loadedResources.get(this.attr('image'))
     this.w = this.attr('w') ? this.attr('w') : this.image.width
     this.h = this.attr('h') ? this.attr('h') : this.image.height
-    this.outline = new SvgPath(
+    this.outline = toSvg(
       `M ${0} ${0} h ${this.w} v ${this.h} h -${this.w} z`
     )
     this.outline

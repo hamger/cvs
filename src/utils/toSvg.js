@@ -1,6 +1,19 @@
-import { oneOrTwoValues } from './utils'
+import { oneOrTwoValues, error } from './utils'
+import SvgPath from '../svgPath'
+
+export default function toSvg (d) {
+  if (typeof d === 'object') {
+    if (d.type === 'rect') {
+      d = rect2svg(d)
+    } else if (d.type === 'circle') {
+      d = circle2svg(d)
+    } else error('unexpected type of path.')
+  }
+  return new SvgPath(d)
+}
+
 // 矩形转成 svg 路径
-export function rect2svg (d) {
+function rect2svg (d) {
   if (!d.borderRadius) {
     return `M ${d.x || 0} ${d.y || 0} h ${d.w} v ${d.h} h -${d.w} z`
   } else {
@@ -39,7 +52,7 @@ export function rect2svg (d) {
 }
 
 // 圆形、椭圆转成 svg 路径
-export function circle2svg (d) {
+function circle2svg (d) {
   const [rx, ry] = oneOrTwoValues(d.r),
     { cx = rx, cy = ry, rotate = 0 } = d
   const calc = calculate({ cx, cy, rx, ry, rotate })

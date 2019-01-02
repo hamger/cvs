@@ -1,7 +1,7 @@
 import Element from '../element'
 import parseFont from '../utils/parse-font'
 import { createCtx } from '../utils/utils'
-import SvgPath from '../svgPath'
+import toSvg from '../utils/toSvg'
 
 const tempCtx = createCtx()
 
@@ -23,12 +23,12 @@ export default class Text extends Element {
     ctx.save()
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
-    if (!this.cacheCtx) this.preload()
     this.changeState(ctx)
+    if (!this.cacheCtx) this.buffer()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
-  preload () {
+  buffer () {
     this.setOutline()
     this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     this.cacheCtx.textBaseline = 'middle'
@@ -52,7 +52,7 @@ export default class Text extends Element {
       if (lineW > maxW) maxW = lineW
     })
     this.attr({ w: maxW, h: this.attr('lineHeight') * this.lines.length })
-    this.outline = new SvgPath(
+    this.outline = toSvg(
       `M 0 0 h ${this.attr('w')} v ${this.attr('h')} h -${this.attr('w')} z`
     )
     this.outline
