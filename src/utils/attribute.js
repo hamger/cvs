@@ -7,6 +7,7 @@ export default class Attribute {
     Object.assign(this, {
       x: 0,
       y: 0,
+      zIndex: 0,
       _rotate: 0,
       _scale: [1, 1],
       _translate: [0, 0],

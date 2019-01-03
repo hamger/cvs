@@ -97,7 +97,7 @@ circle.on('click', () => {
 circle.on('mouseup', (e) => {
   console.log(e)
 })
-circle.on('touchend', (e) => {
+circle.on('mousemove', (e) => {
   console.log(e)
 })
 

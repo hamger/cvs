@@ -2,7 +2,7 @@ import Element from './element'
 import {
   animFrame,
   cancelAnim,
-  arrSort,
+  arrSort2,
   forArr,
   remove,
   getItem,
@@ -84,7 +84,7 @@ class Layer {
       child._ctx = this.ctx
       child._timeline = this.timeline.fork()
       this.children.push(child)
-      arrSort(this.children, 'zIndex')
+      arrSort2(this.children, 'zIndex')
     })
     return this
   }

@@ -28,12 +28,11 @@ const property = [
 let id = 0
 class Element {
   constructor (opt) {
-    this[_attr] = new Attribute(this)
+    this[_attr] = new Attribute()
     if (typeof opt.id === 'string') {
       this.id = opt.id
       delete opt.id
     } else this.id = id++
-    this.index = opt.index || 0
     forObj(opt, (key, val) => {
       this[_attr][key] = val
     })

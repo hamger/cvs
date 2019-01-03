@@ -64,6 +64,15 @@ export function arrSort (arr, key, isDescend = false) {
   return arr
 }
 
+export function arrSort2 (arr, key, isDescend = false) {
+  if (!arr.length) return arr
+  arr.sort(function (a, b) {
+    if (isDescend) return b.attr(key) - a.attr(key)
+    else return a.attr(key) - b.attr(key)
+  })
+  return arr
+}
+
 // 全局动画循环周期
 export const period = 16
 // 折返动画容错毫秒
@@ -159,6 +168,7 @@ export function getMatrix (pos, transforms) {
   return matrix.m
 }
 
+// 转化为二项数组
 export function oneOrTwoValues (val) {
   if (!Array.isArray(val)) return [val, val]
   if (val.length === 1) return [val[0], val[0]]

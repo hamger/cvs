@@ -1,5 +1,5 @@
 import Element from '../element'
-import { remove, arrSort, error, createCtx, getMatrix } from '../utils/utils'
+import { remove, arrSort2, error, createCtx, getMatrix } from '../utils/utils'
 import toSvg from '../utils/toSvg'
 
 export default class Group extends Element {
@@ -13,7 +13,7 @@ export default class Group extends Element {
         error('Function group.append only accept the instance of Element.')
       }
       this.children.push(child)
-      arrSort(this.children, 'zIndex')
+      arrSort2(this.children, 'zIndex')
     })
     return this
   }
