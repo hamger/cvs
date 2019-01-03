@@ -122,7 +122,7 @@
 
 - 参数：
 
-  - `{string} eventType`规定绑定的事件名称，可选值: `click`
+  - `{string} eventType`规定绑定的事件名称，可选值: `click`、`mousedown`、`mouseup`、`mousemove`、`touchstart`、`touchend`、`touchmove`
   - `{Function} callback`规定监听函数
 
 - 示例：
