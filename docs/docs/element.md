@@ -122,13 +122,17 @@
 
 - 参数：
 
-  - `{string} eventType`规定绑定的事件名称，可选值: `click`、`mousedown`、`mouseup`、`mousemove`、`touchstart`、`touchend`、`touchmove`
+  - `{string} eventType`规定绑定的事件名称，可选值: `click`、`mousedown`、`mouseup`、`mousemove`、`touchstart`、`touchend`、`touchmove`、`mouseenter`、`mouseleave`
   - `{Function} callback`规定监听函数
+
+  ::: tip
+  callback 会接收一个包含事件信息的参数`e`，通过`e.originalEvent`可获得原始事件的参数
+  :::
 
 - 示例：
   ```js
   element.on("click", function(e) {
-    console.log("element: " + e);
+    console.log(e.originalEvent);
   });
   ```
 
