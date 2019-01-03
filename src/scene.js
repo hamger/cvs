@@ -3,13 +3,25 @@ import { loadTexture } from './utils/resource'
 import Layer from './layer'
 import Timeline from './utils/timeline'
 
+const events = [
+  'mousedown',
+  'mouseup',
+  'mousemove',
+  'touchstart',
+  'touchend',
+  'touchmove',
+  'click'
+]
+
+const _layers = Symbol('layers')
+
 export default class Scene {
   constructor (opt) {
     this.container = document.getElementById(opt.containerId)
-    this.layers = [] // 根据 zIndex 升序排列的图层
+    this[_layers] = [] // 根据 zIndex 升序排列的图层
     this.timeline = new Timeline()
-    this.init()
-    this.delegateEvents()
+    events.forEach(event => this.delegateEvent(event))
+    // this.delegateEvents()
   }
 
   async preload (obj) {
@@ -26,36 +38,48 @@ export default class Scene {
     return res
   }
 
-  init () {
-    this.scene = document.createElement('div')
-    this.scene.style.cssText = `position:relative;height:100%;width:100%;`
-    this.container.appendChild(this.scene)
-  }
   // 事件委托
   delegateEvents () {
-    this.scene.addEventListener('click', e => {
+    this.container.addEventListener('click', e => {
       // 优先触发前面图层的事件
-      this.layers.forEach(layer => {
+      this[_layers].forEach(layer => {
         if (!layer.handleEvent) return
         layer.dispatchEvent(e, 'click')
       })
     })
   }
+  delegateEvent (type, receiver = this.container) {
+    receiver.addEventListener(
+      type,
+      e => {
+        const evtArgs = {
+          type,
+          originalEvent: e,
+          stopDispatch () {
+            this.terminated = true
+          }
+        }
+        this[_layers].forEach(layer => {
+          if (!layer.handleEvent) return
+          layer.dispatchEvent(evtArgs)
+        })
+      }
+    )
+
+    return true
+  }
   // 添加一个 layer
   layer (opt = {}) {
-    Object.assign(opt, { scene: this.scene })
+    Object.assign(opt, { container: this.container })
     let layer = new Layer(opt)
     layer.timeline = this.timeline.fork()
-    this.layers.push(layer)
-    arrSort(this.layers, 'zIndex')
+    this[_layers].push(layer)
+    arrSort(this[_layers], 'zIndex')
     return layer
   }
   // 删除一个 layer
   remove (layer) {
-    if (layer) {
-      remove(this.layers, layer)
-    } else {
-      this.layers = []
-    }
+    if (layer) remove(this[_layers], layer)
+    else this[_layers] = []
   }
 }

@@ -1,6 +1,5 @@
 import Element from './element'
 import {
-  getLocation,
   animFrame,
   cancelAnim,
   arrSort,
@@ -41,36 +40,41 @@ class Layer {
     return res
   }
   init () {
-    this.width = this.scene.clientWidth
-    this.height = this.scene.clientHeight
+    this.width = this.container.clientWidth
+    this.height = this.container.clientHeight
     this.ctx = createCtx(this.width, this.height)
     this.ctx.canvas.style.cssText = `position: absolute; top: 0px; left: 0px;z-index:${
       this.zIndex
     }`
-    this.scene.appendChild(this.ctx.canvas)
+    this.container.appendChild(this.ctx.canvas)
   }
   element (id) {
     return getItem(this.children, id)
   }
   // 触发子元素的事件监听
-  emitEvent (children, type, e) {
-    forArr(children, child => {
-      if (child.children && child.children.length > 0) {
-        this.emitEvent(child.children, type)
-      }
-      if (!child.attr('visible') || !child[type] || !child.outline) return
-      if (child.isCollision(this.evt)) child[type].call(child, e)
-    }, true)
+  emitEvent (children, e) {
+    forArr(
+      children,
+      child => {
+        if (child.children && child.children.length > 0) {
+          this.emitEvent(child.children, e)
+        }
+        child.emit(e)
+      },
+      true
+    )
   }
   // 分发事件
-  dispatchEvent (e, type) {
-    this.evt = getLocation(this.ctx.canvas, e)
-    // zIndex 大的元素先触发监听事件，先子元素优先于父元素触发（冒泡机制）
-    this.emitEvent(this.children, type, e)
+  dispatchEvent (evtArgs) {
+    let e = evtArgs.originalEvent
+    const { left, top } = e.target.getBoundingClientRect()
+    const { clientX, clientY } = e.changedTouches ? e.changedTouches[0] : e
+    // zIndex 大的元素先触发监听事件，子元素优先于父元素触发（冒泡机制）
+    this.emitEvent(this.children, Object.assign(evtArgs, {
+      x: Math.round((clientX | 0) - left),
+      y: Math.round((clientY | 0) - top)
+    }))
   }
-  // set tempEvent (val) {
-  //   val.call(temp, e)
-  // }
   append (...elements) {
     elements.forEach(child => {
       if (!(child instanceof Element)) {

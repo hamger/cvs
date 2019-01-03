@@ -1,15 +1,4 @@
 import Matrix from './matrix'
-// 获取相对于容器的坐标
-export function getLocation (container, event) {
-  let hastouch = 'ontouchstart' in window
-  let e = event || window.event
-  let x = hastouch ? e.targetTouches[0].pageX : e.clientX
-  let y = hastouch ? e.targetTouches[0].pageY : e.clientY
-  return {
-    x: x - container.getBoundingClientRect().left,
-    y: y - container.getBoundingClientRect().top
-  }
-}
 /**
  * 删除 arr 中的某项
  */

@@ -68,20 +68,8 @@ let ruler = new Path({
   stroke: '#444'
 })
 layer.append(ruler)
-ruler.keyframe([['x'], {x: 300}], 3000)
+// ruler.keyframe([['x'], {x: 300}], 3000)
 
-// let ellipse = new Path({
-//   x: 200,
-//   y: 70,
-//   d: {
-//     type: 'circle',
-//     r: [60, 40],
-//     rotate: 90,
-//   },
-//   fill: '#329',
-//   stroke: 'red'
-// })
-// layer.append(ellipse)
 let circle = new Path({
   x: 200,
   y: 200,
@@ -94,11 +82,28 @@ let circle = new Path({
   lineWidth: 4,
   stroke: '#444'
 })
+
+let flag = true
+circle.on('click', () => {
+  if (flag) {
+    ele.attr({ stroke: 'blue' })
+  } else {
+    ele.attr({ stroke: 'red' })
+  }
+  flag = !flag
+  layer.clear()
+  layer.draw()
+})
+circle.on('mouseup', (e) => {
+  console.log(e)
+})
+circle.on('touchend', (e) => {
+  console.log(e)
+})
+
 layer.append(circle)
 // layer.animate()
 
-console.log(circle.bounds)
-console.log(circle.size)
 let rect = new Path({
   zIndex: 22,
   x: circle.bounds[0],
@@ -113,14 +118,3 @@ let rect = new Path({
 layer.append(rect)
 
 layer.draw()
-// let flag = true
-// rect2.on('click', () => {
-//   if (flag) {
-//     ele.attr({ stroke: 'blue' })
-//   } else {
-//     ele.attr({ stroke: 'red' })
-//   }
-//   flag = !flag
-//   layer.clear()
-//   layer.draw()
-// })

@@ -8,7 +8,8 @@ import { error, forObj } from './utils/utils'
 
 const _keyframeArr = Symbol('keyframeArr'),
   _trackArr = Symbol('trackArr'),
-  _attr = Symbol('attribute')
+  _attr = Symbol('attribute'),
+  _events = Symbol('events')
 
 const property = [
   'lineCap',
@@ -38,6 +39,7 @@ class Element {
     })
     this[_keyframeArr] = []
     this[_trackArr] = []
+    this[_events] = new Map()
     this.needUpdate = false
   }
   get size () {
@@ -125,10 +127,14 @@ class Element {
     return this.outline.isPointInPath(x - this.attr('x'), y - this.attr('y'))
   }
   on (eventType, callback) {
-    this[eventType] = callback
+    this[_events].set(eventType, callback)
   }
   off (eventType) {
-    this[eventType] = null
+    this[_events].delete(eventType)
+  }
+  emit (e) {
+    if (!this.attr('visible') || !this[_events].has(e.type)) return
+    if (this.isCollision(e)) this[_events].get(e.type)(e)
   }
   get animatable () {
     if (this[_trackArr].length > 0 || this[_keyframeArr].length > 0) return true
