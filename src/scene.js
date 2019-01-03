@@ -21,7 +21,6 @@ export default class Scene {
     this[_layers] = [] // 根据 zIndex 升序排列的图层
     this.timeline = new Timeline()
     events.forEach(event => this.delegateEvent(event))
-    // this.delegateEvents()
   }
 
   async preload (obj) {
@@ -39,15 +38,6 @@ export default class Scene {
   }
 
   // 事件委托
-  delegateEvents () {
-    this.container.addEventListener('click', e => {
-      // 优先触发前面图层的事件
-      this[_layers].forEach(layer => {
-        if (!layer.handleEvent) return
-        layer.dispatchEvent(e, 'click')
-      })
-    })
-  }
   delegateEvent (type, receiver = this.container) {
     receiver.addEventListener(
       type,

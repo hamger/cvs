@@ -79,7 +79,7 @@ let circle = new Path({
   },
   transformOrigin: [100, 50],
   rotate: 90,
-  lineWidth: 4,
+  lineWidth: 10,
   stroke: '#444'
 })
 
@@ -97,8 +97,18 @@ circle.on('click', () => {
 circle.on('mouseup', (e) => {
   console.log(e)
 })
-circle.on('mousemove', (e) => {
-  console.log(e)
+// circle.on('mousemove', (e) => {
+//   console.log(e)
+// })
+circle.on('mouseenter', (e) => {
+  console.log('enter')
+  circle.attr({stroke: '#098'})
+  layer.draw()
+})
+circle.on('mouseleave', (e) => {
+  console.log('leave')
+  circle.attr({stroke: '#444'})
+  layer.draw()
 })
 
 layer.append(circle)

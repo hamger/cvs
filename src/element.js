@@ -9,7 +9,8 @@ import { error, forObj } from './utils/utils'
 const _keyframeArr = Symbol('keyframeArr'),
   _trackArr = Symbol('trackArr'),
   _attr = Symbol('attribute'),
-  _events = Symbol('events')
+  _events = Symbol('events'),
+  _collisionState = Symbol('collisionState')
 
 const property = [
   'lineCap',
@@ -39,6 +40,7 @@ class Element {
     this[_keyframeArr] = []
     this[_trackArr] = []
     this[_events] = new Map()
+    this[_collisionState] = false
     this.needUpdate = false
   }
   get size () {
@@ -132,8 +134,20 @@ class Element {
     this[_events].delete(eventType)
   }
   emit (e) {
-    if (!this.attr('visible') || !this[_events].has(e.type)) return
-    if (this.isCollision(e)) this[_events].get(e.type)(e)
+    if (!this.attr('visible')) return
+    else if (e.type !== 'mousemove' && !this[_events].has(e.type)) return
+    else if (e.type === 'mousemove' && !this[_events].has(e.type) && !this[_events].has('mouseenter') && !this[_events].has('mouseleave')) return
+    const isCollision = this.isCollision(e)
+    if (e.type === 'mousemove') {
+      if (isCollision && !this[_collisionState]) {
+        this[_collisionState] = true
+        this[_events].has('mouseenter') && this[_events].get('mouseenter')(e)
+      } else if (!isCollision && this[_collisionState]) {
+        this[_collisionState] = false
+        this[_events].has('mouseleave') && this[_events].get('mouseleave')(e)
+      }
+    }
+    if (isCollision && this[_events].has(e.type)) this[_events].get(e.type)(e)
   }
   get animatable () {
     if (this[_trackArr].length > 0 || this[_keyframeArr].length > 0) return true
