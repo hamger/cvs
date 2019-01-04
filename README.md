@@ -42,7 +42,7 @@ cvs.draw();
 
 [文档地址](https://hamger.github.io/cvs/)
 
-## Future
+## Todo
 
 - 实现基于关键帧的动画
 - 支持多个元素的复合
