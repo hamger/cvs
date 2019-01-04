@@ -1,5 +1,5 @@
 import Matrix from './matrix'
-import SvgPath from '../svgPath'
+import toSvg from './toSvg'
 import { oneOrTwoValues } from './utils'
 
 export default class Attribute {
@@ -12,10 +12,10 @@ export default class Attribute {
       _scale: [1, 1],
       _translate: [0, 0],
       _skew: [0, 0],
-      anchorX: 0.5,
-      anchorY: 0.5,
+      // anchorX: 0.5,
+      // anchorY: 0.5,
+      // anchor: [0, 0],
       visible: true,
-      anchor: [0, 0],
       enableCache: false,
       opacity: 1,
       transformOrigin: '',
@@ -106,6 +106,6 @@ export default class Attribute {
   }
 
   set offsetPath (val) {
-    this._offsetPath = new SvgPath(val)
+    this._offsetPath = toSvg(val)
   }
 }
