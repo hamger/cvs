@@ -61,7 +61,7 @@ export default class Text extends Element {
       .restore()
       .save()
       .beginPath()
-    this.setSvgAttr(this.outline)
+    if (this.attr('lineWidth')) this.outline.lineWidth(this.attr('lineWidth'))
     this.outline.transform(...this.attr('lastMatrix'))
   }
 }

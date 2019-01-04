@@ -31,7 +31,9 @@ class Path extends Element {
       .restore()
       .save()
       .beginPath()
-    this.setSvgAttr(this.outline)
+    if (this.attr('lineWidth')) this.outline.lineWidth(this.attr('lineWidth'))
+    if (this.attr('lineCap')) this.outline.lineCap(this.attr('lineCap'))
+    if (this.attr('lineJoin')) this.outline.lineJoin(this.attr('lineJoin'))
     this.outline.transform(...this.attr('lastMatrix'))
   }
 }

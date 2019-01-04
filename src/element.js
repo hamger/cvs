@@ -1,5 +1,4 @@
 // import Track from './track'
-// import ElementAttr from './utils/elementAttr'
 import Attribute from './utils/attribute'
 import Bezier from './tracks/bezier'
 import Track from './track'
@@ -90,7 +89,7 @@ class Element {
   // 返回一个元素的克隆
   clone (opt = {}) {
     let Cons = this.constructor
-    const options = Object.assign({}, this.opt, opt)
+    const options = Object.assign({}, this.attr(), opt)
     return new Cons(options)
   }
   // 改变上下文环境的状态
@@ -103,12 +102,6 @@ class Element {
       else if (key === 'opacity') ctx.globalAlpha = val
       else if (property.indexOf(key) > -1) ctx[key] = val
     }
-  }
-  setSvgAttr (outline) {
-    const attrs = this.attr()
-    if (attrs.lineWidth) outline.lineWidth(attrs.lineWidth)
-    if (attrs.lineCap) outline.lineCap(attrs.lineCap)
-    if (attrs.lineJoin) outline.lineJoin(attrs.lineJoin)
   }
   // 设置/获取绘制属性
   attr (opt) {
