@@ -61,6 +61,10 @@ cvs.draw();
 
 ## Changelog
 
+### 2018.1.4
+
+> v0.6.2 支持 svg 路径矩阵变换
+
 ### 2018.1.3
 
 > v0.6.1 支持 mouseenter 和  mouseleave 的事件响应
