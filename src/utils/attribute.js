@@ -26,9 +26,7 @@ export default class Attribute {
   }
 
   get (key) {
-    if (/\b(rotate|scale|skew|translate|offsetPath)\b/.test(key)) {
-      key = `_${key}`
-    }
+    if (/\b(rotate|scale|skew|translate|offsetPath)\b/.test(key)) { key = `_${key}` }
     return this[key]
   }
 

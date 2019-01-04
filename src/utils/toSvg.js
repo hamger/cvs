@@ -1,15 +1,19 @@
-import { oneOrTwoValues, error } from './utils'
+import { oneOrTwoValues, error, getMatrix } from './utils'
 import SvgPath from '../svgPath'
 
 export default function toSvg (d) {
+  if (typeof d === 'string') return new SvgPath(d)
   if (typeof d === 'object') {
-    if (d.type === 'rect') {
-      d = rect2svg(d)
-    } else if (d.type === 'circle') {
-      d = circle2svg(d)
-    } else error('unexpected type of path.')
+    let pas = ''
+    if (d.path) pas = d.path
+    else if (d.type === 'rect') pas = rect2svg(d)
+    else if (d.type === 'circle') pas = circle2svg(d)
+    else error('unexpected type of path.')
+    let p = new SvgPath(pas)
+    let m = getMatrix(d)
+    p.transform(...m)
+    return p
   }
-  return new SvgPath(d)
 }
 
 // 矩形转成 svg 路径

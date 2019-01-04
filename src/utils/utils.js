@@ -147,15 +147,14 @@ export function forObj (obj, cb) {
     cb(key, val)
   })
 }
+
 // 获得变换矩阵
-export function getMatrix (pos, transforms) {
+export function getMatrix (transforms) {
   let matrix = new Matrix()
-  matrix.translate(...pos)
-  if (typeof transforms[0] === 'number') {
+  if (Array.isArray(transforms)) {
     matrix.multiply(transforms)
-  } else {
-    transforms.forEach(item => {
-      let [key, val] = Object.entries(item)[0]
+  } else if (typeof transforms === 'object') {
+    Object.entries(transforms).forEach(([key, val]) => {
       if (/\b(scale|translate|skew)\b/.test(key)) {
         matrix[key](...oneOrTwoValues(val))
       } else if (key === 'rotate') {

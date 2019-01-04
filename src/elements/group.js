@@ -57,7 +57,7 @@ export default class Group extends Element {
       .restore()
       .save()
       .beginPath()
-    this.clipMatrix = getMatrix([0, 0], this.attr('clip').transform || [])
+    this.clipMatrix = getMatrix(this.attr('clip').transform)
     this.clipPath.transform(...this.clipMatrix)
     this.clipPath.to(ctx)
     ctx.clip()
