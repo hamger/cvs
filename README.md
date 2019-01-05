@@ -4,12 +4,12 @@ Cvs (a short name from 'canvas') is a basic canvas framework for 2d drawing, it'
 
 ## Features
 
-- 无依赖，API 简练，学习成本低
-- 引入轨迹的概念，并提供辅助工具，使路径动画的实现更加简单直观
-- 支持高度自由的自定义元素和轨迹，应用灵活
+- 简洁的 API 设计
+- 面向对象编程
+- 支持高度自由的元素组合
 - 基于时间轴的细粒度动画控制
-- 元素支持基础事件绑定，增强画布的交互性
-- 利用 Canvas 离屏渲染，实现缓存机制
+- 元素支持事件响应
+- 基于离屏渲染的缓存机制
 
 ## Install
 
@@ -20,22 +20,23 @@ npm install cvs
 ## Usage
 
 ```js
-import { Scene, Circle } from "cvs";
+import { Scene, Path } from "cvs";
 
-let scene = new Scene({
-  containerId: 'container'
-})
-let layer = scene.layer()
+let scene = new Scene({containerId: "container"});
+let layer = scene.layer();
 
-cvs.append(
-  new Circle({
-    x: 100,
-    y: 100,
-    r: 59
-  })
-);
+let circle = new Path({
+  x: 130,
+  y: 60,
+  d: {
+    type: "circle",
+    r: 40
+  },
+  fill: "#153",
+  stroke: "red"
+});
 
-cvs.draw();
+layer.draw();
 ```
 
 ## Document
@@ -44,8 +45,6 @@ cvs.draw();
 
 ## Todo
 
-- 实现基于关键帧的动画
-- 支持多个元素的复合
 - 添加锚点属性，优化矩阵变换
 - 基于时间线的细粒度动画控制
 - 支持伪 3D 效果
@@ -67,7 +66,7 @@ cvs.draw();
 
 ### 2018.1.3
 
-> v0.6.1 支持 mouseenter 和  mouseleave 的事件响应
+> v0.6.1 支持 mouseenter 和 mouseleave 的事件响应
 
 > v0.6.0 元素支持对原生鼠标和触碰事件的响应
 
