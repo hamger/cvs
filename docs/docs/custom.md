@@ -36,7 +36,7 @@ let button = new Group({
 }).append(text, rect);
 
 rect.on("click", () => {
-  alert("操作成功");
+  console.log('rect')
 });
 
 rect.on("mouseenter", () => {
