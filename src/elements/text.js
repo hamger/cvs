@@ -24,7 +24,8 @@ export default class Text extends Element {
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
     this.changeState(ctx)
-    if (!this.cacheCtx) this.buffer()
+    this.buffer()
+    // if (!this.cacheCtx) this.buffer()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }

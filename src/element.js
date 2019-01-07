@@ -44,20 +44,23 @@ class Element {
   }
   get size () {
     if (!this.outline) this.setOutline()
-    return this.outline.size.slice()
+    return {
+      w: this.outline.size[0],
+      h: this.outline.size[1]
+    }
+  }
+  get center () {
+    if (!this.outline) this.setOutline()
+    const x = this.attr('x'), y = this.attr('y')
+    return {
+      x: this.outline.center[0] + x,
+      y: this.outline.center[1] + y
+    }
   }
   get bounds () {
     if (!this.outline) this.setOutline()
     const x = this.attr('x'), y = this.attr('y')
     return this.outline.bounds.map((item, index) => {
-      if (index % 2) return item + y
-      else return item + x
-    })
-  }
-  get center () {
-    if (!this.outline) this.setOutline()
-    const x = this.attr('x'), y = this.attr('y')
-    return this.outline.center.map((item, index) => {
       if (index % 2) return item + y
       else return item + x
     })
@@ -116,8 +119,19 @@ class Element {
       if (typeof val === 'function') { this[_attr][key] = val(this[_attr].get(key)) } else if (typeof val === 'object') { this[_attr][key] = Object.assign({}, this[_attr].get(key) || {}, val) } else this[_attr][key] = val
     })
   }
+  getGlobalPos (ele, x = 0, y = 0) {
+    if (ele.group) {
+      x += ele.group.attr('x')
+      y += ele.group.attr('y')
+      this.getGlobalPos(ele.group, x, y)
+    } else {
+      const obj = [x, y]
+      return obj
+    }
+  }
   // 判断是否点击在元素上
   isCollision ({ x, y }) {
+    // const pos = this.getGlobalPos(this)
     return this.outline.isPointInPath(x - this.attr('x'), y - this.attr('y'))
   }
   on (eventType, callback) {
@@ -126,6 +140,7 @@ class Element {
   off (eventType) {
     this[_events].delete(eventType)
   }
+  // 触发条件的判断，并执行响应
   emit (e) {
     if (!this.attr('visible')) return
     else if (e.type !== 'mousemove' && !this[_events].has(e.type)) return
@@ -140,7 +155,9 @@ class Element {
         this[_events].has('mouseleave') && this[_events].get('mouseleave')(e)
       }
     }
-    if (isCollision && this[_events].has(e.type)) this[_events].get(e.type)(e)
+    if (isCollision && this[_events].has(e.type)) {
+      this[_events].get(e.type)(e)
+    }
   }
   get animatable () {
     if (this[_trackArr].length > 0 || this[_keyframeArr].length > 0) return true

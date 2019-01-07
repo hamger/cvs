@@ -102,11 +102,13 @@ circle.on('mouseup', (e) => {
 // })
 circle.on('mouseenter', (e) => {
   console.log('enter')
+  layer.clear()
   circle.attr({stroke: '#098'})
   layer.draw()
 })
 circle.on('mouseleave', (e) => {
   console.log('leave')
+  layer.clear()
   circle.attr({stroke: '#444'})
   layer.draw()
 })

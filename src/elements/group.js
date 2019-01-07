@@ -12,6 +12,7 @@ export default class Group extends Element {
       if (!(child instanceof Element)) {
         error('Function group.append only accept the instance of Element.')
       }
+      child.group = this
       this.children.push(child)
       arrSort2(this.children, 'zIndex')
     })
@@ -29,7 +30,7 @@ export default class Group extends Element {
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
     this.changeState(ctx)
-    if (!this.cacheCtx || this.needUpdate) this.buffer()
+    this.buffer()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }

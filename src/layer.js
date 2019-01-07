@@ -56,10 +56,13 @@ class Layer {
     forArr(
       children,
       child => {
+        child.emit && child.emit(e)
         if (child.children && child.children.length > 0) {
+          // 组合内的元素位置相对于组合计算
+          e.x -= child.attr('x')
+          e.y -= child.attr('y')
           this.emitEvent(child.children, e)
         }
-        child.emit(e)
       },
       true
     )
@@ -69,11 +72,14 @@ class Layer {
     let e = evtArgs.originalEvent
     const { left, top } = e.target.getBoundingClientRect()
     const { clientX, clientY } = e.changedTouches ? e.changedTouches[0] : e
-    // zIndex 大的元素先触发监听事件，子元素优先于父元素触发（冒泡机制）
-    this.emitEvent(this.children, Object.assign(evtArgs, {
-      x: Math.round((clientX | 0) - left),
-      y: Math.round((clientY | 0) - top)
-    }))
+    // zIndex 大的元素先触发监听事件，父元素优先于子元素触发
+    this.emitEvent(
+      this.children,
+      Object.assign(evtArgs, {
+        x: Math.round((clientX | 0) - left),
+        y: Math.round((clientY | 0) - top)
+      })
+    )
   }
   append (...elements) {
     elements.forEach(child => {
