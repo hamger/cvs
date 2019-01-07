@@ -32,8 +32,8 @@ import { Scene, Image, Group, Path } from '#'
   let group = new Group({
     x: 100,
     y: 100,
-    w: 300,
-    h: 300,
+    // w: 300,
+    // h: 300,
     stroke: '#ddd',
     // transformOrigin: 150,
     fill: 'green',

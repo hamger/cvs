@@ -43,6 +43,9 @@ class Element {
     this.needUpdate = false
   }
   get size () {
+    if (typeof this.isVirtual === 'boolean' && this.isVirtual) {
+      return
+    }
     if (!this.outline) this.setOutline()
     return {
       w: this.outline.size[0],
@@ -50,6 +53,9 @@ class Element {
     }
   }
   get center () {
+    if (typeof this.isVirtual === 'boolean' && this.isVirtual) {
+      return
+    }
     if (!this.outline) this.setOutline()
     const x = this.attr('x'), y = this.attr('y')
     return {
@@ -58,6 +64,9 @@ class Element {
     }
   }
   get bounds () {
+    if (typeof this.isVirtual === 'boolean' && this.isVirtual) {
+      return
+    }
     if (!this.outline) this.setOutline()
     const x = this.attr('x'), y = this.attr('y')
     return this.outline.bounds.map((item, index) => {

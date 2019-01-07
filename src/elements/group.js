@@ -7,6 +7,10 @@ export default class Group extends Element {
     super(opt)
     this.children = []
   }
+  get isVirtual () {
+    if (this.attr('w') && this.attr('h')) return false
+    else return true
+  }
   append (...children) {
     children.forEach(child => {
       if (!(child instanceof Element)) {
@@ -30,26 +34,36 @@ export default class Group extends Element {
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
     this.changeState(ctx)
-    this.buffer()
-    ctx.drawImage(this.cacheCtx.canvas, 0, 0)
+    if (this.isVirtual) {
+      this.buffer(ctx)
+    } else {
+      this.buffer()
+      ctx.drawImage(this.cacheCtx.canvas, 0, 0)
+    }
     ctx.restore()
   }
-  buffer () {
-    this.setOutline()
-    this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
-    if (this.attr('clip')) this.clip(this.cacheCtx)
+  buffer (ctx) {
+    let context = null
+    if (ctx) {
+      context = ctx
+    } else {
+      this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
+      context = this.cacheCtx
+      this.setOutline()
+    }
+    if (this.attr('clip')) this.clip(context)
     if (this.attr('fill')) {
-      this.cacheCtx.fillStyle = this.attr('fill')
-      this.cacheCtx.rect(0, 0, this.attr('w'), this.attr('h'))
-      this.cacheCtx.fill()
+      context.fillStyle = this.attr('fill')
+      context.rect(0, 0, this.attr('w'), this.attr('h'))
+      context.fill()
     }
     if (this.attr('stroke')) {
-      this.cacheCtx.strokeStyle = this.attr('stroke')
-      this.cacheCtx.rect(0, 0, this.attr('w'), this.attr('h'))
-      this.cacheCtx.stroke()
+      context.strokeStyle = this.attr('stroke')
+      context.rect(0, 0, this.attr('w'), this.attr('h'))
+      context.stroke()
     }
     this.children.forEach(child => {
-      child.render.call(child, this.cacheCtx)
+      child.render.call(child, context)
     })
   }
   clip (ctx) {
