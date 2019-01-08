@@ -24,14 +24,12 @@ export default class Text extends Element {
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
     this.changeState(ctx)
-    this.buffer()
-    // if (!this.cacheCtx) this.buffer()
+    if (!this.cacheCtx || this.needUpdate) this.buffer()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
   buffer () {
     this.setOutline()
-    // this.cacheCtx = createCtx(this.size[0] + 2 * (lw + 1), this.size[1] + 2 * (lw + 1))
     this.cacheCtx = createCtx(this.attr('w'), this.attr('h'))
     this.cacheCtx.textBaseline = 'middle'
     let left = 0,
@@ -47,7 +45,6 @@ export default class Text extends Element {
     })
   }
   setOutline () {
-    // if (this.outline && !this.needUpdate) return
     this.lines = this.attr('text').split(/\n/)
     let maxW = 0
     this.lines.forEach(line => {

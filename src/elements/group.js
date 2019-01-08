@@ -37,7 +37,7 @@ export default class Group extends Element {
     if (this.isVirtual) {
       this.buffer(ctx)
     } else {
-      this.buffer()
+      if (!this.cacheCtx || this.needUpdate) this.buffer()
       ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     }
     ctx.restore()
@@ -78,7 +78,6 @@ export default class Group extends Element {
     ctx.clip()
   }
   setOutline () {
-    if (this.outline && !this.needUpdate) return
     this.outline = toSvg(
       `M ${0} ${0} h ${this.attr('w')} v ${this.attr('h')} h -${this.attr(
         'w'

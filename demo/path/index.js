@@ -116,17 +116,4 @@ circle.on('mouseleave', (e) => {
 layer.append(circle)
 // layer.animate()
 
-let rect = new Path({
-  zIndex: 22,
-  x: circle.bounds[0],
-  y: circle.bounds[1],
-  d: {
-    type: 'rect',
-    w: circle.size[0],
-    h: circle.size[1],
-  },
-  stroke: 'red'
-})
-layer.append(rect)
-
 layer.draw()

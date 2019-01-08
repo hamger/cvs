@@ -17,8 +17,8 @@ let rect = new Path({
   y: 1,
   d: {
     type: 'rect',
-    w: text.size.w + 20,
-    h: text.size.h + 20,
+    w: text.size[0] + 20,
+    h: text.size[1] + 20,
     borderRadius: 8
   },
   stroke: '#ecf5ff',
@@ -28,8 +28,6 @@ let rect = new Path({
 let button = new Group({
   x: 200,
   y: 200,
-  // w: rect.size.w + 3,
-  // h: rect.size.h + 3
 }).append(text, rect)
 
 rect.on('click', () => {

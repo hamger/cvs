@@ -23,8 +23,8 @@ class Button extends Group {
       y: Math.floor(opt.borderWidth / 2),
       d: {
         type: 'rect',
-        w: this.text.size.w + opt.padding * 2,
-        h: this.text.size.h + opt.padding * 2,
+        w: this.text.size[0] + opt.padding * 2,
+        h: this.text.size[1] + opt.padding * 2,
         borderRadius: opt.borderRadius,
       },
       lineWidth: opt.borderWidth,

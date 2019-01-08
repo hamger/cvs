@@ -33,8 +33,8 @@ export default {
       y: 1,
       d: {
         type: 'rect',
-        w: text.size.w + 20,
-        h: text.size.h + 20,
+        w: text.size[0] + 20,
+        h: text.size[1] + 20,
         borderRadius: 8
       },
       stroke: '#ecf5ff',

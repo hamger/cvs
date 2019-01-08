@@ -15,6 +15,7 @@ export default class Attribute {
       // anchorX: 0.5,
       // anchorY: 0.5,
       // anchor: [0, 0],
+      lineWidth: 1,
       visible: true,
       enableCache: false,
       opacity: 1,

@@ -4,6 +4,7 @@ import { loadedResources } from '../utils/resource'
 import toSvg from '../utils/toSvg'
 // ctx.drawImage() 参数解释:
 // https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
+
 export default class Image extends Element {
   constructor (opt) {
     super(opt)
@@ -13,8 +14,7 @@ export default class Image extends Element {
     ctx.translate(this.attr('x'), this.attr('y'))
     ctx.transform(...this.attr('lastMatrix'))
     this.changeState(ctx)
-    this.buffer()
-    // if (!this.cacheCtx) this.buffer()
+    if (!this.cacheCtx || this.needUpdate) this.buffer()
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
   }
@@ -46,7 +46,6 @@ export default class Image extends Element {
     ctx.restore()
   }
   setOutline () {
-    // if (this.outline && !this.needUpdate) return
     this.image = loadedResources.get(this.attr('image'))
     this.w = this.attr('w') ? this.attr('w') : this.image.width
     this.h = this.attr('h') ? this.attr('h') : this.image.height

@@ -6,7 +6,7 @@ class Path extends Element {
   constructor (opt) {
     super(opt)
     // 考虑线宽和 1 像素的图像截断
-    this.p = (this.attr('lineWidth') || 0) + 1
+    this.p = Math.floor(this.attr('lineWidth') / 2) + 1
   }
   render (ctx) {
     ctx.save()
@@ -18,7 +18,6 @@ class Path extends Element {
     ctx.restore()
   }
   buffer () {
-    const lw = this.attr('lineWidth') || 0
     this.setOutline()
     this.cacheCtx = createCtx(this.outline.size[0] + 2 * this.p, this.outline.size[1] + 2 * this.p)
     this.changeState(this.cacheCtx)

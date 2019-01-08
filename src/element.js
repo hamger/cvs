@@ -43,32 +43,25 @@ class Element {
     this.needUpdate = false
   }
   get size () {
-    if (typeof this.isVirtual === 'boolean' && this.isVirtual) {
-      return
-    }
+    if (typeof this.isVirtual === 'boolean' && this.isVirtual) return
     if (!this.outline) this.setOutline()
-    return {
-      w: this.outline.size[0],
-      h: this.outline.size[1]
-    }
+    return this.outline.size.slice()
   }
   get center () {
-    if (typeof this.isVirtual === 'boolean' && this.isVirtual) {
-      return
-    }
+    if (typeof this.isVirtual === 'boolean' && this.isVirtual) return
     if (!this.outline) this.setOutline()
-    const x = this.attr('x'), y = this.attr('y')
-    return {
-      x: this.outline.center[0] + x,
-      y: this.outline.center[1] + y
-    }
+    const x = this.attr('x'),
+      y = this.attr('y')
+    return this.outline.center.map((item, index) => {
+      if (index % 2) return item + y
+      else return item + x
+    })
   }
   get bounds () {
-    if (typeof this.isVirtual === 'boolean' && this.isVirtual) {
-      return
-    }
+    if (typeof this.isVirtual === 'boolean' && this.isVirtual) return
     if (!this.outline) this.setOutline()
-    const x = this.attr('x'), y = this.attr('y')
+    const x = this.attr('x'),
+      y = this.attr('y')
     return this.outline.bounds.map((item, index) => {
       if (index % 2) return item + y
       else return item + x
@@ -121,11 +114,17 @@ class Element {
     if (typeof opt === 'string') return this[_attr].get(opt)
     this.needUpdate = false
     forObj(opt, (key, val) => {
-      if (
-        !/\b(x|y|transform|scale|skew|rotate)\b/.test(key) ||
-        property.indexOf(key) > -1
-      ) { this.needUpdate = true }
-      if (typeof val === 'function') { this[_attr][key] = val(this[_attr].get(key)) } else if (typeof val === 'object') { this[_attr][key] = Object.assign({}, this[_attr].get(key) || {}, val) } else this[_attr][key] = val
+      // if (
+      //   !/\b(x|y)\b/.test(key) || property.indexOf(key) > -1
+      // ) {
+      //   this.needUpdate = true
+      // }
+      if (!/\b(x|y)\b/.test(key)) this.needUpdate = true
+      if (typeof val === 'function') {
+        this[_attr][key] = val(this[_attr].get(key))
+      } else if (typeof val === 'object') {
+        this[_attr][key] = Object.assign({}, this[_attr].get(key) || {}, val)
+      } else this[_attr][key] = val
     })
   }
   // 判断是否点击在元素上
@@ -142,7 +141,12 @@ class Element {
   emit (e) {
     if (!this.attr('visible')) return
     else if (e.type !== 'mousemove' && !this[_events].has(e.type)) return
-    else if (e.type === 'mousemove' && !this[_events].has(e.type) && !this[_events].has('mouseenter') && !this[_events].has('mouseleave')) return
+    else if (
+      e.type === 'mousemove' &&
+      !this[_events].has(e.type) &&
+      !this[_events].has('mouseenter') &&
+      !this[_events].has('mouseleave')
+    ) { return }
     const isCollision = this.isCollision(e)
     if (e.type === 'mousemove') {
       if (isCollision && !this[_collisionState]) {

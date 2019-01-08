@@ -39,7 +39,8 @@ let text2 = new Text({
   text: '确定',
   x: 10,
   y: 10,
-  font: '24px serif'
+  font: '24px serif',
+  fill: '#444'
 })
 layer.append(text2)
 layer.draw()

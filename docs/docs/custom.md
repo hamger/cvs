@@ -22,8 +22,8 @@ let rect = new Path({
   y: 1,
   d: {
     type: "rect",
-    w: text.size.w + 20,
-    h: text.size.h + 20,
+    w: text.size[0] + 20,
+    h: text.size[1] + 20,
     borderRadius: 8
   },
   stroke: "#ecf5ff",
@@ -83,8 +83,8 @@ class Button extends Group {
       y: Math.floor(opt.borderWidth / 2),
       d: {
         type: 'rect',
-        w: this.text.size.w + opt.padding * 2,
-        h: this.text.size.h + opt.padding * 2,
+        w: this.text.size[0] + opt.padding * 2,
+        h: this.text.size[1] + opt.padding * 2,
         borderRadius: opt.borderRadius,
       },
       lineWidth: opt.borderWidth,
