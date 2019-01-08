@@ -68,7 +68,8 @@ export default class Keyframe {
       let temp = {}
       if (typeof keyframes[0] === 'string') keyframes[0] = [keyframes[0]]
       keyframes[0].forEach(item => {
-        temp[item] = element.attr(item)
+        if (item === 'offsetDistance') temp.offsetDistance = 0
+        else temp[item] = element.attr(item)
       })
       keyframes[0] = temp
     }
@@ -90,8 +91,7 @@ export default class Keyframe {
     )
     const easingType = this[_timing].easing
     if (typeof easingType === 'string') this[_easing] = Easings[easingType]
-    else if (Array.isArray(easingType) && easingType.length === 4) this[_easing] = getBezierEasing(...easingType)
-    else error('easing must be a string or an array has four items')
+    else if (Array.isArray(easingType) && easingType.length === 4) { this[_easing] = getBezierEasing(...easingType) } else error('easing must be a string or an array has four items')
     this[_keyframes] = calculateFramesOffset(keyframes)
     this[_element] = element
     this[_cb] = cb
@@ -146,10 +146,10 @@ export default class Keyframe {
   }
   handle (obj) {
     if (obj.offsetDistance != null) {
-      const len = this[_element].offsetPath.getTotalLength()
-      const [x, y] = this[_element].offsetPath.getPointAtLength(
-        len * obj.offsetDistance
-      )
+      const len = this[_element].attr('offsetPath').getTotalLength()
+      const [x, y] = this[_element]
+        .attr('offsetPath')
+        .getPointAtLength(len * obj.offsetDistance)
       obj.x = x
       obj.y = y
       delete obj.offsetDistance

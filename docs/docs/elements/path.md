@@ -35,6 +35,7 @@ d: {
   rotate: 20,
   translate: [12, 34],
   skew: [30, 20],
+  scale: [6, 6],
   transform: [1, 0.2, 0.3, 1, 0, 0]
 }
 ```
