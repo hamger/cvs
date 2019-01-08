@@ -32,15 +32,15 @@ module.exports = {
         ]
       },
       ['/docs/custom', '自定义元素'],
-      {
-        title: 'tracks',
-        collapsable: false,
-        children: [
-          ['/docs/tracks/bezier', '曲线 Bezier'],
-          ['/docs/tracks/round', '正圆 Round'],
-          ['/docs/tracks/ellipse', '椭圆 Ellipse']
-        ]
-      }
+      // {
+      //   title: 'tracks',
+      //   collapsable: false,
+      //   children: [
+      //     ['/docs/tracks/bezier', '曲线 Bezier'],
+      //     ['/docs/tracks/round', '正圆 Round'],
+      //     ['/docs/tracks/ellipse', '椭圆 Ellipse']
+      //   ]
+      // }
     ]
   }
 }

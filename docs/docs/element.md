@@ -4,29 +4,34 @@
 
 ### options
 
-| options.key     | value         | description                                  | default              |
-| --------------- | ------------- | -------------------------------------------- | -------------------- |
-| id              | String        | 规定元素的 id                                | 一个自然数           |
-| zIndex          | Number        | 规定元素在 z 轴上的坐标                      | `0`                  |
-| visible         | Boolean       | 规定元素是否可见                             | `true`               |
-| x               | Number        | 规定元素矩阵变换前的左上角 x 轴坐标          | `0`                  |
-| y               | Number        | 规定元素矩阵变换前的左上角 y 轴坐标          | `0`                  |
-| transformOrigin | Number\|Array | 规定元素矩阵变换的的原点与元素左上角的偏移量 | --                   |
-| rotate          | Number        | 规定元素矩阵变换中旋转的角度                 | `0`                  |
-| scale           | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴缩放的倍数     | `[1, 1]`             |
-| translate       | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴移动的距离     | `[0, 0]`             |
-| skew            | Number\|Array | 规定元素矩阵变换中 x 轴与 y 轴倾斜的角度     | `[0, 0]`             |
-| transform       | Array         | 规定元素矩阵变换中的矩阵                     | `[1, 0, 0, 1, 0, 0]` |
+| options.key     | value          | description                                  | default              |
+| --------------- | -------------- | -------------------------------------------- | -------------------- |
+| id              | String         | 规定元素的 id                                | 一个自然数           |
+| zIndex          | Number         | 规定元素在 z 轴上的坐标                      | `0`                  |
+| visible         | Boolean        | 规定元素是否可见                             | `true`               |
+| x               | Number         | 规定元素矩阵变换前的左上角 x 轴坐标          | `0`                  |
+| y               | Number         | 规定元素矩阵变换前的左上角 y 轴坐标          | `0`                  |
+| transformOrigin | Number\|Array  | 规定元素矩阵变换的的原点与元素左上角的偏移量 | --                   |
+| rotate          | Number         | 规定元素矩阵变换中旋转的角度                 | `0`                  |
+| scale           | Number\|Array  | 规定元素矩阵变换中 x 轴与 y 轴缩放的倍数     | `[1, 1]`             |
+| translate       | Number\|Array  | 规定元素矩阵变换中 x 轴与 y 轴移动的距离     | `[0, 0]`             |
+| skew            | Number\|Array  | 规定元素矩阵变换中 x 轴与 y 轴倾斜的角度     | `[0, 0]`             |
+| transform       | Array          | 规定元素矩阵变换中的矩阵                     | `[1, 0, 0, 1, 0, 0]` |
+| offsetPath      | String\|Object | 规定运动路径                                 | --                   |
 
 ::: tip
 `transformOrigin: [50, 50]`表示元素矩阵变换的原点为`[x + 50, y + 50]`，可以缩写为`transformOrigin: 50`。`scale`、`translate`、`skew`的缩写形式同理。
+:::
+
+::: tip
+offsetPath 的值和 Path 元素的 d 形式相同，在关键帧中使用 offsetDistance  定义进度。
 :::
 
 ### 实例属性
 
 | property | value  | description                                                | example              |
 | -------- | ------ | ---------------------------------------------------------- | -------------------- |
-| size     | Object | 元素的大小                                                 | `{w: 100, h: 80}`     |
+| size     | Object | 元素的大小                                                 | `{w: 100, h: 80}`    |
 | center   | Object | 元素相对于父元素的的中心点坐标                             | `{x: 12, y: 12}`     |
 | bounds   | Array  | 元素相对于父元素的左上角（前两项）和右下角（后两项）的坐标 | `[12, 12, 110, 110]` |
 
@@ -159,7 +164,7 @@
   element.off("click");
   ```
 
-#### addTrack(track)
+<!-- #### addTrack(track)
 
 - 描述：
 
@@ -192,4 +197,4 @@
 
   ```js
   elememt.removeTrack(track, track2);
-  ```
+  ``` -->

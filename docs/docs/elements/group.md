@@ -10,13 +10,18 @@ let group = new Group(options);
 
 除了支持元素的[基础属性](/docs/element.html#options)外，还支持以下属性：
 
-| options.key | value  | description  | default |
-| ----------- | ------ | ------------ | ------- |
-| w           | Number | 规定组合宽度 | --      |
-| h           | Number | 规定组合高度 | --      |
+| options.key | value          | description  | default |
+| ----------- | -------------- | ------------ | ------- |
+| w           | Number         | 规定组合宽度 | --      |
+| h           | Number         | 规定组合高度 | --      |
+| clip        | String\|Object | 规定裁剪区域 | --      |
 
 ::: tip
 组合可以不设置宽高，这样的组合称为虚拟组合，即没有边界的组合。虚拟组合无法绑定事件，可以对其子元素进行事件绑定。
+:::
+
+::: tip
+clip 的值和 Path 元素的 d 形式相同。
 :::
 
 ### 实例属性

@@ -128,19 +128,8 @@ class Element {
       if (typeof val === 'function') { this[_attr][key] = val(this[_attr].get(key)) } else if (typeof val === 'object') { this[_attr][key] = Object.assign({}, this[_attr].get(key) || {}, val) } else this[_attr][key] = val
     })
   }
-  getGlobalPos (ele, x = 0, y = 0) {
-    if (ele.group) {
-      x += ele.group.attr('x')
-      y += ele.group.attr('y')
-      this.getGlobalPos(ele.group, x, y)
-    } else {
-      const obj = [x, y]
-      return obj
-    }
-  }
   // 判断是否点击在元素上
   isCollision ({ x, y }) {
-    // const pos = this.getGlobalPos(this)
     return this.outline.isPointInPath(x - this.attr('x'), y - this.attr('y'))
   }
   on (eventType, callback) {
