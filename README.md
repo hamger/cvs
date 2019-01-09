@@ -22,7 +22,7 @@ Cvs (a short name from 'canvas') is a basic canvas framework for 2d drawing, it'
 ```js
 import { Scene, Path } from "cvs";
 
-let scene = new Scene({containerId: "container"});
+let scene = new Scene({ containerId: "container" });
 let layer = scene.layer();
 
 let circle = new Path({
@@ -61,7 +61,7 @@ layer.draw();
 
 ### 2018.1.8
 
-> v0.6.5 实现元素的基础缓存机制
+> v0.6.6 实现元素的基础缓存机制
 
 ### 2018.1.7
 
