@@ -25,6 +25,8 @@ const property = [
   'shadowOffsetY'
 ]
 
+const property2 = ['transform', 'translate', 'scale', 'skew', 'rotate', 'stroke', 'fill', 'transformOrigin']
+
 let id = 0
 class Element {
   constructor (opt) {
@@ -115,7 +117,7 @@ class Element {
     this.needUpdate = false
     forObj(opt, (key, val) => {
       if (
-        !/\b(x|y)\b/.test(key) && (property.indexOf(key) > -1 || /\b(transform|translate|scale|skew|rotate)\b/.test(key))
+        !/\b(x|y)\b/.test(key) && (property.indexOf(key) > -1 || property2.indexOf(key) > -1)
       ) {
         this.needUpdate = true
       }
