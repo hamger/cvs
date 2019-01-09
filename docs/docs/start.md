@@ -1,8 +1,8 @@
 ### Instrall
 
-```bash
-npm instrall cvs
-```
+使用 npm 安装： `npm install cvs`
+
+使用 yarn 安装： `yarn add cvs`
 
 ### Usage
 

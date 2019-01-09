@@ -114,12 +114,11 @@ class Element {
     if (typeof opt === 'string') return this[_attr].get(opt)
     this.needUpdate = false
     forObj(opt, (key, val) => {
-      // if (
-      //   !/\b(x|y)\b/.test(key) || property.indexOf(key) > -1
-      // ) {
-      //   this.needUpdate = true
-      // }
-      if (!/\b(x|y)\b/.test(key)) this.needUpdate = true
+      if (
+        !/\b(x|y)\b/.test(key) && (property.indexOf(key) > -1 || /\b(transform|translate|scale|skew|rotate)\b/.test(key))
+      ) {
+        this.needUpdate = true
+      }
       if (typeof val === 'function') {
         this[_attr][key] = val(this[_attr].get(key))
       } else if (typeof val === 'object') {

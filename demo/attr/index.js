@@ -37,22 +37,7 @@ requestAnimationFrame(function loopUnit () {
   })
   layer.draw()
 })
-// requestAnimationFrame(function loopUnit () {
-//   timer = requestAnimationFrame(loopUnit)
-//   layer.clear()
-//   layer.children.forEach(ele => {
-//     const cx = ele.attr('d').cx + ele.attr('xa')
-//     const cy = ele.attr('d').cy + ele.attr('ya')
-//     const r = ele.attr('r')
-//     ele.attr({
-//       xa: ele.attr('xa') * (cx > layer.width - r || cx < r ? -1 : 1),
-//       ya: ele.attr('ya') * (cy > layer.height - r || cy < r ? -1 : 1),
-//       d: { cx, cy }
-//     })
-//   })
-//   layer.draw()
-// })
 
-setTimeout(function () {
-  cancelAnimationFrame(timer)
-}, 18000)
+// setTimeout(function () {
+//   cancelAnimationFrame(timer)
+// }, 18000)

@@ -11,8 +11,7 @@ class Path extends Element {
   render (ctx) {
     ctx.save()
     ctx.translate(this.attr('x'), this.attr('y'))
-    this.buffer()
-    // if (!this.cacheCtx || this.needUpdate) this.buffer()
+    if (!this.cacheCtx || this.needUpdate) this.buffer()
     ctx.translate(this.outline.bounds[0] - this.p, this.outline.bounds[1] - this.p)
     ctx.drawImage(this.cacheCtx.canvas, 0, 0)
     ctx.restore()
