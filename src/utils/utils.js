@@ -141,6 +141,7 @@ export function forArr (arr, cb, vert) {
   }
 }
 
+// 按写入顺序遍历对象
 export function forObj (obj, cb) {
   Object.entries(obj).forEach(item => {
     let [key, val] = item

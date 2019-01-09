@@ -16,21 +16,21 @@ export default {
     return {}
   },
   mounted() {
-    (async function () {
-      let scene = new Scene({
-        containerId: 'container'
-      })
-      await scene.preload({
-        safari: require('../../../static/safari.png')
-      })
-      let layer = scene.layer()
-      layer.append(new Image({
-        image: 'safari',
-        x: 200,
-        y: 10
-      }))
-      layer.draw()
-    })()
+    this.$nextTick(function () {
+      (async function () {
+        let scene = new Scene({ containerId: 'container' })
+        await scene.preload({
+          safari: require('../../../static/safari.png')
+        })
+        let layer = scene.layer()
+        layer.append(new Image({
+          image: 'safari',
+          x: 200,
+          y: 10
+        }))
+        layer.draw()
+      })()
+    })
   }
 }
 </script>

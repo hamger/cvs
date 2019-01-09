@@ -1,4 +1,4 @@
-import { arrSort, remove } from './utils/utils'
+import { arrSort, remove, forObj } from './utils/utils'
 import { loadTexture } from './utils/resource'
 import Layer from './layer'
 import Timeline from './utils/timeline'
@@ -26,35 +26,32 @@ export default class Scene {
   async preload (obj) {
     const tasks = [],
       res = {}
-    for (let key in obj) {
+    forObj(obj, (key, val) => {
       tasks.push(
-        loadTexture(key, obj[key]).then(r => {
+        loadTexture(key, val).then(r => {
           res[key] = r
         })
       )
-    }
+    })
     await Promise.all(tasks)
     return res
   }
 
   // 事件委托
   delegateEvent (type, receiver = this.container) {
-    receiver.addEventListener(
-      type,
-      e => {
-        const evtArgs = {
-          type,
-          originalEvent: e,
-          stopDispatch () {
-            this.terminated = true
-          }
+    receiver.addEventListener(type, e => {
+      const evtArgs = {
+        type,
+        originalEvent: e,
+        stopDispatch () {
+          this.terminated = true
         }
-        this[_layers].forEach(layer => {
-          if (!layer.handleEvent) return
-          layer.dispatchEvent(evtArgs)
-        })
       }
-    )
+      this[_layers].forEach(layer => {
+        if (!layer.handleEvent) return
+        layer.dispatchEvent(evtArgs)
+      })
+    })
 
     return true
   }

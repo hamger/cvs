@@ -1,4 +1,5 @@
 export const loadedResources = new Map()
+export const loadedPromise = new Map()
 
 export function loadTexture (key, texture, timeout = 30000) {
   if (!loadedResources.has(key)) {
@@ -13,10 +14,10 @@ export function loadTexture (key, texture, timeout = 30000) {
         clearTimeout(timer)
       })
     })
-    loadedResources.set(key, promise)
+    loadedPromise.set(key, promise)
     return promise
   } else {
-    return loadedResources.get(key)
+    return loadedPromise.get(key)
   }
 }
 
