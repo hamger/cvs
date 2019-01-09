@@ -35,7 +35,7 @@ for (let i = 0; i < dotCount; i++) {
 }
 
 requestAnimationFrame(function loopUnit() {
-  timer = requestAnimationFrame(loopUnit)
+  requestAnimationFrame(loopUnit)
   layer.clear()
   layer.children.forEach(ele => {
     const x = ele.attr('x') + ele.attr('xa')
