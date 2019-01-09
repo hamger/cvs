@@ -7,7 +7,7 @@
 ### Usage
 
 ```js
-import { Scene, Circle, Track } from 'cvs'
+import { Scene, Path } from 'cvs'
 let scene = new Scene({
   containerId: 'container'
 })
