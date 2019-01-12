@@ -1,5 +1,4 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const webpack = require('webpack')
 const path = require('path')
 const utils = require('./utils')
 const resolve = utils.resolve
@@ -7,7 +6,7 @@ const resolve = utils.resolve
 let webpackConfig = {
   entry: './src/index.js',
   output: {
-    filename: 'cvs.js',
+    filename: 'cvs.min.js',
     path: path.resolve(__dirname, '../dist'),
     library: 'cvs',
     libraryTarget: 'umd'

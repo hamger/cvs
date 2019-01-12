@@ -14,7 +14,7 @@
     "docs:dev": "vuepress dev docs",
     "docs:pro": "sh deploy.sh"
   },
-  "main": "dist/cvs.js",
+  "main": "dist/cvs.min.js",
   "keywords": [
     "hanger",
     "canvas",
