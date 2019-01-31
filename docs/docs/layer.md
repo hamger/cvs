@@ -51,7 +51,7 @@ var layer = scene.layer(options);
 
 - 示例：
   ```js
-  layer.element('a');
+  layer.element("a");
   ```
 
 #### remove(element)
@@ -134,5 +134,5 @@ var layer = scene.layer(options);
   ```
 
   ::: tip
-  cvs 的动画是基于时间轴的，对用动画的控制详见[timeline](/docs/timeline.html)
+  cvs 的动画是基于时间轴的，对用动画的控制详见[timeline](/docs/timeline.html)
   :::

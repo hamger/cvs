@@ -36,7 +36,7 @@ let button = new Group({
 }).append(text, rect);
 
 rect.on("click", () => {
-  console.log('rect')
+  console.log("rect");
 });
 
 rect.on("mouseenter", () => {
@@ -65,10 +65,13 @@ layer.draw();
 
 ```js
 class Button extends Group {
-  constructor (opt) {
-    super(opt)
+  constructor(opt) {
+    super(opt);
     // 自定义参数
-    opt = Object.assign({borderWidth: 1, padding: 0, borderRadius: 0, font: '20px system-ui'}, opt)
+    opt = Object.assign(
+      { borderWidth: 1, padding: 0, borderRadius: 0, font: "20px system-ui" },
+      opt
+    );
     this.text = new Text({
       zIndex: 1,
       x: opt.padding + Math.floor(opt.borderWidth / 2),
@@ -76,22 +79,22 @@ class Button extends Group {
       text: opt.text,
       font: opt.font,
       fill: opt.color
-    })
-    this.append(this.text)
+    });
+    this.append(this.text);
     this.rect = new Path({
       x: Math.floor(opt.borderWidth / 2),
       y: Math.floor(opt.borderWidth / 2),
       d: {
-        type: 'rect',
+        type: "rect",
         w: this.text.size[0] + opt.padding * 2,
         h: this.text.size[1] + opt.padding * 2,
-        borderRadius: opt.borderRadius,
+        borderRadius: opt.borderRadius
       },
       lineWidth: opt.borderWidth,
       stroke: opt.borderColor,
       fill: opt.bgColor
-    })
-    this.append(this.rect)
+    });
+    this.append(this.rect);
   }
 }
 
@@ -99,36 +102,36 @@ let button = new Button({
   x: 100,
   y: 100,
   padding: 10,
-  text: '确定',
-  font: '20px system-ui',
-  color: '#409eff',
-  borderColor: '#ecf5ff',
-  bgColor: '#b3d8ff',
+  text: "确定",
+  font: "20px system-ui",
+  color: "#409eff",
+  borderColor: "#ecf5ff",
+  bgColor: "#b3d8ff",
   borderRadius: 8
-})
+});
 
-layer.append(button)
+layer.append(button);
 
-let rect = button.rect, text = button.text
+let rect = button.rect,
+  text = button.text;
 
-rect.on('click', () => {
-  console.log('rect')
-})
-rect.on('mouseenter', () => {
-  layer.clear()
-  scene.container.style.cursor = 'pointer'
-  rect.attr({ fill: '#409eff', stroke: '#409eff' })
-  text.attr({ fill: '#fff' })
-  layer.draw()
-})
-rect.on('mouseleave', () => {
-  layer.clear()
-  scene.container.style.cursor = 'default'
-  rect.attr({ fill: '#b3d8ff', stroke: '#ecf5ff' })
-  text.attr({ fill: '#409eff' })
-  layer.draw()
-})
+rect.on("click", () => {
+  console.log("rect");
+});
+rect.on("mouseenter", () => {
+  layer.clear();
+  scene.container.style.cursor = "pointer";
+  rect.attr({ fill: "#409eff", stroke: "#409eff" });
+  text.attr({ fill: "#fff" });
+  layer.draw();
+});
+rect.on("mouseleave", () => {
+  layer.clear();
+  scene.container.style.cursor = "default";
+  rect.attr({ fill: "#b3d8ff", stroke: "#ecf5ff" });
+  text.attr({ fill: "#409eff" });
+  layer.draw();
+});
 
-layer.draw()
+layer.draw();
 ```
-

@@ -56,7 +56,7 @@ let t = easing[key](p);
 import { Scene, Circle, Track, easing } from "cvs";
 let scene = new Scene({ containerId: "container" });
 let layer = scene.layer();
-let dot = new Circle({x: 10, y: 10, r: 10});
+let dot = new Circle({ x: 10, y: 10, r: 10 });
 
 class CustomTrack extends Track {
   loop(t) {

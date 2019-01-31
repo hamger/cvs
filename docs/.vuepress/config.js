@@ -31,7 +31,7 @@ module.exports = {
           ['/docs/elements/group', '组合 Group']
         ]
       },
-      ['/docs/custom', '自定义元素'],
+      ['/docs/custom', '自定义元素']
       // {
       //   title: 'tracks',
       //   collapsable: false,

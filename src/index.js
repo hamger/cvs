@@ -1,6 +1,5 @@
 import Scene from './Scene'
 import Layer from './layer'
-import Element from './element'
 import Group from './elements/group'
 import Path from './elements/path'
 import Image from './elements/image'
@@ -14,7 +13,6 @@ import easing from './utils/easing'
 export {
   Scene,
   Layer,
-  Element,
   Group,
   Image,
   Text,
