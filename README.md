@@ -13,9 +13,15 @@ Cvs (a short name from 'canvas') is a basic canvas framework for 2d drawing, it'
 
 ## Install
 
-使用 npm 安装： `npm install cvs`
+```bash
+yarn add cvs
+```
 
-使用 yarn 安装： `yarn add cvs`
+或者使用 npm 安装：
+
+```bash
+npm install --save cvs
+```
 
 ## Usage
 
